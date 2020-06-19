@@ -9,7 +9,7 @@ class AboutmeACtKt : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.aboutme_act)
-
+                //git Test
         backActionBarAboutMe.setOnClickListener { finish() }
         val file_path = "file:///android_asset/about_me.html"
         webView_AboutMe.loadUrl(file_path)
