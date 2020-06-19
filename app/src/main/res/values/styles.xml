@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#20c581</item>
+        <item name="colorPrimaryDark">#20c581</item>
+        <item name="colorAccent">#20c581</item>
+    </style>
+
+    <style name="CustomViewAllTab" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/b_yekan</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    android:textDirection="rtl"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tolbar_story"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#61A6FF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center"
+
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="16dp">
+
+            <ImageView
+                android:id="@+id/imgTooTitlelbarMainActf"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/hozormain" />
+
+            <ImageView
+                android:id="@+id/imgNavigationInLoginPage"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/senoghte" />
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tolbar_story"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="32dp">
+
+
+            <EditText
+                android:id="@+id/etPasswordStudent"
+                android:layout_width="302dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:gravity="right"
+                android:hint="کلمه عبور"
+                android:inputType="number"
+                android:maxLength="55"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/etUsernameStudent"
+                app:layout_constraintStart_toStartOf="@+id/etUsernameStudent"
+                app:layout_constraintTop_toBottomOf="@+id/etUsernameStudent" />
+
+            <EditText
+                android:id="@+id/etUsernameStudent"
+                android:layout_width="302dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:gravity="right"
+                android:hint="شماره دانش آموزی"
+                android:inputType="number"
+                android:maxLength="11"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/imgLoginStudentText"
+                app:layout_constraintStart_toStartOf="@+id/imgLoginStudentText"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginStudentText" />
+
+            <ImageView
+                android:id="@+id/imgLoginStudent"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/etPasswordStudent"
+                app:layout_constraintHorizontal_bias="0.488"
+                app:layout_constraintStart_toStartOf="@+id/etPasswordStudent"
+                app:layout_constraintTop_toBottomOf="@+id/etPasswordStudent"
+                app:srcCompat="@drawable/login_pic" />
+
+            <EditText
+                android:id="@+id/etUsernameTeacher"
+                android:layout_width="302dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:gravity="right"
+                android:hint="نام کاربری"
+                android:inputType="number"
+                android:maxLength="11"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/imgLoginTeacherText"
+                app:layout_constraintStart_toStartOf="@+id/imgLoginTeacherText"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginTeacherText" />
+
+            <EditText
+                android:id="@+id/etPasswordTeacher"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:gravity="right"
+                android:hint="کلمه عبور"
+                android:inputType="number"
+                android:maxLength="55"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/etUsernameTeacher"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/etUsernameTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/etUsernameTeacher" />
+
+            <ImageView
+                android:id="@+id/imgLoginTeacher"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/etPasswordTeacher"
+                app:layout_constraintHorizontal_bias="0.476"
+                app:layout_constraintStart_toStartOf="@+id/etPasswordTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/etPasswordTeacher"
+                app:srcCompat="@drawable/login_pic" />
+
+            <TextView
+                android:id="@+id/txForgetPasswordStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/adobearabicbold"
+                android:text=" "
+                android:textColor="#25292f"
+                android:textSize="20sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/imgLoginStudent"
+                app:layout_constraintStart_toStartOf="@+id/imgLoginStudent"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginStudent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="712dp"
+                android:background="@color/colorBorderRegisterPage"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginLeft="80dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="55dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="353dp"
+                android:layout_marginLeft="353dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginRight="80dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_end="55dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/welcome" />
+
+            <ImageView
+                android:id="@+id/imgLoginStudentText"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toStartOf="@+id/imageView7"
+                app:layout_constraintTop_toBottomOf="@+id/imageView7"
+                app:srcCompat="@drawable/loginstudent" />
+
+            <ImageView
+                android:id="@+id/imgLoginTeacherText"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/txForgetPasswordStudent"
+                app:layout_constraintStart_toStartOf="@+id/txForgetPasswordStudent"
+                app:layout_constraintTop_toBottomOf="@+id/txForgetPasswordStudent"
+                app:srcCompat="@drawable/loginostad" />
+
+
+            <ImageView
+                android:id="@+id/imgLoginKarmandText"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/imgLoginTeacher"
+                app:layout_constraintStart_toStartOf="@+id/imgLoginTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginTeacher"
+                app:srcCompat="@drawable/loginkarkonan" />
+
+
+            <EditText
+                android:id="@+id/etUsernameKarkonan"
+                android:layout_width="302dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:gravity="right"
+                android:hint="نام کاربری"
+                android:inputType="number"
+                android:maxLength="11"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/imgLoginKarmandText"
+                app:layout_constraintStart_toStartOf="@+id/imgLoginKarmandText"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginKarmandText" />
+
+            <EditText
+                android:id="@+id/etPasswordKarkonan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:gravity="right"
+                android:hint="کلمه عبور"
+                android:inputType="number"
+                android:maxLength="55"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/etUsernameKarkonan"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/etUsernameKarkonan"
+                app:layout_constraintTop_toBottomOf="@+id/etUsernameKarkonan" />
+
+            <ImageView
+                android:id="@+id/imgLoginKarkonan"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/etPasswordKarkonan"
+                app:layout_constraintHorizontal_bias="0.476"
+                app:layout_constraintStart_toStartOf="@+id/etPasswordKarkonan"
+                app:layout_constraintTop_toBottomOf="@+id/etPasswordKarkonan"
+                app:srcCompat="@drawable/login_pic" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

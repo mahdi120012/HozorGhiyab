@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#20C581"
+    android:layoutDirection="ltr"
+    android:textDirection="rtl"
+    >
+
+    <ImageView
+        android:id="@+id/imgInboxMessageInToolbarButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/inbox_message" />
+
+    <ImageView
+        android:id="@+id/imgWriteMessageInToolbarButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgHomeInToolbarButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInToolbarButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/write_message" />
+
+    <ImageView
+        android:id="@+id/imgHomeInToolbarButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="false"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home_pic" />
+
+    <TextView
+        android:id="@+id/txCountNotReadMessageInToolbarButton"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/background_message_count"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#ffffff"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInToolbarButton"
+        app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInToolbarButton"
+        app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInToolbarButton" />
+
+</android.support.constraint.ConstraintLayout>

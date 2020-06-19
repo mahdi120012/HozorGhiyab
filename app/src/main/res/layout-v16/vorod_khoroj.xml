@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clActivityClass"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:gravity="top"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:textDirection="rtl">
+
+    <include
+        android:id="@+id/netConnection"
+        layout="@layout/net_connection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tolbar_story" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tolbar_story"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#20C581"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center"
+
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="16dp">
+
+            <ImageView
+                android:id="@+id/imgTooTitlelbarMainActf"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/imgtolbariconmessage" />
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="8dp"
+                android:adjustViewBounds="false"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/back" />
+
+            <TextView
+                android:id="@+id/txReciverFamilyInTeacher6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="ثبت ورود خروج"
+                android:textSize="20sp"
+                app:fontFamily="@font/broya"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBack"
+                app:layout_constraintEnd_toStartOf="@+id/imgBack"
+                app:layout_constraintTop_toTopOf="@+id/imgBack" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@+id/tolbar_story_bottom"
+        app:layout_constraintTop_toBottomOf="@id/tolbar_story">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgTooTitlelbarMainAct2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgErsalGozaresh"
+                app:srcCompat="@drawable/reciver_messagetxt" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintTop_toBottomOf="@+id/txReciverFamilyInTeacher"
+                tools:layout_editor_absoluteX="16dp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/txReciverFamilyInTeacher2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ساعت ورود"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/broya"
+                        app:layout_constraintEnd_toEndOf="@+id/txReciverFamilyInTeacher4"
+                        app:layout_constraintTop_toTopOf="@+id/etSaatVorod" />
+
+                    <TextView
+                        android:id="@+id/txReciverFamilyInTeacher4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="تاریخ"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/broya"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="####/##/##"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/broya"
+                        app:layout_constraintBottom_toBottomOf="@+id/txReciverFamilyInTeacher4"
+                        app:layout_constraintEnd_toEndOf="@+id/etSaatVorod"
+                        app:layout_constraintTop_toTopOf="@+id/txReciverFamilyInTeacher4" />
+
+                    <TextView
+                        android:id="@+id/txReciverFamilyInTeacher3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ساعت خروج"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/broya"
+                        app:layout_constraintEnd_toEndOf="@+id/txReciverFamilyInTeacher2"
+                        app:layout_constraintTop_toTopOf="@+id/etSaatKhoroj" />
+
+                    <EditText
+                        android:id="@+id/etSaatVorod"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@xml/edittext_style"
+                        android:backgroundTint="#edecec"
+                        android:ems="10"
+                        android:fadingEdge="vertical"
+                        android:fontFamily="@font/b_yekan"
+                        android:gravity="right"
+                        android:hint="انتخاب"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLength="1000"
+                        android:paddingLeft="6dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="6dp"
+                        android:textColorHighlight="#90b1e8"
+                        android:textCursorDrawable="@xml/color_cursor"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toStartOf="@+id/txReciverFamilyInTeacher2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txDate"></EditText>
+
+                    <EditText
+                        android:id="@+id/etSaatKhoroj"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="32dp"
+                        android:background="@xml/edittext_style"
+                        android:backgroundTint="#edecec"
+                        android:ems="10"
+                        android:fontFamily="@font/b_yekan"
+                        android:gravity="right"
+                        android:hint="انتخاب"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLength="1000"
+                        android:paddingLeft="6dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="6dp"
+                        android:textColorHighlight="#90b1e8"
+                        android:textCursorDrawable="@xml/color_cursor"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toTopOf="@+id/imgSend"
+                        app:layout_constraintEnd_toEndOf="@+id/etSaatVorod"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/etSaatVorod"></EditText>
+
+                    <ImageView
+                        android:id="@+id/imgSend"
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/etSaatKhoroj"
+                        app:layout_constraintStart_toStartOf="@+id/etSaatKhoroj"
+                        app:srcCompat="@drawable/sendtxt" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/txReciverFamilyInTeacher"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:text="ادمین"
+                android:textSize="22sp"
+                app:fontFamily="@font/broya"
+                app:layout_constraintEnd_toStartOf="@+id/imgTooTitlelbarMainAct2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgTooTitlelbarMainAct2" />
+
+            <ImageView
+                android:id="@+id/imgErsalGozaresh"
+                android:layout_width="0dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgListGozareshat"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gozaresh_selected" />
+
+            <ImageView
+                android:id="@+id/imgListGozareshat"
+                android:layout_width="0dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgErsalGozaresh"
+                app:layout_constraintEnd_toStartOf="@+id/imgErsalGozaresh"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgErsalGozaresh"
+                app:srcCompat="@drawable/gozaresh" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/b_yekan"
+                android:text="لیست ورود خروج"
+                android:textColor="#666667"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgListGozareshat"
+                app:layout_constraintEnd_toStartOf="@+id/imgErsalGozaresh"
+                app:layout_constraintStart_toStartOf="@+id/imgListGozareshat"
+                app:layout_constraintTop_toTopOf="@+id/imgListGozareshat" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/b_yekan"
+                android:text="ثبت ورود خروج"
+                android:textColor="#666667"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgErsalGozaresh"
+                app:layout_constraintEnd_toEndOf="@+id/imgErsalGozaresh"
+                app:layout_constraintStart_toStartOf="@+id/imgErsalGozaresh"
+                app:layout_constraintTop_toTopOf="@+id/imgErsalGozaresh" />
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tolbar_story_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#20C581"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center"
+
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="16dp">
+
+            <ImageView
+                android:id="@+id/imgInboxMessageInSendMessageTeacher"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/inbox_message" />
+
+            <ImageView
+                android:id="@+id/imgWriteMessageInSendMessageTeacher"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgHomeInNavigationViewInSendMessageTeacher"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInSendMessageTeacher"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/write_message" />
+
+            <ImageView
+                android:id="@+id/imgHomeInNavigationViewInSendMessageTeacher"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:adjustViewBounds="false"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/home_pic" />
+
+            <TextView
+                android:id="@+id/txCountNotReadMessageInSendMessageTeacher"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/background_message_count"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInSendMessageTeacher"
+                app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInSendMessageTeacher"
+                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInSendMessageTeacher" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+</android.support.constraint.ConstraintLayout>
