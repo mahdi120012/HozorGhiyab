@@ -1,15 +1,15 @@
 package hozorghiyab.activities
 
-import android.R
-import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import com.github.javiersantos.appupdater.AppUpdater
 import com.github.javiersantos.appupdater.enums.UpdateFrom
@@ -37,6 +37,14 @@ class MainActivity : AppCompatActivity() {
                 setTitleOnUpdateAvailable("بروزرسانی جدید موجوده!").setButtonUpdate("بروزرسانی").
                 setButtonDismiss("فعلا نه").setButtonDoNotShowAgain("")
         appUpdater.start()
+
+
+        createNotificationChannel()
+
+
+        startService(Intent(this, NotificationService::class.java))
+
+
 
         var username = SharedPrefClass.getUserId(this,"user")
         var noe = SharedPrefClass.getUserId(this,"noe")
@@ -170,4 +178,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "test"
+            val descriptionText = "test"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("1", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }
