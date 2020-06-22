@@ -331,17 +331,13 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.txMatnMessageInRecivedMessage.setText(recyclerModels.get(position).getMatn());
               holder.txNameFerestandeInRecivedMessage.setText(recyclerModels.get(position).getCity());
               holder.txNameGirandehInRecivedMessage.setText(recyclerModels.get(position).getPosition());
+              holder.txDate1.setText(recyclerModels.get(position).getRate());
 
               holder.imgRemoveMessage.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
 
-                      LoadData.removeMessage(c,recyclerModels.get(position).getId());
-
-                      recyclerModels.remove(position);
-                      notifyItemRemoved(position);
-                      notifyItemRangeChanged(position, recyclerModels.size());
-
+                      showCustomDialog(c,position);
 
                   }
               });
@@ -802,7 +798,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txOnvanMessageInRecivedMessage,txMatnMessageInRecivedMessage,
                  txNameFerestandeInRecivedMessage,txNameGirandehInRecivedMessage,
                  txUserNameInSearchInTeacher,txVaziyatDarsiVaAkhlaghi,txTaklif,txDate,txErsalNazar,
-                 txDate2,txVaziyat,txSaatVorod,txSaatKhoroj;
+                 txDate2,txVaziyat,txSaatVorod,txSaatKhoroj,txDate1;
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
         imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgRemoveMessage,imgAddStudent,
         imgHozorGhiyab,imgUserPictureForSendMessageInTeacher,imgIconDate,imgReadOrNo;
@@ -812,6 +808,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         MyViewHolder(View view) {
             super(view);
 
+            txDate1 = itemView.findViewById(R.id.txDate);
             txDate2 = itemView.findViewById(R.id.txDate);
             txVaziyat = itemView.findViewById(R.id.txVaziyat);
             txSaatVorod = itemView.findViewById(R.id.txSaatVorod);

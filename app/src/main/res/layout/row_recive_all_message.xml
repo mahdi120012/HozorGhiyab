@@ -25,6 +25,33 @@
             card_view:layout_constraintTop_toTopOf="parent">
 
 
+            <TextView
+                android:id="@+id/txDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView2"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:fontFamily="@font/adobearabicbold"
+                android:padding="3dp"
+                android:text="##/##/##"
+                android:textSize="14sp"
+                card_view:fontFamily="@font/broya"
+                card_view:layout_constraintBottom_toBottomOf="@+id/imgIconDate2"
+                card_view:layout_constraintEnd_toStartOf="@+id/imgIconDate2"
+                card_view:layout_constraintTop_toTopOf="@+id/imgIconDate2" />
+
+            <ImageView
+                android:id="@+id/imgIconDate2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                card_view:layout_constraintEnd_toEndOf="@+id/imgIconErsalKonandeMessage"
+                card_view:layout_constraintTop_toBottomOf="@+id/txNameFrestandeInRecivedMessage"
+                card_view:srcCompat="@drawable/date_icon" />
+
             <ImageView
                 android:id="@+id/imgRemoveMessage"
                 android:layout_width="16dp"
@@ -128,7 +155,6 @@
                 android:id="@+id/imgIconErsalKonandeMessage"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginEnd="14dp"
                 android:layout_marginRight="14dp"
                 android:layout_marginBottom="5dp"

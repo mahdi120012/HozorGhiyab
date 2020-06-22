@@ -89,7 +89,6 @@ public class ListHameyePayamHaBarayeAdmin extends AppCompatActivity {
         final String username = sharedPreferences.getString("user", "user");
         editor.commit();
 
-
         rModelsYouHaveKnow = new ArrayList<>();
         rAdapterYouHaveKnow = new RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow,"all_users_message",this,rAdapterYouHaveKnow,"",null,null,null,"");
         Recyclerview.define_recyclerviewAddStudent(this,rvListYouHaveKnow,rAdapterYouHaveKnow,

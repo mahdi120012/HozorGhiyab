@@ -46,6 +46,7 @@ public class LoadData {
     public static final int LOAD_LIMIT = 15;
     public static String lastId = "0";
     public static boolean itShouldLoadMore = true;
+    public static String tedadPayamKhangeNashodeServise = "";
 
     public static void firstLoadData(final Context c, final CityAdapter recyclerAdapter,
                                      final ArrayList<RecyclerModel> recyclerModels,
@@ -1950,7 +1951,7 @@ public class LoadData {
                 clWifi.setVisibility(View.GONE);
 
                 if (response.length() <= 0) {
-                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String tarikh = null;
@@ -1984,6 +1985,53 @@ public class LoadData {
         });
 
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+    public static String loadTeacherNameAndCountMessageNotReadForServise(final Context c, String username) {
+
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_teacher_name&user1=" + usernameEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String studentName = null;
+                String teacherPicture = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        studentName = jsonObject.getString("family");
+                        tedadPayamKhangeNashodeServise = jsonObject.getString("tedad_payam_khande_nashode");
+                        teacherPicture = jsonObject.getString("picture");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+        return tedadPayamKhangeNashodeServise;
     }
 
 
@@ -4033,7 +4081,8 @@ public class LoadData {
                         String matn = jsonObject.getString("message");
                         String nameDaryaftKonandeh = jsonObject.getString("name_daryaft_konande");
                         String nameErsalKonandeh = jsonObject.getString("name_ersal_konande");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameErsalKonandeh,nameDaryaftKonandeh,"","",0));
+                        String tarikh = jsonObject.getString("tarikh");
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameErsalKonandeh,nameDaryaftKonandeh,tarikh,"",0));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

@@ -81,7 +81,7 @@ class SearchForSendMessage : AppCompatActivity() {
 
                 override fun onQueryTextChange(newText: String): Boolean {
                     rModelsYouHaveKnow = ArrayList()
-                    rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search_by_teacher", this@SearchForSendMessage, rAdapterYouHaveKnow, ahkam.toString(),null,null,null,sepordanKar.toString())
+                    rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search_by_teacher", this@SearchForSendMessage, rAdapterYouHaveKnow, ahkam.toString(),txReciversList,clShowErsal,txEntekhabHame,sepordanKar.toString())
                     Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
                             rModelsYouHaveKnow, null)
                     LoadData.LoadSearchResultTeacher(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
