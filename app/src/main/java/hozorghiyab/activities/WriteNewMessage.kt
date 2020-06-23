@@ -57,7 +57,7 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
                     val urlAppend = "?action=load_student_count_not_read_message" +
                             "&user1=" + UrlEncoderClass.urlEncoder(username)
-                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, urlAppend, txCountNotReadMessageInSendMessageTeacher)
+                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInSendMessageTeacher,username)
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
@@ -67,7 +67,7 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
             ha.postDelayed(object : Runnable {
                 override fun run() {
 
-                    LoadData.loadTeacherCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInSendMessageTeacher, username)
+                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInSendMessageTeacher, username)
 
                     ha.postDelayed(this, 1000)
                 }

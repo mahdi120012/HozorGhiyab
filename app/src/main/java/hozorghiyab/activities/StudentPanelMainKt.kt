@@ -60,10 +60,10 @@ class StudentPanelMainKt : AppCompatActivity() {
                         tx_stateInStudentPanel, txStudentNameInStudentPanel,
                         txCountNotReadMessageInStudentPanel, imgUserPicture, clWifiInStudentPanel)
 
-                if (tedadKhandeNashode != "0"){
+                /*if (tedadKhandeNashode != "0"){
                     CreateNotification().createNotificationChannel(this@StudentPanelMainKt)
                     CreateNotification().showNotification(this@StudentPanelMainKt,StudentPanelMainKt::class.java,"شما پیام خوانده نشده دارید",tedadKhandeNashode,tedadKhandeNashode)
-                }
+                }*/
 
                 ha.postDelayed(this, 2000)
             }

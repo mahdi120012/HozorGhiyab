@@ -56,7 +56,23 @@
             android:name="hozorghiyab.activities.NamayeshVaziyatDarsiStudent"
             android:label="@string/title_activity_kharid_eshterak_act" />
 
+
+        <receiver
+            android:name="hozorghiyab.activities.Restarter"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="restartservice" />
+            </intent-filter>
+        </receiver>
+
+
         <service
+            android:name="hozorghiyab.activities.NotificationService"
+            android:enabled="true" >
+        </service>
+
+     <!--   <service
             android:name="hozorghiyab.activities.NotificationService"
             android:label="@string/app_name">
             <intent-filter>
@@ -64,8 +80,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </service>
-        <!-- <activity android:name=".cityDetail.CityDetailACT" /> -->
+        </service>-->
         <!--
    //توجه مهم: خط زیر وقتی که میخواهیم از والی استفاده کنیم در اندروید 9 حتما باید باشه وگرنه
         برنامه اررور میده

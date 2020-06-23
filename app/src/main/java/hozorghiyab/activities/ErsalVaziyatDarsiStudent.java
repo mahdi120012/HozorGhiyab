@@ -71,7 +71,7 @@ public class ErsalVaziyatDarsiStudent extends AppCompatActivity implements View.
                 //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
                 String urlAppend = "?action=load_student_count_not_read_message" +
                         "&user1=" + UrlEncoderClass.urlEncoder(username);
-                LoadData.loadCountMessageNotRead(ErsalVaziyatDarsiStudent.this, urlAppend,txCountNotReadMessage);
+                LoadData.loadCountMessageNotRead(ErsalVaziyatDarsiStudent.this,txCountNotReadMessage,username);
 
                 ha.postDelayed(this, 1000);
             }

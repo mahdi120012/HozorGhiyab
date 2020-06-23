@@ -127,9 +127,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                    val urlAppend = "?action=load_student_count_not_read_message" +
-                            "&user1=" + UrlEncoderClass.urlEncoder(username)
-                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali, urlAppend, txCountNotReadMessageInPayamHayeErsaliTeacher)
+                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,  txCountNotReadMessageInPayamHayeErsaliTeacher,username)
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
@@ -150,7 +148,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                    LoadData.loadTeacherCountMessageNotRead(this@ListPayamHayeErsali,txCountNotReadMessageInPayamHayeErsaliTeacher,username);
+                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,txCountNotReadMessageInPayamHayeErsaliTeacher,username);
 
                     ha.postDelayed(this, 1000)
                 }

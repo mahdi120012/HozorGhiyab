@@ -20,90 +20,46 @@ class SearchForSendMessage : AppCompatActivity() {
 
         var username = SharedPrefClass.getUserId(this,"user")
         var noe = SharedPrefClass.getUserId(this,"noe")
+
         var ahkam = if (intent.getExtras() == null) {}else{intent.extras!!.getString("ahkam")}
         var sepordanKar = if (intent.getExtras() == null) {}else{intent.extras!!.getString("sepordan_kar")}
 
-        if (noe.equals("student")){
+        rModelsYouHaveKnow = ArrayList()
+        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search", this@SearchForSendMessage, rAdapterYouHaveKnow, ahkam.toString(),txReciversList,clShowErsal,txEntekhabHame,sepordanKar.toString())
+        Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
+                rModelsYouHaveKnow, null)
 
-            rModelsYouHaveKnow = ArrayList()
-            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search_by_student", this@SearchForSendMessage, rAdapterYouHaveKnow, "", txReciversList, clShowErsal, txEntekhabHame,"")
-            Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
-                    rModelsYouHaveKnow, null)
+        LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                rvInSearchInTeacher, username, "",clWifiState,noe)
 
-            LoadData.LoadSearchResultStudent(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                    rvInSearchInTeacher, username, "")
 
-            searchViewForSendMessageTeacher.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String): Boolean {
-                    //Toast.makeText(SearchForSendMessageTeacher.this, query, Toast.LENGTH_SHORT).show();
-                    return false
-                }
+        searchViewForSendMessageTeacher.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean { //Toast.makeText(SearchForSendMessageTeacher.this, query, Toast.LENGTH_SHORT).show();
+                return false
+            }
 
-                override fun onQueryTextChange(newText: String): Boolean {
-                    rModelsYouHaveKnow = ArrayList()
-                    rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search_by_student", this@SearchForSendMessage, rAdapterYouHaveKnow, "", txReciversList, clShowErsal, txEntekhabHame,"")
-                    Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
-                            rModelsYouHaveKnow, null)
-                    LoadData.LoadSearchResultStudent(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                            rvInSearchInTeacher, username, newText)
-
-                    //Toast.makeText(SearchForSendMessageTeacher.this, newText, Toast.LENGTH_SHORT).show();
-                    return false
-                }
-            })
+            override fun onQueryTextChange(newText: String): Boolean {
+                rModelsYouHaveKnow = ArrayList()
+                rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search", this@SearchForSendMessage, rAdapterYouHaveKnow, ahkam.toString(),txReciversList,clShowErsal,txEntekhabHame,sepordanKar.toString())
+                Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
+                        rModelsYouHaveKnow, null)
+                LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                        rvInSearchInTeacher, username, newText,clWifiState,noe)
+                //Toast.makeText(SearchForSendMessageTeacher.this, newText, Toast.LENGTH_SHORT).show();
+                return false
+            }
+        })
 
             val ha = Handler()
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                    val urlAppend = "?action=load_student_count_not_read_message" +
-                            "&user1=" + UrlEncoderClass.urlEncoder(username)
-                    LoadData.loadCountMessageNotRead(this@SearchForSendMessage, urlAppend, txCountNotReadMessageInSearchInTeacher)
-                    ha.postDelayed(this, 1000)
-                }
-            }, 1000)
 
-        }else{
-
-            rModelsYouHaveKnow = ArrayList()
-            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search_by_teacher", this@SearchForSendMessage, rAdapterYouHaveKnow, ahkam.toString(),txReciversList,clShowErsal,txEntekhabHame,sepordanKar.toString())
-            Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
-                    rModelsYouHaveKnow, null)
-
-            LoadData.LoadSearchResultTeacher(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                    rvInSearchInTeacher, username, "",clWifiState)
-
-
-            searchViewForSendMessageTeacher.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String): Boolean { //Toast.makeText(SearchForSendMessageTeacher.this, query, Toast.LENGTH_SHORT).show();
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String): Boolean {
-                    rModelsYouHaveKnow = ArrayList()
-                    rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search_by_teacher", this@SearchForSendMessage, rAdapterYouHaveKnow, ahkam.toString(),txReciversList,clShowErsal,txEntekhabHame,sepordanKar.toString())
-                    Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
-                            rModelsYouHaveKnow, null)
-                    LoadData.LoadSearchResultTeacher(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                            rvInSearchInTeacher, username, newText,clWifiState)
-                    //Toast.makeText(SearchForSendMessageTeacher.this, newText, Toast.LENGTH_SHORT).show();
-                    return false
-                }
-            })
-
-
-
-            val ha = Handler()
-            ha.postDelayed(object : Runnable {
-                override fun run() {
-
-                    LoadData.loadTeacherCountMessageNotRead(this@SearchForSendMessage, txCountNotReadMessageInSearchInTeacher, username)
+                    LoadData.loadCountMessageNotRead(this@SearchForSendMessage, txCountNotReadMessageInSearchInTeacher, username)
 
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
-
-        }
 
 
         imgWriteMessageInSearchInTeacher.setOnClickListener{

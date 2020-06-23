@@ -96,7 +96,7 @@ class VorodKhoroj : AppCompatActivity() {
         ha.postDelayed(object : Runnable {
             override fun run() {
 
-                LoadData.loadTeacherCountMessageNotRead(this@VorodKhoroj, txCountNotReadMessageInSendMessageTeacher, username)
+                LoadData.loadCountMessageNotRead(this@VorodKhoroj, txCountNotReadMessageInSendMessageTeacher, username)
 
                 ha.postDelayed(this, 1000)
             }

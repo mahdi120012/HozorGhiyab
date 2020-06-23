@@ -62,7 +62,7 @@ class GozareshKar : AppCompatActivity(), View.OnTouchListener {
         ha.postDelayed(object : Runnable {
             override fun run() {
 
-                LoadData.loadTeacherCountMessageNotRead(this@GozareshKar, txCountNotReadMessageInSendMessageTeacher, username)
+                LoadData.loadCountMessageNotRead(this@GozareshKar, txCountNotReadMessageInSendMessageTeacher, username)
 
                 ha.postDelayed(this, 1000)
             }

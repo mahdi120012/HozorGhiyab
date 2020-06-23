@@ -1878,16 +1878,12 @@ public class LoadData {
 
 
 
-    public static void loadTeacherCountMessageNotRead(final Context c, final TextView txCountNotReadMessage,
+    public static void loadCountMessageNotRead(final Context c, final TextView txCountNotReadMessage,
                                                              String username) {
-        String usernameEncode="";
-        try {
-            usernameEncode = URLEncoder.encode(username,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_teacher_count_not_read_message&user1=" + usernameEncode;
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_count_not_read_message&user1=" + usernameEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -1900,18 +1896,12 @@ public class LoadData {
 
                     return;
                 }
-                String studentName = null;
                 String tedadPayamKhangeNashode = null;
-                String teacherPicture = null;
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
 
-                        //lastId = jsonObject.getString("teacher_id");
-                        //studentName = jsonObject.getString("family");
                         tedadPayamKhangeNashode = jsonObject.getString("tedad_payam_khande_nashode");
-                        //teacherPicture = jsonObject.getString("teacher_picture");
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1928,9 +1918,7 @@ public class LoadData {
             }
         });
 
-        //Volley.newRequestQueue(c).add(jsonArrayRequest);
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
-
     }
 
     public static void loadVorodKhorojGhabli(final Context c,final EditText etSaatVorod,
@@ -2101,62 +2089,6 @@ public class LoadData {
             public void onErrorResponse(VolleyError error) {
 
                 clWifi.setVisibility(View.VISIBLE);
-            }
-        });
-
-        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
-    }
-
-    public static void loadCountMessageNotRead(final Context c, final String urlAppend,final TextView txCountNotReadMessage) {
-
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php"+urlAppend;
-        itShouldLoadMore = false;
-        //ProgressDialogClass.showProgress(c);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-
-                //clWifi.setVisibility(View.GONE);
-                //net_state.setVisibility(View.GONE);
-                //ProgressDialogClass.dismissProgress();
-                itShouldLoadMore = true;
-
-                if (response.length() <= 0) {
-                    //Toast.makeText(c, "اطلاعاتی موجود نیست.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String studentName = null;
-                String tedadPayamKhangeNashode = null;
-                String studentPicture = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-
-                        //lastId = jsonObject.getString("std_id");
-                        //studentName = jsonObject.getString("family");
-                        tedadPayamKhangeNashode = jsonObject.getString("tedad_payam_khande_nashode");
-                        //studentPicture = jsonObject.getString("std_picture");
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-               // txStudentName.setText(studentName);
-                txCountNotReadMessage.setText(tedadPayamKhangeNashode);
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                itShouldLoadMore = true;
-                //ProgressDialogClass.dismissProgress();
-                //Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
-                //clWifi.setVisibility(View.VISIBLE);
-                //net_state.setVisibility(View.VISIBLE);
-
             }
         });
 
@@ -3708,138 +3640,17 @@ public class LoadData {
 
     }
 
-    public static void LoadSearchResultStudent(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+
+    public static void LoadSearchResult(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                                final ArrayList<RecyclerModel> recyclerModels,
                                                final RecyclerView recyclerView,
-                                               final String username,String query) {
-
-        String usernameEncode="";
-        String queryEncode="";
-        try {
-            usernameEncode = URLEncoder.encode(username,"UTF-8");
-            queryEncode = URLEncoder.encode(query,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result_student&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode;
-        itShouldLoadMore = false;
-        final ProgressDialog progressDialog = new ProgressDialog(c);
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-
-                /*webView.setVisibility(View.GONE);
-                img_refresh.setVisibility(View.GONE);
-                net_state.setText("");*/
-                progressDialog.dismiss();
-                itShouldLoadMore = true;
-
-                if (response.length() <= 0) {
-                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
-
-                    return;
-                }
-
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-
-                        lastId = jsonObject.getString("id");
-                        String studentId = jsonObject.getString("id");
-                        String nameStudent = jsonObject.getString("family");
-                        String teacherPicture = jsonObject.getString("picture");
-                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,teacherPicture,"","","","",0));
-                        recyclerAdapter.notifyDataSetChanged();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                itShouldLoadMore = true;
-                progressDialog.dismiss();
-                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
-
-                /*net_state.setText("دسترسی به اینترنت موجود نیست.");
-                net_state.setTextSize(18);
-                img_refresh.setVisibility(View.GONE);
-                webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-                webView.getSettings().setLoadsImagesAutomatically(true);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.loadUrl("file:///android_asset/refresh_gif.gif");
-
-
-                webView.postDelayed(new Runnable() {
-                    public void run() {
-                        webView.onPause();
-
-                        //------>توضیح مهم، درصورت فعالسازی کد زیر وب ویو پرداخت همراه پی با مشکل مواجه میشود<-----
-                        //webView.pauseTimers();
-                    }
-                }, 5000);
-
-                //new JSONDownloader(c,jsonURL, rv,rv2,img_refresh).execute(net_state);
-
-
-
-                webView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        //webView.onResume();
-                        //webView.reload();
-                        webView.onResume();
-                        webView.resumeTimers();
-
-                        webView.postDelayed(new Runnable() {
-                            public void run() {
-                                webView.onPause();
-                                webView.pauseTimers();
-                            }
-                        }, 10000);
-
-                        LoadData.firstLoadDataYH(c,recyclerAdapter,recyclerModels,img_refresh,webView,timer,net_state,recyclerView,username);
-
-
-
-                        return false;
-                    }
-                });
-                img_refresh.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //new JSONDownloader(c,jsonURL, rv,rv2,img_refresh).execute(net_state);
-
-                    }
-                });*/
-            }
-        });
-
-        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
-
-
-    }
-
-
-    public static void LoadSearchResultTeacher(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
-                                               final ArrayList<RecyclerModel> recyclerModels,
-                                               final RecyclerView recyclerView,
-                                               final String username, String query, final ConstraintLayout clWifi) {
+                                               final String username, String query, final ConstraintLayout clWifi, final String noe) {
 
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String queryEncode= UrlEncoderClass.urlEncoder(query);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result_teacher&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode;
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -3865,8 +3676,8 @@ public class LoadData {
 
                         lastId = jsonObject.getString("id");
                         String studentId = jsonObject.getString("id");
-                        String nameStudent = jsonObject.getString("name_user");
-                        String std_picture = jsonObject.getString("std_picture");
+                        String nameStudent = jsonObject.getString("family");
+                        String std_picture = jsonObject.getString("picture");
 
                         recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0));
                         recyclerAdapter.notifyDataSetChanged();
@@ -3886,8 +3697,8 @@ public class LoadData {
                 clWifi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LoadData.LoadSearchResultTeacher(c, recyclerAdapter, recyclerModels,
-                                recyclerView, username, "",clWifi);
+                        LoadData.LoadSearchResult(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username, "",clWifi,noe);
                     }
                 });
 

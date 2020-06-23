@@ -93,6 +93,23 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        if (noe == "teacher"){
+            clMorkhasi.setVisibility(View.GONE);
+            clVorodKhoroj.setVisibility(View.GONE);
+            clAhkam.setVisibility(View.GONE);
+            clSepordanKar.setVisibility(View.GONE);
+            clGozareshKar.setVisibility(View.GONE);
+            imgLine8.setVisibility(View.GONE);
+            imgLine10.setVisibility(View.GONE);
+            imgLine9.setVisibility(View.GONE);
+            imgLine1.setVisibility(View.GONE);
+            imgLine2.setVisibility(View.GONE);
+            imgLine4.setVisibility(View.GONE);
+            imgLine5.setVisibility(View.GONE);
+            imgLine6.setVisibility(View.GONE);
+
+        }
+
         if (noe == "karkonan"){
             clClassClickInMainActivity.setVisibility(View.GONE);
             clStudentClickInMainActivity.setVisibility(View.GONE);

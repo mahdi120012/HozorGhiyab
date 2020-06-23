@@ -104,7 +104,7 @@ public class ListHameyePayamHaBarayeAdmin extends AppCompatActivity {
             public void run() {
 
                 //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                LoadData.loadTeacherCountMessageNotRead(ListHameyePayamHaBarayeAdmin.this,txCountNotReadMessage,username);
+                LoadData.loadCountMessageNotRead(ListHameyePayamHaBarayeAdmin.this,txCountNotReadMessage,username);
 
                 ha.postDelayed(this, 1000);
             }

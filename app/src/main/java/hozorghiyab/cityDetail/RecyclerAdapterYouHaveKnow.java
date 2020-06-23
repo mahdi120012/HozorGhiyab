@@ -2,10 +2,8 @@ package hozorghiyab.cityDetail;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
@@ -105,11 +103,8 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         }else if (rowLayoutType.contains("all_users_message")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recive_all_message, parent, false));
 
-        }else if (rowLayoutType.contains("search_by_student")) {
-            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_search_by_teacher, parent, false));
-
-        }else if (rowLayoutType.contains("search_by_teacher")) {
-            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_search_by_teacher, parent, false));
+        }else if (rowLayoutType.contains("search")) {
+            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_search, parent, false));
 
         }else if (rowLayoutType.contains("dars_list")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_dars_list, parent, false));
@@ -342,108 +337,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   }
               });
 
-
-          }else if (rowLayoutType.contains("search_by_student")){
-
-              final String stdId = recyclerModels.get(position).getOnvan();
-              final String stdFamily = recyclerModels.get(position).getMatn();
-
-              if (recyclerModels.get(position).getPicture().isEmpty()) {
-
-                  Picasso.get()
-                          .load(R.drawable.usericon)
-                          .centerInside()
-                          .fit()
-                          .error(R.drawable.usericon)
-                          .placeholder(R.drawable.usericon)
-                          .into(holder.imgUserPictureForSendMessageInTeacher);
-
-              }else{
-                  Picasso.get()
-                          .load(recyclerModels.get(position).getPicture())
-                          .centerInside()
-                          .fit()
-                          .error(R.drawable.usericon)
-                          .placeholder(R.drawable.usericon)
-                          .into(holder.imgUserPictureForSendMessageInTeacher);
-              }
-
-              holder.txUserNameInSearchInTeacher.setText(stdFamily);
-
-
-              /*txEntekhabHame.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-
-
-                      clShowErsal.setVisibility(View.VISIBLE);
-                      holder.imgChoiseReciverSendNewMessageInTeacher.setVisibility(View.VISIBLE);
-                      holder.imgChoiseUserInSearchInTeacher.setVisibility(View.VISIBLE);
-
-                  }
-              });*/
-
-              holder.imgChoiseUserInSearchInTeacher.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-
-
-                      list_family.add(stdFamily);
-                      list_id.add(stdId);
-
-                      String s = "";
-                      for (int i = 0; i < list_family.size(); i++) {
-                          s += list_family.get(i) + ", ";
-                      }
-                      txReciversList.setText(s);
-
-                      clShowErsal.setVisibility(View.VISIBLE);
-                      holder.imgChoiseReciverSendNewMessageInTeacher.setVisibility(View.VISIBLE);
-                      holder.imgChoiseUserInSearchInTeacher.setVisibility(View.GONE);
-
-                  }
-              });
-
-              holder.imgChoiseReciverSendNewMessageInTeacher.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-
-                      list_family.remove(stdFamily);
-                      list_id.remove(stdId);
-
-                      if (list_family.size() <= 0){
-                          clShowErsal.setVisibility(View.GONE);
-
-                      }
-
-                      String s = "";
-                      for (int i = 0; i < list_family.size(); i++) {
-                          s += list_family.get(i) + ", ";
-                      }
-                      txReciversList.setText(s);
-
-                      holder.imgChoiseReciverSendNewMessageInTeacher.setVisibility(View.GONE);
-                      holder.imgChoiseUserInSearchInTeacher.setVisibility(View.VISIBLE);
-
-
-                  }
-              });
-
-              clShowErsal.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-
-                      Intent intent = new Intent(c, WriteNewMessage.class);
-                      intent.putStringArrayListExtra("id",list_id);
-                      intent.putStringArrayListExtra("family",list_family);
-                      c.startActivity(intent);
-
-                  }
-              });
-
-
-
-          }else if (rowLayoutType.contains("search_by_teacher")){
+          }else if (rowLayoutType.contains("search")){
 
               final String stdId = recyclerModels.get(position).getOnvan();
               final String stdFamily = recyclerModels.get(position).getMatn();
