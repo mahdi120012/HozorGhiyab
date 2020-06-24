@@ -56,6 +56,10 @@
             android:name="hozorghiyab.activities.NamayeshVaziyatDarsiStudent"
             android:label="@string/title_activity_kharid_eshterak_act" />
 
+        <activity
+            android:name="hozorghiyab.activities.DarkhastMorkhasi"
+            android:label="@string/title_activity_kharid_eshterak_act" />
+
 
         <receiver
             android:name="hozorghiyab.activities.Restarter"

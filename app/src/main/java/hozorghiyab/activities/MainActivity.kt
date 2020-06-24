@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        if (noe == "teacher"){
+       /* if (noe == "teacher"){
             clMorkhasi.setVisibility(View.GONE);
             clVorodKhoroj.setVisibility(View.GONE);
             clAhkam.setVisibility(View.GONE);
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
             imgLine5.setVisibility(View.GONE);
             imgLine6.setVisibility(View.GONE);
 
-        }
+        }*/
 
         if (noe == "karkonan"){
             clClassClickInMainActivity.setVisibility(View.GONE);
@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         clMorkhasi.setOnClickListener(){
-            //startActivity(Intent(this, GozareshKar::class.java))
+            startActivity(Intent(this, DarkhastMorkhasi::class.java))
         }
 
         clGozareshKar.setOnClickListener(){

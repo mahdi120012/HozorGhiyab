@@ -1464,6 +1464,66 @@ public class LoadData {
 
     }
 
+    public static void sendDarkhastMorkhasi(final Context c, final String username,String tarikh, String tarikhShoro,
+                                       String tarikhPayan, String elat ,final ConstraintLayout clWifi) {
+
+        String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String tarikhEncode= UrlEncoderClass.urlEncoder(tarikh);
+        String tarikhPayanEncode= UrlEncoderClass.urlEncoder(tarikhShoro);
+        String tarikhShoroEncode= UrlEncoderClass.urlEncoder(tarikhPayan);
+        String elatEncode= UrlEncoderClass.urlEncoder(elat);
+
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_darkhast_morkhasi&username1=" + userNameEncode + "&tarikh=" + tarikhEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&tarikh_payan=" + tarikhPayanEncode + "&elat=" + elatEncode;
+        itShouldLoadMore = false;
+        ProgressDialogClass.showProgress(c);
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        clWifi.setVisibility(View.GONE);
+                        ProgressDialogClass.dismissProgress();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        if (response.equals("send_shod")){
+                            Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+
+                            //Intent intent = new Intent(c, ListPayamHayeErsali.class);
+                            //intent.putExtra("vorod_khoroj", "vorod_khoroj");
+                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            //c.startActivity(intent);
+
+                            //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
+                            //LoadData.loadMoreClass(c,rAdapterYouHaveKnow,recyclerModels,progressBar,username);
+
+                        }else {
+                            Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                ProgressDialogClass.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
 
     public static void sendVorodKhoroj(final Context c, final String username,
                                        String saatVorod, String saatKhoroj, String date, final ConstraintLayout clWifi) {
