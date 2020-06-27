@@ -37,6 +37,7 @@ import hozorghiyab.activities.ErsalVaziyatDarsiStudent;
 import hozorghiyab.activities.HozorGhiyab;
 import hozorghiyab.activities.NamayeshVaziyatDarsiStudent;
 import hozorghiyab.activities.WriteNewMessage;
+import hozorghiyab.customClasses.EnglishNumberToPersian;
 
 public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAdapterYouHaveKnow.MyViewHolder> {
 
@@ -99,6 +100,9 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
         }else if (rowLayoutType.contains("vorod_khoroj")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_vorod_khoroj, parent, false));
+
+        }else if (rowLayoutType.contains("darkhast_morkhasi")) {
+            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_darkhast_morkhasi, parent, false));
 
         }else if (rowLayoutType.contains("all_users_message")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recive_all_message, parent, false));
@@ -228,7 +232,15 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.txSaatVorod.setText(recyclerModels.get(position).getMatn());
               holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
               holder.txVaziyat.setText(recyclerModels.get(position).getCity());
-              
+
+          }else if (rowLayoutType.contains("darkhast_morkhasi")){
+
+              holder.txTarikhDarkhast.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getOnvan()));
+              holder.txAzTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn()));
+              holder.txTaTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPicture()));
+              holder.txElat.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getCity()));
+              holder.TxVaziyatt.setText(recyclerModels.get(position).getPosition());
+
           }else if (rowLayoutType.contains("recived_message")){
 
               holder.txOnvanMessageInRecivedMessage.setText(recyclerModels.get(position).getOnvan());
@@ -692,7 +704,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txOnvanMessageInRecivedMessage,txMatnMessageInRecivedMessage,
                  txNameFerestandeInRecivedMessage,txNameGirandehInRecivedMessage,
                  txUserNameInSearchInTeacher,txVaziyatDarsiVaAkhlaghi,txTaklif,txDate,txErsalNazar,
-                 txDate2,txVaziyat,txSaatVorod,txSaatKhoroj,txDate1;
+                 txDate2,txVaziyat,txSaatVorod,txSaatKhoroj,txDate1,txTarikhDarkhast,txAzTarikh,txTaTarikh,txElat,TxVaziyatt;;
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
         imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgRemoveMessage,imgAddStudent,
         imgHozorGhiyab,imgUserPictureForSendMessageInTeacher,imgIconDate,imgReadOrNo;
@@ -701,6 +713,11 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         EditText etTimeTakhirStudent,etVaziyatDarsiStudent,etVaziyatAkhlaghiStudent;
         MyViewHolder(View view) {
             super(view);
+            txTarikhDarkhast = itemView.findViewById(R.id.txTarikhDarkhast);
+            txAzTarikh = itemView.findViewById(R.id.txDateAz);
+            txTaTarikh = itemView.findViewById(R.id.txDateTa);
+            txElat = itemView.findViewById(R.id.txElat);
+            TxVaziyatt = itemView.findViewById(R.id.txVaziyat);
 
             txDate1 = itemView.findViewById(R.id.txDate);
             txDate2 = itemView.findViewById(R.id.txDate);

@@ -1,6 +1,6 @@
 package hozorghiyab.activities
 
-import android.app.TimePickerDialog
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +13,7 @@ import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import hozorghiyab.cityDetail.LoadData
+import hozorghiyab.customClasses.EnglishNumberToPersian
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
 import kotlinx.android.synthetic.main.darkhast_morkhasi.*
@@ -20,25 +21,23 @@ import kotlinx.android.synthetic.main.gozaresh_kar.*
 import kotlinx.android.synthetic.main.gozaresh_kar.imgBack
 import kotlinx.android.synthetic.main.gozaresh_kar.imgListGozareshat
 import kotlinx.android.synthetic.main.gozaresh_kar.imgSend
-import kotlinx.android.synthetic.main.gozaresh_kar.txDate
 import kotlinx.android.synthetic.main.net_connection.*
-import kotlinx.android.synthetic.main.vorod_khoroj.*
 import kotlinx.android.synthetic.main.write_new_message_teacher.imgHomeInNavigationViewInSendMessageTeacher
 import kotlinx.android.synthetic.main.write_new_message_teacher.imgInboxMessageInSendMessageTeacher
 import kotlinx.android.synthetic.main.write_new_message_teacher.txCountNotReadMessageInSendMessageTeacher
-import java.util.*
 
 
-class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog.OnTimeSetListener {
 
-
+    var saatShoroYaPayan = ""
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.darkhast_morkhasi)
 
         imgListGozareshat.setOnClickListener {
             val intent = Intent(this, ListPayamHayeErsali::class.java)
-            intent.putExtra("vorod_khoroj", "vorod_khoroj")
+            intent.putExtra("darkhast_morkhasi", "darkhast_morkhasi")
             startActivity(intent)
             finish()
         }
@@ -63,12 +62,10 @@ class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         etTarikhPayan.setOnTouchListener(OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val persianCalendar = PersianCalendar()
-                val datePickerDialog = DatePickerDialog.newInstance(
-                        this@DarkhastMorkhasi,
+                val datePickerDialog = DatePickerDialog.newInstance(this@DarkhastMorkhasi,
                         persianCalendar.persianYear,
                         persianCalendar.persianMonth,
-                        persianCalendar.persianDay
-                )
+                        persianCalendar.persianDay)
                 datePickerDialog.show(fragmentManager, "TarikhPayan")
                 return@OnTouchListener true
             }
@@ -78,15 +75,17 @@ class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener
 
         etSaatShoro.setOnTouchListener(OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
-                val mcurrentTime: Calendar = Calendar.getInstance()
-                val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-                val minute: Int = mcurrentTime.get(Calendar.MINUTE)
-                val mTimePicker: TimePickerDialog
-                mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                    etSaatShoro.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
-                }, hour, minute, true) //Yes 24 hour time
-                mTimePicker.setTitle("انتخاب زمان")
-                mTimePicker.show()
+
+                saatShoroYaPayan = "saat_shoro"
+
+                val persianCalendar = PersianCalendar()
+                val timePickerDialog = com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog.newInstance(
+                        this@DarkhastMorkhasi,
+                        persianCalendar.get(PersianCalendar.HOUR_OF_DAY),
+                        persianCalendar.get(PersianCalendar.MINUTE), true)
+                timePickerDialog.show(fragmentManager, "saat_shoro")
+
+
                 return@OnTouchListener true
             }
             false
@@ -94,15 +93,17 @@ class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener
 
         etSaatPayan.setOnTouchListener(OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
-                val mcurrentTime: Calendar = Calendar.getInstance()
-                val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-                val minute: Int = mcurrentTime.get(Calendar.MINUTE)
-                val mTimePicker: TimePickerDialog
-                mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                    etSaatPayan.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
-                }, hour, minute, true) //Yes 24 hour time
-                mTimePicker.setTitle("انتخاب زمان")
-                mTimePicker.show()
+
+
+                saatShoroYaPayan = "saat_payan"
+
+                val persianCalendar = PersianCalendar()
+                val timePickerDialog = com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog.newInstance(
+                        this@DarkhastMorkhasi,
+                        persianCalendar.get(PersianCalendar.HOUR_OF_DAY),
+                        persianCalendar.get(PersianCalendar.MINUTE), true)
+                timePickerDialog.show(fragmentManager, "saat_payan")
+
                 return@OnTouchListener true
             }
             false
@@ -157,21 +158,41 @@ class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         finish()
     }
 
-    fun onTimeSet(view: RadialPickerLayout?, hourOfDay: Int, minute: Int) {
-        val time = "You picked the following time: " + hourOfDay + "h" + minute
-        //timeTextView.setText(time)
-
-        Toast.makeText(this,time,Toast.LENGTH_SHORT).show()
-    }
-
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
 
-        val date = (year.toString().substring(2) + "/" + (monthOfYear + 1) + "/" + dayOfMonth.toString())
+        val month = monthOfYear + 1
+        var fm = "" + month
+        var fd = "" + dayOfMonth
+        if (month < 10) {
+            fm = "0$month"
+        }
+        if (dayOfMonth < 10) {
+            fd = "0$dayOfMonth"
+        }
+
+        val date = "$year/$fm/$fd"
 
         if (view.toString().contains("TarikhShoro")){
-            etTarikhShoro.setText(date)
+
+
+
+            etTarikhShoro.setText(EnglishNumberToPersian().convert(date))
         }else{
-            etTarikhPayan.setText(date)
+            etTarikhPayan.setText(EnglishNumberToPersian().convert(date))
         }
     }
+
+    override fun onTimeSet(view: RadialPickerLayout?, hourOfDay: Int, minute: Int) {
+        val hourString = if (hourOfDay < 10) "0$hourOfDay" else "" + hourOfDay
+        val minuteString = if (minute < 10) "0$minute" else "" + minute
+        val time = "$hourString:$minuteString"
+
+
+        if (saatShoroYaPayan.contains("saat_shoro")){
+            etSaatShoro.setText(EnglishNumberToPersian().convert(time))
+        }else{
+            etSaatPayan.setText(EnglishNumberToPersian().convert(time))
+        }
+    }
+
 }

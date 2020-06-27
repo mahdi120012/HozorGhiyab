@@ -1497,10 +1497,10 @@ public class LoadData {
                         if (response.equals("send_shod")){
                             Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
 
-                            //Intent intent = new Intent(c, ListPayamHayeErsali.class);
-                            //intent.putExtra("vorod_khoroj", "vorod_khoroj");
-                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            //c.startActivity(intent);
+                           Intent intent = new Intent(c, ListPayamHayeErsali.class);
+                           intent.putExtra("darkhast_morkhasi", "darkhast_morkhasi");
+                           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                           c.startActivity(intent);
 
                             //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
                             //LoadData.loadMoreClass(c,rAdapterYouHaveKnow,recyclerModels,progressBar,username);
@@ -3762,6 +3762,75 @@ public class LoadData {
                     }
                 });
 
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void ListDarkhastMorkhasi(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                             final ArrayList<RecyclerModel> recyclerModels,
+                                             final RecyclerView recyclerView,
+                                             final String username, final ConstraintLayout clWifi) {
+
+        String usernameEncode= UrlEncoderClass.urlEncoder(username);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String saat_vorod = jsonObject.getString("saat_vorod");
+                        String saat_khoroj = jsonObject.getString("saat_khoroj");
+                        String elat = jsonObject.getString("elat");
+                        String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
+                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,"","",0));
+                        recyclerAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataListPayamHayeErsaliTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,"",clWifi);
+                    }
+                });
             }
         });
 

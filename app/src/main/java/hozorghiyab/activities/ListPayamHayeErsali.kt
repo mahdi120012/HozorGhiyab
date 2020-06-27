@@ -6,10 +6,12 @@ import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import hozorghiyab.cityDetail.*
+import hozorghiyab.cityDetail.LoadData
+import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
+import hozorghiyab.cityDetail.RecyclerModel
+import hozorghiyab.cityDetail.Recyclerview
 import hozorghiyab.customClasses.SharedPrefClass
 import kotlinx.android.synthetic.main.gozaresh_kar.imgErsalGozaresh
-import kotlinx.android.synthetic.main.inbox_message.*
 import kotlinx.android.synthetic.main.inbox_message.imgTooTitlelbarMainAct
 import kotlinx.android.synthetic.main.inbox_message.tabLayout
 import kotlinx.android.synthetic.main.inbox_message.txTitle
@@ -29,6 +31,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
 
         var gozaresh_kar = if (intent.getExtras() == null) {}else{intent.extras!!.getString("gozaresh_kar")}
         var vorod_khoroj = if (intent.getExtras() == null) {}else{intent.extras!!.getString("vorod_khoroj")}
+        var darkhast_morkhasi = if (intent.getExtras() == null) {}else{intent.extras!!.getString("darkhast_morkhasi")}
 
         rModelsYouHaveKnow = ArrayList()
         rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "",null,null,null,"")
@@ -103,6 +106,16 @@ class ListPayamHayeErsali : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
+        if (darkhast_morkhasi.toString()!!.equals("darkhast_morkhasi")){
+            clGozareshat.visibility = View.VISIBLE
+            imgSendNewMessageInTeacher.visibility = View.GONE
+            imgTooTitlelbarMainAct.visibility = View.GONE
+            tabLayout.visibility = View.GONE
+            txTitle.setText("درخواست مرخصی")
+            textView20.setText("ثبت مرخصی")
+            textView21.setText("لیست مرخصی ها")
+        }
+
         if (vorod_khoroj.toString()!!.equals("vorod_khoroj")){
             clGozareshat.visibility = View.VISIBLE
             imgSendNewMessageInTeacher.visibility = View.GONE
@@ -131,6 +144,14 @@ class ListPayamHayeErsali : AppCompatActivity() {
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
+
+        }else if (darkhast_morkhasi.toString()!!.equals("darkhast_morkhasi")){
+            rModelsYouHaveKnow = ArrayList()
+            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "darkhast_morkhasi", this, rAdapterYouHaveKnow, "",null,null,null,"")
+            Recyclerview.define_recyclerviewAddStudent(this, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
+                    rModelsYouHaveKnow, null)
+            LoadData.ListDarkhastMorkhasi(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                    rvInPayamHayeErsaliTeacher, username,clWifiState)
 
         }else{
 
@@ -161,6 +182,9 @@ class ListPayamHayeErsali : AppCompatActivity() {
         imgErsalGozaresh.setOnClickListener {
             if (vorod_khoroj.toString()!!.equals("vorod_khoroj")){
                 startActivity(Intent(this, VorodKhoroj::class.java))
+                finish()
+            }else if(darkhast_morkhasi.toString()!!.equals("darkhast_morkhasi")){
+                startActivity(Intent(this, DarkhastMorkhasi::class.java))
                 finish()
             }else{
                 startActivity(Intent(this, GozareshKar::class.java))
@@ -195,7 +219,10 @@ class ListPayamHayeErsali : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finish()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        //finish()
     }
 
 }
