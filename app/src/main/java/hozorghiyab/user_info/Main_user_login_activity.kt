@@ -177,7 +177,7 @@ class Main_user_login_activity : AppCompatActivity() {
                 var passwordEncode = UrlEncoderClass.urlEncoder(password)
 
                 val url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=login_student&std_id=$userNameEncode&pass1=$passwordEncode"
-                Login_helper(this, url, etUsernameStudent, etPasswordStudent,"student").execute()
+                Login_helper(this, url, etUsernameStudent, etPasswordStudent).execute()
             }
         })
 
@@ -192,7 +192,7 @@ class Main_user_login_activity : AppCompatActivity() {
                 var passwordEncode = UrlEncoderClass.urlEncoder(password)
 
                 val url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=login_teacher&teacher_id=$userNameEncode&pass1=$passwordEncode"
-                Login_helper(this, url, etUsernameTeacher, etPasswordTeacher, "teacher").execute()
+                Login_helper(this, url, etUsernameTeacher, etPasswordTeacher).execute()
             }
         })
 
@@ -207,7 +207,7 @@ class Main_user_login_activity : AppCompatActivity() {
                 var passwordEncode = UrlEncoderClass.urlEncoder(password)
 
                 val url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=login_karkonan&karkon_id=$userNameEncode&pass1=$passwordEncode"
-                Login_helper(this, url, etUsernameKarkonan, etPasswordKarkonan, "karkonan").execute()
+                Login_helper(this, url, etUsernameKarkonan, etPasswordKarkonan).execute()
             }
         })
 

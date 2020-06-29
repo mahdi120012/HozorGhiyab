@@ -22,6 +22,8 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintTop_toTopOf="parent">
 
 
@@ -90,12 +92,48 @@
                 card_view:layout_constraintEnd_toStartOf="@+id/imgIconErsalKonandeMessage"
                 card_view:layout_constraintTop_toTopOf="@+id/imgIconErsalKonandeMessage" />
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clVaziyatTaeid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                card_view:layout_constraintEnd_toEndOf="@+id/imgIconErsalKonandeMessage"
+                card_view:layout_constraintTop_toBottomOf="@+id/txNameFrestandeInRecivedMessage">
+
+                <TextView
+                    android:id="@+id/txVaziyatTaeid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/adobearabicbold"
+                    android:padding="3dp"
+                    android:text="وضعیت تایید:"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    card_view:fontFamily="@font/broya"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgVaziyatTaeid"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:visibility="visible"
+                    card_view:layout_constraintBottom_toBottomOf="@+id/txVaziyatTaeid"
+                    card_view:layout_constraintEnd_toStartOf="@+id/txVaziyatTaeid"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="@+id/txVaziyatTaeid"
+                    card_view:srcCompat="@drawable/dar_entezar_teeid" />
+            </android.support.constraint.ConstraintLayout>
+
             <TextView
                 android:id="@+id/txErsalNazar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView2"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
                 android:fontFamily="@font/adobearabicbold"
@@ -104,7 +142,6 @@
                 android:textSize="14sp"
                 android:visibility="gone"
                 card_view:fontFamily="@font/broya"
-                card_view:layout_constraintBottom_toBottomOf="@+id/imgErsalNazarIcon"
                 card_view:layout_constraintEnd_toStartOf="@+id/imgErsalNazarIcon"
                 card_view:layout_constraintTop_toBottomOf="@+id/txDate" />
 
@@ -129,25 +166,18 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginBottom="5dp"
                 android:visibility="visible"
-                card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toBottomOf="@+id/txMatnRecivedMessage"
-                card_view:layout_constraintVertical_bias="1.0"
                 card_view:srcCompat="@drawable/icon_ersal_konandemessage" />
 
             <ImageView
                 android:id="@+id/imgReadOrNotRead"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="8dp"
                 android:visibility="gone"
-                card_view:layout_constraintEnd_toEndOf="@+id/imgIconErsalKonandeMessage"
-                card_view:layout_constraintStart_toStartOf="@+id/imgIconErsalKonandeMessage"
-                card_view:layout_constraintTop_toBottomOf="@+id/imgIconErsalKonandeMessage"
+                card_view:layout_constraintEnd_toEndOf="@+id/clVaziyatTaeid"
+                card_view:layout_constraintTop_toBottomOf="@+id/clVaziyatTaeid"
                 card_view:srcCompat="@drawable/not_read" />
 
             <ImageView
@@ -155,10 +185,10 @@
                 android:layout_width="19dp"
                 android:layout_height="19dp"
                 android:visibility="gone"
-                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="@+id/txErsalNazar"
                 card_view:layout_constraintEnd_toEndOf="@+id/imgIconDate"
                 card_view:layout_constraintStart_toStartOf="@+id/imgIconDate"
-                card_view:layout_constraintTop_toBottomOf="@+id/txDate"
+                card_view:layout_constraintTop_toTopOf="@+id/txErsalNazar"
                 card_view:srcCompat="@drawable/sendmessageicon" />
 
             <ImageView

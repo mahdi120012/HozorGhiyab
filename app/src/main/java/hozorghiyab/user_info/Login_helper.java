@@ -24,26 +24,24 @@ import hozorghiyab.activities.StudentPanelMainKt;
 public class Login_helper extends AsyncTask<Void, Void, String> {
 
     Context        c;
-    String         urlAddress,noe;
+    String         urlAddress;
     EditText       usernameTxt1, passwordTxt1;
 
     ProgressDialog pd;
     User_login     user;
 
 
-    public Login_helper(Context c, String urlAddress, EditText usernameTxt1, EditText passwordTxt1,String noe) {
+    public Login_helper(Context c, String urlAddress, EditText usernameTxt1, EditText passwordTxt1) {
 
         this.c = c;
         this.urlAddress = urlAddress;
         this.usernameTxt1 = usernameTxt1;
         this.passwordTxt1 = passwordTxt1;
-        this.noe = noe;
 
         user = new User_login();
         user.setUsernameOrEmail(usernameTxt1.getText().toString());
         user.setPassword(passwordTxt1.getText().toString());
     }
-
 
     @Override
     protected void onPreExecute() {
@@ -73,9 +71,13 @@ public class Login_helper extends AsyncTask<Void, Void, String> {
             if (response.startsWith(ErrorTracker.LOGIN_SUCCESS)) {
 
                 //Line below For Remove String Logged Successfully from string and get only name:
-                String name = response.replace("Logged Successfully", "");
+                //String name = response.replace("Logged Successfully", "");
+                String name = response.substring(response.indexOf("[") + 1, response.indexOf("]"));
                 //Line below for remove only the spaces at the beginning or end of the String:
                 name = name.trim();
+
+                String noe = response.substring(response.indexOf("(") + 1, response.indexOf(")"));
+                noe = noe.trim();
 
                 SharedPreferences sharedPreferences = Login_helper.this.c.getSharedPreferences("file", c.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
