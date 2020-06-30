@@ -282,10 +282,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   sb.setSpan(bss, 0, 10, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
 
                   holder.txOnvanMessageInRecivedMessage.setText(sb);
-                  holder.txErsalNazar.setVisibility(View.VISIBLE);
-                  holder.imgErsalNazarIcon.setVisibility(View.VISIBLE);
                   holder.clVaziyatTaeid.setVisibility(View.VISIBLE);
-
               }
 
               String noe = SharedPrefClass.getUserId(c,"noe");
@@ -306,9 +303,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   sb.setSpan(bss, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
 
                   holder.txOnvanMessageInRecivedMessage.setText(sb);
-                  holder.txErsalNazar.setVisibility(View.VISIBLE);
-                  holder.imgErsalNazarIcon.setVisibility(View.VISIBLE);
-
               }
 
               if(recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
@@ -319,40 +313,27 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   sb.setSpan(bss, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
 
                   holder.txOnvanMessageInRecivedMessage.setText(sb);
-                  holder.txErsalNazar.setVisibility(View.VISIBLE);
-                  holder.imgErsalNazarIcon.setVisibility(View.VISIBLE);
-
               }
 
-              holder.txErsalNazar.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
 
-                      list_family.add(recyclerModels.get(position).getCity());
-                      list_id.add(recyclerModels.get(position).getRate());
 
-                      String s = "";
-                      for (int i = 0; i < list_family.size(); i++) {
-                          s += list_family.get(i) + ", ";
+
+              if (noe.equals("admin")){
+                  holder.clMain.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+                          showCustomDialogMessage(c,position,"taeid_gozaresh",holder.imgVaziyatTaeid);
                       }
+                  });
+              }else {
+                  holder.clMain.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+                          showCustomDialogMessage(c,position,"",holder.imgVaziyatTaeid);
+                      }
+                  });
+              }
 
-
-                      Intent intent = new Intent(c, WriteNewMessage.class);
-                      intent.putStringArrayListExtra("id",list_id);
-                      intent.putStringArrayListExtra("family",list_family);
-                      c.startActivity(intent);
-
-                  }
-              });
-
-              holder.imgRemoveMessage.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-
-                      showCustomDialog(c,position,"delete",null);
-
-                  }
-              });
 
           }else if (rowLayoutType.contains("all_users_message")){
 
@@ -361,15 +342,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.txNameFerestandeInRecivedMessage.setText(recyclerModels.get(position).getCity());
               holder.txNameGirandehInRecivedMessage.setText(recyclerModels.get(position).getPosition());
               holder.txDate1.setText(recyclerModels.get(position).getRate());
-
-              holder.imgRemoveMessage.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-
-                      showCustomDialog(c,position,"delete",null);
-
-                  }
-              });
 
           }else if (rowLayoutType.contains("search")){
 
@@ -725,16 +697,18 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txTedadHazerinInLinsJalasat,txTedadGhayebinInListJalasat,
                  txOnvanMessageInRecivedMessage,txMatnMessageInRecivedMessage,
                  txNameFerestandeInRecivedMessage,txNameGirandehInRecivedMessage,
-                 txUserNameInSearchInTeacher,txVaziyatDarsiVaAkhlaghi,txTaklif,txDate,txErsalNazar,
+                 txUserNameInSearchInTeacher,txVaziyatDarsiVaAkhlaghi,txTaklif,txDate,
                  txDate2,txVaziyat,txSaatVorod,txSaatKhoroj,txDate1,txTarikhDarkhast,txAzTarikh,txTaTarikh,txElat,TxVaziyatt;
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
-        imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgRemoveMessage,imgAddStudent,imgVaziyatTaeid,
+        imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgAddStudent,imgVaziyatTaeid,
         imgHozorGhiyab,imgUserPictureForSendMessageInTeacher,imgIconDate,imgReadOrNo;
-        ConstraintLayout cl,clHazerGhayebTik,clVaziyatDarsi,clVaziyatTaeid;
+        ConstraintLayout cl,clHazerGhayebTik,clVaziyatDarsi,clVaziyatTaeid,clMain;
         Spinner spinnerTakhirStudent;
         EditText etTimeTakhirStudent,etVaziyatDarsiStudent,etVaziyatAkhlaghiStudent;
         MyViewHolder(View view) {
             super(view);
+            clMain = itemView.findViewById(R.id.cl_main);
+
             clVaziyatTaeid = itemView.findViewById(R.id.clVaziyatTaeid);
             imgVaziyatTaeid = itemView.findViewById(R.id.imgVaziyatTaeid);
 
@@ -751,8 +725,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             txSaatKhoroj = itemView.findViewById(R.id.txSaatKhoroj);
 
             imgReadOrNo = itemView.findViewById(R.id.imgReadOrNotRead);
-            txErsalNazar = itemView.findViewById(R.id.txErsalNazar);
-            imgErsalNazarIcon = itemView.findViewById(R.id.imgErsalNazarIcon);
 
             imgUserPictureForSendMessageInTeacher = itemView.findViewById(R.id.imgUserPictureForSendMessageInTeacher);
             etTimeTakhirStudent = itemView.findViewById(R.id.etTimeTakhirStudent);
@@ -765,7 +737,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             txDate = itemView.findViewById(R.id.txDate);
             imgIconDate = itemView.findViewById(R.id.imgIconDate);
 
-            imgRemoveMessage = itemView.findViewById(R.id.imgRemoveMessage);
             spinnerTakhirStudent= itemView.findViewById(R.id.spinnerInHozorGhiyab);
             imgChoiseReciverSendNewMessageInTeacher= itemView.findViewById(R.id.imgChoiseReciverSendNewMessageInTeacher);
             imgChoiseUserInSearchInTeacher= itemView.findViewById(R.id.imgChoiseUserForSendNewMessageInTeacher);
@@ -799,6 +770,83 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             clHazerGhayebTik = itemView.findViewById(R.id.clHazerGhayebTik);
         }
     }
+
+    public void showCustomDialogMessage(final Context context, final int position, final String method, final ImageView imgVaziyatTaeid) {
+        final Dialog dialog = new Dialog(c, R.style.customDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_dialog_inbox_message, null, false);
+        TextView txErsalNazar = view.findViewById(R.id.txErsalNazar);
+        TextView txCopy = view.findViewById(R.id.txCopy);
+        TextView txRemove = view.findViewById(R.id.txRemove);
+        TextView txTaeid = view.findViewById(R.id.txTaeid);
+        TextView txRad = view.findViewById(R.id.txRad);
+
+        ImageView imgTaeid = view.findViewById(R.id.imgTaeid);
+        ImageView imgRad = view.findViewById(R.id.imgRad);
+
+        if (method.equals("taeid_gozaresh")){
+            imgTaeid.setVisibility(View.VISIBLE);
+            imgRad.setVisibility(View.VISIBLE);
+            txTaeid.setVisibility(View.VISIBLE);
+            txRad.setVisibility(View.VISIBLE);
+        }
+
+        txErsalNazar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list_family.add(recyclerModels.get(position).getCity());
+                list_id.add(recyclerModels.get(position).getRate());
+
+                String s = "";
+                for (int i = 0; i < list_family.size(); i++) {
+                    s += list_family.get(i) + ", ";
+                }
+
+                Intent intent = new Intent(c, WriteNewMessage.class);
+                intent.putStringArrayListExtra("id",list_id);
+                intent.putStringArrayListExtra("family",list_family);
+                c.startActivity(intent);
+
+                dialog.dismiss();
+            }
+        });
+
+        txTaeid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCustomDialog(c,position,"taeid_gozaresh",imgVaziyatTaeid);
+                dialog.dismiss();
+            }
+        });
+
+        txRad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCustomDialog(c,position,"rad_gozaresh",imgVaziyatTaeid);
+                dialog.dismiss();
+            }
+        });
+
+        txRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showCustomDialog(c,position,"delete",null);
+
+                dialog.dismiss();
+            }
+        });
+
+        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        dialog.setContentView(view);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        dialog.show();
+    }
+
     public void showCustomDialog(final Context context, final int position, final String method, final ImageView imgVaziyatTaeid) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -810,12 +858,22 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         TextView txMatnHazfPayam = view.findViewById(R.id.txMatnHazfPayam);
         TextView txRad = view.findViewById(R.id.txRad);
 
+        if (method.equals("rad_gozaresh")){
+            txHazfPayam.setText("رد گزارش");
+            txMatnHazfPayam.setText("آیا گزارش رد شود؟");
+            txRemove.setText("رد");
+            txRemove.setTextColor(Color.parseColor("#008000"));
+            txRad.setVisibility(View.VISIBLE);
+            txRemove.setVisibility(View.GONE);
+        }
+
+
         if (method.equals("taeid_gozaresh")){
             txHazfPayam.setText("تایید گزارش");
             txMatnHazfPayam.setText("آیا گزارش تایید شود؟");
             txRemove.setText("تایید");
             txRemove.setTextColor(Color.parseColor("#008000"));
-            txRad.setVisibility(View.VISIBLE);
+            txRad.setVisibility(View.GONE);
         }
 
         txCancel.setOnClickListener(new View.OnClickListener() {

@@ -12,5 +12,8 @@
         <item name="android:fontFamily" tools:ignore="NewApi">@font/b_yekan</item>
     </style>
 
-
+    <style name="customDialog" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">60%</item>
+        <item name="android:windowMinWidthMinor">60%</item>
+    </style>
 </resources>

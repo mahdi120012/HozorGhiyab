@@ -52,25 +52,12 @@
                 card_view:layout_constraintTop_toBottomOf="@+id/txNameFrestandeInRecivedMessage"
                 card_view:srcCompat="@drawable/date_icon" />
 
-            <ImageView
-                android:id="@+id/imgRemoveMessage"
-                android:layout_width="16dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="18dp"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:srcCompat="@drawable/zarbdar11" />
-
             <TextView
                 android:id="@+id/txOnvanRecevedMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
@@ -80,7 +67,7 @@
                 android:textSize="17sp"
                 card_view:fontFamily="@font/broya"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/imgRemoveMessage"
+                card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -88,8 +75,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView2"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/adobearabicbold"
@@ -98,7 +85,7 @@
                 android:textSize="17sp"
                 card_view:fontFamily="@font/broya"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/imgRemoveMessage"
+                card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage" />
 
             <TextView
@@ -139,8 +126,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView2"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:fontFamily="@font/adobearabicbold"
                 android:padding="3dp"
                 android:text="نام گیرنده"
@@ -148,7 +133,6 @@
                 card_view:fontFamily="@font/broya"
                 card_view:layout_constraintBottom_toBottomOf="@+id/txNameFrestandeInRecivedMessage3"
                 card_view:layout_constraintEnd_toStartOf="@+id/txNameFrestandeInRecivedMessage3"
-                card_view:layout_constraintStart_toEndOf="@+id/imgRemoveMessage"
                 card_view:layout_constraintTop_toTopOf="@+id/txNameFrestandeInRecivedMessage3" />
 
             <ImageView

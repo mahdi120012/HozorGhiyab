@@ -9,12 +9,13 @@
     card_view:cardCornerRadius="12dp"
     card_view:cardElevation="3dp"
     card_view:cardPreventCornerOverlap="false"
-    card_view:cardBackgroundColor="#eff3f7"
+    card_view:cardBackgroundColor="#ffffff"
     android:layoutDirection="ltr"
     android:textDirection="rtl"
     >
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="5dp">
@@ -27,25 +28,12 @@
             card_view:layout_constraintTop_toTopOf="parent">
 
 
-            <ImageView
-                android:id="@+id/imgRemoveMessage"
-                android:layout_width="16dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="18dp"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:srcCompat="@drawable/zarbdar11" />
-
             <TextView
                 android:id="@+id/txOnvanRecevedMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
@@ -55,7 +43,7 @@
                 android:textSize="17sp"
                 card_view:fontFamily="@font/broya"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/imgRemoveMessage"
+                card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -63,8 +51,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView2"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/adobearabicbold"
@@ -73,7 +61,7 @@
                 android:textSize="17sp"
                 card_view:fontFamily="@font/broya"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toEndOf="@+id/imgRemoveMessage"
+                card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage" />
 
             <TextView
@@ -97,8 +85,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                card_view:layout_constraintEnd_toEndOf="@+id/imgIconErsalKonandeMessage"
-                card_view:layout_constraintTop_toBottomOf="@+id/txNameFrestandeInRecivedMessage">
+                card_view:layout_constraintStart_toStartOf="@+id/txDate"
+                card_view:layout_constraintTop_toBottomOf="@+id/txDate">
 
                 <TextView
                     android:id="@+id/txVaziyatTaeid"
@@ -130,22 +118,6 @@
             </android.support.constraint.ConstraintLayout>
 
             <TextView
-                android:id="@+id/txErsalNazar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView2"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:fontFamily="@font/adobearabicbold"
-                android:padding="3dp"
-                android:text="ارسال نظر"
-                android:textSize="14sp"
-                android:visibility="gone"
-                card_view:fontFamily="@font/broya"
-                card_view:layout_constraintEnd_toStartOf="@+id/imgErsalNazarIcon"
-                card_view:layout_constraintTop_toBottomOf="@+id/txDate" />
-
-            <TextView
                 android:id="@+id/txDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,21 +147,13 @@
                 android:id="@+id/imgReadOrNotRead"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
                 android:visibility="gone"
-                card_view:layout_constraintEnd_toEndOf="@+id/clVaziyatTaeid"
-                card_view:layout_constraintTop_toBottomOf="@+id/clVaziyatTaeid"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/txNameFrestandeInRecivedMessage"
                 card_view:srcCompat="@drawable/not_read" />
-
-            <ImageView
-                android:id="@+id/imgErsalNazarIcon"
-                android:layout_width="19dp"
-                android:layout_height="19dp"
-                android:visibility="gone"
-                card_view:layout_constraintBottom_toBottomOf="@+id/txErsalNazar"
-                card_view:layout_constraintEnd_toEndOf="@+id/imgIconDate"
-                card_view:layout_constraintStart_toStartOf="@+id/imgIconDate"
-                card_view:layout_constraintTop_toTopOf="@+id/txErsalNazar"
-                card_view:srcCompat="@drawable/sendmessageicon" />
 
             <ImageView
                 android:id="@+id/imgIconDate"
