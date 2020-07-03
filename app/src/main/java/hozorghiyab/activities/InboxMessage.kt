@@ -1,21 +1,17 @@
 package hozorghiyab.activities
 
+import android.content.Context
 import android.content.Intent
-import android.os.Build
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.TabHost.OnTabChangeListener
-import android.widget.Toast
 import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
 import hozorghiyab.cityDetail.RecyclerModel
 import hozorghiyab.cityDetail.Recyclerview
 import hozorghiyab.customClasses.SharedPrefClass
-import kotlinx.android.synthetic.main.custom_dialog_inbox_message.*
 import kotlinx.android.synthetic.main.inbox_message.*
 import kotlinx.android.synthetic.main.net_connection.*
 import java.util.*
@@ -36,7 +32,10 @@ class InboxMessage : AppCompatActivity() {
             tabLayout.setScrollPosition(4,0f,true);
         }
 
-
+        val sharedPreferences: SharedPreferences = this.getSharedPreferences("file", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("tedad_payam_khande_nashode", "0")
+        editor.commit()
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

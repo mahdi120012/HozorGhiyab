@@ -10,7 +10,6 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
@@ -30,8 +29,8 @@ import kotlinx.android.synthetic.main.toolbar_top.*
 
 
 class MainActivity : AppCompatActivity() {
-    //var mServiceIntent: Intent? = null
-   //private var mYourService: NotificationService? = null
+    var mServiceIntent: Intent? = null
+    private var mYourService: YourService? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.hozorghiyab.R.layout.navigation_main)
@@ -46,27 +45,11 @@ class MainActivity : AppCompatActivity() {
         appUpdater.start()
 
 
-/*        createNotificationChannel()
-        startService(Intent(this, NotificationService::class.java))
-
-        mYourService = NotificationService()
+        mYourService = YourService()
         mServiceIntent = Intent(this, mYourService!!.javaClass)
         if (!isMyServiceRunning(mYourService!!.javaClass)) {
             startService(mServiceIntent)
         }
-
-
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-                object : BroadcastReceiver() {
-                    override fun onReceive(context: Context, intent: Intent) {
-                        val latitude = intent.getDoubleExtra(NotificationService.EXTRA_LATITUDE, 0.0)
-                        val longitude = intent.getDoubleExtra(NotificationService.EXTRA_LONGITUDE, 0.0)
-                        Toast.makeText(this@MainActivity,latitude.toString(),Toast.LENGTH_LONG).show()
-                        //textView.setText("Lat: $latitude, Lng: $longitude")
-                    }
-                }, IntentFilter(NotificationService.ACTION_LOCATION_BROADCAST)
-        )*/
 
 
         var username = SharedPrefClass.getUserId(this,"user")
@@ -216,7 +199,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-/*    private fun createNotificationChannel() {
+    private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -232,6 +215,8 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+
+
     private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
         val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         for (service in manager.getRunningServices(Int.MAX_VALUE)) {
@@ -250,19 +235,19 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    override fun onStart() {
+/*    override fun onStart() {
         super.onStart()
         val intentFilter = IntentFilter()
-        intentFilter.addAction(NotificationService.MY_ACTION)
+        intentFilter.addAction(YourService.MY_ACTION)
         registerReceiver(broadcastReceiver, intentFilter)
         //Start our own service
         val intent = Intent(this@MainActivity,
-                NotificationService::class.java)
+                YourService::class.java)
         startService(intent)
         super.onStart()
-    }
+    }*/
 
-    var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+/*    var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val datapassed = intent.getIntExtra("DATAPASSED", 0)
             val s = intent.action.toString()

@@ -1,10 +1,18 @@
 package hozorghiyab.cityDetail;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
@@ -41,8 +49,10 @@ import hozorghiyab.activities.ListPayamHayeErsali;
 import hozorghiyab.activities.VorodKhoroj;
 import hozorghiyab.cityDetail.placeComment.RecyclerAdapterPlaceComment;
 import hozorghiyab.cityDetail.placeComment.RecyclerModelPlaceComment;
+import hozorghiyab.customClasses.SharedPrefClass;
 import hozorghiyab.listCityACT.CityAdapter;
 import hozorghiyab.listCityACT.Contacts;
+import hozorghiyab.user_info.Login_helper;
 
 public class LoadData {
 
@@ -2092,6 +2102,96 @@ public class LoadData {
     }
 
 
+    public static void loadOnlyCountMessageNotReadForNotification(final Context c, final TextView txStudentName,
+                                                             final TextView txCountNotReadMessage,
+                                                             String username, final ImageView imgTeacherPicture,
+                                                             final ConstraintLayout clWifi) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_teacher_name&user1=" + usernameEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //clWifi.setVisibility(View.GONE);
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String studentName = null;
+                String tedadPayamKhangeNashode = null;
+                String teacherPicture = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        studentName = jsonObject.getString("family");
+                        tedadPayamKhangeNashode = jsonObject.getString("tedad_payam_khande_nashode");
+                        teacherPicture = jsonObject.getString("picture");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+                    String tedadPayamKhandeNashodeGhabli = SharedPrefClass.getUserId(c,"tedad_payam_khande_nashode");
+
+                    if (tedadPayamKhandeNashodeGhabli.equals("")){
+                        tedadPayamKhandeNashodeGhabli = "0";
+                    }
+                    int tedadPayamKhandeNashodeGhabliInt = Integer.parseInt(tedadPayamKhandeNashodeGhabli);
+                    int tedadPayamKhangeNashodeInt = Integer.parseInt(tedadPayamKhangeNashode);
+
+                    //Toast.makeText(c, String.valueOf(tedadPayamKhandeNashodeGhabliInt), Toast.LENGTH_SHORT).show();
+                    if (tedadPayamKhandeNashodeGhabliInt == tedadPayamKhangeNashodeInt){
+
+                    }else {
+
+
+                    SharedPreferences sharedPreferences = c.getSharedPreferences("file", c.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("tedad_payam_khande_nashode", tedadPayamKhangeNashode);
+                    editor.commit();
+
+                    // Create the NotificationChannel, but only on API 26+ because
+                    // the NotificationChannel class is new and not in the support library
+                    LoadData.createNotificationChannel(c);
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(c, "1")
+                            .setSmallIcon(R.drawable.hozorghiyabicon)
+                            .setSound(Uri.parse("android.resource://" + c.getPackageName() + "/" + R.raw.sound))//*see note)
+                            .setContentTitle("یک پیام جدید")
+                            .setContentText("یک پیام جدید موجوده")
+                            .setCategory(Notification.CATEGORY_SERVICE)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
+// notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(1, builder.build());
+
+                    //Toast.makeText(c, tedadPayamKhangeNashode, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                //clWifi.setVisibility(View.VISIBLE);
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
     public static void loadTeacherNameAndCountMessageNotRead(final Context c, final TextView txStudentName,
                                                              final TextView txCountNotReadMessage,
                                                              String username, final ImageView imgTeacherPicture,
@@ -2163,6 +2263,23 @@ public class LoadData {
 
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
+
+    public static void createNotificationChannel(Context c) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "test";
+            String description = "test";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = c.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
 
     public static String loadStudentNameAndCountMessageNotRead(final Context c, final String urlAppend,
