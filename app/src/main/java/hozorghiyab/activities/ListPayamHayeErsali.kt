@@ -34,7 +34,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
         var darkhast_morkhasi = if (intent.getExtras() == null) {}else{intent.extras!!.getString("darkhast_morkhasi")}
 
         rModelsYouHaveKnow = ArrayList()
-        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "",null,null,null,"")
+        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                 rModelsYouHaveKnow, null)
 

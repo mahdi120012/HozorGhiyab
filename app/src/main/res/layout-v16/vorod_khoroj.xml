@@ -128,17 +128,20 @@
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp">
+                    android:background="#EBEDF3">
 
                     <TextView
                         android:id="@+id/txReciverFamilyInTeacher2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ساعت ورود"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/broya"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/rmedium"
+
+                        app:layout_constraintBottom_toBottomOf="@+id/imgSendSaatVorod"
                         app:layout_constraintEnd_toEndOf="@+id/txReciverFamilyInTeacher4"
-                        app:layout_constraintTop_toTopOf="@+id/etSaatVorod" />
+                        app:layout_constraintTop_toTopOf="@+id/imgSendSaatVorod" />
 
                     <TextView
                         android:id="@+id/txReciverFamilyInTeacher4"
@@ -148,8 +151,9 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:text="تاریخ"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/broya"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/rmedium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -158,10 +162,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="####/##/##"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/broya"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/rmedium"
                         app:layout_constraintBottom_toBottomOf="@+id/txReciverFamilyInTeacher4"
-                        app:layout_constraintEnd_toEndOf="@+id/etSaatVorod"
+                        app:layout_constraintEnd_toEndOf="@+id/imgSendSaatVorod"
                         app:layout_constraintTop_toTopOf="@+id/txReciverFamilyInTeacher4" />
 
                     <TextView
@@ -169,77 +174,93 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ساعت خروج"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/broya"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/rmedium"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgSendSaatKhoroj"
                         app:layout_constraintEnd_toEndOf="@+id/txReciverFamilyInTeacher2"
-                        app:layout_constraintTop_toTopOf="@+id/etSaatKhoroj" />
-
-                    <EditText
-                        android:id="@+id/etSaatVorod"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:background="@xml/edittext_style"
-                        android:backgroundTint="#edecec"
-                        android:ems="10"
-                        android:fadingEdge="vertical"
-                        android:fontFamily="@font/b_yekan"
-                        android:gravity="right"
-                        android:hint="انتخاب"
-                        android:inputType="textMultiLine|textCapSentences"
-                        android:maxLength="1000"
-                        android:paddingLeft="6dp"
-                        android:paddingTop="6dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="6dp"
-                        android:textColorHighlight="#90b1e8"
-                        android:textCursorDrawable="@xml/color_cursor"
-                        android:textSize="15sp"
-                        app:layout_constraintEnd_toStartOf="@+id/txReciverFamilyInTeacher2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txDate"></EditText>
-
-                    <EditText
-                        android:id="@+id/etSaatKhoroj"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="32dp"
-                        android:background="@xml/edittext_style"
-                        android:backgroundTint="#edecec"
-                        android:ems="10"
-                        android:fontFamily="@font/b_yekan"
-                        android:gravity="right"
-                        android:hint="انتخاب"
-                        android:inputType="textMultiLine|textCapSentences"
-                        android:maxLength="1000"
-                        android:paddingLeft="6dp"
-                        android:paddingTop="6dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="6dp"
-                        android:textColorHighlight="#90b1e8"
-                        android:textCursorDrawable="@xml/color_cursor"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toTopOf="@+id/imgSend"
-                        app:layout_constraintEnd_toEndOf="@+id/etSaatVorod"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/etSaatVorod"></EditText>
+                        app:layout_constraintTop_toTopOf="@+id/imgSendSaatKhoroj" />
 
                     <ImageView
-                        android:id="@+id/imgSend"
-                        android:layout_width="120dp"
-                        android:layout_height="50dp"
-                        android:layout_marginBottom="20dp"
+                        android:id="@+id/imgSendSaatVorod"
+                        android:layout_width="180dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintEnd_toStartOf="@+id/txReciverFamilyInTeacher2"
+                        app:layout_constraintTop_toBottomOf="@+id/txDate"
+                        app:srcCompat="@drawable/sabt_vorod" />
+
+                    <ImageView
+                        android:id="@+id/imgSendSaatKhoroj"
+                        android:layout_width="180dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/etSaatKhoroj"
-                        app:layout_constraintStart_toStartOf="@+id/etSaatKhoroj"
-                        app:srcCompat="@drawable/sendtxt" />
+                        app:layout_constraintEnd_toEndOf="@+id/imgSendSaatVorod"
+                        app:layout_constraintStart_toStartOf="@+id/imgSendSaatVorod"
+                        app:layout_constraintTop_toBottomOf="@+id/imgSendSaatVorod"
+                        app:srcCompat="@drawable/sabt_khoroj" />
+
+                    <TextView
+                        android:id="@+id/etSaatKhoroj"
+                        android:layout_width="56dp"
+                        android:layout_height="60dp"
+                        android:fontFamily="@font/rmedium"
+                        android:gravity="center"
+                        android:hint="انتخاب"
+                        android:textColorHint="#ffffff"
+                        android:textColor="#ffffff"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgSendSaatKhoroj"
+                        app:layout_constraintEnd_toEndOf="@+id/imgSendSaatKhoroj"
+                        app:layout_constraintTop_toTopOf="@+id/imgSendSaatKhoroj" />
+
+                    <TextView
+                        android:id="@+id/etSaatVorod"
+                        android:layout_width="56dp"
+                        android:layout_height="60dp"
+                        android:fontFamily="@font/rmedium"
+                        android:gravity="center"
+                        android:hint="انتخاب"
+                        android:textColorHint="#ffffff"
+
+                        android:textColor="#ffffff"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgSendSaatVorod"
+                        app:layout_constraintEnd_toEndOf="@+id/imgSendSaatVorod"
+                        app:layout_constraintTop_toTopOf="@+id/imgSendSaatVorod" />
+
+                    <TextView
+                        android:id="@+id/txReciverFamilyInTeacher7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="ثبت"
+                        android:textColor="#f48142"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/rmedium"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgSendSaatVorod"
+                        app:layout_constraintEnd_toStartOf="@+id/etSaatVorod"
+                        app:layout_constraintStart_toStartOf="@+id/imgSendSaatVorod"
+                        app:layout_constraintTop_toTopOf="@+id/imgSendSaatVorod" />
+
+                    <TextView
+                        android:id="@+id/txReciverFamilyInTeacher8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="ثبت"
+                        android:textColor="#169c9d"
+
+                        android:textSize="18sp"
+                        app:fontFamily="@font/rmedium"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgSendSaatKhoroj"
+                        app:layout_constraintEnd_toStartOf="@+id/etSaatKhoroj"
+                        app:layout_constraintStart_toStartOf="@+id/imgSendSaatKhoroj"
+                        app:layout_constraintTop_toTopOf="@+id/imgSendSaatKhoroj" />
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 

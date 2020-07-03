@@ -234,7 +234,14 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.txDate2.setText(recyclerModels.get(position).getOnvan());
               holder.txSaatVorod.setText(recyclerModels.get(position).getMatn());
               holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
-              holder.txVaziyat.setText(recyclerModels.get(position).getCity());
+
+              if (recyclerModels.get(position).getCity() != null){
+                  if (recyclerModels.get(position).getCity().equals("تایید شده")){
+                      holder.imgVaziyatTaeidVorodKhoroj.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_shode));
+                  }else if(recyclerModels.get(position).getCity().equals("رد شده")){
+                      holder.imgVaziyatTaeidVorodKhoroj.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_nashode));
+                  }
+              }
 
           }else if (rowLayoutType.contains("darkhast_morkhasi")){
 
@@ -245,6 +252,12 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.TxVaziyatt.setText(recyclerModels.get(position).getPosition());
 
           }else if (rowLayoutType.contains("recived_message")){
+
+              if (className.equals("payam_haye_ersali")){
+                  holder.txAzYaBe.setText("به");
+              }else {
+                  holder.txAzYaBe.setText("از");
+              }
 
               holder.txOnvanMessageInRecivedMessage.setText(recyclerModels.get(position).getOnvan());
               holder.txMatnMessageInRecivedMessage.setText(recyclerModels.get(position).getMatn());
@@ -271,7 +284,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
               if(holder.txDate.getText().toString().isEmpty()){
                   holder.txDate.setVisibility(View.GONE);
-                  holder.imgIconDate.setVisibility(View.GONE);
               }
 
               if(recyclerModels.get(position).getPosition().toString().contains("gozaresh_kar")){
@@ -698,16 +710,20 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txOnvanMessageInRecivedMessage,txMatnMessageInRecivedMessage,
                  txNameFerestandeInRecivedMessage,txNameGirandehInRecivedMessage,
                  txUserNameInSearchInTeacher,txVaziyatDarsiVaAkhlaghi,txTaklif,txDate,
-                 txDate2,txVaziyat,txSaatVorod,txSaatKhoroj,txDate1,txTarikhDarkhast,txAzTarikh,txTaTarikh,txElat,TxVaziyatt;
+                 txDate2,txSaatVorod,txSaatKhoroj,txDate1,txTarikhDarkhast,txAzTarikh,txTaTarikh,txElat,
+                 TxVaziyatt,txAzYaBe;
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
         imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgAddStudent,imgVaziyatTaeid,
-        imgHozorGhiyab,imgUserPictureForSendMessageInTeacher,imgIconDate,imgReadOrNo;
+        imgHozorGhiyab,imgUserPictureForSendMessageInTeacher,imgReadOrNo,imgVaziyatTaeidVorodKhoroj;
         ConstraintLayout cl,clHazerGhayebTik,clVaziyatDarsi,clVaziyatTaeid,clMain;
         Spinner spinnerTakhirStudent;
         EditText etTimeTakhirStudent,etVaziyatDarsiStudent,etVaziyatAkhlaghiStudent;
         MyViewHolder(View view) {
             super(view);
+            txAzYaBe = itemView.findViewById(R.id.txAzYaBe);
             clMain = itemView.findViewById(R.id.cl_main);
+
+            imgVaziyatTaeidVorodKhoroj = itemView.findViewById(R.id.imgVaziyatTaeid);
 
             clVaziyatTaeid = itemView.findViewById(R.id.clVaziyatTaeid);
             imgVaziyatTaeid = itemView.findViewById(R.id.imgVaziyatTaeid);
@@ -720,7 +736,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
             txDate1 = itemView.findViewById(R.id.txDate);
             txDate2 = itemView.findViewById(R.id.txDate);
-            txVaziyat = itemView.findViewById(R.id.txVaziyat);
             txSaatVorod = itemView.findViewById(R.id.txSaatVorod);
             txSaatKhoroj = itemView.findViewById(R.id.txSaatKhoroj);
 
@@ -735,7 +750,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             imgAddStudent = itemView.findViewById(R.id.imgAddStudent);
 
             txDate = itemView.findViewById(R.id.txDate);
-            imgIconDate = itemView.findViewById(R.id.imgIconDate);
 
             spinnerTakhirStudent= itemView.findViewById(R.id.spinnerInHozorGhiyab);
             imgChoiseReciverSendNewMessageInTeacher= itemView.findViewById(R.id.imgChoiseReciverSendNewMessageInTeacher);
@@ -844,11 +858,15 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         final Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
+        //line zir baraye transparent kardan hashiye haye cardview ee:
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show();
+
+
     }
 
     public void showCustomDialog(final Context context, final int position, final String method, final ImageView imgVaziyatTaeid) {
-        final Dialog dialog = new Dialog(context);
+        final Dialog dialog = new Dialog(context, R.style.customDialog2);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_dialog, null, false);
@@ -910,8 +928,10 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         dialog.setContentView(view);
         final Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
+        //line zir baraye transparent kardan hashiye haye cardview ee:
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show();
     }
 

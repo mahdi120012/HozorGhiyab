@@ -38,9 +38,11 @@ import java.util.Timer;
 
 import hozorghiyab.MySingleton;
 import hozorghiyab.activities.ListPayamHayeErsali;
+import hozorghiyab.activities.VorodKhoroj;
 import hozorghiyab.cityDetail.placeComment.RecyclerAdapterPlaceComment;
 import hozorghiyab.cityDetail.placeComment.RecyclerModelPlaceComment;
 import hozorghiyab.listCityACT.CityAdapter;
+import hozorghiyab.listCityACT.Contacts;
 
 public class LoadData {
 
@@ -1527,7 +1529,7 @@ public class LoadData {
 
 
     public static void sendVorodKhoroj(final Context c, final String username,
-                                       String saatVorod, String saatKhoroj, String date, final ConstraintLayout clWifi) {
+                                       String saatVorod, String saatKhoroj, String date, final String method, final ConstraintLayout clWifi) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
         String saatVorodEncode= UrlEncoderClass.urlEncoder(saatVorod);
@@ -1555,18 +1557,20 @@ public class LoadData {
                         }
 
                         if (response.equals("send_shod")){
-                            Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(c, ListPayamHayeErsali.class);
-                            intent.putExtra("vorod_khoroj", "vorod_khoroj");
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            c.startActivity(intent);
+                            Toast.makeText(c, "ثبت شد", Toast.LENGTH_SHORT).show();
+                            if (method.equals("saatKhoroj")){
+                                Intent intent = new Intent(c, ListPayamHayeErsali.class);
+                                intent.putExtra("vorod_khoroj", "vorod_khoroj");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                c.startActivity(intent);
+                            }
 
                             //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
                             //LoadData.loadMoreClass(c,rAdapterYouHaveKnow,recyclerModels,progressBar,username);
 
                         }else {
-                            Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(c, "ثبت نشد", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -1982,8 +1986,8 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
-    public static void loadVorodKhorojGhabli(final Context c,final EditText etSaatVorod,
-                                                             final EditText etSaatKhoroj,
+    public static void loadVorodKhorojGhabli(final Context c,final TextView etSaatVorod,
+                                                             final TextView etSaatKhoroj,
                                                              String tarikh,
                                                              String username, final ConstraintLayout clWifi) {
 
@@ -2021,6 +2025,10 @@ public class LoadData {
                 }
                 etSaatVorod.setText(saatVorod);
                 etSaatKhoroj.setText(saatKhoroj);
+
+                //VorodKhoroj.Myclass myclass = new VorodKhoroj.Myclass();
+                //myclass.Myclass("hi","by");
+
 
 
 

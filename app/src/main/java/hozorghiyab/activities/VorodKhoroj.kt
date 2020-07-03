@@ -1,12 +1,13 @@
 package hozorghiyab.activities
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.MotionEvent
-import android.view.View.OnTouchListener
+import android.widget.TextView
 import android.widget.Toast
 import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
@@ -17,7 +18,6 @@ import hozorghiyab.customClasses.TimeKononi
 import kotlinx.android.synthetic.main.gozaresh_kar.*
 import kotlinx.android.synthetic.main.gozaresh_kar.imgBack
 import kotlinx.android.synthetic.main.gozaresh_kar.imgListGozareshat
-import kotlinx.android.synthetic.main.gozaresh_kar.imgSend
 import kotlinx.android.synthetic.main.gozaresh_kar.txDate
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.vorod_khoroj.*
@@ -29,6 +29,8 @@ import java.util.*
 
 class VorodKhoroj : AppCompatActivity() {
 
+    public var saatVorodGhabli = ""
+    public var saatKhorojGhabli = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +47,10 @@ class VorodKhoroj : AppCompatActivity() {
 
         LoadData.loadVorodKhorojGhabli(this,etSaatVorod,etSaatKhoroj,timeKononi.persianTime,username,clWifiState)
 
-        etSaatVorod.setOnTouchListener(OnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
+        etSaatVorod.setOnClickListener {
+
+            //Toast.makeText(this,myclass.schoolName.toString(),Toast.LENGTH_SHORT).show()
+
                 val mcurrentTime: Calendar = Calendar.getInstance()
                 val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
                 val minute: Int = mcurrentTime.get(Calendar.MINUTE)
@@ -56,13 +60,15 @@ class VorodKhoroj : AppCompatActivity() {
                 }, hour, minute, true) //Yes 24 hour time
                 mTimePicker.setTitle("انتخاب زمان")
                 mTimePicker.show()
-                return@OnTouchListener true
-            }
-            false
-        })
 
-        etSaatKhoroj.setOnTouchListener(OnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
+
+        }
+
+        etSaatKhoroj.setOnClickListener{
+            val saatVorod: String = etSaatVorod.getText().toString()
+            if (saatVorod.length <= 0 || saatVorod == null){
+                Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+            }else{
                 val mcurrentTime: Calendar = Calendar.getInstance()
                 val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
                 val minute: Int = mcurrentTime.get(Calendar.MINUTE)
@@ -72,25 +78,43 @@ class VorodKhoroj : AppCompatActivity() {
                 }, hour, minute, true) //Yes 24 hour time
                 mTimePicker.setTitle("انتخاب زمان")
                 mTimePicker.show()
-                return@OnTouchListener true
             }
-            false
-        })
+        }
 
 
         txDate.setText(timeKononi.persianTime)
 
-        imgSend.setOnClickListener{
+        imgSendSaatVorod.setOnClickListener{
+            val saatVorod: String = etSaatVorod.getText().toString()
+            val date: String = txDate.getText().toString()
+
+            if (saatVorod.length <= 0 || saatVorod == null) {
+                Toast.makeText(this, "لطفا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+            } else if(saatVorod.equals(saatVorodGhabli)){
+                Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
+            }else {
+                LoadData.sendVorodKhoroj(this, username, saatVorod, "",date,"saatVorod",clWifiState)
+            }
+        }
+
+        imgSendSaatKhoroj.setOnClickListener{
             val saatVorod: String = etSaatVorod.getText().toString()
             val saatKhoroj: String = etSaatKhoroj.getText().toString()
             val date: String = txDate.getText().toString()
 
-            if (saatVorod.length <= 0 || saatVorod == null || saatKhoroj.length <= 0 || saatKhoroj == null) {
-                Toast.makeText(this, "لطفا همه فیلد ها را تکمیل نمایید", Toast.LENGTH_SHORT).show()
+            if (saatVorod.length <= 0 || saatVorod == null){
+                Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+
+            }else if(saatKhoroj.length <= 0 || saatKhoroj == null) {
+                Toast.makeText(this, "لطفا ساعت خروج را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+
+            } else if(saatVorod.equals(saatVorodGhabli) && saatKhoroj.equals(saatKhorojGhabli)){
+                Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
             } else {
-                LoadData.sendVorodKhoroj(this, username, saatVorod, saatKhoroj,date,clWifiState)
+                LoadData.sendVorodKhoroj(this, username, saatVorod, saatKhoroj,date,"saatKhoroj",clWifiState)
             }
         }
+
 
         val ha = Handler()
         ha.postDelayed(object : Runnable {
@@ -117,6 +141,15 @@ class VorodKhoroj : AppCompatActivity() {
 
     }
 
+    public class Myclass {
+        public var schoolName: String? = null
+        public var className: String? = null
+
+        fun Myclass(schoolName: String?, className: String?) {
+            this.schoolName = schoolName
+            this.className = className
+        }
+    }
 
     override fun onBackPressed() {
         finish()

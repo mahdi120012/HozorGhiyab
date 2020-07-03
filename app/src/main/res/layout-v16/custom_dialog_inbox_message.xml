@@ -8,9 +8,9 @@
     android:layoutDirection="ltr"
     android:orientation="horizontal"
     android:textDirection="rtl"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardPreventCornerOverlap="false"
-    >
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="6dp"
+    card_view:cardPreventCornerOverlap="false">
 
 
     <android.support.constraint.ConstraintLayout
@@ -20,8 +20,7 @@
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent"
-        >
+        card_view:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txCopy"
@@ -61,7 +60,7 @@
             android:text="تایید"
             android:textColor="#222222"
             android:textSize="14sp"
-            android:visibility="gone"
+            android:visibility="visible"
             card_view:layout_constraintBottom_toBottomOf="@+id/imgTaeid"
             card_view:layout_constraintEnd_toStartOf="@+id/imgTaeid"
             card_view:layout_constraintTop_toTopOf="@+id/imgTaeid" />
@@ -76,7 +75,7 @@
             android:text="رد"
             android:textColor="#222222"
             android:textSize="14sp"
-            android:visibility="gone"
+            android:visibility="visible"
             card_view:layout_constraintBottom_toBottomOf="@+id/imgRad"
             card_view:layout_constraintEnd_toStartOf="@+id/imgRad"
             card_view:layout_constraintTop_toTopOf="@+id/imgRad" />
@@ -97,8 +96,8 @@
 
         <ImageView
             android:id="@+id/imageView10"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
@@ -109,8 +108,8 @@
 
         <ImageView
             android:id="@+id/imageView11"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
             android:layout_marginTop="24dp"
             card_view:layout_constraintBottom_toTopOf="@+id/imageView12"
             card_view:layout_constraintEnd_toEndOf="@+id/imageView10"
@@ -121,10 +120,9 @@
 
         <ImageView
             android:id="@+id/imageView12"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="12dp"
             card_view:layout_constraintBottom_toTopOf="@+id/imgTaeid"
             card_view:layout_constraintEnd_toEndOf="@+id/imageView11"
             card_view:layout_constraintHorizontal_bias="0.5"
@@ -134,10 +132,10 @@
 
         <ImageView
             android:id="@+id/imgTaeid"
-            android:layout_width="23dp"
-            android:layout_height="24dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginTop="24dp"
-            android:visibility="gone"
+            android:visibility="visible"
             card_view:layout_constraintBottom_toTopOf="@+id/imgRad"
             card_view:layout_constraintEnd_toEndOf="@+id/imageView12"
             card_view:layout_constraintHorizontal_bias="0.5"
@@ -147,11 +145,11 @@
 
         <ImageView
             android:id="@+id/imgRad"
-            android:layout_width="23dp"
-            android:layout_height="24dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="12dp"
-            android:visibility="gone"
+            android:visibility="visible"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="@+id/imgTaeid"
             card_view:layout_constraintHorizontal_bias="0.5"
