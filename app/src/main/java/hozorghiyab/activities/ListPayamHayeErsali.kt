@@ -151,7 +151,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             Recyclerview.define_recyclerviewAddStudent(this, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                     rModelsYouHaveKnow, null)
             LoadData.ListDarkhastMorkhasi(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                    rvInPayamHayeErsaliTeacher, username,clWifiState)
+                    rvInPayamHayeErsaliTeacher, username,clWifiState,"")
 
         }else{
 
@@ -161,7 +161,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
                 Recyclerview.define_recyclerviewAddStudent(this, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                         rModelsYouHaveKnow, null)
                 LoadData.ListVorodKhorojErsali(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                        rvInPayamHayeErsaliTeacher, username,clWifiState)
+                        rvInPayamHayeErsaliTeacher, username,clWifiState,noe)
 
             }else{
 

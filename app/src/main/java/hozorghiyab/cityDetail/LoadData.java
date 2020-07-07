@@ -1,5 +1,6 @@
 package hozorghiyab.cityDetail;
 
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -49,6 +50,9 @@ import hozorghiyab.activities.ListPayamHayeErsali;
 import hozorghiyab.activities.VorodKhoroj;
 import hozorghiyab.cityDetail.placeComment.RecyclerAdapterPlaceComment;
 import hozorghiyab.cityDetail.placeComment.RecyclerModelPlaceComment;
+import hozorghiyab.customClasses.CustomDialog;
+import hozorghiyab.customClasses.EnglishNumberToPersian;
+import hozorghiyab.customClasses.Keyboard;
 import hozorghiyab.customClasses.SharedPrefClass;
 import hozorghiyab.listCityACT.CityAdapter;
 import hozorghiyab.listCityACT.Contacts;
@@ -56,7 +60,7 @@ import hozorghiyab.user_info.Login_helper;
 
 public class LoadData {
 
-    public static final int LOAD_LIMIT = 15;
+    public static final int LOAD_LIMIT = 30;
     public static String lastId = "0";
     public static boolean itShouldLoadMore = true;
     public static String tedadPayamKhangeNashodeServise = "";
@@ -1542,8 +1546,8 @@ public class LoadData {
                                        String saatVorod, String saatKhoroj, String date, final String method, final ConstraintLayout clWifi) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
-        String saatVorodEncode= UrlEncoderClass.urlEncoder(saatVorod);
-        String saatKhorojEncode= UrlEncoderClass.urlEncoder(saatKhoroj);
+        String saatVorodEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatVorod));
+        String saatKhorojEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatKhoroj));
         String dateEncode= UrlEncoderClass.urlEncoder(date);
 
         String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj&username1=" + userNameEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode;
@@ -2610,9 +2614,67 @@ public class LoadData {
     }
 
 
-    public static void updateVaziyatGozaresh(final Context c, String idGozaresh, final ImageView imgVaziyatTaeid, final String vaziyat) {
+    public static void updatePassword(final Context c, final String username, final String newPassword,
+                                      final EditText etNewPassword, final EditText etTekrarNewPassword,final Dialog dialog) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_gozaresh&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+        String url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_password&username=" + UrlEncoderClass.urlEncoder(username) + "&new_password=" +  UrlEncoderClass.urlEncoder(newPassword);
+
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        progressDialog.dismiss();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (response.equals("send_shod")){
+                            etNewPassword.setText("");
+                            etTekrarNewPassword.setText("");
+                            dialog.dismiss();
+                            Toast.makeText(c, "رمز عبور با موفقیت تغییر یافت", Toast.LENGTH_SHORT).show();
+                            Keyboard.hideKeyboard(c);
+                        }else {
+                            Toast.makeText(c, "مشکلی در تغییر رمز عبور بوجود آمده", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void updateVaziyatGozaresh(final Context c, String idGozaresh, final ImageView imgVaziyatTaeid, final String vaziyat,
+                                             final String noeGozaresh) {
+
+        String url = null;
+        if (noeGozaresh.equals("saat_vorod_khoroj")){
+            url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_vorod_khoroj&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+
+        }else if (noeGozaresh.equals("darkhasti_morkhasi")){
+            url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_morkhasi&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+        }else {
+            url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_gozaresh&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+        }
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -3885,13 +3947,15 @@ public class LoadData {
     public static void LoadSearchResult(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                                final ArrayList<RecyclerModel> recyclerModels,
                                                final RecyclerView recyclerView,
-                                               final String username, String query, final ConstraintLayout clWifi, final String noe) {
+                                               final String username, String query, final ConstraintLayout clWifi, final String noe
+                                             , final String noeMessage) {
 
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String queryEncode= UrlEncoderClass.urlEncoder(query);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
+        String noeMessageEncode= UrlEncoderClass.urlEncoder(noeMessage);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -3938,8 +4002,14 @@ public class LoadData {
                 clWifi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LoadData.LoadSearchResult(c, recyclerAdapter, recyclerModels,
-                                recyclerView, username, "",clWifi,noe);
+                        if (noeMessage.equals("")){
+                            LoadData.LoadSearchResult(c, recyclerAdapter, recyclerModels,
+                                    recyclerView, username, "",clWifi,noe,noeMessage);
+                        }else {
+                            LoadData.LoadSearchResult(c, recyclerAdapter, recyclerModels,
+                                    recyclerView, username, "",clWifi,noe,"");
+                        }
+
                     }
                 });
 
@@ -3953,11 +4023,12 @@ public class LoadData {
     public static void ListDarkhastMorkhasi(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                              final ArrayList<RecyclerModel> recyclerModels,
                                              final RecyclerView recyclerView,
-                                             final String username, final ConstraintLayout clWifi) {
+                                             final String username, final ConstraintLayout clWifi,String noe) {
 
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -3990,7 +4061,8 @@ public class LoadData {
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String elat = jsonObject.getString("elat");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
-                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,"","",0,null));
+                        String family = jsonObject.getString("family");
+                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4022,14 +4094,15 @@ public class LoadData {
     public static void ListVorodKhorojErsali(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                                                final ArrayList<RecyclerModel> recyclerModels,
                                                                final RecyclerView recyclerView,
-                                                               final String username, final ConstraintLayout clWifi) {
+                                                               final String username, final ConstraintLayout clWifi,String noe) {
 
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_vorod_khoroj_ersali&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_vorod_khoroj_ersali&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode  +"&noe=" + noeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("درحال بارگزاری...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -4058,7 +4131,8 @@ public class LoadData {
                         String saat_vorod = jsonObject.getString("saat_vorod");
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
-                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,vaziyat_taeid,"noe","","",0,null));
+                        String family = jsonObject.getString("family");
+                        recyclerModels.add(new RecyclerModel(lastId,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,"",0,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

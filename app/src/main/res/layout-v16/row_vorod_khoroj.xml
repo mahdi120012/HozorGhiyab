@@ -22,6 +22,7 @@
         android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/clVorodKhoroj"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             card_view:layout_constraintBottom_toBottomOf="parent"
@@ -31,6 +32,35 @@
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintVertical_bias="1.0">
 
+
+            <TextView
+                android:id="@+id/txAzYaBe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="از"
+                android:textColor="#3886c7"
+                android:textSize="15sp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txNameFrestandeVorodKhoroj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="نام فرستنده"
+                android:textColor="#3886c7"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                card_view:layout_constraintBottom_toBottomOf="@+id/txAzYaBe"
+                card_view:layout_constraintEnd_toStartOf="@+id/txAzYaBe"
+                card_view:layout_constraintTop_toTopOf="@+id/txAzYaBe" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/clVaziyatTaeid"
@@ -73,18 +103,19 @@
                 android:id="@+id/txOnvanRecevedMessage3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/rmedium"
-                android:textColor="#000000"
-                android:textSize="15sp"
                 android:padding="3dp"
                 android:text="ساعت ورود:"
+                android:textColor="#000000"
+                android:textSize="15sp"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent" />
+                card_view:layout_constraintTop_toBottomOf="@+id/txAzYaBe" />
 
             <TextView
+                android:textDirection="ltr"
+
                 android:id="@+id/txSaatVorod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,6 +142,8 @@
                 card_view:layout_constraintTop_toTopOf="@+id/txSaatKhoroj" />
 
             <TextView
+                android:textDirection="ltr"
+
                 android:id="@+id/txSaatKhoroj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,6 +159,7 @@
                 card_view:layout_constraintTop_toTopOf="@+id/txSaatVorod" />
 
             <TextView
+                android:textDirection="ltr"
                 android:id="@+id/txDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

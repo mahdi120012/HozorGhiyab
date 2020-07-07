@@ -3,10 +3,9 @@ package hozorghiyab.activities
 import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.BroadcastReceiver
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -19,6 +18,7 @@ import com.github.javiersantos.appupdater.AppUpdater
 import com.github.javiersantos.appupdater.enums.UpdateFrom
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.customClasses.AppVersionName
+import hozorghiyab.customClasses.CustomDialog
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.user_info.Main_user_login_activity
 import kotlinx.android.synthetic.main.main_activity.*
@@ -44,13 +44,11 @@ class MainActivity : AppCompatActivity() {
                 setButtonDismiss("فعلا نه").setButtonDoNotShowAgain("")
         appUpdater.start()
 
-
-        mYourService = YourService()
+       /* mYourService = YourService()
         mServiceIntent = Intent(this, mYourService!!.javaClass)
         if (!isMyServiceRunning(mYourService!!.javaClass)) {
             startService(mServiceIntent)
-        }
-
+        }*/
 
         var username = SharedPrefClass.getUserId(this,"user")
         var noe = SharedPrefClass.getUserId(this,"noe")
@@ -118,8 +116,6 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, SearchForSendMessage::class.java)
                 intent.putExtra("ahkam", "ahkam")
                 startActivity(intent)
-
-
             }
         }
 
@@ -173,12 +169,20 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"درباره ما",Toast.LENGTH_SHORT).show()
         }
 
+        txChangePassword.setOnClickListener{
+            CustomDialog.changePassword(this@MainActivity)
+
+        }
+
+
+
         txExit.setOnClickListener(){
             SharedPrefClass.clearData(this)
             Toast.makeText(this,"شما خارج شدید",Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, Main_user_login_activity::class.java))
             finish()
         }
+
 
         imgNavigationViewInToolbarTop.setOnClickListener(){
             if (drawer_layout.isDrawerOpen(Gravity.RIGHT)) {
@@ -230,10 +234,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onDestroy() {
+/*    override fun onDestroy() {
         stopService(mServiceIntent)
         super.onDestroy()
-    }
+    }*/
 
 /*    override fun onStart() {
         super.onStart()

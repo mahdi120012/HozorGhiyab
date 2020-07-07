@@ -10,8 +10,8 @@ android {
         applicationId "com.hozorghiyab"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 15
-        versionName "2.4"
+        versionCode 16
+        versionName "2.5"
         testInstrumentationRunner "android.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

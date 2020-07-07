@@ -23,6 +23,7 @@ import hozorghiyab.cityDetail.LoadData;
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow;
 import hozorghiyab.cityDetail.RecyclerModel;
 import hozorghiyab.cityDetail.Recyclerview;
+import hozorghiyab.customClasses.CustomDialog;
 
 public class AddClass extends AppCompatActivity {
     ImageView imgBackInActivityClass,imgAfzodanClassText,imgAddClass;
@@ -56,11 +57,10 @@ public class AddClass extends AppCompatActivity {
         rvListYouHaveKnow = findViewById(R.id.rvAddClass);
         progressBar = findViewById(R.id.progressBarInAddClass);
 
-
         imgBackInActivityClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+               finish();
             }
         });
 

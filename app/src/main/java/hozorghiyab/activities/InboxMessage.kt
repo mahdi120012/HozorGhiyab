@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
@@ -13,6 +14,8 @@ import hozorghiyab.cityDetail.RecyclerModel
 import hozorghiyab.cityDetail.Recyclerview
 import hozorghiyab.customClasses.SharedPrefClass
 import kotlinx.android.synthetic.main.inbox_message.*
+import kotlinx.android.synthetic.main.inbox_message.tabLayout
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.net_connection.*
 import java.util.*
 
@@ -36,6 +39,10 @@ class InboxMessage : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("tedad_payam_khande_nashode", "0")
         editor.commit()
+
+       /* if(!noe.equals("admin")){
+            tabItemVorodKhoroj.visibility = View.GONE
+        }*/
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -92,7 +99,28 @@ class InboxMessage : AppCompatActivity() {
 
                     LoadData.firstLoadDataRecivedMessageTeacher(this@InboxMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
                             rvInInboxMessageTeacher, username,"ahkam",clWifiState)
-                }
+                    }
+                    5 -> {
+                    //ورود خروج
+                        rModelsYouHaveKnow = ArrayList()
+                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "vorod_khoroj", this@InboxMessage, rAdapterYouHaveKnow, "",null,null,null,"")
+                        Recyclerview.define_recyclerviewAddStudent(this@InboxMessage, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
+                                rModelsYouHaveKnow, null)
+
+                        LoadData.ListVorodKhorojErsali(this@InboxMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                rvInInboxMessageTeacher, username,clWifiState,noe)
+
+                    }
+                    6 -> {
+                        //مرخصی
+                        rModelsYouHaveKnow = ArrayList()
+                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "darkhast_morkhasi", this@InboxMessage, rAdapterYouHaveKnow, "",null,null,null,"")
+                        Recyclerview.define_recyclerviewAddStudent(this@InboxMessage, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
+                                rModelsYouHaveKnow, null)
+                        LoadData.ListDarkhastMorkhasi(this@InboxMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                rvInPayamHayeErsaliTeacher, username,clWifiState,noe)
+
+                    }
                     else -> {
                     }
                 }

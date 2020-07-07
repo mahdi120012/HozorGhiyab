@@ -23,13 +23,14 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tolbar_story"
-        app:tabTextAppearance="@style/CustomViewAllTab"
-        >
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/CustomViewAllTab">
 
         <android.support.design.widget.TabItem
             android:id="@+id/tabItem"
@@ -57,6 +58,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="احکام" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItemVorodKhoroj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ورود خروج" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabItemMorkhasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="مرخصی" />
+
     </android.support.design.widget.TabLayout>
 
     <android.support.v7.widget.Toolbar

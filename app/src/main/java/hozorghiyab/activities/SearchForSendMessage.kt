@@ -29,8 +29,14 @@ class SearchForSendMessage : AppCompatActivity() {
         Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
                 rModelsYouHaveKnow, null)
 
-        LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                rvInSearchInTeacher, username, "",clWifiState,noe)
+        if (sepordanKar.toString().equals("sepordan_kar")){
+            LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                    rvInSearchInTeacher, username, "",clWifiState,noe,sepordanKar.toString())
+        }else{
+            LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                    rvInSearchInTeacher, username, "",clWifiState,noe,"")
+        }
+
 
 
         searchViewForSendMessageTeacher.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -43,9 +49,14 @@ class SearchForSendMessage : AppCompatActivity() {
                 rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "search", this@SearchForSendMessage, rAdapterYouHaveKnow, ahkam.toString(),txReciversList,clShowErsal,txEntekhabHame,sepordanKar.toString())
                 Recyclerview.define_recyclerviewAddStudent(this@SearchForSendMessage, rvInSearchInTeacher, rAdapterYouHaveKnow,
                         rModelsYouHaveKnow, null)
-                LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                        rvInSearchInTeacher, username, newText,clWifiState,noe)
-                //Toast.makeText(SearchForSendMessageTeacher.this, newText, Toast.LENGTH_SHORT).show();
+
+                if (sepordanKar.toString().equals("sepordan_kar")){
+                    LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                            rvInSearchInTeacher, username, newText,clWifiState,noe,sepordanKar.toString())
+                }else{
+                    LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                            rvInSearchInTeacher, username, newText,clWifiState,noe,"")
+                }
                 return false
             }
         })
