@@ -3,8 +3,8 @@ package hozorghiyab.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
@@ -12,11 +12,14 @@ import com.hozorghiyab.R
 import hozorghiyab.cityDetail.*
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.write_new_message_teacher.*
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgHomeInNavigationViewInSendMessageTeacher
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgInboxMessageInSendMessageTeacher
-import kotlinx.android.synthetic.main.write_new_message_teacher.txCountNotReadMessageInSendMessageTeacher
+import kotlinx.android.synthetic.main.write_new_message_teacher.imgHomeInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.write_new_message_teacher.imgInboxMessageInRecevedPageStudent
+import kotlinx.android.synthetic.main.write_new_message_teacher.imgMassenger
+import kotlinx.android.synthetic.main.write_new_message_teacher.txCountNotReadMessageInTeacher
+
 import kotlinx.android.synthetic.main.write_new_message_teacher.txReciverFamilyInTeacher
 import java.util.*
 
@@ -57,7 +60,7 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
                     val urlAppend = "?action=load_student_count_not_read_message" +
                             "&user1=" + UrlEncoderClass.urlEncoder(username)
-                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInSendMessageTeacher,username)
+                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInTeacher,username)
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
@@ -67,7 +70,7 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
             ha.postDelayed(object : Runnable {
                 override fun run() {
 
-                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInSendMessageTeacher, username)
+                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInTeacher, username)
 
                     ha.postDelayed(this, 1000)
                 }
@@ -87,21 +90,19 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
 
                 for (i in list_id.indices) {
 
-
-
                     if (noe.equals("student")){
                         LoadData.sendMessageStudent(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
                                 rvListYouHaveKnow, username, list_id[i], onvan, matn,nowTime)
                     }else{
                         if (ahkam.toString().equals("ahkam")){
-                            LoadData.sendMessageTeacher(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    username, list_id.get(i), onvan, matn,clWifiState,nowTime,ahkam.toString())
+                            LoadData.sendMessageTeacherInWriteNewMessage(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,ahkam.toString(),"",null)
                         }else if(sepordanKar.toString().equals("sepordan_kar")){
-                            LoadData.sendMessageTeacher(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    username, list_id.get(i), onvan, matn,clWifiState,nowTime,sepordanKar.toString())
+                            LoadData.sendMessageTeacherInWriteNewMessage(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,sepordanKar.toString(),"",null)
                         }else{
-                            LoadData.sendMessageTeacher(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    username, list_id.get(i), onvan, matn,clWifiState,nowTime,"")
+                            LoadData.sendMessageTeacherInWriteNewMessage(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,"","",null)
                         }
 
                     }
@@ -110,12 +111,12 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
             }
         }
 
-        imgInboxMessageInSendMessageTeacher.setOnClickListener{
+        imgInboxMessageInRecevedPageStudent.setOnClickListener{
                 startActivity(Intent(this, InboxMessage::class.java))
                 finish()
         }
 
-        imgHomeInNavigationViewInSendMessageTeacher.setOnClickListener{
+        imgHomeInRecevedMessageTeacher.setOnClickListener{
             if (noe.equals("student")){
                 startActivity(Intent(this, StudentPanelMainKt::class.java))
                 finish()
@@ -126,6 +127,12 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
 
         }
         imgBackInSendMessageTeacher.setOnClickListener{
+            finish()
+        }
+
+        imgMassenger.setOnClickListener{
+
+            startActivity(Intent(this, InboxMessageChat::class.java))
             finish()
         }
 

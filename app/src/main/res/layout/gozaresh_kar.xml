@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clActivityClass"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tolbar_story" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tolbar_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
@@ -83,13 +83,13 @@
                 app:layout_constraintTop_toTopOf="@+id/imgBack" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -97,7 +97,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tolbar_story_bottom"
         app:layout_constraintTop_toBottomOf="@id/tolbar_story">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -113,7 +113,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imgErsalGozaresh"
                 app:srcCompat="@drawable/reciver_messagetxt" />
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -125,7 +125,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txReciverFamilyInTeacher"
                 tools:layout_editor_absoluteX="16dp">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="5dp">
@@ -248,8 +248,8 @@
                         app:layout_constraintEnd_toEndOf="@+id/etNatige"
                         app:layout_constraintStart_toStartOf="@+id/etNatige"
                         app:srcCompat="@drawable/sendtxt" />
-                </android.support.constraint.ConstraintLayout>
-            </android.support.v7.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
 
             <TextView
@@ -323,11 +323,11 @@
                 app:layout_constraintTop_toTopOf="@+id/imgErsalGozaresh" />
 
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tolbar_story_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -339,7 +339,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
@@ -348,32 +348,43 @@
             tools:layout_editor_absoluteX="16dp">
 
             <ImageView
-                android:id="@+id/imgInboxMessageInSendMessageTeacher"
+                android:id="@+id/imgMassenger"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintEnd_toStartOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:srcCompat="@drawable/massenger_icon" />
+
+            <ImageView
+                android:id="@+id/imgInboxMessageInRecevedPageStudent"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgWriteMessageInRecevedMessageTeacher"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgMassenger"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/inbox_message" />
 
             <ImageView
-                android:id="@+id/imgWriteMessageInSendMessageTeacher"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/imgWriteMessageInRecevedMessageTeacher"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:layout_marginTop="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imgHomeInNavigationViewInSendMessageTeacher"
+                app:layout_constraintEnd_toStartOf="@+id/imgHomeInRecevedMessageTeacher"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInSendMessageTeacher"
+                app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/write_message" />
 
             <ImageView
-                android:id="@+id/imgHomeInNavigationViewInSendMessageTeacher"
+                android:id="@+id/imgHomeInRecevedMessageTeacher"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
@@ -384,11 +395,13 @@
                 android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgWriteMessageInRecevedMessageTeacher"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/home_pic" />
 
             <TextView
-                android:id="@+id/txCountNotReadMessageInSendMessageTeacher"
+                android:id="@+id/txCountNotReadMessageInTeacher"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginEnd="1dp"
@@ -399,15 +412,15 @@
                 android:text="0"
                 android:textColor="#ffffff"
                 android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInSendMessageTeacher"
-                app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInSendMessageTeacher"
-                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInSendMessageTeacher" />
+                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
@@ -16,6 +16,9 @@ import hozorghiyab.customClasses.SharedPrefClass
 import kotlinx.android.synthetic.main.inbox_message.*
 import kotlinx.android.synthetic.main.inbox_message.tabLayout
 import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgHomeInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgMassenger
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgWriteMessageInRecevedMessageTeacher
 import kotlinx.android.synthetic.main.net_connection.*
 import java.util.*
 
@@ -156,6 +159,12 @@ class InboxMessage : AppCompatActivity() {
         }
 
         imgBackRecevedMessageTeacher.setOnClickListener{
+            finish()
+        }
+
+        imgMassenger.setOnClickListener{
+
+            startActivity(Intent(this, InboxMessageChat::class.java))
             finish()
         }
 

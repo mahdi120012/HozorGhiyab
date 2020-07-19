@@ -1,8 +1,8 @@
 package hozorghiyab.listCityACT;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,7 +21,7 @@ public class ListcityACT extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listcity_act);
 
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
         TextView tx_actionbar = findViewById(R.id.tx_actionbar_storya);

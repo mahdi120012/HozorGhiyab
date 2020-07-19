@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.Toast
@@ -17,14 +17,15 @@ import hozorghiyab.customClasses.EnglishNumberToPersian
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
 import kotlinx.android.synthetic.main.darkhast_morkhasi.*
-import kotlinx.android.synthetic.main.gozaresh_kar.*
 import kotlinx.android.synthetic.main.gozaresh_kar.imgBack
+import kotlinx.android.synthetic.main.gozaresh_kar.imgHomeInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.gozaresh_kar.imgInboxMessageInRecevedPageStudent
 import kotlinx.android.synthetic.main.gozaresh_kar.imgListGozareshat
 import kotlinx.android.synthetic.main.gozaresh_kar.imgSend
+import kotlinx.android.synthetic.main.gozaresh_kar.txCountNotReadMessageInTeacher
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgMassenger
 import kotlinx.android.synthetic.main.net_connection.*
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgHomeInNavigationViewInSendMessageTeacher
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgInboxMessageInSendMessageTeacher
-import kotlinx.android.synthetic.main.write_new_message_teacher.txCountNotReadMessageInSendMessageTeacher
 
 
 class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog.OnTimeSetListener {
@@ -132,22 +133,28 @@ class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         ha.postDelayed(object : Runnable {
             override fun run() {
 
-                LoadData.loadCountMessageNotRead(this@DarkhastMorkhasi, txCountNotReadMessageInSendMessageTeacher, username)
+                LoadData.loadCountMessageNotRead(this@DarkhastMorkhasi, txCountNotReadMessageInTeacher, username)
 
                 ha.postDelayed(this, 1000)
             }
         }, 1000)
 
-        imgInboxMessageInSendMessageTeacher.setOnClickListener{
+        imgInboxMessageInRecevedPageStudent.setOnClickListener{
             startActivity(Intent(this, InboxMessage::class.java))
             finish()
         }
 
-        imgHomeInNavigationViewInSendMessageTeacher.setOnClickListener{
+        imgHomeInRecevedMessageTeacher.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
         imgBack.setOnClickListener{
+            finish()
+        }
+
+        imgMassenger.setOnClickListener{
+
+            startActivity(Intent(this, InboxMessageChat::class.java))
             finish()
         }
 

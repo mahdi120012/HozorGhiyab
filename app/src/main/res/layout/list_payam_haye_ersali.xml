@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clActivityClass"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgSendNewMessageInTeacher" />
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,35 +31,35 @@
         app:layout_constraintTop_toBottomOf="@+id/tolbar_story"
         app:tabTextAppearance="@style/CustomViewAllTab">
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="همه" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="خصوصی" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="گزارشات" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="کارها" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="احکام" />
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tolbar_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
@@ -132,10 +132,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <ImageView
@@ -148,7 +148,7 @@
         app:layout_constraintTop_toBottomOf="@+id/clGozareshat"
         app:srcCompat="@drawable/send_messageicon" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clGozareshat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -211,9 +211,9 @@
             app:layout_constraintEnd_toEndOf="@+id/imgListGozareshat"
             app:layout_constraintStart_toStartOf="@+id/imgListGozareshat"
             app:layout_constraintTop_toTopOf="@+id/imgListGozareshat" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInPayamHayeErsaliTeacher"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -222,7 +222,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgSendNewMessageInTeacher" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tolbar_story_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -234,73 +234,88 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imgMassenger"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
+            app:layout_constraintEnd_toStartOf="@+id/imgInboxMessageInRecevedPageStudent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent"
+            app:srcCompat="@drawable/massenger_icon" />
+
+        <ImageView
+            android:id="@+id/imgInboxMessageInRecevedPageStudent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgWriteMessageInRecevedMessageTeacher"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgMassenger"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/inbox_message" />
+
+        <ImageView
+            android:id="@+id/imgWriteMessageInRecevedMessageTeacher"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgHomeInRecevedMessageTeacher"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/write_message" />
+
+        <ImageView
+            android:id="@+id/imgHomeInRecevedMessageTeacher"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="false"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgWriteMessageInRecevedMessageTeacher"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/home_pic" />
+
+        <TextView
+            android:id="@+id/txCountNotReadMessageInTeacher"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/background_message_count"
             android:gravity="center"
-
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="16dp">
-
-            <ImageView
-                android:id="@+id/imgInboxMessageInPayamHayeErsaliTeacher"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/inbox_message" />
-
-            <ImageView
-                android:id="@+id/imgWriteMessageInPayamHayeErsaliTeacher"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="3dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imgHomeInNavigationViewInPayamHayeErsaliTeacher"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInPayamHayeErsaliTeacher"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/write_message" />
-
-            <ImageView
-                android:id="@+id/imgHomeInNavigationViewInPayamHayeErsaliTeacher"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
-                android:adjustViewBounds="false"
-                android:scaleType="centerInside"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/home_pic" />
-
-            <TextView
-                android:id="@+id/txCountNotReadMessageInPayamHayeErsaliTeacher"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="18dp"
-                android:background="@drawable/background_message_count"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInPayamHayeErsaliTeacher"
-                app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInPayamHayeErsaliTeacher"
-                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInPayamHayeErsaliTeacher" />
+            android:text="0"
+            android:textColor="#ffffff"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
+            app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
+            app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent" />
 
 
-        </android.support.constraint.ConstraintLayout>
-
-
-    </android.support.v7.widget.Toolbar>
-</android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

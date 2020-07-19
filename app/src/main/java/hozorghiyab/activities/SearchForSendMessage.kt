@@ -3,12 +3,19 @@ package hozorghiyab.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.SearchView
+import android.widget.Toast
 import hozorghiyab.cityDetail.*
 import hozorghiyab.customClasses.SharedPrefClass
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.search_for_send_message.*
+import kotlinx.android.synthetic.main.search_for_send_message.imgHomeInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.search_for_send_message.imgInboxMessageInRecevedPageStudent
+import kotlinx.android.synthetic.main.search_for_send_message.imgMassenger
+import kotlinx.android.synthetic.main.search_for_send_message.imgWriteMessageInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.search_for_send_message.txCountNotReadMessageInTeacher
 import java.util.*
 
 class SearchForSendMessage : AppCompatActivity() {
@@ -30,7 +37,7 @@ class SearchForSendMessage : AppCompatActivity() {
                 rModelsYouHaveKnow, null)
 
         if (sepordanKar.toString().equals("sepordan_kar")){
-            LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+            LoadData.LoadSearchResultForSepordanKar(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
                     rvInSearchInTeacher, username, "",clWifiState,noe,sepordanKar.toString())
         }else{
             LoadData.LoadSearchResult(this@SearchForSendMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
@@ -66,22 +73,22 @@ class SearchForSendMessage : AppCompatActivity() {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
 
-                    LoadData.loadCountMessageNotRead(this@SearchForSendMessage, txCountNotReadMessageInSearchInTeacher, username)
+                    LoadData.loadCountMessageNotRead(this@SearchForSendMessage, txCountNotReadMessageInTeacher, username)
 
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
 
 
-        imgWriteMessageInSearchInTeacher.setOnClickListener{
+        imgWriteMessageInRecevedMessageTeacher.setOnClickListener{
              startActivity(Intent(this, ListPayamHayeErsali::class.java))
         }
 
-        imgInboxMessageInSearchInTeacher.setOnClickListener{
+        imgInboxMessageInRecevedPageStudent.setOnClickListener{
                 startActivity(Intent(this, InboxMessage::class.java))
                 finish()
         }
-        imgHomeInNavigationViewInSearchInTeacher.setOnClickListener{
+        imgHomeInRecevedMessageTeacher.setOnClickListener{
             if (noe.equals("student")){
                 startActivity(Intent(this, StudentPanelMainKt::class.java))
                 finish()
@@ -93,6 +100,12 @@ class SearchForSendMessage : AppCompatActivity() {
         }
 
         imgBackInSearchInTeacher.setOnClickListener{
+            finish()
+        }
+
+        imgMassenger.setOnClickListener{
+
+            startActivity(Intent(this, InboxMessageChat::class.java))
             finish()
         }
 

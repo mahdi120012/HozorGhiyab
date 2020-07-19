@@ -9,7 +9,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -21,10 +21,15 @@ import hozorghiyab.customClasses.AppVersionName
 import hozorghiyab.customClasses.CustomDialog
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.user_info.Main_user_login_activity
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.navigation_main.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.toolbar_button.*
+import kotlinx.android.synthetic.main.toolbar_button.imgInboxMessageInRecevedPageStudent
+import kotlinx.android.synthetic.main.toolbar_button.imgMassenger
+import kotlinx.android.synthetic.main.toolbar_button.imgWriteMessageInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.toolbar_button.txCountNotReadMessageInTeacher
 import kotlinx.android.synthetic.main.toolbar_top.*
 
 
@@ -59,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     LoadData.loadTeacherNameAndCountMessageNotRead(this@MainActivity,
-                            txTecherNameInMainActivity, txCountNotReadMessageInToolbarButton, username,imgTeacherPicture,clWifiState)
+                            txTecherNameInMainActivity, txCountNotReadMessageInTeacher, username,imgTeacherPicture,clWifiState)
 
                     ha.postDelayed(this, 2000)
                 }
@@ -141,11 +146,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        imgInboxMessageInToolbarButton.setOnClickListener(){
+        imgInboxMessageInRecevedPageStudent.setOnClickListener(){
             startActivity(Intent(this, InboxMessage::class.java))
         }
 
-        imgWriteMessageInToolbarButton.setOnClickListener(){
+        imgWriteMessageInRecevedMessageTeacher.setOnClickListener(){
             startActivity(Intent(this, ListPayamHayeErsali::class.java))
         }
 
@@ -170,8 +175,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         txChangePassword.setOnClickListener{
-            CustomDialog.changePassword(this@MainActivity)
+            CustomDialog.changePassword(this@MainActivity,this@MainActivity)
 
+        }
+        imgMassenger.setOnClickListener{
+            startActivity(Intent(this, InboxMessageChat::class.java))
         }
 
 

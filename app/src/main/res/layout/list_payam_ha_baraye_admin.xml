@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clActivityClass"
@@ -12,7 +13,8 @@
     android:textDirection="rtl"
     >
 
-    <android.support.v7.widget.Toolbar
+
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tolbar_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
@@ -73,13 +75,13 @@
                 app:srcCompat="@drawable/back" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clWifiInStudentPanel"
         android:layout_width="409dp"
         android:layout_height="50dp"
@@ -117,7 +119,7 @@
             app:layout_constraintStart_toEndOf="@+id/tx_stateInStudentPanel"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/wifi" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ProgressBar
@@ -131,7 +133,7 @@
         android:visibility="gone" />
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInPayamHayeErsaliStudent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -140,7 +142,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tolbar_story" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tolbar_story_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -152,7 +154,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
@@ -161,32 +163,43 @@
             tools:layout_editor_absoluteX="16dp">
 
             <ImageView
-                android:id="@+id/imgInboxMessageInPayamHayeErsaliStudent"
+                android:id="@+id/imgMassenger"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintEnd_toStartOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:srcCompat="@drawable/massenger_icon" />
+
+            <ImageView
+                android:id="@+id/imgInboxMessageInRecevedPageStudent"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgWriteMessageInRecevedMessageTeacher"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgMassenger"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/inbox_message" />
 
             <ImageView
-                android:id="@+id/imgWriteMessageInPayamHayeErsaliStudent"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/imgWriteMessageInRecevedMessageTeacher"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:layout_marginTop="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imgHomeInNavigationViewInPayamHayeErsaliStudent"
+                app:layout_constraintEnd_toStartOf="@+id/imgHomeInRecevedMessageTeacher"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInPayamHayeErsaliStudent"
+                app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/write_message" />
 
             <ImageView
-                android:id="@+id/imgHomeInNavigationViewInPayamHayeErsaliStudent"
+                android:id="@+id/imgHomeInRecevedMessageTeacher"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
@@ -197,11 +210,13 @@
                 android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgWriteMessageInRecevedMessageTeacher"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/home_pic" />
 
             <TextView
-                android:id="@+id/txCountNotReadMessageInPayamHayeErsaliStudent"
+                android:id="@+id/txCountNotReadMessageInTeacher"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginEnd="1dp"
@@ -212,13 +227,13 @@
                 android:text="0"
                 android:textColor="#ffffff"
                 android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInPayamHayeErsaliStudent"
-                app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInPayamHayeErsaliStudent"
-                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInPayamHayeErsaliStudent" />
+                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
+                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.v7.widget.Toolbar>
-</android.support.constraint.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+</androidx.constraintlayout.widget.ConstraintLayout>

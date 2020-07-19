@@ -1,5 +1,6 @@
 package hozorghiyab.cityDetail;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -8,14 +9,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -47,21 +49,18 @@ import java.util.Timer;
 
 import hozorghiyab.MySingleton;
 import hozorghiyab.activities.ListPayamHayeErsali;
-import hozorghiyab.activities.VorodKhoroj;
 import hozorghiyab.cityDetail.placeComment.RecyclerAdapterPlaceComment;
 import hozorghiyab.cityDetail.placeComment.RecyclerModelPlaceComment;
-import hozorghiyab.customClasses.CustomDialog;
 import hozorghiyab.customClasses.EnglishNumberToPersian;
 import hozorghiyab.customClasses.Keyboard;
 import hozorghiyab.customClasses.SharedPrefClass;
 import hozorghiyab.listCityACT.CityAdapter;
-import hozorghiyab.listCityACT.Contacts;
-import hozorghiyab.user_info.Login_helper;
 
 public class LoadData {
 
     public static final int LOAD_LIMIT = 30;
     public static String lastId = "0";
+    public static String lastId2 = "0";
     public static boolean itShouldLoadMore = true;
     public static String tedadPayamKhangeNashodeServise = "";
 
@@ -567,7 +566,7 @@ public class LoadData {
         String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=remove_message&message_id=" + messageIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("درحال انجام...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -1661,30 +1660,32 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
-    public static void sendMessageTeacher(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+    public static void sendFirstNullMessagePvChat(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
                                           final ArrayList<RecyclerModel> recyclerModels,
                                           final String username, String stdId,
-                                          String onvan, String matn, final ConstraintLayout clWifi,String nowTime,String noe) {
+                                          final EditText etOnvan, String matn, final ConstraintLayout clWifi, String nowTime,
+                                          final String noe, final String conversationId, final RecyclerView rv) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
         String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
-        String onvanEncode= UrlEncoderClass.urlEncoder(onvan);
+        String onvanEncode= UrlEncoderClass.urlEncoder(etOnvan.getText().toString());
         String matnEncode= UrlEncoderClass.urlEncoder(matn);
         String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
+        String conversationIdEncode= UrlEncoderClass.urlEncoder(conversationId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_first_null_message&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&conversation_id=" + conversationIdEncode;
         itShouldLoadMore = false;
-        ProgressDialogClass.showProgress(c);
+        //ProgressDialogClass.showProgress(c);
 
         StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
                 new Response.Listener<String>() {
 
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(final String response) {
 
                         clWifi.setVisibility(View.GONE);
-                        ProgressDialogClass.dismissProgress();
+                        //ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
 
                         if (response.length() <= 0) {
@@ -1693,14 +1694,11 @@ public class LoadData {
                             return;
                         }
 
-                        if (response.equals("send_shod")){
-                            Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+                        if (response.length()>0){
+                            etOnvan.setText("");
 
-                            Intent intent = new Intent(c, ListPayamHayeErsali.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            c.startActivity(intent);
-                            //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
-                            //LoadData.loadMoreClass(c,rAdapterYouHaveKnow,recyclerModels,progressBar,username);
+                            LoadData.loadPvChat(c, rAdapterYouHaveKnow, recyclerModels, rv, username,response.toString(),clWifi);
+                            Toast.makeText(c, "ارسال شدددددد", Toast.LENGTH_SHORT).show();
 
                         }else {
                             Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
@@ -1710,7 +1708,127 @@ public class LoadData {
             @Override
             public void onErrorResponse(VolleyError error) {
                 itShouldLoadMore = true;
-                ProgressDialogClass.dismissProgress();
+                //ProgressDialogClass.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+
+    public static void sendMessageTeacherInWriteNewMessage(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+                                          final ArrayList<RecyclerModel> recyclerModels,
+                                          final String username, String stdId,
+                                          final EditText etOnvan, String matn, final ConstraintLayout clWifi, String nowTime,
+                                          final String noe, final String conversationId, final RecyclerView rv) {
+
+        String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
+        String onvanEncode= UrlEncoderClass.urlEncoder(etOnvan.getText().toString());
+        String matnEncode= UrlEncoderClass.urlEncoder(matn);
+        String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+        String conversationIdEncode= UrlEncoderClass.urlEncoder(conversationId);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&conversation_id=" + conversationIdEncode;
+        itShouldLoadMore = false;
+        //ProgressDialogClass.showProgress(c);
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        clWifi.setVisibility(View.GONE);
+                        //ProgressDialogClass.dismissProgress();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        if (response.equals("send_shod")){
+
+                            etOnvan.setText("");
+                            Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(c, ListPayamHayeErsali.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            c.startActivity(intent);
+
+                        }else {
+                            Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //ProgressDialogClass.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+    public static void sendMessageTeacher(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+                                          final ArrayList<RecyclerModel> recyclerModels,
+                                          final String username, String stdId,
+                                          final EditText etOnvan, String matn, final ConstraintLayout clWifi, String nowTime,
+                                          final String noe, final String conversationId, final RecyclerView rv) {
+
+        String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
+        String onvanEncode= UrlEncoderClass.urlEncoder(etOnvan.getText().toString());
+        String matnEncode= UrlEncoderClass.urlEncoder(matn);
+        String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+        String conversationIdEncode= UrlEncoderClass.urlEncoder(conversationId);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&conversation_id=" + conversationIdEncode;
+        itShouldLoadMore = false;
+        //ProgressDialogClass.showProgress(c);
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        clWifi.setVisibility(View.GONE);
+                        //ProgressDialogClass.dismissProgress();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        if (response.equals("send_shod")){
+
+                            etOnvan.setText("");
+                            LoadData.loadPvChatWitchLastLoadAfterSendMessage(c, rAdapterYouHaveKnow, recyclerModels,
+                                    rv, username,conversationId.toString(),clWifi);
+                        }else {
+                            Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //ProgressDialogClass.dismissProgress();
                 Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
                 clWifi.setVisibility(View.VISIBLE);
 
@@ -2644,7 +2762,7 @@ public class LoadData {
                             etTekrarNewPassword.setText("");
                             dialog.dismiss();
                             Toast.makeText(c, "رمز عبور با موفقیت تغییر یافت", Toast.LENGTH_SHORT).show();
-                            Keyboard.hideKeyboard(c);
+                            Keyboard.hideKeyboard(c,(Activity) c);
                         }else {
                             Toast.makeText(c, "مشکلی در تغییر رمز عبور بوجود آمده", Toast.LENGTH_SHORT).show();
                         }
@@ -2667,11 +2785,16 @@ public class LoadData {
                                              final String noeGozaresh) {
 
         String url = null;
-        if (noeGozaresh.equals("saat_vorod_khoroj")){
-            url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_vorod_khoroj&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
 
-        }else if (noeGozaresh.equals("darkhasti_morkhasi")){
-            url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_morkhasi&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+        if (noeGozaresh != null){
+
+            if (noeGozaresh.equals("saat_vorod_khoroj")){
+                url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_vorod_khoroj&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+
+            }else if(noeGozaresh.equals("darkhasti_morkhasi")){
+                url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_morkhasi&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+            }
+
         }else {
             url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_gozaresh&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
         }
@@ -3869,6 +3992,316 @@ public class LoadData {
 
     }
 
+
+
+    public static void loadPvChatWitchLastLoadAfterSendMessage(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                                               final ArrayList<RecyclerModel> recyclerModels,
+                                                               final RecyclerView recyclerView,final String username,
+                                                               final String conversationId, final ConstraintLayout clWifi) {
+
+
+        final String usernameIdEncode = UrlEncoderClass.urlEncoder(username);
+        final String conversationIdEncode = UrlEncoderClass.urlEncoder(conversationId);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat_witdh_last_load&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&conversation_id=" + conversationIdEncode + "&lastId=" + lastId;
+        itShouldLoadMore = false;
+        //final ProgressDialog progressDialog = new ProgressDialog(c);
+        //progressDialog.setMessage("درحال بارگزاری...");
+        //progressDialog.setCancelable(false);
+        //progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                //progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    //Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String onvan = jsonObject.getString("onvan");
+                        String matn = jsonObject.getString("message");
+                        String idFerestande = jsonObject.getString("id_ersal_konande");
+                        String nameFerestande = jsonObject.getString("name_ferestande");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String noe = jsonObject.getString("noe");
+                        String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
+                        String conversationId = jsonObject.getString("coversation_id");
+
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,conversationId,0,vaziyatTaeid));
+                        recyclerAdapter.notifyDataSetChanged();
+                        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.loadPvChat(c, recyclerAdapter, recyclerModels,
+                                recyclerView,username, conversationIdEncode,clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
+    public static void loadPvChat(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                    final ArrayList<RecyclerModel> recyclerModels,
+                                    final RecyclerView recyclerView,final String username,
+                                    final String conversationId, final ConstraintLayout clWifi) {
+
+        final String usernameIdEncode = UrlEncoderClass.urlEncoder(username);
+        final String conversationIdEncode = UrlEncoderClass.urlEncoder(conversationId);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&conversation_id=" + conversationIdEncode + "&lastId=" + lastId;
+        itShouldLoadMore = false;
+        //final ProgressDialog progressDialog = new ProgressDialog(c);
+        //progressDialog.setMessage("درحال بارگزاری...");
+        //progressDialog.setCancelable(false);
+        //progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                //progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    //Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String onvan = jsonObject.getString("onvan");
+                        String matn = jsonObject.getString("message");
+                        String idFerestande = jsonObject.getString("id_ersal_konande");
+                        String nameFerestande = jsonObject.getString("name_ferestande");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String noe = jsonObject.getString("noe");
+                        String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
+                        String conversationId = jsonObject.getString("coversation_id");
+
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,conversationId,0,vaziyatTaeid));
+                        recyclerAdapter.notifyDataSetChanged();
+                        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.loadPvChat(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,conversationIdEncode,clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
+    public static void loadMainChat(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                                          final ArrayList<RecyclerModel> recyclerModels,
+                                                          final RecyclerView recyclerView,
+                                                          final String username, final ConstraintLayout clWifi) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_message&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode ;
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String onvan = jsonObject.getString("onvan");
+                        String matn = jsonObject.getString("message");
+                        String idFerestande = jsonObject.getString("id_ersal_konande");
+                        String nameFerestande = jsonObject.getString("name_ferestande");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String noe = jsonObject.getString("noe");
+                        String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
+                        String conversationId = jsonObject.getString("coversation_id");
+                        String idMokhatab = jsonObject.getString("id_mokhatab");
+
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idMokhatab,conversationId,0,vaziyatTaeid));
+                        recyclerAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.loadMainChat(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
+    public static void firstLoadDataRecivedMessageChat(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                                          final ArrayList<RecyclerModel> recyclerModels,
+                                                          final RecyclerView recyclerView,
+                                                          final String username,final String mokhatabId, final String noe,
+                                                          final String noeUser, final ConstraintLayout clWifi) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
+        String noeEncode = UrlEncoderClass.urlEncoder(noe);
+        String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_recived_message_chat_tab&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        itShouldLoadMore = false;
+       /* final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();*/
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                //progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId2 = jsonObject.getString("id");
+                        String onvan = jsonObject.getString("onvan");
+                        String matn = jsonObject.getString("message");
+                        String idFerestande = jsonObject.getString("id_ersal_konande");
+                        String nameFerestande = jsonObject.getString("name_ferestande");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String noe = jsonObject.getString("noe");
+                        String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid));
+                        recyclerAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataRecivedMessageTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,noe,clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
     public static void firstLoadDataRecivedMessageTeacher(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                                           final ArrayList<RecyclerModel> recyclerModels,
                                                           final RecyclerView recyclerView,
@@ -3943,21 +4376,20 @@ public class LoadData {
 
     }
 
-
-    public static void LoadSearchResult(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
-                                               final ArrayList<RecyclerModel> recyclerModels,
-                                               final RecyclerView recyclerView,
-                                               final String username, String query, final ConstraintLayout clWifi, final String noe
-                                             , final String noeMessage) {
+    public static void LoadSearchResultForSepordanKar(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                        final ArrayList<RecyclerModel> recyclerModels,
+                                        final RecyclerView recyclerView,
+                                        final String username, String query, final ConstraintLayout clWifi, final String noe
+            , final String noeMessage) {
 
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String queryEncode= UrlEncoderClass.urlEncoder(query);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
         String noeMessageEncode= UrlEncoderClass.urlEncoder(noeMessage);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result_chat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
         itShouldLoadMore = false;
-        ProgressDialogClass.showProgress(c);
+        //ProgressDialogClass.showProgress(c);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -3966,11 +4398,11 @@ public class LoadData {
             public void onResponse(JSONArray response) {
 
                 clWifi.setVisibility(View.GONE);
-                ProgressDialogClass.dismissProgress();
+                //ProgressDialogClass.dismissProgress();
                 itShouldLoadMore = true;
 
                 if (response.length() <= 0) {
-                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
 
                     return;
                 }
@@ -3997,7 +4429,7 @@ public class LoadData {
             @Override
             public void onErrorResponse(VolleyError error) {
                 itShouldLoadMore = true;
-                ProgressDialogClass.dismissProgress();
+                //ProgressDialogClass.dismissProgress();
                 clWifi.setVisibility(View.VISIBLE);
                 clWifi.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -4019,6 +4451,154 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+
+
+    public static void LoadSearchResult(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                               final ArrayList<RecyclerModel> recyclerModels,
+                                               final RecyclerView recyclerView,
+                                               final String username, String query, final ConstraintLayout clWifi, final String noe
+                                             , final String noeMessage) {
+
+        String usernameEncode= UrlEncoderClass.urlEncoder(username);
+        String queryEncode= UrlEncoderClass.urlEncoder(query);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+        String noeMessageEncode= UrlEncoderClass.urlEncoder(noeMessage);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result_chat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
+        itShouldLoadMore = false;
+        //ProgressDialogClass.showProgress(c);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                //ProgressDialogClass.dismissProgress();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    //Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String studentId = jsonObject.getString("id");
+                        String nameStudent = jsonObject.getString("family");
+                        String std_picture = jsonObject.getString("picture");
+                        String conversationId = jsonObject.getString("coversation_id");
+
+                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,conversationId,"","","",0,null));
+                        recyclerAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //ProgressDialogClass.dismissProgress();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (noeMessage.equals("")){
+                            LoadData.LoadSearchResult(c, recyclerAdapter, recyclerModels,
+                                    recyclerView, username, "",clWifi,noe,noeMessage);
+                        }else {
+                            LoadData.LoadSearchResult(c, recyclerAdapter, recyclerModels,
+                                    recyclerView, username, "",clWifi,noe,"");
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void ListDarkhastMorkhasiDarBakhshPv(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                            final ArrayList<RecyclerModel> recyclerModels,
+                                            final RecyclerView recyclerView,
+                                            final String mokhatabId, final ConstraintLayout clWifi,String noe) {
+
+        String mokhatabIdEncode= UrlEncoderClass.urlEncoder(mokhatabId);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi_dar_bakhsh_pv&limit=" + LOAD_LIMIT + "&mokhatab_id=" + mokhatabIdEncode + "&noe=" + noeEncode;
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId2 = jsonObject.getString("id");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String saat_vorod = jsonObject.getString("saat_vorod");
+                        String saat_khoroj = jsonObject.getString("saat_khoroj");
+                        String elat = jsonObject.getString("elat");
+                        String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
+                        String family = jsonObject.getString("family");
+                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null));
+                        recyclerAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataListPayamHayeErsaliTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, mokhatabId,"",clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
 
     public static void ListDarkhastMorkhasi(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                              final ArrayList<RecyclerModel> recyclerModels,
@@ -4055,7 +4635,7 @@ public class LoadData {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
 
-                        lastId = jsonObject.getString("id");
+                        lastId2 = jsonObject.getString("id");
                         String tarikh = jsonObject.getString("tarikh");
                         String saat_vorod = jsonObject.getString("saat_vorod");
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
@@ -4090,6 +4670,76 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+
+
+    public static void ListVorodKhorojErsaliDarPv(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                             final ArrayList<RecyclerModel> recyclerModels,
+                                             final RecyclerView recyclerView,
+                                             final String username, final ConstraintLayout clWifi,String noe) {
+
+        String usernameEncode= UrlEncoderClass.urlEncoder(username);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_vorod_khoroj_ersali_dar_pv&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode  +"&noe=" + noeEncode;
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId2 = jsonObject.getString("id");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String saat_vorod = jsonObject.getString("saat_vorod");
+                        String saat_khoroj = jsonObject.getString("saat_khoroj");
+                        String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
+                        String family = jsonObject.getString("family");
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,"",0,null));
+                        recyclerAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataListPayamHayeErsaliTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,"",clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
 
     public static void ListVorodKhorojErsali(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                                                final ArrayList<RecyclerModel> recyclerModels,
@@ -4126,13 +4776,13 @@ public class LoadData {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
 
-                        lastId = jsonObject.getString("id");
+                        lastId2 = jsonObject.getString("id");
                         String tarikh = jsonObject.getString("tarikh");
                         String saat_vorod = jsonObject.getString("saat_vorod");
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,"",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,"",0,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

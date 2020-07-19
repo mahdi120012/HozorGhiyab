@@ -14,6 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+
+        <activity android:name="hozorghiyab.user_info.Main_user_login_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="hozorghiyab.activities.RecentSearch" />
+
+        <activity android:name="hozorghiyab.activities.PvChat" />
+        <activity android:name="hozorghiyab.activities.InboxMessageChat" />
         <activity android:name="hozorghiyab.activities.VorodKhoroj" />
         <activity android:name="hozorghiyab.activities.AboutmeACtKt" />
         <activity android:name="hozorghiyab.activities.VaziyatDarsiAkhlaghi" />
@@ -38,13 +52,7 @@
         <activity
             android:name="hozorghiyab.activities.MainActivity"
             android:label="UserRegister" />
-        <activity android:name="hozorghiyab.user_info.Main_user_login_activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name="hozorghiyab.activities.Setting" />
         <activity
             android:name="hozorghiyab.listCityACT.ListcityACT"

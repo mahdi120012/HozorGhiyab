@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarTop">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clMainT"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/clHameyePayamHaClickInMainActivity"
                 app:srcCompat="@drawable/line" />
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clGozareshKar"
 
                 android:layout_width="wrap_content"
@@ -119,9 +119,9 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgGozareshKar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgGozareshKar" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clHameyePayamHaClickInMainActivity"
 
                 android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgHozorGhiyabInMainActivity3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgHozorGhiyabInMainActivity3" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imgLine"
@@ -250,7 +250,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/imgTeacherPicture"
                 app:layout_constraintTop_toTopOf="@+id/imgTeacherPicture" />
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clUserNameClick"
 
                 android:layout_width="185dp"
@@ -263,7 +263,7 @@
                 app:layout_constraintStart_toStartOf="@+id/txTecherNameInMainActivity"
                 app:layout_constraintTop_toTopOf="@+id/imgTeacherPicture">
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imgTeacherPicture"
@@ -295,7 +295,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/clClassClickInMainActivity"
                 app:srcCompat="@drawable/line" />
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clStudentClickInMainActivity"
 
                 android:layout_width="wrap_content"
@@ -330,9 +330,9 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgStudentInMainActivity"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgStudentInMainActivity" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clMorkhasi"
 
                 android:layout_width="wrap_content"
@@ -369,9 +369,9 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgMorkhasi"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgMorkhasi" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clVorodKhoroj"
 
                 android:layout_width="wrap_content"
@@ -406,9 +406,9 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgEnterExit"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgEnterExit" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clAhkam"
 
                 android:layout_width="wrap_content"
@@ -443,9 +443,9 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgAhkam"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgAhkam" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clSepordanKar"
 
                 android:layout_width="wrap_content"
@@ -480,9 +480,9 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgSepordanKar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgSepordanKar" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clHozorGhiyabClickInMainActivity"
 
                 android:layout_width="wrap_content"
@@ -518,7 +518,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgHozorGhiyabInMainActivity"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgHozorGhiyabInMainActivity" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/textView11"
@@ -531,7 +531,7 @@
                 app:layout_constraintStart_toStartOf="@+id/clHameyePayamHaClickInMainActivityfas"
                 app:layout_constraintTop_toBottomOf="@+id/clMorkhasi" />
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clClassClickInMainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -565,9 +565,9 @@
                     app:layout_constraintEnd_toStartOf="@+id/imgClassInMainActivity"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgClassInMainActivity" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

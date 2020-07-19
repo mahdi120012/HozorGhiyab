@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -43,14 +43,14 @@ public class ListHameyePayamHaBarayeAdmin extends AppCompatActivity {
         imgBackInActivityClass = findViewById(R.id.imgBackInPayamHayeErsaliStudent);
         rvListYouHaveKnow = findViewById(R.id.rvInPayamHayeErsaliStudent);
         progressBar = findViewById(R.id.progressBarInPayamHayeErsaliStudent);
-        imgRecivedMessage = findViewById(R.id.imgInboxMessageInPayamHayeErsaliStudent);
-        imgHome = findViewById(R.id.imgHomeInNavigationViewInPayamHayeErsaliStudent);
-        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessageInPayamHayeErsaliStudent);
+        imgRecivedMessage = findViewById(R.id.imgInboxMessageInRecevedPageStudent);
+        imgHome = findViewById(R.id.imgHomeInRecevedMessageTeacher);
+        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessageInTeacher);
         clWifi = findViewById(R.id.clWifiInStudentPanel);
 
         txCountNotReadMessage.setText("0");
 
-        imgSendMessage = findViewById(R.id.imgWriteMessageInPayamHayeErsaliStudent);
+        imgSendMessage = findViewById(R.id.imgWriteMessageInRecevedMessageTeacher);
 
         imgSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override

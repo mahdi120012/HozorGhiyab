@@ -3,7 +3,7 @@ package hozorghiyab.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
 import android.widget.Toast
 import com.github.javiersantos.appupdater.AppUpdater
@@ -14,8 +14,13 @@ import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.cityDetail.UrlEncoderClass
 import hozorghiyab.customClasses.CreateNotification
 import hozorghiyab.user_info.Main_user_login_activity
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.navigation_studentpanel.*
 import kotlinx.android.synthetic.main.student_panel_main.*
+import kotlinx.android.synthetic.main.student_panel_main.imgInboxMessageInRecevedPageStudent
+import kotlinx.android.synthetic.main.student_panel_main.imgMassenger
+import kotlinx.android.synthetic.main.student_panel_main.imgWriteMessageInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.student_panel_main.txCountNotReadMessageInTeacher
 
 
 class StudentPanelMainKt : AppCompatActivity() {
@@ -44,7 +49,7 @@ class StudentPanelMainKt : AppCompatActivity() {
 
         LoadData.loadStudentNameAndCountMessageNotRead(this, urlAppend,
                 tx_stateInStudentPanel, txStudentNameInStudentPanel,
-                txCountNotReadMessageInStudentPanel, imgUserPicture, clWifiInStudentPanel)
+                txCountNotReadMessageInTeacher, imgUserPicture, clWifiInStudentPanel)
 
 
         val ha = Handler()
@@ -58,7 +63,7 @@ class StudentPanelMainKt : AppCompatActivity() {
 
                 var tedadKhandeNashode =LoadData.loadStudentNameAndCountMessageNotRead(this@StudentPanelMainKt, urlAppend,
                         tx_stateInStudentPanel, txStudentNameInStudentPanel,
-                        txCountNotReadMessageInStudentPanel, imgUserPicture, clWifiInStudentPanel)
+                        txCountNotReadMessageInTeacher, imgUserPicture, clWifiInStudentPanel)
 
                 /*if (tedadKhandeNashode != "0"){
                     CreateNotification().createNotificationChannel(this@StudentPanelMainKt)
@@ -80,11 +85,11 @@ class StudentPanelMainKt : AppCompatActivity() {
             Toast.makeText(this, "درباره ما", Toast.LENGTH_SHORT).show()
         }
 
-        imgWriteMessageInStudentPanel.setOnClickListener {
+        imgWriteMessageInRecevedMessageTeacher.setOnClickListener {
             startActivity(Intent(this, ListPayamHayeErsali::class.java))
         }
 
-        imgInboxMessageInStudentPanel.setOnClickListener {
+        imgInboxMessageInRecevedPageStudent.setOnClickListener {
             startActivity(Intent(this, InboxMessage::class.java))
         }
 
@@ -98,6 +103,12 @@ class StudentPanelMainKt : AppCompatActivity() {
             } else {
                 drawer_layoutInStudent.openDrawer(Gravity.RIGHT)
             }
+        }
+
+        imgMassenger.setOnClickListener{
+
+            startActivity(Intent(this, InboxMessageChat::class.java))
+            finish()
         }
 
         txExitInStudentPanel.setOnClickListener {

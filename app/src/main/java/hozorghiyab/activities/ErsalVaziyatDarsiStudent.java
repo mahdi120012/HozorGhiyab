@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -47,9 +47,9 @@ public class ErsalVaziyatDarsiStudent extends AppCompatActivity implements View.
         tx_state = findViewById(R.id.tx_stateInSendMessageTeacher);
         webView = findViewById(R.id.webInSendMessageTeacher);
         progressBar = findViewById(R.id.progressBarInSendMessageTeacher);*/
-        imgRecivedMessage = findViewById(R.id.imgInboxMessageInSendMessageTeacher);
-        imgHome = findViewById(R.id.imgHomeInNavigationViewInSendMessageTeacher);
-        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessageInSendMessageTeacher);
+        imgRecivedMessage = findViewById(R.id.imgInboxMessageInRecevedPageStudent);
+        imgHome = findViewById(R.id.imgHomeInRecevedMessageTeacher);
+        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessageInTeacher);
         imgSendMessage = findViewById(R.id.imgSendMessageTeacher);
         etOnvan = findViewById(R.id.etOnvanSendTeacherMessage);
         etMatn = findViewById(R.id.etMatnSendTeacherMessage);

@@ -3,8 +3,8 @@ package hozorghiyab.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
@@ -38,8 +38,8 @@ class ListPayamHayeErsali : AppCompatActivity() {
         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                 rModelsYouHaveKnow, null)
 
-        LoadData.firstLoadDataListPayamHayeErsaliTeacher(this@ListPayamHayeErsali, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                rvInPayamHayeErsaliTeacher, username,"all",clWifiState)
+        /*LoadData.firstLoadDataListPayamHayeErsaliTeacher(this@ListPayamHayeErsali, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                rvInPayamHayeErsaliTeacher, username,"all",clWifiState)*/
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -48,7 +48,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
                         //همه
 
                         rModelsYouHaveKnow = ArrayList()
-                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "",null,null,null,"")
+                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
                         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                                 rModelsYouHaveKnow, null)
 
@@ -59,7 +59,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
                         //خصوصی
 
                         rModelsYouHaveKnow = ArrayList()
-                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "",null,null,null,"")
+                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
                         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                                 rModelsYouHaveKnow, null)
 
@@ -70,7 +70,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
                         //گزارشات
 
                         rModelsYouHaveKnow = ArrayList()
-                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "",null,null,null,"")
+                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
                         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                                 rModelsYouHaveKnow, null)
 
@@ -80,7 +80,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
                     3 -> {
                         //کارها
                         rModelsYouHaveKnow = ArrayList()
-                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "",null,null,null,"")
+                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
                         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                                 rModelsYouHaveKnow, null)
 
@@ -90,7 +90,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
                     4 -> {
                         //احکام
                         rModelsYouHaveKnow = ArrayList()
-                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "",null,null,null,"")
+                        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
                         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                                 rModelsYouHaveKnow, null)
 
@@ -140,7 +140,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,  txCountNotReadMessageInPayamHayeErsaliTeacher,username)
+                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,  txCountNotReadMessageInTeacher,username)
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
@@ -169,7 +169,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,txCountNotReadMessageInPayamHayeErsaliTeacher,username);
+                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,txCountNotReadMessageInTeacher,username);
 
                     ha.postDelayed(this, 1000)
                 }
@@ -196,12 +196,12 @@ class ListPayamHayeErsali : AppCompatActivity() {
                 startActivity(Intent(this, SearchForSendMessage::class.java))
         }
 
-        imgInboxMessageInPayamHayeErsaliTeacher.setOnClickListener{
+        imgInboxMessageInRecevedPageStudent.setOnClickListener{
                 startActivity(Intent(this, InboxMessage::class.java))
                 finish()
         }
 
-        imgHomeInNavigationViewInPayamHayeErsaliTeacher.setOnClickListener{
+        imgHomeInRecevedMessageTeacher.setOnClickListener{
             if(noe.equals("student")){
                 val intent = Intent(applicationContext, StudentPanelMainKt::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -210,6 +210,12 @@ class ListPayamHayeErsali : AppCompatActivity() {
                 finish()
             }
 
+        }
+
+        imgMassenger.setOnClickListener{
+
+            startActivity(Intent(this, InboxMessageChat::class.java))
+            finish()
         }
 
         imgBackInPayamHayeErsaliTeacher.setOnClickListener{
