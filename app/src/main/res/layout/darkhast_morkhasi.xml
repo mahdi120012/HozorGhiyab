@@ -95,7 +95,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@+id/tolbar_story_bottom"
+        app:layout_constraintBottom_toTopOf="@+id/toolbarButton"
         app:layout_constraintTop_toBottomOf="@id/tolbar_story">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -399,100 +399,16 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tolbar_story_bottom"
+
+
+    <include
+        android:id="@+id/toolbarButton"
+        layout="@layout/toolbar_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#20C581"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:gravity="center"
-
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="16dp">
-
-            <ImageView
-                android:id="@+id/imgMassenger"
-                android:layout_width="39dp"
-                android:layout_height="39dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
-                app:layout_constraintEnd_toStartOf="@+id/imgInboxMessageInRecevedPageStudent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent"
-                app:srcCompat="@drawable/massenger_icon" />
-
-            <ImageView
-                android:id="@+id/imgInboxMessageInRecevedPageStudent"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imgWriteMessageInRecevedMessageTeacher"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgMassenger"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/inbox_message" />
-
-            <ImageView
-                android:id="@+id/imgWriteMessageInRecevedMessageTeacher"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_marginTop="3dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imgHomeInRecevedMessageTeacher"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/write_message" />
-
-            <ImageView
-                android:id="@+id/imgHomeInRecevedMessageTeacher"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
-                android:adjustViewBounds="false"
-                android:scaleType="centerInside"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgWriteMessageInRecevedMessageTeacher"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/home_pic" />
-
-            <TextView
-                android:id="@+id/txCountNotReadMessageInTeacher"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="18dp"
-                android:background="@drawable/background_message_count"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="8sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgInboxMessageInRecevedPageStudent"
-                app:layout_constraintEnd_toEndOf="@+id/imgInboxMessageInRecevedPageStudent"
-                app:layout_constraintTop_toTopOf="@+id/imgInboxMessageInRecevedPageStudent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

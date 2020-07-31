@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.Toast
 import com.github.javiersantos.appupdater.AppUpdater
 import com.github.javiersantos.appupdater.enums.UpdateFrom
+import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.customClasses.AppVersionName
 import hozorghiyab.customClasses.CustomDialog
@@ -23,14 +24,19 @@ import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.user_info.Main_user_login_activity
 import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.main_activity.clAhkam
+import kotlinx.android.synthetic.main.main_activity.clJalasat
+import kotlinx.android.synthetic.main.main_activity.clVorodKhoroj
+import kotlinx.android.synthetic.main.main_activity.imgTeacherPicture
+import kotlinx.android.synthetic.main.main_activity.txTecherNameInMainActivity
+import kotlinx.android.synthetic.main.main_activity_karkonan.*
 import kotlinx.android.synthetic.main.navigation_main.*
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.search_for_send_message.*
 import kotlinx.android.synthetic.main.toolbar_button.*
-import kotlinx.android.synthetic.main.toolbar_button.imgInboxMessageInRecevedPageStudent
 import kotlinx.android.synthetic.main.toolbar_button.imgMassenger
-import kotlinx.android.synthetic.main.toolbar_button.imgWriteMessageInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.toolbar_button.txCountNotReadMessageInTeacher
 import kotlinx.android.synthetic.main.toolbar_top.*
+import kotlinx.android.synthetic.main.toolbar_top.imgNavigationViewInToolbarTop
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,11 +44,89 @@ class MainActivity : AppCompatActivity() {
     private var mYourService: YourService? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.hozorghiyab.R.layout.navigation_main)
+        var noe = SharedPrefClass.getUserId(this,"noe")
+
+        if(noe == "admin"){
+            setContentView(com.hozorghiyab.R.layout.navigation_main)
+            imgInboxMessage.visibility = View.VISIBLE
+            imgWriteMessage.visibility = View.VISIBLE
+            txCountNotReadMessage.visibility = View.VISIBLE
+
+            clAhkam.setOnClickListener(){
+
+                val intent = Intent(this, SearchForSendMessage::class.java)
+                intent.putExtra("ahkam", "ahkam")
+                startActivity(intent)
+            }
+
+            clSepordanKar.setOnClickListener(){
+
+                val intent = Intent(this, SearchForSendMessage::class.java)
+                intent.putExtra("sepordan_kar", "sepordan_kar")
+                startActivity(intent)
+            }
+
+            clVorodKhoroj.setOnClickListener(){
+
+                val intent = Intent(this, VorodKhoroj::class.java)
+                startActivity(intent)
+            }
+            clHameyePayamHaClickInMainActivity.setOnClickListener(){
+                startActivity(Intent(this, ListHameyePayamHaBarayeAdmin::class.java))
+            }
+
+            clClassClickInMainActivity.setOnClickListener(){
+                startActivity(Intent(this, AddClass::class.java))
+            }
+
+            clStudentClickInMainActivity.setOnClickListener(){
+                startActivity(Intent(this, AddStudent::class.java))
+            }
+
+            clJalasat.setOnClickListener(){
+                startActivity(Intent(this, TanzimJalase::class.java))
+            }
+
+
+
+            clHozorGhiyabClickInMainActivity.setOnClickListener(){
+                startActivity(Intent(this, HozorGhiyabMain::class.java))
+
+            }
+
+        }else{
+            setContentView(com.hozorghiyab.R.layout.navigation_main_karkonan)
+            clGozareshKar.setVisibility(View.VISIBLE);
+
+
+            clAhkam.setOnClickListener(){
+
+                val intent = Intent(this, InboxMessage::class.java)
+                intent.putExtra("ahkam", "ahkam")
+                startActivity(intent)
+            }
+
+            clVorodKhoroj.setOnClickListener(){
+
+                val intent = Intent(this, VorodKhoroj::class.java)
+                startActivity(intent)
+            }
+
+            clMorkhasi.setOnClickListener(){
+                startActivity(Intent(this, DarkhastMorkhasi::class.java))
+            }
+
+            clGozareshKar.setOnClickListener(){
+                startActivity(Intent(this, GozareshKar::class.java))
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.statusbarColor2));
+        }
 
         nav_footer_txVesionCodeInMainPageTeacher.setText("نسخه " + AppVersionName.getVersionName(this))
 
-        //line zir baraye update automatic ee.
         val appUpdater = AppUpdater(this).setUpdateFrom(UpdateFrom.JSON).
                 setUpdateJSON("http://robika.ir/ultitled/practice/tavasi_update_checker.json").
                 setTitleOnUpdateAvailable("بروزرسانی جدید موجوده!").setButtonUpdate("بروزرسانی").
@@ -56,26 +140,22 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         var username = SharedPrefClass.getUserId(this,"user")
-        var noe = SharedPrefClass.getUserId(this,"noe")
         var name = SharedPrefClass.getUserId(this,"name")
+
+
         if(name.isEmpty()){
 
             val ha = Handler()
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     LoadData.loadTeacherNameAndCountMessageNotRead(this@MainActivity,
-                            txTecherNameInMainActivity, txCountNotReadMessageInTeacher, username,imgTeacherPicture,clWifiState)
+                            txTecherNameInMainActivity, txCountNotReadMessage, username,imgTeacherPicture,clWifiState)
 
                     ha.postDelayed(this, 2000)
                 }
             }, 2000)
         }else{
             txTecherNameInMainActivity.setText(name)
-        }
-
-        if (username == "100010"){
-            clHameyePayamHaClickInMainActivity.setVisibility(View.VISIBLE);
-            imgLine5.setVisibility(View.VISIBLE);
         }
 
 
@@ -96,80 +176,15 @@ class MainActivity : AppCompatActivity() {
 
         }*/
 
-        if (noe == "karkonan"){
-            clClassClickInMainActivity.setVisibility(View.GONE);
-            clStudentClickInMainActivity.setVisibility(View.GONE);
-            clHozorGhiyabClickInMainActivity.setVisibility(View.GONE);
-            clSepordanKar.setVisibility(View.GONE);
-            clGozareshKar.setVisibility(View.VISIBLE);
-            imgLine1.setVisibility(View.GONE);
-            imgLine2.setVisibility(View.GONE);
-            imgLine4.setVisibility(View.GONE);
-            imgLine5.setVisibility(View.GONE);
-            imgLine6.setVisibility(View.GONE);
 
-            clAhkam.setOnClickListener(){
-
-                val intent = Intent(this, InboxMessage::class.java)
-                intent.putExtra("ahkam", "ahkam")
-                startActivity(intent)
-            }
-
-        }else{
-            clAhkam.setOnClickListener(){
-
-                val intent = Intent(this, SearchForSendMessage::class.java)
-                intent.putExtra("ahkam", "ahkam")
-                startActivity(intent)
-            }
-        }
-
-        clMorkhasi.setOnClickListener(){
-            startActivity(Intent(this, DarkhastMorkhasi::class.java))
-        }
-
-        clGozareshKar.setOnClickListener(){
-            startActivity(Intent(this, GozareshKar::class.java))
-        }
-
-        clSepordanKar.setOnClickListener(){
-
-            val intent = Intent(this, SearchForSendMessage::class.java)
-            intent.putExtra("sepordan_kar", "sepordan_kar")
-            startActivity(intent)
-        }
-
-        clVorodKhoroj.setOnClickListener(){
-
-            val intent = Intent(this, VorodKhoroj::class.java)
-            startActivity(intent)
-        }
-
-
-        imgInboxMessageInRecevedPageStudent.setOnClickListener(){
+        imgInboxMessage.setOnClickListener(){
             startActivity(Intent(this, InboxMessage::class.java))
         }
 
-        imgWriteMessageInRecevedMessageTeacher.setOnClickListener(){
+        imgWriteMessage.setOnClickListener(){
             startActivity(Intent(this, ListPayamHayeErsali::class.java))
         }
 
-        clHameyePayamHaClickInMainActivity.setOnClickListener(){
-            startActivity(Intent(this, ListHameyePayamHaBarayeAdmin::class.java))
-        }
-
-        clClassClickInMainActivity.setOnClickListener(){
-            startActivity(Intent(this, AddClass::class.java))
-        }
-
-        clStudentClickInMainActivity.setOnClickListener(){
-            startActivity(Intent(this, AddStudent::class.java))
-        }
-
-        clHozorGhiyabClickInMainActivity.setOnClickListener(){
-            startActivity(Intent(this, HozorGhiyabMain::class.java))
-
-        }
         txMenuAboutme.setOnClickListener(){
             Toast.makeText(this,"درباره ما",Toast.LENGTH_SHORT).show()
         }
@@ -182,15 +197,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, InboxMessageChat::class.java))
         }
 
-
-
         txExit.setOnClickListener(){
             SharedPrefClass.clearData(this)
             Toast.makeText(this,"شما خارج شدید",Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, Main_user_login_activity::class.java))
             finish()
         }
-
 
         imgNavigationViewInToolbarTop.setOnClickListener(){
             if (drawer_layout.isDrawerOpen(Gravity.RIGHT)) {

@@ -8,14 +8,9 @@ import android.widget.SearchView
 import android.widget.Toast
 import hozorghiyab.cityDetail.*
 import hozorghiyab.customClasses.SharedPrefClass
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.search_for_send_message.*
-import kotlinx.android.synthetic.main.search_for_send_message.imgHomeInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.search_for_send_message.imgInboxMessageInRecevedPageStudent
-import kotlinx.android.synthetic.main.search_for_send_message.imgMassenger
-import kotlinx.android.synthetic.main.search_for_send_message.imgWriteMessageInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.search_for_send_message.txCountNotReadMessageInTeacher
+import kotlinx.android.synthetic.main.toolbar_button.*
 import java.util.*
 
 class SearchForSendMessage : AppCompatActivity() {
@@ -73,22 +68,22 @@ class SearchForSendMessage : AppCompatActivity() {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
 
-                    LoadData.loadCountMessageNotRead(this@SearchForSendMessage, txCountNotReadMessageInTeacher, username)
+                    LoadData.loadCountMessageNotRead(this@SearchForSendMessage, txCountNotReadMessage, username)
 
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
 
 
-        imgWriteMessageInRecevedMessageTeacher.setOnClickListener{
+        imgWriteMessage.setOnClickListener{
              startActivity(Intent(this, ListPayamHayeErsali::class.java))
         }
 
-        imgInboxMessageInRecevedPageStudent.setOnClickListener{
+        imgInboxMessage.setOnClickListener{
                 startActivity(Intent(this, InboxMessage::class.java))
                 finish()
         }
-        imgHomeInRecevedMessageTeacher.setOnClickListener{
+        imgHome.setOnClickListener{
             if (noe.equals("student")){
                 startActivity(Intent(this, StudentPanelMainKt::class.java))
                 finish()

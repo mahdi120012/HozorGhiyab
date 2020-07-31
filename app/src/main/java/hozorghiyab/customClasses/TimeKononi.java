@@ -31,6 +31,16 @@ public class TimeKononi {
 
     }
 
+    public String getPersianTimeWithoutDayName(){
+
+        PersianDate persianDate = new PersianDate();
+        //-- model dovvom --> PersianDateFormat format = new PersianDateFormat("y-m-d H:i:s");
+        PersianDateFormat format = new PersianDateFormat("y/m/d");
+        String persianTime = format.format(persianDate);
+        return persianTime;
+
+    }
+
 
     public String changeGregorianToPersian(String dateString){
 

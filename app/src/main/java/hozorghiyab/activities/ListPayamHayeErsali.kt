@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.inbox_message.tabLayout
 import kotlinx.android.synthetic.main.inbox_message.txTitle
 import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.toolbar_button.*
 import java.util.*
 
 class ListPayamHayeErsali : AppCompatActivity() {
@@ -33,13 +34,14 @@ class ListPayamHayeErsali : AppCompatActivity() {
         var vorod_khoroj = if (intent.getExtras() == null) {}else{intent.extras!!.getString("vorod_khoroj")}
         var darkhast_morkhasi = if (intent.getExtras() == null) {}else{intent.extras!!.getString("darkhast_morkhasi")}
 
+
         rModelsYouHaveKnow = ArrayList()
         rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                 rModelsYouHaveKnow, null)
 
-        /*LoadData.firstLoadDataListPayamHayeErsaliTeacher(this@ListPayamHayeErsali, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                rvInPayamHayeErsaliTeacher, username,"all",clWifiState)*/
+        LoadData.firstLoadDataListPayamHayeErsaliTeacher(this@ListPayamHayeErsali, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                rvInPayamHayeErsaliTeacher, username,"all",clWifiState)
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -140,7 +142,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,  txCountNotReadMessageInTeacher,username)
+                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,  txCountNotReadMessage,username)
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
@@ -169,7 +171,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             ha.postDelayed(object : Runnable {
                 override fun run() {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
-                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,txCountNotReadMessageInTeacher,username);
+                    LoadData.loadCountMessageNotRead(this@ListPayamHayeErsali,txCountNotReadMessage,username);
 
                     ha.postDelayed(this, 1000)
                 }
@@ -196,12 +198,12 @@ class ListPayamHayeErsali : AppCompatActivity() {
                 startActivity(Intent(this, SearchForSendMessage::class.java))
         }
 
-        imgInboxMessageInRecevedPageStudent.setOnClickListener{
+        imgInboxMessage.setOnClickListener{
                 startActivity(Intent(this, InboxMessage::class.java))
                 finish()
         }
 
-        imgHomeInRecevedMessageTeacher.setOnClickListener{
+        imgHome.setOnClickListener{
             if(noe.equals("student")){
                 val intent = Intent(applicationContext, StudentPanelMainKt::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

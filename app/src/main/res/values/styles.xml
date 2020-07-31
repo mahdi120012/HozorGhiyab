@@ -17,6 +17,11 @@
         <item name="android:windowMinWidthMinor">55%</item>
     </style>
 
+    <style name="customDialogKar" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+    </style>
+
     <style name="customDialog2" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>

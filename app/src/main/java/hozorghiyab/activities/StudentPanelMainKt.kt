@@ -12,16 +12,10 @@ import hozorghiyab.cityDetail.AppVersionName
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.cityDetail.UrlEncoderClass
-import hozorghiyab.customClasses.CreateNotification
 import hozorghiyab.user_info.Main_user_login_activity
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.navigation_studentpanel.*
 import kotlinx.android.synthetic.main.student_panel_main.*
-import kotlinx.android.synthetic.main.student_panel_main.imgInboxMessageInRecevedPageStudent
-import kotlinx.android.synthetic.main.student_panel_main.imgMassenger
-import kotlinx.android.synthetic.main.student_panel_main.imgWriteMessageInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.student_panel_main.txCountNotReadMessageInTeacher
-
+import kotlinx.android.synthetic.main.toolbar_button.*
 
 class StudentPanelMainKt : AppCompatActivity() {
 
@@ -49,7 +43,7 @@ class StudentPanelMainKt : AppCompatActivity() {
 
         LoadData.loadStudentNameAndCountMessageNotRead(this, urlAppend,
                 tx_stateInStudentPanel, txStudentNameInStudentPanel,
-                txCountNotReadMessageInTeacher, imgUserPicture, clWifiInStudentPanel)
+                txCountNotReadMessage, imgUserPicture, clWifiInStudentPanel)
 
 
         val ha = Handler()
@@ -63,7 +57,7 @@ class StudentPanelMainKt : AppCompatActivity() {
 
                 var tedadKhandeNashode =LoadData.loadStudentNameAndCountMessageNotRead(this@StudentPanelMainKt, urlAppend,
                         tx_stateInStudentPanel, txStudentNameInStudentPanel,
-                        txCountNotReadMessageInTeacher, imgUserPicture, clWifiInStudentPanel)
+                        txCountNotReadMessage, imgUserPicture, clWifiInStudentPanel)
 
                 /*if (tedadKhandeNashode != "0"){
                     CreateNotification().createNotificationChannel(this@StudentPanelMainKt)
@@ -85,11 +79,11 @@ class StudentPanelMainKt : AppCompatActivity() {
             Toast.makeText(this, "درباره ما", Toast.LENGTH_SHORT).show()
         }
 
-        imgWriteMessageInRecevedMessageTeacher.setOnClickListener {
+        imgWriteMessage.setOnClickListener {
             startActivity(Intent(this, ListPayamHayeErsali::class.java))
         }
 
-        imgInboxMessageInRecevedPageStudent.setOnClickListener {
+        imgInboxMessage.setOnClickListener {
             startActivity(Intent(this, InboxMessage::class.java))
         }
 

@@ -27,6 +27,8 @@ import hozorghiyab.cityDetail.LoadData;
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow;
 import hozorghiyab.cityDetail.RecyclerModel;
 import hozorghiyab.cityDetail.Recyclerview;
+import hozorghiyab.customClasses.EnglishNumberToPersian;
+import hozorghiyab.customClasses.TimeKononi;
 
 public class HozorGhiyabMain extends AppCompatActivity {
     ImageView imgBack,imgAfzodanjalaseText,imgAddJalase;
@@ -63,9 +65,16 @@ public class HozorGhiyabMain extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarInAddJalase);
         rvAddJalase = findViewById(R.id.rvAddjalase);
 
+        TimeKononi timeKononi = new TimeKononi();
+        final String nowTime = timeKononi.getPersianTimeWithoutDayName();
+
         imgAfzodanjalaseText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                etJalaseName.setText(new EnglishNumberToPersian().convert( "جلسه - " + nowTime));
+
+
                 if (imgAddJalase.getVisibility() == View.GONE) {
                     imgAddJalase.setVisibility(View.VISIBLE);
                     etJalaseName.setVisibility(View.VISIBLE);
@@ -107,7 +116,6 @@ public class HozorGhiyabMain extends AppCompatActivity {
 
         if (username.matches("100024") || username.matches("100025") ){
             username = "100010";
-            imgAfzodanjalaseText.setEnabled(false);
         }
 
         //خط زیر برای لود کلاسهاست
@@ -136,11 +144,14 @@ public class HozorGhiyabMain extends AppCompatActivity {
             }
         });
 
+
+
+        etJalaseName.setText(new EnglishNumberToPersian().convert( "جلسه - " + nowTime));
         imgAddJalase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String jalaseName = etJalaseName.getText().toString();
+                String jalaseName = new EnglishNumberToPersian().convert(etJalaseName.getText().toString());
                 String className = selectedItemClassId;
 
                 if(className.length() <=0 || className.isEmpty() || jalaseName.length() <=0 || jalaseName.isEmpty()){
@@ -150,8 +161,7 @@ public class HozorGhiyabMain extends AppCompatActivity {
                     LoadData.sendJalase(HozorGhiyabMain.this,rAdapterYouHaveKnow,rModelsYouHaveKnow,img_refresh,
                             webView,timer,tx_state,rvAddJalase,progressBar,jalaseName,className,username);
 
-                    etJalaseName.setText("");
-                    Toast.makeText(HozorGhiyabMain.this,"ثبت شد",Toast.LENGTH_SHORT).show();
+                    //etJalaseName.setText("");
 
                     imgAddJalase.setVisibility(View.GONE);
                     etJalaseName.setVisibility(View.GONE);

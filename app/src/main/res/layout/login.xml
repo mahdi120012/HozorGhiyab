@@ -256,17 +256,29 @@
                 android:id="@+id/imgLoginStudentText"
                 android:layout_width="170dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toStartOf="@+id/imageView7"
+                app:layout_constraintTop_toBottomOf="@+id/imgMohsenin"
+                app:srcCompat="@drawable/loginstudent" />
+
+            <ImageView
+                android:id="@+id/imgMohsenin"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="@+id/imageView7"
                 app:layout_constraintStart_toStartOf="@+id/imageView7"
                 app:layout_constraintTop_toBottomOf="@+id/imageView7"
-                app:srcCompat="@drawable/loginstudent" />
+                app:srcCompat="@drawable/mohsenin" />
 
             <ImageView
                 android:id="@+id/imgLoginTeacherText"
                 android:layout_width="170dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/txForgetPasswordStudent"
                 app:layout_constraintStart_toStartOf="@+id/txForgetPasswordStudent"
                 app:layout_constraintTop_toBottomOf="@+id/txForgetPasswordStudent"
@@ -274,15 +286,27 @@
 
 
             <ImageView
+                android:id="@+id/imgSetad"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/imgMohsenin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imgMohsenin"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginTeacher"
+                app:srcCompat="@drawable/setad" />
+
+            <ImageView
                 android:id="@+id/imgLoginKarmandText"
                 android:layout_width="170dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/imgLoginTeacher"
+                app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="@+id/imgLoginTeacher"
-                app:layout_constraintTop_toBottomOf="@+id/imgLoginTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/imgSetad"
                 app:srcCompat="@drawable/loginkarkonan" />
-
 
             <EditText
                 android:id="@+id/etUsernameKarkonan"

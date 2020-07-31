@@ -6,12 +6,12 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import com.hozorghiyab.R
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions
@@ -33,6 +33,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
     private var rAdapterYouHaveKnow: RecyclerAdapterYouHaveKnow? = null
     private var rModelsYouHaveKnow: ArrayList<RecyclerModel>? = null
     val ha = Handler()
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inbox_message_pv_chat)
@@ -45,7 +46,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
 
 
 
-        val emojIcon = EmojIconActions(this, constraintLayout3, etMatnChat, imgSelectEmoji, "#495C66", "#DCE1E2", "#E6EBEF")
+        val emojIcon = EmojIconActions(this, clMain, etMatnChat, imgSelectEmoji, "#495C66", "#DCE1E2", "#E6EBEF")
         emojIcon.setIconsIds(R.drawable.keyboad_icon,R.drawable.emoji_select)
         emojIcon.setUseSystemEmoji(true)
         emojIcon.setKeyboardListener(object : EmojIconActions.KeyboardListener {
@@ -85,7 +86,6 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
         }
 
 
-        var conversationId = if (intent.getExtras() == null) {}else{intent.extras!!.getString("conversation_id")}
         var mokhatabId = if (intent.getExtras() == null) {}else{intent.extras!!.getString("mokhatab_id")}
         var nameMokhatab = if (intent.getExtras() == null) {}else{intent.extras!!.getString("name_mokhatab")}
         txNameMokhatab.setText(nameMokhatab.toString())
@@ -103,27 +103,15 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
         editor.putString("tedad_payam_khande_nashode", "0")
         editor.commit()
 
+
+        LoadData.lastId2 = "0"
         rModelsYouHaveKnow = ArrayList()
-        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "pv_chat", this@PvChat, rAdapterYouHaveKnow, null,null,null,null,"")
+        rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "payam_haye_daryafti",null,clMain,null,"")
         Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                 rModelsYouHaveKnow,null)
 
-        //Toast.makeText(this,conversationId.toString(),Toast.LENGTH_SHORT).show()
-
-        LoadData.loadPvChat(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                rvInInboxMessageTeacher, username,conversationId.toString(),clWifiState)
-
-
-        //هندرلر زیر برای اینه که اگه چت جدید موجود بود بیاره
-        /*ha.postDelayed(object : Runnable {
-            override fun run() {
-
-                LoadData.loadPvChat(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                        rvInInboxMessageTeacher, conversationId.toString(),clWifiState)
-
-                ha.postDelayed(this, 2000)
-            }
-        }, 2000)*/
+        LoadData.firstLoadDataRecivedMessageChat(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                rvInInboxMessageTeacher, username,mokhatabId.toString(),"all",noe,clWifiState)
 
 
 
@@ -134,7 +122,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                             //همه
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
-                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "payam_haye_daryafti",null,null,null,"")
+                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "payam_haye_daryafti",null,clMain,null,"")
                             Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                                     rModelsYouHaveKnow,null)
 
@@ -144,19 +132,34 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         }
                         1 -> {
                             //خصوصی
-                            LoadData.lastId = "0"
+                            clMain.setVisibility(View.VISIBLE)
+                            LoadData.lastId3 = "0"
+
+
                             rModelsYouHaveKnow = ArrayList()
-                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "pv_chat", this@PvChat, rAdapterYouHaveKnow, null,null,null,null,"")
+                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "pv_chat", this@PvChat, rAdapterYouHaveKnow, null,null,clMain,null,"")
                             Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                                     rModelsYouHaveKnow,null)
                             LoadData.loadPvChat(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    rvInInboxMessageTeacher, username,conversationId.toString(),clWifiState)
+                                    rvInInboxMessageTeacher, username,mokhatabId.toString(),clWifiState)
+
+                            //هندرلر زیر برای اینه که اگه چت جدید موجود بود بیاره
+                            ha.postDelayed(object : Runnable {
+                                override fun run() {
+
+                                    LoadData.loadPvChat(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                            rvInInboxMessageTeacher,username,mokhatabId.toString(),clWifiState)
+
+                                    ha.postDelayed(this, 1000)
+                                }
+                            }, 1000)
+
                         }
                         2 -> {
                             //گزارشات
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
-                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "pv",null,null,null,"")
+                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "pv",null,clMain,null,"")
                             Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                                     rModelsYouHaveKnow,null)
 
@@ -167,18 +170,18 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                             //کارها
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
-                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "",null,null,null,"")
+                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message_sepordan_kar", this@PvChat, rAdapterYouHaveKnow, mokhatabId.toString(),null,clMain,null,"")
                             Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                                     rModelsYouHaveKnow,null)
 
-                            LoadData.firstLoadDataRecivedMessageChat(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                            LoadData.firstLoadDataRecivedMessageChatWorks(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
                                     rvInInboxMessageTeacher, username,mokhatabId.toString(),"sepordan_kar",noe,clWifiState)
                         }
                         4 -> {
                             //احکام
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
-                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "",null,null,null,"")
+                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")
                             Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                                     rModelsYouHaveKnow,null)
 
@@ -189,23 +192,31 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                             //ورود خروج
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
-                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "vorod_khoroj", this@PvChat, rAdapterYouHaveKnow, "",null,null,null,"")
+                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "vorod_khoroj", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")
                             Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                                     rModelsYouHaveKnow, null)
 
-                            LoadData.ListVorodKhorojErsaliDarPv(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    rvInInboxMessageTeacher, mokhatabId.toString(),clWifiState,noe)
+
+                                LoadData.ListVorodKhorojErsaliDarPv(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                        rvInInboxMessageTeacher, username,mokhatabId.toString(),clWifiState)
+
+
 
                         }
                         6 -> {
                             //مرخصی
+
+
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
-                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "darkhast_morkhasi", this@PvChat, rAdapterYouHaveKnow, "",null,null,null,"")
+                            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "darkhast_morkhasi", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")
                             Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
                                     rModelsYouHaveKnow, null)
+
                             LoadData.ListDarkhastMorkhasiDarBakhshPv(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    rvInPayamHayeErsaliTeacher, mokhatabId.toString(),clWifiState,noe)
+                                     rvInPayamHayeErsaliTeacher, username,mokhatabId.toString(),clWifiState)
+
+
 
                         }
                         else -> {
@@ -218,6 +229,10 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
             })
 
 
+     /*   Handler().postDelayed(
+                {
+                    tabLayout.getTabAt(0)?.select();
+    }, 100)*/
 
         imgSend.setOnClickListener {
 
@@ -225,28 +240,20 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
             var nowTime = timeKononi.persianTime
 
 
-            if (conversationId.toString().equals("") || conversationId.toString().equals("0")){
-
-                LoadData.sendFirstNullMessagePvChat(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                        username, mokhatabId.toString(), etMatnChat, "",clWifiState,nowTime,"","",rvInInboxMessageTeacher)
-
-            }else{
-            /*rModelsYouHaveKnow = ArrayList()
-            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "pv_chat", this@PvChat, rAdapterYouHaveKnow, null,null,null,null,"")
-            Recyclerview.define_recyclerviewAddStudent(this@PvChat, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
-                    rModelsYouHaveKnow,null)*/
-
             LoadData.sendMessageTeacher(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                    username, mokhatabId.toString(), etMatnChat, "",clWifiState,nowTime,"",conversationId.toString(),rvInInboxMessageTeacher)
+                    username, mokhatabId.toString(), etMatnChat, "",clWifiState,nowTime,"",rvInInboxMessageTeacher)
 
             /*rModelsYouHaveKnow!!.add(RecyclerModel(LoadData.lastId, etMatnChat.text.toString(), "matn", nowTime, "", "", username, "", 0, ""))
             rAdapterYouHaveKnow!!.notifyDataSetChanged()*/
             rvInInboxMessageTeacher.scrollToPosition(rvInInboxMessageTeacher.getAdapter()!!.getItemCount() - 1)
-            }
+            //}
         }
 
 
         imgBackRecevedMessageTeacher.setOnClickListener{
+            LoadData.lastId = "0"
+            LoadData.lastId2 = "0"
+            LoadData.lastId3 = "0"
             ha.removeCallbacksAndMessages(null);
             val i = Intent(this, InboxMessageChat::class.java)
             i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -267,6 +274,9 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
     }
     override fun onBackPressed() {
         ha.removeCallbacksAndMessages(null);
+        LoadData.lastId = "0"
+        LoadData.lastId2 = "0"
+        LoadData.lastId3 = "0"
         val i = Intent(this, InboxMessageChat::class.java)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(i)
@@ -277,6 +287,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
         super.onDestroy()
         LoadData.lastId = "0"
         LoadData.lastId2 = "0"
+        LoadData.lastId3 = "0"
         ha.removeCallbacksAndMessages(null);
     }
 

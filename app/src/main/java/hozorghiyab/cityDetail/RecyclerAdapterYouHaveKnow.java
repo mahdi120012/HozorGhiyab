@@ -45,9 +45,11 @@ import hozorghiyab.activities.HozorGhiyab;
 import hozorghiyab.activities.NamayeshVaziyatDarsiStudent;
 import hozorghiyab.activities.PvChat;
 import hozorghiyab.activities.WriteNewMessage;
+import hozorghiyab.activities.WriteSepordanKar;
 import hozorghiyab.customClasses.CustomDialog;
 import hozorghiyab.customClasses.EnglishNumberToPersian;
 import hozorghiyab.customClasses.SharedPrefClass;
+import hozorghiyab.customClasses.TimeKononi;
 
 public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAdapterYouHaveKnow.MyViewHolder> {
     private String dateAsli = "";
@@ -110,6 +112,12 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_add_student, parent, false));
 
         }else if (rowLayoutType.equals("recived_message")) {
+            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recive_message, parent, false));
+
+        }else if (rowLayoutType.equals("recived_message_sepordan_kar")) {
+            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recive_message, parent, false));
+
+        }else if (rowLayoutType.equals("recived_message_dakhel_sepordan_kar")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recive_message, parent, false));
 
         }else if (rowLayoutType.equals("pv_chat")) {
@@ -184,8 +192,10 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   @Override
                   public void onClick(View v) {
 
-                      CustomDialog.clickDialogItems(c,position,"remove_class",
+
+                      clickDialogItems(c,position,"remove_class",
                               null,"",recyclerModels,recyclerAdapterYouHaveKnow);
+
 
 
                       //holder.txSchoolName.setText(recyclerModels.get(position).getOnvan());
@@ -252,8 +262,9 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                 });
 
           }else if (rowLayoutType.contains("vorod_khoroj")){
-
-
+              if (clShowErsal != null) {
+                  clShowErsal.setVisibility(View.GONE);
+              }
               holder.txDate2.setText(recyclerModels.get(position).getOnvan());
               holder.txSaatVorod.setText(recyclerModels.get(position).getMatn());
               holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
@@ -267,38 +278,62 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   }
               }
 
+
+              String noe = SharedPrefClass.getUserId(c,"noe");
+
+              if (!noe.equals("admin")){
+
+                  holder.txAzYaBeVorodKhoroj.setVisibility(View.GONE);
+                  holder.txNameFrestandeVorodKhoroj.setVisibility(View.GONE);
+              }
+
+
               if (dateAsli3.equals(recyclerModels.get(position).getOnvan())) {
                   holder.cardViewTxDate3.setVisibility(View.GONE);
               }else {
                   holder.txDateAsli.setText(recyclerModels.get(position).getOnvan());
                   dateAsli3 = recyclerModels.get(position).getOnvan();
               }
+              String username = SharedPrefClass.getUserId(c,"user");
 
 
+              if (recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain3.setCardBackgroundColor(Color.parseColor("#efffde"));
+                  holder.txDate2.setTextColor(Color.parseColor("#70b15c"));
 
-              String noe = SharedPrefClass.getUserId(c,"noe");
+              }else if (!recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain3.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                  holder.txDate2.setTextColor(Color.parseColor("#a1aab3"));
+              }
+
+
               if (noe.equals("admin")){
                   holder.clVorodKhoroj.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View v) {
-                          CustomDialog.allDialogButton(c,position,"taeid_gozaresh",
-                          holder.imgVaziyatTaeid,holder.txOnvanMessageInRecivedMessage,"saat_vorod_khoroj",
-                          list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
+
+                          allDialogButton(c,position,"taeid_gozaresh",
+                                  holder.imgVaziyatTaeid,holder.txOnvanMessageInRecivedMessage,"saat_vorod_khoroj",
+                                  list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
                       }
                   });
               }else {
-                  holder.clVorodKhoroj.setOnClickListener(new View.OnClickListener() {
+                  /*holder.clVorodKhoroj.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View v) {
                           CustomDialog.allDialogButton(c,position,"",holder.imgVaziyatTaeid,
                                   holder.txOnvanMessageInRecivedMessage,"saat_vorod_khoroj",
                                   list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
                       }
-                  });
+                  });*/
               }
 
           }else if (rowLayoutType.contains("darkhast_morkhasi")){
 
+              if (clShowErsal != null) {
+                  clShowErsal.setVisibility(View.GONE);
+              }
               holder.txTarikhDarkhast.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getOnvan()));
               holder.txAzTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn()));
               holder.txTaTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPicture()));
@@ -319,6 +354,17 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   dateAsli4 = recyclerModels.get(position).getOnvan();
               }
 
+              String username = SharedPrefClass.getUserId(c,"user");
+
+              if (recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain4.setCardBackgroundColor(Color.parseColor("#efffde"));
+                  holder.txTarikhDarkhast.setTextColor(Color.parseColor("#70b15c"));
+
+              }else if (!recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain4.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                  holder.txTarikhDarkhast.setTextColor(Color.parseColor("#a1aab3"));
+              }
+
               String noe = SharedPrefClass.getUserId(c,"noe");
 
               if (!noe.equals("admin")){
@@ -331,33 +377,37 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   holder.clDarkhastMorkhasi.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View v) {
-                          CustomDialog.allDialogButton(c,position,"taeid_gozaresh",
+
+                          allDialogButton(c,position,"taeid_gozaresh",
                                   holder.imgVaziyatTaeidMorkhasi,holder.txOnvanMessageInRecivedMessage,
-                                  "darkhasti_morkhasi",list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
+                                  "darkhasti_morkhasi",list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
                       }
                   });
               }else {
-                  holder.clDarkhastMorkhasi.setOnClickListener(new View.OnClickListener() {
+                  /*holder.clDarkhastMorkhasi.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View v) {
                           CustomDialog.allDialogButton(c,position,"",holder.imgVaziyatTaeidMorkhasi,
                                   holder.txOnvanMessageInRecivedMessage,"darkhasti_morkhasi",
                                   list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
                       }
-                  });
+                  });*/
               }
 
 
           }else if (rowLayoutType.equals("pv_chat")){
-
-              holder.txOnvanMessageInRecivedMessage.setText(recyclerModels.get(position).getOnvan());
+             clShowErsal.setVisibility(View.VISIBLE);
+             holder.txOnvanMessageInRecivedMessage.setText(recyclerModels.get(position).getOnvan());
               //holder.txMatnMessageInRecivedMessage.setText(recyclerModels.get(position).getMatn());
               //holder.txNameFerestandeInRecivedMessage.setText(recyclerModels.get(position).getCity());
               holder.txDate.setText(recyclerModels.get(position).getPicture());
 
               if (dateAsli.equals(recyclerModels.get(position).getPicture())) {
                   holder.cardViewTxDate.setVisibility(View.GONE);
+                  dateAsli = recyclerModels.get(position).getPicture();
               }else if (!dateAsli.equals(recyclerModels.get(position).getPicture())){
+                  holder.cardViewTxDate.setVisibility(View.VISIBLE);
                   holder.txDateAsli.setText(recyclerModels.get(position).getPicture());
                   dateAsli = recyclerModels.get(position).getPicture();
               }
@@ -418,7 +468,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   public void onClick(View v) {
 
                       Intent intent = new Intent(c, PvChat.class);
-                      intent.putExtra("conversation_id", recyclerModels.get(position).getCountRateAndComment());
                       intent.putExtra("mokhatab_id", recyclerModels.get(position).getRate());
                       intent.putExtra("name_mokhatab", recyclerModels.get(position).getCity());
                       c.startActivity(intent);
@@ -441,7 +490,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   public void onClick(View v) {
 
                       Intent intent = new Intent(c, PvChat.class);
-                      intent.putExtra("conversation_id", recyclerModels.get(position).getCity());
                       intent.putExtra("mokhatab_id", recyclerModels.get(position).getId());
                       intent.putExtra("name_mokhatab", recyclerModels.get(position).getMatn());
                       c.startActivity(intent);
@@ -469,7 +517,6 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   public void onClick(View v) {
 
                       Intent intent = new Intent(c, PvChat.class);
-                      intent.putExtra("conversation_id", recyclerModels.get(position).getCountRateAndComment());
                       intent.putExtra("mokhatab_id", recyclerModels.get(position).getRate());
                       intent.putExtra("name_mokhatab", recyclerModels.get(position).getCity());
                       c.startActivity(intent);
@@ -479,8 +526,278 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               });
 
 
-          }else if (rowLayoutType.equals("recived_message")){
 
+          }else if (rowLayoutType.equals("recived_message_dakhel_sepordan_kar")){
+              if (clShowErsal != null) {
+                  clShowErsal.setVisibility(View.GONE);
+              }
+              String noe = SharedPrefClass.getUserId(c,"noe");
+              if (noe.equals("student")){
+                  holder.clVaziyatTaeid.setVisibility(View.GONE);
+              }
+
+              if (className.equals("payam_haye_ersali")){
+                  holder.txAzYaBe.setText("به");
+              }else {
+                  holder.txAzYaBe.setText("از");
+              }
+
+              if (className.equals("pv")){
+                  holder.txAzYaBe.setVisibility(View.GONE);
+                  holder.txNameFerestandeInRecivedMessage.setVisibility(View.GONE);
+              }
+
+              holder.txOnvanMessageInRecivedMessage.setText(recyclerModels.get(position).getOnvan());
+              holder.txMatnMessageInRecivedMessage.setText(recyclerModels.get(position).getMatn());
+              holder.txNameFerestandeInRecivedMessage.setText(recyclerModels.get(position).getCity());
+              holder.txDate.setText(recyclerModels.get(position).getPicture());
+
+              if (recyclerModels.get(position).getVaziyat() != null){
+                  if (recyclerModels.get(position).getVaziyat().equals("تایید شده")){
+                      holder.imgVaziyatTaeid.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_shode));
+                  }else if(recyclerModels.get(position).getVaziyat().equals("رد شده")){
+                      holder.imgVaziyatTaeid.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_nashode));
+                  }
+              }
+
+              String username = SharedPrefClass.getUserId(c,"user");
+
+              if (recyclerModels.get(position).getRate().equals(username)){
+                  holder.cardMain.setCardBackgroundColor(Color.parseColor("#efffde"));
+                  holder.txDate.setTextColor(Color.parseColor("#70b15c"));
+
+              }else if (!recyclerModels.get(position).getRate().equals(username)){
+                  holder.cardMain.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                  holder.txDate.setTextColor(Color.parseColor("#a1aab3"));
+              }
+
+
+              if (dateAsli2.equals(recyclerModels.get(position).getPicture())) {
+                  holder.cardViewTxDate2.setVisibility(View.GONE);
+              }else {
+                  holder.txDateAsli2.setText(recyclerModels.get(position).getPicture());
+                  dateAsli2 = recyclerModels.get(position).getPicture();
+              }
+
+              if (recyclerModels.get(position).getCountRateAndComment()!=""){
+                  holder.imgReadOrNo.setVisibility(View.VISIBLE);
+
+                  if (recyclerModels.get(position).getCountRateAndComment().equals("0")){
+                      holder.imgReadOrNo.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.not_read));
+                  }else {
+                      holder.imgReadOrNo.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.read));
+                  }
+              }
+
+              if(holder.txDate.getText().toString().isEmpty()){
+                  holder.txDate.setVisibility(View.GONE);
+              }
+
+              if(recyclerModels.get(position).getPosition().toString().contains("gozaresh_kar")){
+
+                  final SpannableStringBuilder sb = new SpannableStringBuilder("گزارش کار: " + recyclerModels.get(position).getWorkNumber() + " :" +recyclerModels.get(position).getOnvan());
+
+                  final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+                  sb.setSpan(bss, 0, 10, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                  holder.txOnvanMessageInRecivedMessage.setText(sb);
+                  holder.clVaziyatTaeid.setVisibility(View.VISIBLE);
+              }
+
+             int a = Integer.parseInt(recyclerModels.get(position).getWorkNumber()) -1;
+
+              final SpannableStringBuilder sb2 = new SpannableStringBuilder("گزارش کار " + String.valueOf(a) + " :" +recyclerModels.get(position).getOnvan());
+
+              final StyleSpan bss2 = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+              sb2.setSpan(bss2, 0, 11, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+              holder.txOnvanMessageInRecivedMessage.setText(sb2);
+              holder.clVaziyatTaeid.setVisibility(View.VISIBLE);
+
+
+              if(recyclerModels.get(position).getPosition().toString().contains("ahkam")){
+
+                  final SpannableStringBuilder sb = new SpannableStringBuilder("احکام: " +recyclerModels.get(position).getOnvan());
+
+                  final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+                  sb.setSpan(bss, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                  holder.txOnvanMessageInRecivedMessage.setText(sb);
+              }
+
+              if(recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
+
+                  final SpannableStringBuilder sb = new SpannableStringBuilder("کار " + recyclerModels.get(position).getWorkNumber() + " :" +recyclerModels.get(position).getOnvan());
+
+                  final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+                  sb.setSpan(bss, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                  holder.txOnvanMessageInRecivedMessage.setText(sb);
+
+              }
+
+              if (noe.equals("admin")){
+                  holder.clMain.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+
+                          allDialogButton(c,position,"taeid_gozaresh",
+                                  holder.imgVaziyatTaeid,holder.txOnvanMessageInRecivedMessage,
+                                  null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
+                      }
+                  });
+              }else {
+                  holder.clMain.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+                          allDialogButton(c,position,"",holder.imgVaziyatTaeid,
+                                  holder.txOnvanMessageInRecivedMessage,null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+                      }
+                  });
+              }
+
+
+
+          }else if (rowLayoutType.equals("recived_message_sepordan_kar")){
+              if (clShowErsal != null) {
+                  clShowErsal.setVisibility(View.GONE);
+              }
+              String noe = SharedPrefClass.getUserId(c,"noe");
+              if (noe.equals("student")){
+                  holder.clVaziyatTaeid.setVisibility(View.GONE);
+              }
+
+              if (className.equals("payam_haye_ersali")){
+                  holder.txAzYaBe.setText("به");
+              }else {
+                  holder.txAzYaBe.setText("از");
+              }
+
+              if (className.equals("pv")){
+                  holder.txAzYaBe.setVisibility(View.GONE);
+                  holder.txNameFerestandeInRecivedMessage.setVisibility(View.GONE);
+              }
+
+              holder.txOnvanMessageInRecivedMessage.setText(recyclerModels.get(position).getOnvan());
+              holder.txMatnMessageInRecivedMessage.setText(recyclerModels.get(position).getMatn());
+              holder.txNameFerestandeInRecivedMessage.setText(recyclerModels.get(position).getCity());
+              holder.txDate.setText(recyclerModels.get(position).getPicture());
+
+              if (recyclerModels.get(position).getVaziyat() != null){
+                  if (recyclerModels.get(position).getVaziyat().equals("تایید شده")){
+                      holder.imgVaziyatTaeid.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_shode));
+                  }else if(recyclerModels.get(position).getVaziyat().equals("رد شده")){
+                      holder.imgVaziyatTaeid.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_nashode));
+                  }
+              }
+
+              String username = SharedPrefClass.getUserId(c,"user");
+
+              if (recyclerModels.get(position).getRate().equals(username)){
+                  holder.cardMain.setCardBackgroundColor(Color.parseColor("#efffde"));
+                  holder.txDate.setTextColor(Color.parseColor("#70b15c"));
+
+              }else if (!recyclerModels.get(position).getRate().equals(username)){
+                  holder.cardMain.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                  holder.txDate.setTextColor(Color.parseColor("#a1aab3"));
+              }
+
+
+              if (dateAsli2.equals(recyclerModels.get(position).getPicture())) {
+                  holder.cardViewTxDate2.setVisibility(View.GONE);
+              }else {
+                  holder.txDateAsli2.setText(recyclerModels.get(position).getPicture());
+                  dateAsli2 = recyclerModels.get(position).getPicture();
+              }
+
+              if (recyclerModels.get(position).getCountRateAndComment()!=""){
+                  holder.imgReadOrNo.setVisibility(View.VISIBLE);
+
+                  if (recyclerModels.get(position).getCountRateAndComment().equals("0")){
+                      holder.imgReadOrNo.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.not_read));
+                  }else {
+                      holder.imgReadOrNo.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.read));
+                  }
+              }
+
+              if(holder.txDate.getText().toString().isEmpty()){
+                  holder.txDate.setVisibility(View.GONE);
+              }
+
+              if(recyclerModels.get(position).getPosition().toString().contains("gozaresh_kar")){
+
+                  final SpannableStringBuilder sb = new SpannableStringBuilder("گزارش کار " + recyclerModels.get(position).getWorkNumber() + " :" +recyclerModels.get(position).getOnvan());
+
+                  final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+                  sb.setSpan(bss, 0, 10, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                  holder.txOnvanMessageInRecivedMessage.setText(sb);
+                  holder.clVaziyatTaeid.setVisibility(View.VISIBLE);
+              }
+
+
+              if(recyclerModels.get(position).getPosition().toString().contains("ahkam")){
+
+                  final SpannableStringBuilder sb = new SpannableStringBuilder("احکام: " +recyclerModels.get(position).getOnvan());
+
+                  final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+                  sb.setSpan(bss, 0, 6, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                  holder.txOnvanMessageInRecivedMessage.setText(sb);
+              }
+
+              if(recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
+
+                  final SpannableStringBuilder sb = new SpannableStringBuilder("کار " + recyclerModels.get(position).getWorkNumber() + " :" +recyclerModels.get(position).getOnvan());
+
+                  final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+                  sb.setSpan(bss, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                  holder.txOnvanMessageInRecivedMessage.setText(sb);
+
+
+                      holder.clMain.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View v) {
+
+                              allDialogButton(c,position,"gozaresh_kar",
+                                      holder.imgVaziyatTaeid,holder.txOnvanMessageInRecivedMessage,
+                                      null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
+                          }
+                      });
+
+              }else {
+                  if (noe.equals("admin")){
+                      holder.clMain.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View v) {
+
+                              allDialogButton(c,position,"taeid_gozaresh",
+                                      holder.imgVaziyatTaeid,holder.txOnvanMessageInRecivedMessage,
+                                      null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
+                          }
+                      });
+                  }else {
+                      holder.clMain.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View v) {
+                              allDialogButton(c,position,"",holder.imgVaziyatTaeid,
+                                      holder.txOnvanMessageInRecivedMessage,null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+                          }
+                      });
+                  }
+              }
+
+
+
+
+          }else if (rowLayoutType.equals("recived_message")){
+              if (clShowErsal != null) {
+                  clShowErsal.setVisibility(View.GONE);
+              }
               String noe = SharedPrefClass.getUserId(c,"noe");
               if (noe.equals("student")){
                   holder.clVaziyatTaeid.setVisibility(View.GONE);
@@ -574,23 +891,26 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   sb.setSpan(bss, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
 
                   holder.txOnvanMessageInRecivedMessage.setText(sb);
+
               }
 
               if (noe.equals("admin")){
                   holder.clMain.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View v) {
-                          CustomDialog.allDialogButton(c,position,"taeid_gozaresh",
+
+                          allDialogButton(c,position,"taeid_gozaresh",
                                   holder.imgVaziyatTaeid,holder.txOnvanMessageInRecivedMessage,
-                                  null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
+                                  null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
                       }
                   });
               }else {
                   holder.clMain.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View v) {
-                          CustomDialog.allDialogButton(c,position,"",holder.imgVaziyatTaeid,
-                                  holder.txOnvanMessageInRecivedMessage,null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
+                          allDialogButton(c,position,"",holder.imgVaziyatTaeid,
+                                  holder.txOnvanMessageInRecivedMessage,null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
                       }
                   });
               }
@@ -702,12 +1022,22 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   @Override
                   public void onClick(View v) {
 
-                      Intent intent = new Intent(c, WriteNewMessage.class);
-                      intent.putStringArrayListExtra("id",list_id);
-                      intent.putStringArrayListExtra("family",list_family);
-                      intent.putExtra("ahkam",className);
-                      intent.putExtra("sepordan_kar",sepordanKar);
-                      c.startActivity(intent);
+                      if (sepordanKar != null){
+                          Intent intent = new Intent(c, WriteSepordanKar.class);
+                          intent.putStringArrayListExtra("id",list_id);
+                          intent.putStringArrayListExtra("family",list_family);
+                          intent.putExtra("ahkam",className);
+                          intent.putExtra("sepordan_kar",sepordanKar);
+                          c.startActivity(intent);
+                      }else {
+                          Intent intent = new Intent(c, WriteNewMessage.class);
+                          intent.putStringArrayListExtra("id",list_id);
+                          intent.putStringArrayListExtra("family",list_family);
+                          intent.putExtra("ahkam",className);
+                          intent.putExtra("sepordan_kar",sepordanKar);
+                          c.startActivity(intent);
+                      }
+
 
                       String stdId = recyclerModels.get(position).getOnvan();
 
@@ -787,7 +1117,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.imgRemoveJalase.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                      CustomDialog.clickDialogItems(c,position,"remove_jalase",null,"",recyclerModels,recyclerAdapterYouHaveKnow);
+                      clickDialogItems(c,position,"remove_jalase",null,"",recyclerModels,recyclerAdapterYouHaveKnow);
                   }
               });
 
@@ -994,12 +1324,13 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         Spinner spinnerTakhirStudent;
         EditText etTimeTakhirStudent,etVaziyatDarsiStudent,etVaziyatAkhlaghiStudent;
         CardView cardViewUnderUserPicture,cardViewUnderUserPicture1,cardViewChat,cardViewTxDate,cardViewTxDate2
-                ,cardViewTxDate3,cardViewTxDate4,cardMain,cardMain2;
+                ,cardViewTxDate3,cardViewTxDate4,cardMain,cardMain2,cardMain3,cardMain4;
         LinearLayout linerLayoutInRowChat;
         MyViewHolder(View view) {
             super(view);
+            cardMain4 = itemView.findViewById(R.id.cardMain);
+            cardMain3 = itemView.findViewById(R.id.cardMain);
             cardMain2 = itemView.findViewById(R.id.cardMain);
-
             cardMain = itemView.findViewById(R.id.cardMain);
             txDateAsli4 = itemView.findViewById(R.id.txDateAsli);
             cardViewTxDate4 = itemView.findViewById(R.id.cardViewTxDate);
@@ -1197,6 +1528,454 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show();
 
+    }
+
+    public void dialogGozareshKarRoyeKar(final Context context, final int position, final String method,
+                                         final ImageView imgVaziyatTaeid, final TextView txOnvanMessageInRecivedMessage,
+                                         final String noeGozaresh, final ArrayList<String> list_family, final ArrayList<String> list_id,
+                                         final ArrayList<RecyclerModel> recyclerModels, final RecyclerAdapterYouHaveKnow adapter,
+                                         final String idKar) {
+        final Dialog dialog = new Dialog(context, R.style.customDialogKar);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.gozaresh_roye_kar, null, false);
+        final RecyclerView rvInInboxMessageTeacher = view.findViewById(R.id.rvInInboxMessageTeacher);
+        final ConstraintLayout clWifiState = view.findViewById(R.id.clWifiState);
+        ImageView imgBack = view.findViewById(R.id.imgBack);
+        final EditText etMatnChat = view.findViewById(R.id.etMatnChat);
+        final ImageView imgSend = view.findViewById(R.id.imgSend);
+        TextView txMatnAsli = view.findViewById(R.id.txMatnAsli);
+        txMatnAsli.setText(recyclerModels.get(position).getOnvan());
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        final String username = SharedPrefClass.getUserId(c,"user");
+        final String noe = SharedPrefClass.getUserId(c,"noe");
+
+        etMatnChat.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()>0){
+                    imgSend.setVisibility(View.VISIBLE);
+                }else{
+                    imgSend.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        imgSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimeKononi timeKononi = new TimeKononi();
+                String nowTime = timeKononi.getPersianTime();
+
+
+                LoadData.sendMessageRoyeSepordanKar(c, recyclerAdapterYouHaveKnow, recyclerModels,
+                        username, className, etMatnChat, "",clWifiState,nowTime,"",rvInInboxMessageTeacher,recyclerModels.get(position).getId());
+
+
+
+
+            }
+        });
+
+
+        ArrayList<RecyclerModel> rModelsYouHaveKnow = null;
+        RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow = null;
+
+        LoadData.lastId2 = "0";
+        rModelsYouHaveKnow = new ArrayList();
+
+        rAdapterYouHaveKnow = new  RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message_dakhel_sepordan_kar", c, rAdapterYouHaveKnow, "",null,clShowErsal,null,"");
+        Recyclerview.define_recyclerviewAddStudent(c, rvInInboxMessageTeacher, rAdapterYouHaveKnow,
+                rModelsYouHaveKnow,null);
+
+
+
+        LoadData.loadGozareshatUnderSepordanKar(c, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                rvInInboxMessageTeacher, username,className,"sepordan_kar",noe,clWifiState,idKar);
+
+
+
+
+        /*ConstraintLayout clErsalNazar = view.findViewById(R.id.clErsalNazar);
+        ConstraintLayout clCopy = view.findViewById(R.id.clCopy);
+        ConstraintLayout clRemove = view.findViewById(R.id.clHazf);
+        ConstraintLayout clTaeid = view.findViewById(R.id.clTaeid);
+        ConstraintLayout clRad = view.findViewById(R.id.clRad);
+
+        if (method.equals("taeid_gozaresh")){
+            clRemove.setVisibility(View.VISIBLE);
+            clTaeid.setVisibility(View.VISIBLE);
+            clRad.setVisibility(View.VISIBLE);
+        }
+
+
+
+        if (recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
+            clTaeid.setVisibility(View.VISIBLE);
+            clRad.setVisibility(View.VISIBLE);
+        }
+
+        if (noeGozaresh != null){
+            if (noeGozaresh.equals("saat_vorod_khoroj")){
+                clErsalNazar.setVisibility(View.GONE);
+                clCopy.setVisibility(View.GONE);
+            }else if (noeGozaresh.equals("darkhasti_morkhasi")){
+                clErsalNazar.setVisibility(View.GONE);
+                clCopy.setVisibility(View.GONE);
+            }
+        }
+
+        clErsalNazar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list_family.add(recyclerModels.get(position).getCity());
+                list_id.add(recyclerModels.get(position).getRate());
+
+                String s = "";
+                for (int i = 0; i < list_family.size(); i++) {
+                    s += list_family.get(i) + ", ";
+                }
+
+                Intent intent = new Intent(context, WriteNewMessage.class);
+                intent.putStringArrayListExtra("id",list_id);
+                intent.putStringArrayListExtra("family",list_family);
+                context.startActivity(intent);
+
+                dialog.dismiss();
+            }
+        });
+
+        clTaeid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickDialogItems(context,position,"taeid_gozaresh",imgVaziyatTaeid,noeGozaresh,recyclerModels,adapter);
+                dialog.dismiss();
+            }
+        });
+
+        clRad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickDialogItems(context,position,"rad_gozaresh",imgVaziyatTaeid,noeGozaresh,recyclerModels,adapter);
+                dialog.dismiss();
+            }
+        });
+
+        clRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                clickDialogItems(context,position,"delete",null,noeGozaresh,recyclerModels,adapter);
+
+                dialog.dismiss();
+            }
+        });
+
+        clCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (noeGozaresh != null){
+                    if (noeGozaresh.equals("darkhasti_morkhasi")){
+
+                    }
+                }else {
+                    ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(txOnvanMessageInRecivedMessage.getText().toString() + " "  + recyclerModels.get(position).getMatn());
+                    Toast.makeText(context, "کپی شد", Toast.LENGTH_SHORT).show();
+
+                }
+
+                dialog.dismiss();
+            }
+        });*/
+
+        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        dialog.setContentView(view);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        //line zir baraye transparent kardan hashiye haye cardview ee:
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
+
+    }
+
+
+    public void allDialogButton(final Context context, final int position, final String method,
+                                final ImageView imgVaziyatTaeid, final TextView txOnvanMessageInRecivedMessage,
+                                final String noeGozaresh, final ArrayList<String> list_family, final ArrayList<String> list_id,
+                                final ArrayList<RecyclerModel> recyclerModels, final RecyclerAdapterYouHaveKnow adapter, final String id) {
+        final Dialog dialog = new Dialog(context, R.style.customDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_dialog_inbox_message, null, false);
+
+        ConstraintLayout clErsalNazar = view.findViewById(R.id.clErsalNazar);
+        ConstraintLayout clCopy = view.findViewById(R.id.clCopy);
+        ConstraintLayout clRemove = view.findViewById(R.id.clHazf);
+        ConstraintLayout clTaeid = view.findViewById(R.id.clTaeid);
+        ConstraintLayout clRad = view.findViewById(R.id.clRad);
+        ConstraintLayout clErsalGozaresh = view.findViewById(R.id.clErsalGozaresh);
+
+
+        if (method.equals("taeid_gozaresh")){
+            clRemove.setVisibility(View.VISIBLE);
+            clTaeid.setVisibility(View.VISIBLE);
+            clRad.setVisibility(View.VISIBLE);
+        }
+        String noe = SharedPrefClass.getUserId(c,"noe");
+        if (method.equals("gozaresh_kar")){
+            if (noe.equals("admin")){
+                clRemove.setVisibility(View.VISIBLE);
+                clTaeid.setVisibility(View.VISIBLE);
+                clRad.setVisibility(View.VISIBLE);
+                clErsalGozaresh.setVisibility(View.VISIBLE);
+            }else {
+                clRemove.setVisibility(View.GONE);
+                clTaeid.setVisibility(View.VISIBLE);
+                clRad.setVisibility(View.VISIBLE);
+                clErsalGozaresh.setVisibility(View.VISIBLE);
+            }
+
+
+        }
+
+
+        clErsalGozaresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogGozareshKarRoyeKar(c,position,"gozaresh_kar",
+                        null,null,
+                        null,list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,id);
+                dialog.dismiss();
+            }
+        });
+
+        if (recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
+            clTaeid.setVisibility(View.VISIBLE);
+            clRad.setVisibility(View.VISIBLE);
+        }
+
+        if (noeGozaresh != null){
+            if (noeGozaresh.equals("saat_vorod_khoroj")){
+                clErsalNazar.setVisibility(View.GONE);
+                clCopy.setVisibility(View.GONE);
+            }else if (noeGozaresh.equals("darkhasti_morkhasi")){
+                clErsalNazar.setVisibility(View.GONE);
+                clCopy.setVisibility(View.GONE);
+            }
+        }
+
+        clErsalNazar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list_family.add(recyclerModels.get(position).getCity());
+                list_id.add(recyclerModels.get(position).getRate());
+
+                String s = "";
+                for (int i = 0; i < list_family.size(); i++) {
+                    s += list_family.get(i) + ", ";
+                }
+
+                Intent intent = new Intent(context, WriteNewMessage.class);
+                intent.putStringArrayListExtra("id",list_id);
+                intent.putStringArrayListExtra("family",list_family);
+                context.startActivity(intent);
+
+                dialog.dismiss();
+            }
+        });
+
+        clTaeid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickDialogItems(context,position,"taeid_gozaresh",imgVaziyatTaeid,noeGozaresh,recyclerModels,adapter);
+                dialog.dismiss();
+            }
+        });
+
+        clRad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickDialogItems(context,position,"rad_gozaresh",imgVaziyatTaeid,noeGozaresh,recyclerModels,adapter);
+                dialog.dismiss();
+            }
+        });
+
+        clRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                clickDialogItems(context,position,"delete",null,noeGozaresh,recyclerModels,adapter);
+
+                dialog.dismiss();
+            }
+        });
+
+        clCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (noeGozaresh != null){
+                    if (noeGozaresh.equals("darkhasti_morkhasi")){
+
+                    }
+                }else {
+                    ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(txOnvanMessageInRecivedMessage.getText().toString() + " "  + recyclerModels.get(position).getMatn());
+                    Toast.makeText(context, "کپی شد", Toast.LENGTH_SHORT).show();
+
+                }
+
+                dialog.dismiss();
+            }
+        });
+
+        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        dialog.setContentView(view);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        //line zir baraye transparent kardan hashiye haye cardview ee:
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
+
+    }
+
+
+    public void clickDialogItems(final Context context, final int position, final String method,
+                                 final ImageView imgVaziyatTaeid, final String noeGozaresh,
+                                 final ArrayList<RecyclerModel> recyclerModels, final RecyclerAdapterYouHaveKnow adapter) {
+        final Dialog dialog = new Dialog(context, R.style.customDialog2);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_dialog, null, false);
+        final TextView txCancel = view.findViewById(R.id.txCancel);
+        TextView txRemove = view.findViewById(R.id.txRemove);
+        TextView txHazfPayam = view.findViewById(R.id.txHazfPayam);
+        TextView txMatnHazfPayam = view.findViewById(R.id.txMatnHazfPayam);
+        TextView txRad = view.findViewById(R.id.txRad);
+
+        if (method.equals("rad_gozaresh")){
+            txHazfPayam.setText("رد گزارش");
+            txMatnHazfPayam.setText("آیا گزارش رد شود؟");
+            txRemove.setText("رد");
+            txRemove.setTextColor(Color.parseColor("#008000"));
+            txRad.setVisibility(View.VISIBLE);
+            txRemove.setVisibility(View.GONE);
+        }
+
+
+
+        if (method.equals("taeid_gozaresh")){
+            txHazfPayam.setText("تایید گزارش");
+            txMatnHazfPayam.setText("آیا گزارش تایید شود؟");
+            txRemove.setText("تایید");
+            txRemove.setTextColor(Color.parseColor("#228f62"));
+            txRemove.setVisibility(View.VISIBLE);
+            txRad.setVisibility(View.GONE);
+        }
+        if (recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
+            txHazfPayam.setText("تایید کار");
+            txMatnHazfPayam.setText("آیا کار تایید شود؟");
+            txRemove.setText("تایید");
+            txRemove.setTextColor(Color.parseColor("#228f62"));
+            txRemove.setVisibility(View.VISIBLE);
+            txRad.setVisibility(View.GONE);
+        }
+
+        if (method.equals("remove_class")){
+            txMatnHazfPayam.setText("آیا از حذف این کلاس اطمینان دارید؟");
+        }
+        if (method.equals("remove_jalase")) {
+            txMatnHazfPayam.setText("آیا از حذف این جلسه اطمینان دارید؟");
+        }
+
+        txCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        txRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (method.equals("delete")){
+                    LoadData.removeMessage(context,recyclerModels.get(position).getId());
+                    recyclerModels.remove(position);
+                    //adapter.notifyItemRemoved(position);
+                    //adapter.notifyItemRangeChanged(position, recyclerModels.size());
+
+                    //recyclerModels.remove(position);
+                    onItemRemoved(recyclerModels);
+
+
+                }else if (method.equals("remove_class")){
+
+                    LoadData.removeClass(context,recyclerModels.get(position).getId());
+                    recyclerModels.remove(position);
+                    /*adapter.notifyItemRemoved(position);
+                    adapter.notifyItemRangeChanged(position, recyclerModels.size());*/
+                    onItemRemoved(recyclerModels);
+
+                }else if (method.equals("remove_jalase")){
+                    LoadData.removeJalase(context,recyclerModels.get(position).getId(),
+                            recyclerModels.get(position).getCity());
+
+                    recyclerModels.remove(position);
+                    /*adapter.notifyItemRemoved(position);
+                    adapter.notifyItemRangeChanged(position, recyclerModels.size());*/
+                    onItemRemoved(recyclerModels);
+
+                }else if (noeGozaresh != null){
+                    if (noeGozaresh.equals("saat_vorod_khoroj")){
+                        LoadData.updateVaziyatGozaresh(context,recyclerModels.get(position).getId(),imgVaziyatTaeid,"تایید شده",noeGozaresh.toString());
+                    }else {
+                        LoadData.updateVaziyatGozaresh(context,recyclerModels.get(position).getId(),imgVaziyatTaeid,"تایید شده",noeGozaresh.toString());
+
+                    }
+                }else {
+                    LoadData.updateVaziyatGozaresh(context,recyclerModels.get(position).getId(),imgVaziyatTaeid,"تایید شده",noeGozaresh);
+                }
+                dialog.dismiss();
+            }
+        });
+
+        txRad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadData.updateVaziyatGozaresh(context,recyclerModels.get(position).getId(),imgVaziyatTaeid,"رد شده",noeGozaresh);
+                dialog.dismiss();
+            }
+        });
+
+        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        dialog.setContentView(view);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        //line zir baraye transparent kardan hashiye haye cardview ee:
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
     }
 
 

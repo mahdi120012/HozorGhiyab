@@ -47,9 +47,9 @@ public class ErsalVaziyatDarsiStudent extends AppCompatActivity implements View.
         tx_state = findViewById(R.id.tx_stateInSendMessageTeacher);
         webView = findViewById(R.id.webInSendMessageTeacher);
         progressBar = findViewById(R.id.progressBarInSendMessageTeacher);*/
-        imgRecivedMessage = findViewById(R.id.imgInboxMessageInRecevedPageStudent);
-        imgHome = findViewById(R.id.imgHomeInRecevedMessageTeacher);
-        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessageInTeacher);
+        imgRecivedMessage = findViewById(R.id.imgInboxMessage);
+        imgHome = findViewById(R.id.imgHome);
+        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessage);
         imgSendMessage = findViewById(R.id.imgSendMessageTeacher);
         etOnvan = findViewById(R.id.etOnvanSendTeacherMessage);
         etMatn = findViewById(R.id.etMatnSendTeacherMessage);

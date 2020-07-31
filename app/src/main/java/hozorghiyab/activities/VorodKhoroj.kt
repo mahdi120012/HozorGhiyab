@@ -18,13 +18,9 @@ import hozorghiyab.customClasses.TimeKononi
 import kotlinx.android.synthetic.main.gozaresh_kar.imgBack
 import kotlinx.android.synthetic.main.gozaresh_kar.imgListGozareshat
 import kotlinx.android.synthetic.main.gozaresh_kar.txDate
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.toolbar_button.*
 import kotlinx.android.synthetic.main.vorod_khoroj.*
-import kotlinx.android.synthetic.main.vorod_khoroj.imgHomeInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.vorod_khoroj.imgInboxMessageInRecevedPageStudent
-import kotlinx.android.synthetic.main.vorod_khoroj.imgMassenger
-import kotlinx.android.synthetic.main.vorod_khoroj.txCountNotReadMessageInTeacher
 import java.util.*
 
 
@@ -121,18 +117,19 @@ class VorodKhoroj : AppCompatActivity() {
         ha.postDelayed(object : Runnable {
             override fun run() {
 
-                LoadData.loadCountMessageNotRead(this@VorodKhoroj, txCountNotReadMessageInTeacher, username)
+                LoadData.loadCountMessageNotRead(this@VorodKhoroj, txCountNotReadMessage, username)
 
                 ha.postDelayed(this, 1000)
             }
         }, 1000)
 
-        imgInboxMessageInRecevedPageStudent.setOnClickListener{
+
+        imgInboxMessage.setOnClickListener{
             startActivity(Intent(this, InboxMessage::class.java))
             finish()
         }
 
-        imgHomeInRecevedMessageTeacher.setOnClickListener{
+        imgHome.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

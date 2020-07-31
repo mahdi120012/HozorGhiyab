@@ -43,14 +43,14 @@ public class ListHameyePayamHaBarayeAdmin extends AppCompatActivity {
         imgBackInActivityClass = findViewById(R.id.imgBackInPayamHayeErsaliStudent);
         rvListYouHaveKnow = findViewById(R.id.rvInPayamHayeErsaliStudent);
         progressBar = findViewById(R.id.progressBarInPayamHayeErsaliStudent);
-        imgRecivedMessage = findViewById(R.id.imgInboxMessageInRecevedPageStudent);
-        imgHome = findViewById(R.id.imgHomeInRecevedMessageTeacher);
-        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessageInTeacher);
+        imgRecivedMessage = findViewById(R.id.imgInboxMessage);
+        imgHome = findViewById(R.id.imgHome);
+        txCountNotReadMessage = findViewById(R.id.txCountNotReadMessage);
         clWifi = findViewById(R.id.clWifiInStudentPanel);
 
         txCountNotReadMessage.setText("0");
 
-        imgSendMessage = findViewById(R.id.imgWriteMessageInRecevedMessageTeacher);
+        imgSendMessage = findViewById(R.id.imgWriteMessage);
 
         imgSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override

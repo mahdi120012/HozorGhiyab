@@ -16,10 +16,8 @@ import hozorghiyab.customClasses.SharedPrefClass
 import kotlinx.android.synthetic.main.inbox_message.*
 import kotlinx.android.synthetic.main.inbox_message.tabLayout
 import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgHomeInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgMassenger
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgWriteMessageInRecevedMessageTeacher
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.toolbar_button.*
 import java.util.*
 
 
@@ -149,12 +147,12 @@ class InboxMessage : AppCompatActivity() {
                     rvInInboxMessageTeacher, username,"all",clWifiState)
         }
 
-        imgWriteMessageInRecevedMessageTeacher.setOnClickListener{
+        imgWriteMessage.setOnClickListener{
             startActivity(Intent(this, ListPayamHayeErsali::class.java))
             finish()
         }
 
-        imgHomeInRecevedMessageTeacher.setOnClickListener{
+        imgHome.setOnClickListener{
             finish()
         }
 

@@ -66,6 +66,46 @@ class Main_user_login_activity : AppCompatActivity() {
             //below KITKAT
         }
 
+        imgMohsenin.setOnClickListener {
+            if (imgLoginStudentText.getVisibility() == View.GONE) {
+                imgLoginStudentText.visibility = View.VISIBLE
+                imgLoginTeacherText.visibility = View.VISIBLE
+                etUsernameStudent.visibility = View.GONE
+                etPasswordStudent.visibility = View.GONE
+                imgLoginStudent.visibility = View.GONE
+                etUsernameTeacher.visibility = View.GONE
+                etPasswordTeacher.visibility = View.GONE
+                imgLoginTeacher.visibility = View.GONE
+            }else{
+                imgLoginStudentText.visibility = View.GONE
+                imgLoginTeacherText.visibility = View.GONE
+                etUsernameStudent.visibility = View.GONE
+                etPasswordStudent.visibility = View.GONE
+                imgLoginStudent.visibility = View.GONE
+                etUsernameTeacher.visibility = View.GONE
+                etPasswordTeacher.visibility = View.GONE
+                imgLoginTeacher.visibility = View.GONE
+            }
+
+        }
+        imgSetad.setOnClickListener {
+            if (imgLoginKarmandText.getVisibility() == View.GONE) {
+                imgLoginStudentText.visibility = View.GONE
+                imgLoginTeacherText.visibility = View.GONE
+                imgLoginKarmandText.visibility = View.VISIBLE
+            }else{
+                imgLoginStudentText.visibility = View.GONE
+                imgLoginTeacherText.visibility = View.GONE
+                imgLoginKarmandText.visibility = View.GONE
+                etUsernameTeacher.visibility = View.GONE
+                etPasswordTeacher.visibility = View.GONE
+                imgLoginTeacher.visibility = View.GONE
+                etUsernameKarkonan.visibility = View.GONE
+                etPasswordKarkonan.visibility = View.GONE
+                imgLoginKarkonan.visibility = View.GONE
+            }
+
+        }
 
         imgLoginStudentText.setOnClickListener(View.OnClickListener {
             if (etUsernameStudent.getVisibility() == View.GONE) {

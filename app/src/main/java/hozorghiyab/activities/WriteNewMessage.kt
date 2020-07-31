@@ -12,14 +12,9 @@ import com.hozorghiyab.R
 import hozorghiyab.cityDetail.*
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.toolbar_button.*
 import kotlinx.android.synthetic.main.write_new_message_teacher.*
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgHomeInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgInboxMessageInRecevedPageStudent
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgMassenger
-import kotlinx.android.synthetic.main.write_new_message_teacher.txCountNotReadMessageInTeacher
-
 import kotlinx.android.synthetic.main.write_new_message_teacher.txReciverFamilyInTeacher
 import java.util.*
 
@@ -60,7 +55,7 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
                     //line zir baraye load name student Va Load Tedad Payam Haye Khande Nashodast.
                     val urlAppend = "?action=load_student_count_not_read_message" +
                             "&user1=" + UrlEncoderClass.urlEncoder(username)
-                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInTeacher,username)
+                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessage,username)
                     ha.postDelayed(this, 1000)
                 }
             }, 1000)
@@ -70,7 +65,7 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
             ha.postDelayed(object : Runnable {
                 override fun run() {
 
-                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessageInTeacher, username)
+                    LoadData.loadCountMessageNotRead(this@WriteNewMessage, txCountNotReadMessage, username)
 
                     ha.postDelayed(this, 1000)
                 }
@@ -96,13 +91,13 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
                     }else{
                         if (ahkam.toString().equals("ahkam")){
                             LoadData.sendMessageTeacherInWriteNewMessage(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,ahkam.toString(),"",null)
+                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,ahkam.toString(),null)
                         }else if(sepordanKar.toString().equals("sepordan_kar")){
                             LoadData.sendMessageTeacherInWriteNewMessage(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,sepordanKar.toString(),"",null)
+                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,sepordanKar.toString(),null)
                         }else{
                             LoadData.sendMessageTeacherInWriteNewMessage(this@WriteNewMessage, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,"","",null)
+                                    username, list_id.get(i), etOnvanSendTeacherMessage, matn,clWifiState,nowTime,"",null)
                         }
 
                     }
@@ -111,12 +106,12 @@ class WriteNewMessage : AppCompatActivity(), View.OnTouchListener {
             }
         }
 
-        imgInboxMessageInRecevedPageStudent.setOnClickListener{
+        imgInboxMessage.setOnClickListener{
                 startActivity(Intent(this, InboxMessage::class.java))
                 finish()
         }
 
-        imgHomeInRecevedMessageTeacher.setOnClickListener{
+        imgHome.setOnClickListener{
             if (noe.equals("student")){
                 startActivity(Intent(this, StudentPanelMainKt::class.java))
                 finish()

@@ -83,7 +83,7 @@ public class CustomDialog {
 
 
 
-
+/*
     public static void allDialogButton (final Context context, final int position, final String method,
                      final ImageView imgVaziyatTaeid,final TextView txOnvanMessageInRecivedMessage,
                      final String noeGozaresh, final ArrayList<String>list_family,final ArrayList<String> list_id,
@@ -101,6 +101,13 @@ public class CustomDialog {
 
         if (method.equals("taeid_gozaresh")){
             clRemove.setVisibility(View.VISIBLE);
+            clTaeid.setVisibility(View.VISIBLE);
+            clRad.setVisibility(View.VISIBLE);
+        }
+
+
+
+        if (recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
             clTaeid.setVisibility(View.VISIBLE);
             clRad.setVisibility(View.VISIBLE);
         }
@@ -216,6 +223,8 @@ public class CustomDialog {
             txRemove.setVisibility(View.GONE);
         }
 
+
+
         if (method.equals("taeid_gozaresh")){
             txHazfPayam.setText("تایید گزارش");
             txMatnHazfPayam.setText("آیا گزارش تایید شود؟");
@@ -224,7 +233,14 @@ public class CustomDialog {
             txRemove.setVisibility(View.VISIBLE);
             txRad.setVisibility(View.GONE);
         }
-
+        if (recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
+            txHazfPayam.setText("تایید کار");
+            txMatnHazfPayam.setText("آیا کار تایید شود؟");
+            txRemove.setText("تایید");
+            txRemove.setTextColor(Color.parseColor("#228f62"));
+            txRemove.setVisibility(View.VISIBLE);
+            txRad.setVisibility(View.GONE);
+        }
 
         if (method.equals("remove_class")){
             txMatnHazfPayam.setText("آیا از حذف این کلاس اطمینان دارید؟");
@@ -294,5 +310,5 @@ public class CustomDialog {
         //line zir baraye transparent kardan hashiye haye cardview ee:
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show();
-    }
+    }*/
 }

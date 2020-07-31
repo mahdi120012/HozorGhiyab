@@ -24,8 +24,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="hozorghiyab.activities.TanzimJalase" />
+        <activity android:name="hozorghiyab.activities.WriteSepordanKar" />
         <activity android:name="hozorghiyab.activities.RecentSearch" />
-
         <activity android:name="hozorghiyab.activities.PvChat" />
         <activity android:name="hozorghiyab.activities.InboxMessageChat" />
         <activity android:name="hozorghiyab.activities.VorodKhoroj" />

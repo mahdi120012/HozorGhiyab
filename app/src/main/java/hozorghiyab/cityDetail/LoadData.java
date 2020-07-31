@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Timer;
 
 import hozorghiyab.MySingleton;
+import hozorghiyab.activities.HozorGhiyabMain;
 import hozorghiyab.activities.ListPayamHayeErsali;
 import hozorghiyab.cityDetail.placeComment.RecyclerAdapterPlaceComment;
 import hozorghiyab.cityDetail.placeComment.RecyclerModelPlaceComment;
@@ -58,9 +59,12 @@ import hozorghiyab.listCityACT.CityAdapter;
 
 public class LoadData {
 
-    public static final int LOAD_LIMIT = 30;
+    public static final int LOAD_LIMIT = 60;
     public static String lastId = "0";
     public static String lastId2 = "0";
+    public static String lastId3 = "0";
+    public static String lastId5 = "0";
+
     public static boolean itShouldLoadMore = true;
     public static String tedadPayamKhangeNashodeServise = "";
 
@@ -110,7 +114,7 @@ public class LoadData {
                         String position = jsonObject.getString("position");
                         float rate = Float.valueOf(jsonObject.getString("rate"));
                         String countRateAndComment = jsonObject.getString("count_rate_comment");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","",countRateAndComment,0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","",countRateAndComment,0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -234,7 +238,7 @@ public class LoadData {
                         String city = jsonObject.getString("city");
                         String position = jsonObject.getString("position");
                         //float rate = Float.valueOf(jsonObject.getString("rate"));
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1146,13 +1150,15 @@ public class LoadData {
                         itShouldLoadMore = true;
 
                         if (response.length() <= 0) {
-                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(c, "جلسه از قبل ثبت شده", Toast.LENGTH_SHORT).show();
 
                             return;
                         }
 
                         //etComment.setText("");
                         if (response.equals("send_shod")){
+                            Toast.makeText(c,"ثبت شد",Toast.LENGTH_SHORT).show();
+
                             //Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
                             //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
                             LoadData.loadMorejalase(c,rAdapterYouHaveKnow,recyclerModels,progressBar,username,className);
@@ -1268,7 +1274,7 @@ public class LoadData {
                         String classId = jsonObject.getString("class_id");
                         String tedadHazerin = jsonObject.getString("tedad_hazerin");
                         String tedadGhayebin = jsonObject.getString("tedad_ghayebin");
-                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1330,7 +1336,7 @@ public class LoadData {
                         String studentName = jsonObject.getString("std_name");
                         String className = jsonObject.getString("class_name");
                         String studentPicture = jsonObject.getString("std_picture");
-                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1601,14 +1607,14 @@ public class LoadData {
     }
 
     public static void sendGozareshKar(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
-                                          final ArrayList<RecyclerModel> recyclerModels,
-                                          final String username, String idDaryaftKonande,
-                                          String gozaresh, String natige, String date, final ConstraintLayout clWifi) {
+                                       final ArrayList<RecyclerModel> recyclerModels,
+                                       final String username, String idDaryaftKonande,
+                                       final EditText etGozaresh, final EditText etNatige, String date, final ConstraintLayout clWifi) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
         String idDaryaftKonandeEncode= UrlEncoderClass.urlEncoder(idDaryaftKonande);
-        String gozareshEncode= UrlEncoderClass.urlEncoder(gozaresh);
-        String natigeEncode= UrlEncoderClass.urlEncoder(natige);
+        String gozareshEncode= UrlEncoderClass.urlEncoder(etGozaresh.getText().toString());
+        String natigeEncode= UrlEncoderClass.urlEncoder(etNatige.getText().toString());
         String dateEncode= UrlEncoderClass.urlEncoder(date);
 
         String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_gozaresh_kar&username1=" + userNameEncode + "&id_daryaft_konande=" + idDaryaftKonandeEncode + "&gozaresh=" + gozareshEncode + "&natige=" + natigeEncode + "&date=" + dateEncode;
@@ -1633,7 +1639,8 @@ public class LoadData {
 
                         if (response.equals("send_shod")){
                             Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
-
+                            etGozaresh.setText("");
+                            etNatige.setText("");
                             Intent intent = new Intent(c, ListPayamHayeErsali.class);
                             intent.putExtra("gozaresh_kar", "gozaresh_kar");
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1660,7 +1667,7 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
-    public static void sendFirstNullMessagePvChat(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+/*    public static void sendFirstNullMessagePvChat(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
                                           final ArrayList<RecyclerModel> recyclerModels,
                                           final String username, String stdId,
                                           final EditText etOnvan, String matn, final ConstraintLayout clWifi, String nowTime,
@@ -1716,15 +1723,85 @@ public class LoadData {
         });
 
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }*/
+
+
+
+    public static void sendSepordanKar(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+                                                           final ArrayList<RecyclerModel> recyclerModels,
+                                                           final String username, String stdId,
+                                                           final EditText etKar1,final EditText etKar2,final EditText etKar3,
+                                                           final EditText etKar4,final EditText etKar5,
+                                                           final ConstraintLayout clWifi, String nowTime,
+                                                           final String noe, final RecyclerView rv) {
+
+        String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
+        String kar1Encode= UrlEncoderClass.urlEncoder(etKar1.getText().toString());
+        String kar2Encode= UrlEncoderClass.urlEncoder(etKar2.getText().toString());
+        String kar3Encode= UrlEncoderClass.urlEncoder(etKar3.getText().toString());
+        String kar4Encode= UrlEncoderClass.urlEncoder(etKar4.getText().toString());
+        String kar5Encode= UrlEncoderClass.urlEncoder(etKar5.getText().toString());
+
+        String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_sepordan_kar&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&kar1=" + kar1Encode + "&kar2=" + kar2Encode + "&kar3=" + kar3Encode + "&kar4=" + kar4Encode + "&kar5=" + kar5Encode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
+        itShouldLoadMore = false;
+        //ProgressDialogClass.showProgress(c);
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        clWifi.setVisibility(View.GONE);
+                        //ProgressDialogClass.dismissProgress();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        if (response.contains("send_shod")){
+
+                            etKar1.setText("");
+                            etKar2.setText("");
+                            etKar3.setText("");
+                            etKar4.setText("");
+                            etKar5.setText("");
+                            Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(c, ListPayamHayeErsali.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            c.startActivity(intent);
+
+                        }else {
+                            Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //ProgressDialogClass.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
-
-
 
     public static void sendMessageTeacherInWriteNewMessage(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
                                           final ArrayList<RecyclerModel> recyclerModels,
                                           final String username, String stdId,
                                           final EditText etOnvan, String matn, final ConstraintLayout clWifi, String nowTime,
-                                          final String noe, final String conversationId, final RecyclerView rv) {
+                                          final String noe, final RecyclerView rv) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
         String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
@@ -1732,9 +1809,8 @@ public class LoadData {
         String matnEncode= UrlEncoderClass.urlEncoder(matn);
         String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
-        String conversationIdEncode= UrlEncoderClass.urlEncoder(conversationId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&conversation_id=" + conversationIdEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -1781,21 +1857,23 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
-    public static void sendMessageTeacher(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
-                                          final ArrayList<RecyclerModel> recyclerModels,
-                                          final String username, String stdId,
-                                          final EditText etOnvan, String matn, final ConstraintLayout clWifi, String nowTime,
-                                          final String noe, final String conversationId, final RecyclerView rv) {
+
+    public static void sendMessageRoyeSepordanKar(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+                                                  final ArrayList<RecyclerModel> recyclerModels,
+                                                  final String username, final String stdId,
+                                                  final EditText etOnvan, String matn,
+                                                  final ConstraintLayout clWifi, String nowTime,
+                                                  final String noe, final RecyclerView rv, final String id_kar) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
-        String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
+        final String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
         String onvanEncode= UrlEncoderClass.urlEncoder(etOnvan.getText().toString());
         String matnEncode= UrlEncoderClass.urlEncoder(matn);
         String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
-        String conversationIdEncode= UrlEncoderClass.urlEncoder(conversationId);
+        String id_karEncode= UrlEncoderClass.urlEncoder(id_kar);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&conversation_id=" + conversationIdEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_roye_sepordan_kar&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&id_kar=" + id_karEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -1818,8 +1896,88 @@ public class LoadData {
                         if (response.equals("send_shod")){
 
                             etOnvan.setText("");
-                            LoadData.loadPvChatWitchLastLoadAfterSendMessage(c, rAdapterYouHaveKnow, recyclerModels,
-                                    rv, username,conversationId.toString(),clWifi);
+                            /*LoadData.loadGozareshatUnderSepordanKar(c, rAdapterYouHaveKnow, recyclerModels,
+                                    rv, username,stdId,"sepordan_kar",noe,clWifi,id_kar);*/
+
+                           /* LoadData.loadGozareshatUnderSepordanKarWidthLimit(c, rAdapterYouHaveKnow, recyclerModels,
+                                    rv, username,stdId,"sepordan_kar",noe,clWifi,id_kar);*/
+                            /*LoadData.loadPvChatWitchLastLoadAfterSendMessage(c, rAdapterYouHaveKnow, recyclerModels,
+                                    rv, username,stdIdEncode,clWifi);*/
+
+                            ArrayList<RecyclerModel> rModelsYouHaveKnow = null;
+                            RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow = null;
+
+                            LoadData.lastId2 = "0";
+                            rModelsYouHaveKnow = new ArrayList();
+
+                            rAdapterYouHaveKnow = new  RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message_dakhel_sepordan_kar", c, rAdapterYouHaveKnow, "",null,null,null,"");
+                            Recyclerview.define_recyclerviewAddStudent(c, rv, rAdapterYouHaveKnow,
+                                    rModelsYouHaveKnow,null);
+
+
+
+                            LoadData.loadGozareshatUnderSepordanKar(c, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                    rv, username,stdId,"sepordan_kar",noe,clWifi,id_kar);
+
+
+                        }else {
+                            Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //ProgressDialogClass.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void sendMessageTeacher(final Context c, final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+                                          final ArrayList<RecyclerModel> recyclerModels,
+                                          final String username, String stdId,
+                                          final EditText etOnvan, String matn,
+                                          final ConstraintLayout clWifi, String nowTime,
+                                          final String noe, final RecyclerView rv) {
+
+        String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        final String stdIdEncode= UrlEncoderClass.urlEncoder(stdId);
+        String onvanEncode= UrlEncoderClass.urlEncoder(etOnvan.getText().toString());
+        String matnEncode= UrlEncoderClass.urlEncoder(matn);
+        String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
+        itShouldLoadMore = false;
+        //ProgressDialogClass.showProgress(c);
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        clWifi.setVisibility(View.GONE);
+                        //ProgressDialogClass.dismissProgress();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        if (response.equals("send_shod")){
+
+                            etOnvan.setText("");
+                            /*LoadData.loadPvChatWitchLastLoadAfterSendMessage(c, rAdapterYouHaveKnow, recyclerModels,
+                                    rv, username,stdIdEncode,clWifi);*/
                         }else {
                             Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
                         }
@@ -2532,7 +2690,7 @@ public class LoadData {
                         lastId = jsonObject.getString("id");
                         String className = jsonObject.getString("time_takhir");
 
-                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null));
+                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null,null));
                         rAdapterYouHaveKnow.notifyDataSetChanged();
 
                         list.add(className);
@@ -2651,7 +2809,7 @@ public class LoadData {
                         lastId = jsonObject.getString("class_id");
                         String className = jsonObject.getString("class_name");
 
-                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null));
+                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null,null));
                         rAdapterYouHaveKnow.notifyDataSetChanged();
 
                         list.add(className);
@@ -3403,14 +3561,14 @@ public class LoadData {
                         vaziyatAkhlaghi = jsonObject.getString("vaziyat_akhlaghi");
                         int idTimeTakhirConvert = Integer.parseInt(idTimeTakhir);
 
-                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,studentPicture,tozihatJalase,timeTakhir,vaziyatDarsi,vaziyatAkhlaghi,idTimeTakhirConvert,null));
+                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,studentPicture,tozihatJalase,timeTakhir,vaziyatDarsi,vaziyatAkhlaghi,idTimeTakhirConvert,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                
+
                 etTozihat.setText(tozihatJalase);
                 etTaklif.setText(taklifJalase);
 
@@ -3533,7 +3691,7 @@ public class LoadData {
                         String className = jsonObject.getString("class_name");
                         String studentPicture = jsonObject.getString("std_picture");
 
-                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -3661,7 +3819,7 @@ public class LoadData {
                         String vaziyat_akhlaghi = jsonObject.getString("vaziyat_akhlaghi");
                         String taklif = jsonObject.getString("taklif");
 
-                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, classId,hazer_ya_na,vaziyat_darsi,vaziyat_akhlaghi,taklif,"",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, classId,hazer_ya_na,vaziyat_darsi,vaziyat_akhlaghi,taklif,"",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -3787,7 +3945,7 @@ public class LoadData {
                         String classId = jsonObject.getString("class_id");
                         String tedadHazerin = jsonObject.getString("tedad_hazerin");
                         String tedadGhayebin = jsonObject.getString("tedad_ghayebin");
-                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -3914,7 +4072,7 @@ public class LoadData {
                         String tedadHazeri = jsonObject.getString("tedad_hazeri");
                         String tedadGheybat = jsonObject.getString("tedad_gheybat");
                         String classId = jsonObject.getString("class_id");
-                        recyclerModels.add(new RecyclerModel(lastId, className,tedadHazeri,"",tedadGheybat,classId,teacherName,teacherId,0,null));
+                        recyclerModels.add(new RecyclerModel(lastId, className,tedadHazeri,"",tedadGheybat,classId,teacherName,teacherId,0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -3993,16 +4151,100 @@ public class LoadData {
     }
 
 
+    public static void loadGozareshatUnderSepordanKarWidthLimit(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                                      final ArrayList<RecyclerModel> recyclerModels,
+                                                      final RecyclerView recyclerView,
+                                                      final String username,final String mokhatabId, final String noe,
+                                                      final String noeUser, final ConstraintLayout clWifi,String idKar) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
+        String noeEncode = UrlEncoderClass.urlEncoder(noe);
+        String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
+        String idKarEncode = UrlEncoderClass.urlEncoder(idKar);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_gozareshat_under_sepordan_kar_with_limit&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode + "&id_kar=" + idKarEncode + "&last_id=" + lastId2;
+        itShouldLoadMore = false;
+       /* final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();*/
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                //progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId2 = jsonObject.getString("id");
+                        String onvan = jsonObject.getString("onvan");
+                        String matn = jsonObject.getString("message");
+                        String idFerestande = jsonObject.getString("id_ersal_konande");
+                        String nameFerestande = jsonObject.getString("name_ferestande");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String noe = jsonObject.getString("noe");
+                        String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
+                        String workNumber = jsonObject.getString("num");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber));
+                        recyclerAdapter.notifyDataSetChanged();
+                        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Toast.makeText(c, lastId2.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataRecivedMessageTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,noe,clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
 
     public static void loadPvChatWitchLastLoadAfterSendMessage(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                                                final ArrayList<RecyclerModel> recyclerModels,
                                                                final RecyclerView recyclerView,final String username,
-                                                               final String conversationId, final ConstraintLayout clWifi) {
+                                                               final String mokhatabId,
+                                                               final ConstraintLayout clWifi) {
 
 
         final String usernameIdEncode = UrlEncoderClass.urlEncoder(username);
-        final String conversationIdEncode = UrlEncoderClass.urlEncoder(conversationId);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat_witdh_last_load&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&conversation_id=" + conversationIdEncode + "&lastId=" + lastId;
+        final String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat_witdh_last_load&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&mokhatab_id=" + mokhatabIdEncode + "&lastId=" + lastId3;
         itShouldLoadMore = false;
         //final ProgressDialog progressDialog = new ProgressDialog(c);
         //progressDialog.setMessage("درحال بارگزاری...");
@@ -4029,7 +4271,7 @@ public class LoadData {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
 
-                        lastId = jsonObject.getString("id");
+                        lastId3 = jsonObject.getString("id");
                         String onvan = jsonObject.getString("onvan");
                         String matn = jsonObject.getString("message");
                         String idFerestande = jsonObject.getString("id_ersal_konande");
@@ -4037,9 +4279,8 @@ public class LoadData {
                         String tarikh = jsonObject.getString("tarikh");
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
-                        String conversationId = jsonObject.getString("coversation_id");
 
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,conversationId,0,vaziyatTaeid));
+                        recyclerModels.add(new RecyclerModel(lastId3,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
                         recyclerAdapter.notifyDataSetChanged();
                         recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -4061,7 +4302,7 @@ public class LoadData {
                     @Override
                     public void onClick(View v) {
                         LoadData.loadPvChat(c, recyclerAdapter, recyclerModels,
-                                recyclerView,username, conversationIdEncode,clWifi);
+                                recyclerView,username, mokhatabIdEncode,clWifi);
                     }
                 });
             }
@@ -4075,11 +4316,11 @@ public class LoadData {
     public static void loadPvChat(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                     final ArrayList<RecyclerModel> recyclerModels,
                                     final RecyclerView recyclerView,final String username,
-                                    final String conversationId, final ConstraintLayout clWifi) {
+                                    final String mokhatabId, final ConstraintLayout clWifi) {
 
         final String usernameIdEncode = UrlEncoderClass.urlEncoder(username);
-        final String conversationIdEncode = UrlEncoderClass.urlEncoder(conversationId);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&conversation_id=" + conversationIdEncode + "&lastId=" + lastId;
+        final String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&mokhatab_id=" + mokhatabIdEncode + "&lastId=" + lastId3;
         itShouldLoadMore = false;
         //final ProgressDialog progressDialog = new ProgressDialog(c);
         //progressDialog.setMessage("درحال بارگزاری...");
@@ -4106,7 +4347,7 @@ public class LoadData {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
 
-                        lastId = jsonObject.getString("id");
+                        lastId3 = jsonObject.getString("id");
                         String onvan = jsonObject.getString("onvan");
                         String matn = jsonObject.getString("message");
                         String idFerestande = jsonObject.getString("id_ersal_konande");
@@ -4114,9 +4355,8 @@ public class LoadData {
                         String tarikh = jsonObject.getString("tarikh");
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
-                        String conversationId = jsonObject.getString("coversation_id");
 
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,conversationId,0,vaziyatTaeid));
+                        recyclerModels.add(new RecyclerModel(lastId3,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
                         recyclerAdapter.notifyDataSetChanged();
                         recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -4138,7 +4378,7 @@ public class LoadData {
                     @Override
                     public void onClick(View v) {
                         LoadData.loadPvChat(c, recyclerAdapter, recyclerModels,
-                                recyclerView, username,conversationIdEncode,clWifi);
+                                recyclerView, username,mokhatabIdEncode,clWifi);
                     }
                 });
             }
@@ -4190,10 +4430,9 @@ public class LoadData {
                         String tarikh = jsonObject.getString("tarikh");
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
-                        String conversationId = jsonObject.getString("coversation_id");
                         String idMokhatab = jsonObject.getString("id_mokhatab");
 
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idMokhatab,conversationId,0,vaziyatTaeid));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idMokhatab,"",0,vaziyatTaeid,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4223,6 +4462,168 @@ public class LoadData {
 
 
     }
+
+    public static void loadGozareshatUnderSepordanKar(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                                            final ArrayList<RecyclerModel> recyclerModels,
+                                                            final RecyclerView recyclerView,
+                                                            final String username,final String mokhatabId, final String noe,
+                                                            final String noeUser, final ConstraintLayout clWifi,String idKar) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
+        String noeEncode = UrlEncoderClass.urlEncoder(noe);
+        String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
+        String idKarEncode = UrlEncoderClass.urlEncoder(idKar);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_gozareshat_under_sepordan_kar&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode + "&id_kar=" + idKarEncode;
+        itShouldLoadMore = false;
+       /* final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();*/
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                //progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId2 = jsonObject.getString("id");
+                        String onvan = jsonObject.getString("onvan");
+                        String matn = jsonObject.getString("message");
+                        String idFerestande = jsonObject.getString("id_ersal_konande");
+                        String nameFerestande = jsonObject.getString("name_ferestande");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String noe = jsonObject.getString("noe");
+                        String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
+                        String workNumber = jsonObject.getString("num");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber));
+                        recyclerAdapter.notifyDataSetChanged();
+                        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataRecivedMessageTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,noe,clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
+    public static void firstLoadDataRecivedMessageChatWorks(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                                       final ArrayList<RecyclerModel> recyclerModels,
+                                                       final RecyclerView recyclerView,
+                                                       final String username,final String mokhatabId, final String noe,
+                                                       final String noeUser, final ConstraintLayout clWifi) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
+        String noeEncode = UrlEncoderClass.urlEncoder(noe);
+        String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_recived_message_chat_tab&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        itShouldLoadMore = false;
+       /* final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();*/
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                //progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId2 = jsonObject.getString("id");
+                        String onvan = jsonObject.getString("onvan");
+                        String matn = jsonObject.getString("message");
+                        String idFerestande = jsonObject.getString("id_ersal_konande");
+                        String nameFerestande = jsonObject.getString("name_ferestande");
+                        String tarikh = jsonObject.getString("tarikh");
+                        String noe = jsonObject.getString("noe");
+                        String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
+                        String workNumber = jsonObject.getString("num");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber));
+                        recyclerAdapter.notifyDataSetChanged();
+                        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                //progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataRecivedMessageTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,noe,clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
 
     public static void firstLoadDataRecivedMessageChat(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                                           final ArrayList<RecyclerModel> recyclerModels,
@@ -4271,7 +4672,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid));
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4345,7 +4746,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
 
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4416,7 +4817,7 @@ public class LoadData {
                         String nameStudent = jsonObject.getString("family");
                         String std_picture = jsonObject.getString("picture");
 
-                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4492,9 +4893,8 @@ public class LoadData {
                         String studentId = jsonObject.getString("id");
                         String nameStudent = jsonObject.getString("family");
                         String std_picture = jsonObject.getString("picture");
-                        String conversationId = jsonObject.getString("coversation_id");
 
-                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,conversationId,"","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4533,12 +4933,12 @@ public class LoadData {
     public static void ListDarkhastMorkhasiDarBakhshPv(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                             final ArrayList<RecyclerModel> recyclerModels,
                                             final RecyclerView recyclerView,
-                                            final String mokhatabId, final ConstraintLayout clWifi,String noe) {
+                                            final String username,final String mokhatabId, final ConstraintLayout clWifi) {
 
+        String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String mokhatabIdEncode= UrlEncoderClass.urlEncoder(mokhatabId);
-        String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi_dar_bakhsh_pv&limit=" + LOAD_LIMIT + "&mokhatab_id=" + mokhatabIdEncode + "&noe=" + noeEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi_dar_bakhsh_pv&limit=" + LOAD_LIMIT + "&username=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -4572,7 +4972,8 @@ public class LoadData {
                         String elat = jsonObject.getString("elat");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null));
+                        String user_id = jsonObject.getString("user_id");
+                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,user_id,0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4586,7 +4987,7 @@ public class LoadData {
             public void onErrorResponse(VolleyError error) {
                 itShouldLoadMore = true;
                 progressDialog.dismiss();
-                clWifi.setVisibility(View.VISIBLE);
+                //clWifi.setVisibility(View.VISIBLE);
                 clWifi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -4642,7 +5043,7 @@ public class LoadData {
                         String elat = jsonObject.getString("elat");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4675,12 +5076,12 @@ public class LoadData {
     public static void ListVorodKhorojErsaliDarPv(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                              final ArrayList<RecyclerModel> recyclerModels,
                                              final RecyclerView recyclerView,
-                                             final String username, final ConstraintLayout clWifi,String noe) {
+                                             final String username,final String mokhatabId, final ConstraintLayout clWifi) {
 
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
-        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+        String mokhatabIdEncode= UrlEncoderClass.urlEncoder(mokhatabId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_vorod_khoroj_ersali_dar_pv&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode  +"&noe=" + noeEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_vorod_khoroj_ersali_dar_pv&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -4713,7 +5114,9 @@ public class LoadData {
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,"",0,null));
+                        String user_id = jsonObject.getString("user_id");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,user_id,0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4727,7 +5130,7 @@ public class LoadData {
             public void onErrorResponse(VolleyError error) {
                 itShouldLoadMore = true;
                 progressDialog.dismiss();
-                clWifi.setVisibility(View.VISIBLE);
+                //clWifi.setVisibility(View.VISIBLE);
                 clWifi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -4782,7 +5185,7 @@ public class LoadData {
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,"",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,"",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4854,7 +5257,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String readOrNo = jsonObject.getString("read_or_no");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,"",readOrNo,0,vaziyatTaeid));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,"",readOrNo,0,vaziyatTaeid,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4928,7 +5331,7 @@ public class LoadData {
                         String nameDaryaftKonandeh = jsonObject.getString("name_daryaft_konande");
                         String nameErsalKonandeh = jsonObject.getString("name_ersal_konande");
                         String tarikh = jsonObject.getString("tarikh");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameErsalKonandeh,nameDaryaftKonandeh,tarikh,"",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameErsalKonandeh,nameDaryaftKonandeh,tarikh,"",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5000,7 +5403,7 @@ public class LoadData {
                         String onvan = jsonObject.getString("onvan");
                         String matn = jsonObject.getString("message");
                         String nameFerestande = jsonObject.getString("name_daryaft_konande");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5071,7 +5474,7 @@ public class LoadData {
                         String onvan = jsonObject.getString("onvan");
                         String matn = jsonObject.getString("message");
                         String nameFerestande = jsonObject.getString("name_ferestande");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5153,7 +5556,7 @@ public class LoadData {
                         String schoolName = jsonObject.getString("school_name");
                         String teacherId = jsonObject.getString("teacher_id");
                         String tedad_student = jsonObject.getString("tedad_student");
-                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacherId,tedad_student,"","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacherId,tedad_student,"","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5264,7 +5667,7 @@ public class LoadData {
                         String className = jsonObject.getString("class_name");
                         String teacher_id = jsonObject.getString("teacher_id");
                         String tedad_student = jsonObject.getString("tedad_student");
-                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacher_id,tedad_student,"","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacher_id,tedad_student,"","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5322,7 +5725,7 @@ public class LoadData {
                         String city = jsonObject.getString("city");
                         String position = jsonObject.getString("position");
                         float rate = jsonObject.getInt("rate");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

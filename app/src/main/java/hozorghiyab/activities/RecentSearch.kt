@@ -18,11 +18,8 @@ import hozorghiyab.cityDetail.Recyclerview
 import hozorghiyab.customClasses.SharedPrefClass
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.recent_search.*
-import kotlinx.android.synthetic.main.recent_search.imgMassenger
 import kotlinx.android.synthetic.main.search_for_send_message.*
-import kotlinx.android.synthetic.main.search_for_send_message.imgHomeInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.search_for_send_message.imgInboxMessageInRecevedPageStudent
-import kotlinx.android.synthetic.main.search_for_send_message.imgWriteMessageInRecevedMessageTeacher
+import kotlinx.android.synthetic.main.toolbar_button.*
 import java.util.*
 
 
@@ -154,15 +151,15 @@ class RecentSearch : AppCompatActivity() {
         imgZarbDar.setOnClickListener {
             searchView.text = ""
         }
-        imgWriteMessageInRecevedMessageTeacher.setOnClickListener{
+        imgWriteMessage.setOnClickListener{
              startActivity(Intent(this, ListPayamHayeErsali::class.java))
         }
 
-        imgInboxMessageInRecevedPageStudent.setOnClickListener{
+        imgInboxMessage.setOnClickListener{
                 startActivity(Intent(this, InboxMessage::class.java))
                 finish()
         }
-        imgHomeInRecevedMessageTeacher.setOnClickListener{
+        imgHome.setOnClickListener{
             if (noe.equals("student")){
                 startActivity(Intent(this, StudentPanelMainKt::class.java))
                 finish()

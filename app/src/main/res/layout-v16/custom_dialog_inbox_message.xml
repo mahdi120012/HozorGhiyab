@@ -17,11 +17,7 @@
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="12dp"
-        card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent">
+        android:paddingBottom="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clErsalNazar"
@@ -32,7 +28,7 @@
             android:layout_marginRight="20dp"
             android:paddingLeft="20dp"
             android:visibility="visible"
-            card_view:layout_constraintBottom_toTopOf="@+id/clCopy"
+            card_view:layout_constraintBottom_toTopOf="@+id/clErsalGozaresh"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent">
 
@@ -60,6 +56,43 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clErsalGozaresh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="20dp"
+            android:visibility="gone"
+            card_view:layout_constraintBottom_toTopOf="@+id/clCopy"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/clErsalNazar">
+
+            <ImageView
+                android:id="@+id/imageView112"
+                android:layout_width="21dp"
+                android:layout_height="24dp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:srcCompat="@drawable/gozaresh_kar_roye_sepordan_kar" />
+
+            <TextView
+                android:id="@+id/txCopy2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/b_yekan"
+                android:text="ارسال گزارش"
+                android:textColor="#222222"
+                android:textSize="14sp"
+                card_view:layout_constraintBottom_toBottomOf="@+id/imageView112"
+                card_view:layout_constraintEnd_toStartOf="@+id/imageView112"
+                card_view:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clCopy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -69,7 +102,7 @@
             android:paddingLeft="20dp"
             card_view:layout_constraintBottom_toTopOf="@+id/clHazf"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/clErsalNazar">
+            card_view:layout_constraintTop_toBottomOf="@+id/clErsalGozaresh">
 
             <ImageView
                 android:id="@+id/imageView11"

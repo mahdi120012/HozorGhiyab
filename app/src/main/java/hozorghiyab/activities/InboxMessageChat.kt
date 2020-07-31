@@ -14,12 +14,10 @@ import hozorghiyab.cityDetail.RecyclerModel
 import hozorghiyab.cityDetail.Recyclerview
 import hozorghiyab.customClasses.SharedPrefClass
 import kotlinx.android.synthetic.main.inbox_message_chat.*
-import kotlinx.android.synthetic.main.inbox_message_chat.imgHomeInRecevedMessageTeacher
-import kotlinx.android.synthetic.main.inbox_message_chat.imgWriteMessageInRecevedMessageTeacher
 import kotlinx.android.synthetic.main.inbox_message_chat.tabLayout
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgMassenger
+
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.toolbar_button.*
 import java.util.*
 
 
@@ -50,14 +48,17 @@ class InboxMessageChat : AppCompatActivity() {
 
 
 
+        imgInboxMessage.setOnClickListener{
+            startActivity(Intent(this, InboxMessage::class.java))
+            finish()
+        }
 
-
-        imgWriteMessageInRecevedMessageTeacher.setOnClickListener{
+        imgWriteMessage.setOnClickListener{
             startActivity(Intent(this, ListPayamHayeErsali::class.java))
             finish()
         }
 
-        imgHomeInRecevedMessageTeacher.setOnClickListener{
+        imgHome.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
