@@ -33,6 +33,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
         var gozaresh_kar = if (intent.getExtras() == null) {}else{intent.extras!!.getString("gozaresh_kar")}
         var vorod_khoroj = if (intent.getExtras() == null) {}else{intent.extras!!.getString("vorod_khoroj")}
         var darkhast_morkhasi = if (intent.getExtras() == null) {}else{intent.extras!!.getString("darkhast_morkhasi")}
+        var darkhast_jalase = if (intent.getExtras() == null) {}else{intent.extras!!.getString("darkhast_jalase")}
 
 
         rModelsYouHaveKnow = ArrayList()
@@ -118,6 +119,17 @@ class ListPayamHayeErsali : AppCompatActivity() {
             textView21.setText("لیست مرخصی ها")
         }
 
+        if (darkhast_jalase.toString()!!.equals("darkhast_jalase")){
+            clGozareshat.visibility = View.VISIBLE
+            imgSendNewMessageInTeacher.visibility = View.GONE
+            imgTooTitlelbarMainAct.visibility = View.GONE
+            tabLayout.visibility = View.GONE
+            txTitle.setText("درخواست جلسه")
+            textView20.setText("ثبت جلسه")
+            textView21.setText("لیست جلسات")
+        }
+
+
         if (vorod_khoroj.toString()!!.equals("vorod_khoroj")){
             clGozareshat.visibility = View.VISIBLE
             imgSendNewMessageInTeacher.visibility = View.GONE
@@ -155,6 +167,14 @@ class ListPayamHayeErsali : AppCompatActivity() {
             LoadData.ListDarkhastMorkhasi(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
                     rvInPayamHayeErsaliTeacher, username,clWifiState,"")
 
+        }else if (darkhast_jalase.toString()!!.equals("darkhast_jalase")){
+            rModelsYouHaveKnow = ArrayList()
+            rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "darkhast_jalase", this, rAdapterYouHaveKnow, "",null,null,null,"")
+            Recyclerview.define_recyclerviewAddStudent(this, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
+                    rModelsYouHaveKnow, null)
+            LoadData.ListDarkhastJalase(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                    rvInPayamHayeErsaliTeacher, username,clWifiState,"")
+
         }else{
 
             if (vorod_khoroj.toString()!!.equals("vorod_khoroj")){
@@ -187,6 +207,9 @@ class ListPayamHayeErsali : AppCompatActivity() {
                 finish()
             }else if(darkhast_morkhasi.toString()!!.equals("darkhast_morkhasi")){
                 startActivity(Intent(this, DarkhastMorkhasi::class.java))
+                finish()
+            }else if(darkhast_jalase.toString()!!.equals("darkhast_jalase")){
+                startActivity(Intent(this, TanzimJalase::class.java))
                 finish()
             }else{
                 startActivity(Intent(this, GozareshKar::class.java))

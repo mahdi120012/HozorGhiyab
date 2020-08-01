@@ -17,6 +17,8 @@ import hozorghiyab.cityDetail.*
 import hozorghiyab.customClasses.EnglishNumberToPersian
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
+import kotlinx.android.synthetic.main.gozaresh_kar.*
+import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.tanzim_jalase.*
 import kotlinx.android.synthetic.main.tanzim_jalase.imgSend
 import kotlinx.android.synthetic.main.toolbar_button.*
@@ -43,6 +45,14 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
         for (i in list_family.indices) {
             s += list_family[i].toString() + ", "
         }*/
+
+        imgListJalasat.setOnClickListener {
+            val intent = Intent(this, ListPayamHayeErsali::class.java)
+            intent.putExtra("darkhast_jalase", "darkhast_jalase")
+            startActivity(intent)
+            finish()
+        }
+
 
         txReciver.setText("ادمین")
 
@@ -122,7 +132,8 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
             } else {
                 val timeKononi = TimeKononi()
                 var nowTime = timeKononi.persianTime
-                //LoadData.sendDarkhastMorkhasi(this, username, timeKononi.persianTime  ,tarikhPayan + " " + saatKhoroj,tarikhShoro + " " + saatVorod, elat,clWifiState)
+
+                LoadData.sendDarkhastJalase(this, username,onvan, timeKononi.persianTime  ,tarikh + " " + saat,clWifiState,etOnvan,etTarikh,etSaat)
 
 
             }

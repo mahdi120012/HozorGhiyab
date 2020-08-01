@@ -121,6 +121,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+        clJalasat.setOnClickListener{
+            startActivity(Intent(this, TanzimJalase::class.java))
+
+        }
+
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.statusbarColor2));
         }

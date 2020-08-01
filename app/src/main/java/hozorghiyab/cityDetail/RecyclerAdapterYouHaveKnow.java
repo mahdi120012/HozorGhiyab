@@ -135,6 +135,9 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         }else if (rowLayoutType.contains("darkhast_morkhasi")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_darkhast_morkhasi, parent, false));
 
+        }else if (rowLayoutType.contains("darkhast_jalase")) {
+            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_darkhast_jalase, parent, false));
+
         }else if (rowLayoutType.contains("all_users_message")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recive_all_message, parent, false));
 
@@ -328,6 +331,74 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                       }
                   });*/
               }
+
+          }else if (rowLayoutType.contains("darkhast_jalase")){
+
+              if (clShowErsal != null) {
+                  clShowErsal.setVisibility(View.GONE);
+              }
+              holder.txTarikhDarkhast.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getOnvan()));
+              holder.txAzTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn()));
+              //holder.txTaTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPicture()));
+              holder.txElat.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getCity()));
+
+              if (recyclerModels.get(position).getPosition() != null){
+                  if (recyclerModels.get(position).getPosition().equals("تایید شده")){
+                      holder.imgVaziyatTaeidMorkhasi.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_shode));
+                  }else if(recyclerModels.get(position).getPosition().equals("رد شده")){
+                      holder.imgVaziyatTaeidMorkhasi.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_nashode));
+                  }
+              }
+
+              if (dateAsli4.equals(recyclerModels.get(position).getOnvan())) {
+                  holder.cardViewTxDate4.setVisibility(View.GONE);
+              }else {
+                  holder.txDateAsli4.setText(recyclerModels.get(position).getOnvan());
+                  dateAsli4 = recyclerModels.get(position).getOnvan();
+              }
+
+              String username = SharedPrefClass.getUserId(c,"user");
+
+              if (recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain4.setCardBackgroundColor(Color.parseColor("#efffde"));
+                  holder.txTarikhDarkhast.setTextColor(Color.parseColor("#70b15c"));
+
+              }else if (!recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain4.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                  holder.txTarikhDarkhast.setTextColor(Color.parseColor("#a1aab3"));
+              }
+
+              String noe = SharedPrefClass.getUserId(c,"noe");
+
+              if (!noe.equals("admin")){
+                  holder.txAzYaBeMorkhasi.setVisibility(View.GONE);
+                  holder.txNameFerestandeMorkhasi.setVisibility(View.GONE);
+              }
+              holder.txNameFerestandeMorkhasi.setText(recyclerModels.get(position).getRate());
+
+              if (noe.equals("admin")){
+                  holder.clDarkhastMorkhasi.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+
+                          allDialogButton(c,position,"taeid_gozaresh",
+                                  holder.imgVaziyatTaeidMorkhasi,holder.txOnvanMessageInRecivedMessage,
+                                  "darkhasti_morkhasi",list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
+                      }
+                  });
+              }else {
+                  /*holder.clDarkhastMorkhasi.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+                          CustomDialog.allDialogButton(c,position,"",holder.imgVaziyatTaeidMorkhasi,
+                                  holder.txOnvanMessageInRecivedMessage,"darkhasti_morkhasi",
+                                  list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
+                      }
+                  });*/
+              }
+
+
 
           }else if (rowLayoutType.contains("darkhast_morkhasi")){
 
@@ -1733,7 +1804,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         ConstraintLayout clTaeid = view.findViewById(R.id.clTaeid);
         ConstraintLayout clRad = view.findViewById(R.id.clRad);
         ConstraintLayout clErsalGozaresh = view.findViewById(R.id.clErsalGozaresh);
-
+        TextView txErsalGozaresh = view.findViewById(R.id.txErsalGozaresh);
 
         if (method.equals("taeid_gozaresh")){
             clRemove.setVisibility(View.VISIBLE);
@@ -1747,6 +1818,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                 clTaeid.setVisibility(View.VISIBLE);
                 clRad.setVisibility(View.VISIBLE);
                 clErsalGozaresh.setVisibility(View.VISIBLE);
+                txErsalGozaresh.setText("گزارشات");
             }else {
                 clRemove.setVisibility(View.GONE);
                 clTaeid.setVisibility(View.VISIBLE);

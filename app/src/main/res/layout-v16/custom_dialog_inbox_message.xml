@@ -77,7 +77,7 @@
                 card_view:srcCompat="@drawable/gozaresh_kar_roye_sepordan_kar" />
 
             <TextView
-                android:id="@+id/txCopy2"
+                android:id="@+id/txErsalGozaresh"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"

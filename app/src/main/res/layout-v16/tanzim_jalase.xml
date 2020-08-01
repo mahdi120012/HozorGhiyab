@@ -42,6 +42,19 @@
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="16dp">
 
+            <TextView
+                android:id="@+id/txReciverFamilyInTeacher9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:text="درخواست جلسه"
+                android:textSize="20sp"
+                app:fontFamily="@font/broya"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBackInSendMessageTeacher"
+                app:layout_constraintEnd_toStartOf="@+id/imgBackInSendMessageTeacher"
+                app:layout_constraintTop_toTopOf="@+id/imgBackInSendMessageTeacher" />
+
             <ImageView
                 android:id="@+id/imgTooTitlelbarMainActf"
                 android:layout_width="40dp"
@@ -54,17 +67,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/imgtolbariconmessage" />
-
-            <ImageView
-                android:id="@+id/imgTooTitlelbarMainAct"
-                android:layout_width="75dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/imgBackInSendMessageTeacher"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/send_messagea" />
 
             <ImageView
                 android:id="@+id/imgBackInSendMessageTeacher"
@@ -100,8 +102,36 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgSabtJalase"
+                android:layout_width="0dp"
+                android:layout_height="47dp"
+
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgListJalasat"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gozaresh_selected" />
+
+            <ImageView
+                android:id="@+id/imgListJalasat"
+                android:layout_width="0dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgSabtJalase"
+                app:layout_constraintEnd_toStartOf="@+id/imgSabtJalase"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgSabtJalase"
+                app:srcCompat="@drawable/gozaresh" />
 
             <ImageView
                 android:id="@+id/imgTooTitlelbarMainAct2"
@@ -111,8 +141,34 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgSabtJalase"
                 app:srcCompat="@drawable/reciver_messagetxt" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/b_yekan"
+                android:text="لیست جلسات"
+                android:textColor="#666667"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgListJalasat"
+                app:layout_constraintEnd_toEndOf="@+id/imgListJalasat"
+                app:layout_constraintStart_toStartOf="@+id/imgListJalasat"
+                app:layout_constraintTop_toTopOf="@+id/imgListJalasat" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/b_yekan"
+                android:text="ثبت جلسه"
+                android:textColor="#666667"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgSabtJalase"
+                app:layout_constraintEnd_toEndOf="@+id/imgSabtJalase"
+                app:layout_constraintStart_toStartOf="@+id/imgSabtJalase"
+                app:layout_constraintTop_toTopOf="@+id/imgSabtJalase" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -129,7 +185,9 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp">
+                    android:layout_marginBottom="5dp"
+                    android:layoutDirection="ltr"
+                    android:textDirection="ltr">
 
                     <EditText
                         android:id="@+id/etOnvan"
