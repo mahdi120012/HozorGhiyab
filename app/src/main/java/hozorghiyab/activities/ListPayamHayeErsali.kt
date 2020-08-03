@@ -173,7 +173,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             Recyclerview.define_recyclerviewAddStudent(this, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                     rModelsYouHaveKnow, null)
             LoadData.ListDarkhastJalase(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                    rvInPayamHayeErsaliTeacher, username,clWifiState,"")
+                    rvInPayamHayeErsaliTeacher, username,clWifiState,noe)
 
         }else{
 

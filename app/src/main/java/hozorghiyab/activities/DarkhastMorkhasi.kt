@@ -6,26 +6,40 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MotionEvent
+import android.view.View
 import android.view.View.OnTouchListener
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.hozorghiyab.R
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import hozorghiyab.cityDetail.LoadData
+import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
+import hozorghiyab.cityDetail.RecyclerModel
 import hozorghiyab.customClasses.EnglishNumberToPersian
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
 import kotlinx.android.synthetic.main.darkhast_morkhasi.*
+import kotlinx.android.synthetic.main.darkhast_morkhasi.spinner
+import kotlinx.android.synthetic.main.gozaresh_kar.*
 import kotlinx.android.synthetic.main.gozaresh_kar.imgBack
 import kotlinx.android.synthetic.main.gozaresh_kar.imgListGozareshat
 import kotlinx.android.synthetic.main.gozaresh_kar.imgSend
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.toolbar_button.*
+import java.util.ArrayList
 
 
 class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog.OnTimeSetListener {
+    private var rAdapterYouHaveKnow: RecyclerAdapterYouHaveKnow? = null
+    private var rModelsYouHaveKnow: ArrayList<RecyclerModel>? = null
 
+    private  var rAdapterSpinner: RecyclerAdapterYouHaveKnow? = null
+    private  var rModelsSpinner: ArrayList<RecyclerModel>? = null
+    var selectedItem: String? = null
+    var selectedItemAdminId: String? = null
     var saatShoroYaPayan = ""
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +53,33 @@ class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             finish()
         }
         var username = SharedPrefClass.getUserId(this,"user")
+
+
+
+        //Adapter zir faghat baraye zakhireh ye class ide baraye spinner be kar mire:
+        rModelsSpinner = ArrayList<RecyclerModel>()
+        rAdapterSpinner = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "add_jalase", this, rAdapterYouHaveKnow,
+                selectedItem, null, null, null, "")
+
+        val list: List<String> = ArrayList()
+
+        val spinnerArrayAdapter = ArrayAdapter(
+                this, R.layout.spinnter_dropdown_custom, list)
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnter_dropdown_custom)
+        spinner.adapter = spinnerArrayAdapter
+
+
+        //خط زیر برای لود ادمین هاست
+        LoadData.loadAdminList(this, list, spinnerArrayAdapter, username, rAdapterSpinner, rModelsSpinner)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                selectedItem = adapterView.getItemAtPosition(i).toString()
+                selectedItemAdminId = rModelsSpinner!![i].id
+            }
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
 
 
         etTarikhShoro.setOnTouchListener(OnTouchListener { v, event ->

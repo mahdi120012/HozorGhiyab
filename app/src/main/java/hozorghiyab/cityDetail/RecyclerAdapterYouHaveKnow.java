@@ -383,7 +383,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
                           allDialogButton(c,position,"taeid_gozaresh",
                                   holder.imgVaziyatTaeidMorkhasi,holder.txOnvanMessageInRecivedMessage,
-                                  "darkhasti_morkhasi",list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+                                  "darkhast_jalase",list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
 
                       }
                   });
@@ -1852,7 +1852,10 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             }else if (noeGozaresh.equals("darkhasti_morkhasi")){
                 clErsalNazar.setVisibility(View.GONE);
                 clCopy.setVisibility(View.GONE);
-            }
+            }else if (noeGozaresh.equals("darkhast_jalase")){
+            clErsalNazar.setVisibility(View.GONE);
+            clCopy.setVisibility(View.GONE);
+        }
         }
 
         clErsalNazar.setOnClickListener(new View.OnClickListener() {
@@ -1906,7 +1909,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             @Override
             public void onClick(View v) {
                 if (noeGozaresh != null){
-                    if (noeGozaresh.equals("darkhasti_morkhasi")){
+                    if (noeGozaresh.equals("darkhasti_morkhasi") || noeGozaresh.equals("darkhast_jalase")){
 
                     }
                 }else {
@@ -1992,6 +1995,14 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
             public void onClick(View v) {
 
                 if (method.equals("delete")){
+                    if (noeGozaresh != null){
+                         if (noeGozaresh.equals("darkhast_jalase")){
+
+                             LoadData.removDarkhastJalase(context,recyclerModels.get(position).getId());
+                             recyclerModels.remove(position);
+                             onItemRemoved(recyclerModels);
+                         }
+                    }
                     LoadData.removeMessage(context,recyclerModels.get(position).getId());
                     recyclerModels.remove(position);
                     //adapter.notifyItemRemoved(position);
@@ -2021,7 +2032,9 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                 }else if (noeGozaresh != null){
                     if (noeGozaresh.equals("saat_vorod_khoroj")){
                         LoadData.updateVaziyatGozaresh(context,recyclerModels.get(position).getId(),imgVaziyatTaeid,"تایید شده",noeGozaresh.toString());
-                    }else {
+                    }else if (noeGozaresh.equals("darkhasti_morkhasi")){
+                        LoadData.updateVaziyatGozaresh(context,recyclerModels.get(position).getId(),imgVaziyatTaeid,"تایید شده",noeGozaresh.toString());
+                    }else if (noeGozaresh.equals("darkhast_jalase")){
                         LoadData.updateVaziyatGozaresh(context,recyclerModels.get(position).getId(),imgVaziyatTaeid,"تایید شده",noeGozaresh.toString());
 
                     }

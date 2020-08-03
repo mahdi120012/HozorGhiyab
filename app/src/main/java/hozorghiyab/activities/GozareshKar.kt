@@ -3,20 +3,21 @@ package hozorghiyab.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
 import hozorghiyab.cityDetail.RecyclerModel
+import hozorghiyab.cityDetail.Recyclerview
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
 import kotlinx.android.synthetic.main.gozaresh_kar.*
-import kotlinx.android.synthetic.main.gozaresh_kar.imgBack
-import kotlinx.android.synthetic.main.gozaresh_kar.imgListGozareshat
-import kotlinx.android.synthetic.main.gozaresh_kar.imgSend
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.toolbar_button.*
 import java.util.*
@@ -24,9 +25,13 @@ import java.util.*
 
 class GozareshKar : AppCompatActivity(), View.OnTouchListener {
 
-    private val rAdapterYouHaveKnow: RecyclerAdapterYouHaveKnow? = null
-    private val rModelsYouHaveKnow: ArrayList<RecyclerModel>? = null
+    private var rAdapterYouHaveKnow: RecyclerAdapterYouHaveKnow? = null
+    private var rModelsYouHaveKnow: ArrayList<RecyclerModel>? = null
 
+    private  var rAdapterSpinner:RecyclerAdapterYouHaveKnow? = null
+    private  var rModelsSpinner: ArrayList<RecyclerModel>? = null
+    var selectedItem: String? = null
+    var selectedItemAdminId: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.gozaresh_kar)
@@ -46,6 +51,33 @@ class GozareshKar : AppCompatActivity(), View.OnTouchListener {
 
         var username = SharedPrefClass.getUserId(this,"user")
 
+
+        //Adapter zir faghat baraye zakhireh ye class ide baraye spinner be kar mire:
+        rModelsSpinner = ArrayList<RecyclerModel>()
+        rAdapterSpinner = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "add_jalase", this, rAdapterYouHaveKnow,
+                selectedItem, null, null, null, "")
+
+        val list: List<String> = ArrayList()
+
+        val spinnerArrayAdapter = ArrayAdapter(
+                this, R.layout.spinnter_dropdown_custom, list)
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnter_dropdown_custom)
+        spinner.adapter = spinnerArrayAdapter
+
+
+        //خط زیر برای لود ادمین هاست
+        LoadData.loadAdminList(this, list, spinnerArrayAdapter, username, rAdapterSpinner, rModelsSpinner)
+
+        spinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                selectedItem = adapterView.getItemAtPosition(i).toString()
+                selectedItemAdminId = rModelsSpinner!![i].id
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+
         imgSend.setOnClickListener{
             val gozaresh: String = etGozaresh.getText().toString()
             //val natige: String = etNatige.getText().toString()
@@ -55,7 +87,7 @@ class GozareshKar : AppCompatActivity(), View.OnTouchListener {
                 Toast.makeText(this, "لطفا همه فیلد ها را تکمیل نمایید", Toast.LENGTH_SHORT).show()
             } else {
                 LoadData.sendGozareshKar(this, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                        username, "100010", etGozaresh, etNatige,date,clWifiState)
+                        username, selectedItemAdminId, etGozaresh, etNatige,date,clWifiState)
             }
         }
 

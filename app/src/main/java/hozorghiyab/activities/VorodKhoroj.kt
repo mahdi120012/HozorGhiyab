@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
@@ -28,6 +31,13 @@ class VorodKhoroj : AppCompatActivity() {
 
     public var saatVorodGhabli = ""
     public var saatKhorojGhabli = ""
+    private var rAdapterYouHaveKnow: RecyclerAdapterYouHaveKnow? = null
+    private var rModelsYouHaveKnow: ArrayList<RecyclerModel>? = null
+
+    private  var rAdapterSpinner:RecyclerAdapterYouHaveKnow? = null
+    private  var rModelsSpinner: ArrayList<RecyclerModel>? = null
+    var selectedItem: String? = null
+    var selectedItemAdminId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +51,37 @@ class VorodKhoroj : AppCompatActivity() {
         }
         var username = SharedPrefClass.getUserId(this,"user")
         val timeKononi = TimeKononi()
+
+
+        //Adapter zir faghat baraye zakhireh ye class ide baraye spinner be kar mire:
+        rModelsSpinner = ArrayList<RecyclerModel>()
+        rAdapterSpinner = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "add_jalase", this, rAdapterYouHaveKnow,
+                selectedItem, null, null, null, "")
+
+        val list: List<String> = ArrayList()
+
+        val spinnerArrayAdapter = ArrayAdapter(
+                this, R.layout.spinnter_dropdown_custom, list)
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnter_dropdown_custom)
+        spinner.adapter = spinnerArrayAdapter
+
+
+        //خط زیر برای لود ادمین هاست
+        LoadData.loadAdminList(this, list, spinnerArrayAdapter, username, rAdapterSpinner, rModelsSpinner)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                selectedItem = adapterView.getItemAtPosition(i).toString()
+                selectedItemAdminId = rModelsSpinner!![i].id
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+
+
+
+
 
         LoadData.loadVorodKhorojGhabli(this,etSaatVorod,etSaatKhoroj,timeKononi.persianTime,username,clWifiState)
 

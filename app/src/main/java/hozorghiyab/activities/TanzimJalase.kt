@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.view.MotionEvent
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.hozorghiyab.R
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
@@ -17,7 +19,6 @@ import hozorghiyab.cityDetail.*
 import hozorghiyab.customClasses.EnglishNumberToPersian
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
-import kotlinx.android.synthetic.main.gozaresh_kar.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.tanzim_jalase.*
 import kotlinx.android.synthetic.main.tanzim_jalase.imgSend
@@ -29,12 +30,18 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
 
     private val rAdapterYouHaveKnow: RecyclerAdapterYouHaveKnow? = null
     private val rModelsYouHaveKnow: ArrayList<RecyclerModel>? = null
+    private  var rAdapterSpinner:RecyclerAdapterYouHaveKnow? = null
+    private  var rModelsSpinner: ArrayList<RecyclerModel>? = null
+    var selectedItem: String? = null
+    var selectedItemAdminId: String? = null
+
     var rvListYouHaveKnow: RecyclerView? = null
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tanzim_jalase)
-
+        var username = SharedPrefClass.getUserId(this,"user")
+        var noe = SharedPrefClass.getUserId(this,"noe")
         /*val intent = intent
         val list_id = intent.getStringArrayListExtra("id")
         val list_family = intent.getStringArrayListExtra("family")
@@ -54,7 +61,32 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
         }
 
 
-        txReciver.setText("ادمین")
+
+        //Adapter zir faghat baraye zakhireh ye class ide baraye spinner be kar mire:
+        rModelsSpinner = ArrayList<RecyclerModel>()
+        rAdapterSpinner = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "add_jalase", this, rAdapterYouHaveKnow,
+                selectedItem, null, null, null, "")
+
+        val list: List<String> = ArrayList()
+
+        val spinnerArrayAdapter = ArrayAdapter(
+                this, R.layout.spinnter_dropdown_custom, list)
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinnter_dropdown_custom)
+        spinner.adapter = spinnerArrayAdapter
+
+
+        //خط زیر برای لود ادمین هاست
+        LoadData.loadAdminList(this, list, spinnerArrayAdapter, username, rAdapterSpinner, rModelsSpinner)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                selectedItem = adapterView.getItemAtPosition(i).toString()
+                selectedItemAdminId = rModelsSpinner!![i].id
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
 
         etTarikh.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
@@ -90,8 +122,7 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
         })
 
 
-        var username = SharedPrefClass.getUserId(this,"user")
-        var noe = SharedPrefClass.getUserId(this,"noe")
+
 
         if (noe.equals("student")){
 

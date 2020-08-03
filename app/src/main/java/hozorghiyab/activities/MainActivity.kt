@@ -27,16 +27,13 @@ import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_activity.clAhkam
 import kotlinx.android.synthetic.main.main_activity.clJalasat
 import kotlinx.android.synthetic.main.main_activity.clVorodKhoroj
+import kotlinx.android.synthetic.main.main_activity.imgNavigationViewInToolbarTop
 import kotlinx.android.synthetic.main.main_activity.imgTeacherPicture
 import kotlinx.android.synthetic.main.main_activity.txTecherNameInMainActivity
 import kotlinx.android.synthetic.main.main_activity_karkonan.*
 import kotlinx.android.synthetic.main.navigation_main.*
 import kotlinx.android.synthetic.main.net_connection.*
-import kotlinx.android.synthetic.main.search_for_send_message.*
 import kotlinx.android.synthetic.main.toolbar_button.*
-import kotlinx.android.synthetic.main.toolbar_button.imgMassenger
-import kotlinx.android.synthetic.main.toolbar_top.*
-import kotlinx.android.synthetic.main.toolbar_top.imgNavigationViewInToolbarTop
 
 
 class MainActivity : AppCompatActivity() {

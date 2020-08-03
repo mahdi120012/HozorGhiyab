@@ -117,12 +117,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
-                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="3dp"
                 app:cardPreventCornerOverlap="false"
-                app:layout_constraintTop_toBottomOf="@+id/txReciverFamilyInTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/imgTooTitlelbarMainAct2"
                 tools:layout_editor_absoluteX="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -260,16 +259,22 @@
                 android:id="@+id/txReciverFamilyInTeacher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="11dp"
-                android:layout_marginLeft="11dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="11dp"
                 android:layout_marginRight="11dp"
                 android:text="ادمین"
                 android:textSize="22sp"
+                android:visibility="gone"
                 app:fontFamily="@font/broya"
                 app:layout_constraintEnd_toStartOf="@+id/imgTooTitlelbarMainAct2"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgTooTitlelbarMainAct2" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="213dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/imgTooTitlelbarMainAct2"
+                app:layout_constraintEnd_toStartOf="@+id/imgTooTitlelbarMainAct2"
                 app:layout_constraintTop_toTopOf="@+id/imgTooTitlelbarMainAct2" />
 
             <ImageView

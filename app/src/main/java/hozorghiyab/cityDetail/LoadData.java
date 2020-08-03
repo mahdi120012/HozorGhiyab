@@ -670,6 +670,60 @@ public class LoadData {
 
     }
 
+    public static void removDarkhastJalase(final Context c, String id) {
+
+        String darkhastJalaseIdEncode = UrlEncoderClass.urlEncoder(id);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=remove_darkhast_jalase&darkhast_jalase_id=" + darkhastJalaseIdEncode;
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        progressDialog.dismiss();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        //etComment.setText("");
+                        if (response.equals("send_shod")){
+                            //Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+                            //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
+                            //LoadData.loadMoreStudent(c,rAdapterYouHaveKnow,recyclerModels,progressBar);
+                            Toast.makeText(c, "حذف شد", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            Toast.makeText(c, "حذف نشد", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+
+
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);;
+
+
+    }
+
 
     public static void removeJalase(final Context c, String jalase_id,String classId) {
 
@@ -2833,6 +2887,74 @@ public class LoadData {
 
     }
 
+
+    public static void loadAdminList(final Context c, final List<String> list,
+                                     final ArrayAdapter<String> spinnerArrayAdapter,
+                                     String username,
+                                     final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
+                                     final ArrayList<RecyclerModel> rModelsYouHaveKnow) {
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_admin_list&limit=" + LOAD_LIMIT + "&user1=" + username;
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String family = jsonObject.getString("family");
+
+                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,family, "","","","","","",0,null,null));
+                        rAdapterYouHaveKnow.notifyDataSetChanged();
+
+                        list.add(family);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                spinnerArrayAdapter.notifyDataSetChanged();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+
+
+    }
+
+
+
+
+
+
+
+
     public static void loadClassList(final Context c, final List<String> list,
                                      final ArrayAdapter<String> spinnerArrayAdapter,
                                      final ImageView img_refresh, final WebView webView,
@@ -3014,6 +3136,11 @@ public class LoadData {
 
             }else if(noeGozaresh.equals("darkhasti_morkhasi")){
                 url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_morkhasi&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+
+            }else if (noeGozaresh.equals("darkhast_jalase")){
+                Toast.makeText(c, idGozaresh, Toast.LENGTH_SHORT).show();
+                url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_darkhast_jalase&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+
             }
 
         }else {
@@ -5106,7 +5233,7 @@ public class LoadData {
                         String elat = jsonObject.getString("elat");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
