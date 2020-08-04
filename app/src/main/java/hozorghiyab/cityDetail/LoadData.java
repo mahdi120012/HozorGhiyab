@@ -1542,15 +1542,19 @@ public class LoadData {
     public static void sendDarkhastJalase(final Context c, final String username, String onvan,
                                           String tarikhDarkhast,
                                           String tarikhShoro, final ConstraintLayout clWifi, final EditText etOnvan,
-                                          final EditText etTarikh, final EditText etSaat) {
+                                          final EditText etTarikh, final EditText etSaat, final EditText etMokhatabin,
+                                          final EditText etMakan, final EditText etTozihat) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
         String onvanEncode= UrlEncoderClass.urlEncoder(onvan);
         String tarikhDarkhastEncode= UrlEncoderClass.urlEncoder(tarikhDarkhast);
         String tarikhShoroEncode= UrlEncoderClass.urlEncoder(tarikhShoro);
 
+        String mokhatabinEncode= UrlEncoderClass.urlEncoder(etMokhatabin.getText().toString());
+        String makanEncode= UrlEncoderClass.urlEncoder(etMakan.getText().toString());
+        String tozihatEncode= UrlEncoderClass.urlEncoder(etTozihat.getText().toString());
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_darkhast_jalase&username1=" + userNameEncode + "&tarikh_darkhast=" + tarikhDarkhastEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&onvan=" + onvanEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_darkhast_jalase&username1=" + userNameEncode + "&tarikh_darkhast=" + tarikhDarkhastEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&onvan=" + onvanEncode + "&mokhatabin=" + mokhatabinEncode + "&makan=" + makanEncode + "&tozihat=" + tozihatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1575,6 +1579,10 @@ public class LoadData {
                             etOnvan.setText("");
                             etTarikh.setText("");
                             etSaat.setText("");
+
+                            etMokhatabin.setText("");
+                            etMakan.setText("");
+                            etTozihat.setText("");
 
                            Intent intent = new Intent(c, ListPayamHayeErsali.class);
                            intent.putExtra("darkhast_jalase", "darkhast_jalase");

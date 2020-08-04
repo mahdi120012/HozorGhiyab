@@ -156,6 +156,9 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
             val tarikh: String = etTarikh.getText().toString()
             val saat: String = etSaat.getText().toString()
 
+            val mokhatabin: String = etMokhatabin.getText().toString()
+            val makan: String = etMakan.getText().toString()
+            val tozihat: String = etTozihat.getText().toString()
 
             if (onvan.length <= 0 || onvan == null || tarikh.length <= 0 || tarikh == null ||
                     saat.length <= 0 || saat == null) {
@@ -164,7 +167,7 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
                 val timeKononi = TimeKononi()
                 var nowTime = timeKononi.persianTime
 
-                LoadData.sendDarkhastJalase(this, username,onvan, timeKononi.persianTime  ,tarikh + " " + saat,clWifiState,etOnvan,etTarikh,etSaat)
+                LoadData.sendDarkhastJalase(this, username,onvan, timeKononi.persianTime  ,tarikh + " " + saat,clWifiState,etOnvan,etTarikh,etSaat,etMokhatabin,etMakan,etTozihat)
 
 
             }

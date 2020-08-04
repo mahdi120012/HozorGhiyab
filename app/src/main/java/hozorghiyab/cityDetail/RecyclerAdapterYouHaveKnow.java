@@ -820,7 +820,8 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
               if(recyclerModels.get(position).getPosition().toString().contains("sepordan_kar")){
 
-                  final SpannableStringBuilder sb = new SpannableStringBuilder("کار " + recyclerModels.get(position).getWorkNumber() + " :" +recyclerModels.get(position).getOnvan());
+                  String persianWorkNumber = new EnglishNumberToPersian().convert(recyclerModels.get(position).getWorkNumber());
+                  final SpannableStringBuilder sb = new SpannableStringBuilder("کار " + persianWorkNumber + " :" +recyclerModels.get(position).getOnvan());
 
                   final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
                   sb.setSpan(bss, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold

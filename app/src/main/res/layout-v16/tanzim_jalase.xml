@@ -158,6 +158,17 @@
                 app:layout_constraintTop_toTopOf="@+id/imgListJalasat" />
 
             <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/b_yekan"
+                android:textColor="#666667"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+            <TextView
                 android:id="@+id/textView33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -171,8 +182,9 @@
                 app:layout_constraintTop_toTopOf="@+id/imgSabtJalase" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="420dp"
                 android:layout_margin="8dp"
                 android:orientation="horizontal"
                 app:cardCornerRadius="12dp"
@@ -240,6 +252,78 @@
                         app:layout_constraintTop_toTopOf="@+id/textView31"></EditText>
 
                     <EditText
+                        android:id="@+id/etMokhatabin"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:background="@xml/edittext_style"
+                        android:backgroundTint="#edecec"
+                        android:ems="10"
+                        android:fontFamily="@font/b_yekan"
+                        android:gravity="right"
+                        android:hint="مخاطبین"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLength="1000"
+                        android:paddingLeft="6dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="6dp"
+                        android:textColorHighlight="#90b1e8"
+                        android:textCursorDrawable="@xml/color_cursor"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView36"
+                        app:layout_constraintEnd_toEndOf="@+id/etSaat"
+                        app:layout_constraintStart_toStartOf="@+id/etSaat"
+                        app:layout_constraintTop_toTopOf="@+id/textView36"></EditText>
+
+                    <EditText
+                        android:id="@+id/etTozihat"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:background="@xml/edittext_style"
+                        android:backgroundTint="#edecec"
+                        android:ems="10"
+                        android:fontFamily="@font/b_yekan"
+                        android:gravity="right"
+                        android:hint="توضیحات"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLength="1000"
+                        android:paddingLeft="6dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="6dp"
+                        android:textColorHighlight="#90b1e8"
+                        android:textCursorDrawable="@xml/color_cursor"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView34"
+                        app:layout_constraintEnd_toEndOf="@+id/etMakan"
+                        app:layout_constraintStart_toStartOf="@+id/etMakan"
+                        app:layout_constraintTop_toTopOf="@+id/textView34"></EditText>
+
+                    <EditText
+                        android:id="@+id/etMakan"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:background="@xml/edittext_style"
+                        android:backgroundTint="#edecec"
+                        android:ems="10"
+                        android:fontFamily="@font/b_yekan"
+                        android:gravity="right"
+                        android:hint="مکان"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLength="1000"
+                        android:paddingLeft="6dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="6dp"
+                        android:textColorHighlight="#90b1e8"
+                        android:textCursorDrawable="@xml/color_cursor"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView35"
+                        app:layout_constraintEnd_toEndOf="@+id/etMokhatabin"
+                        app:layout_constraintStart_toStartOf="@+id/etMokhatabin"
+                        app:layout_constraintTop_toTopOf="@+id/textView35"></EditText>
+
+                    <EditText
                         android:id="@+id/etTarikh"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -267,11 +351,11 @@
                         android:id="@+id/imgSend"
                         android:layout_width="120dp"
                         android:layout_height="50dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="4dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/etSaat"
+                        app:layout_constraintHorizontal_bias="0.497"
                         app:layout_constraintStart_toStartOf="@+id/etSaat"
-                        app:layout_constraintTop_toBottomOf="@+id/etSaat"
                         app:srcCompat="@drawable/sendtxt" />
 
                     <TextView
@@ -308,6 +392,42 @@
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView30"
                         app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <TextView
+                        android:id="@+id/textView34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/rmedium"
+                        android:text="توضیحات"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView35"
+                        app:layout_constraintStart_toStartOf="@+id/textView35"
+                        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+                    <TextView
+                        android:id="@+id/textView35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/rmedium"
+                        android:text="مکان"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView36"
+                        app:layout_constraintStart_toStartOf="@+id/textView36"
+                        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+                    <TextView
+                        android:id="@+id/textView36"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/rmedium"
+                        android:text="مخاطبین"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView31"
+                        app:layout_constraintStart_toStartOf="@+id/textView31"
+                        app:layout_constraintTop_toBottomOf="@+id/textView31" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

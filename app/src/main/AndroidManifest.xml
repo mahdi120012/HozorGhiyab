@@ -14,8 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-
         <activity android:name="hozorghiyab.user_info.Main_user_login_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="hozorghiyab.activities.TanzimJalase" />
         <activity android:name="hozorghiyab.activities.WriteSepordanKar" />
         <activity android:name="hozorghiyab.activities.RecentSearch" />
@@ -53,7 +50,6 @@
         <activity
             android:name="hozorghiyab.activities.MainActivity"
             android:label="UserRegister" />
-
         <activity android:name="hozorghiyab.activities.Setting" />
         <activity
             android:name="hozorghiyab.listCityACT.ListcityACT"
@@ -69,7 +65,6 @@
             android:name="hozorghiyab.activities.DarkhastMorkhasi"
             android:label="@string/title_activity_kharid_eshterak_act" />
 
-
         <receiver
             android:name="hozorghiyab.activities.Restarter"
             android:enabled="true"
@@ -79,12 +74,9 @@
             </intent-filter>
         </receiver>
 
-
         <service
             android:name="hozorghiyab.activities.YourService"
-            android:enabled="true" >
-        </service>
-
+            android:enabled="true"></service>
         <!--
    //توجه مهم: خط زیر وقتی که میخواهیم از والی استفاده کنیم در اندروید 9 حتما باید باشه وگرنه
         برنامه اررور میده
