@@ -103,6 +103,7 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
             false
         })
 
+
         etSaat.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
 

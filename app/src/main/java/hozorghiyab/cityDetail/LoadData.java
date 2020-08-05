@@ -5237,11 +5237,17 @@ public class LoadData {
                         lastId2 = jsonObject.getString("id");
                         String tarikh = jsonObject.getString("tarikh");
                         String saat_vorod = jsonObject.getString("saat_vorod");
-                        String saat_khoroj = jsonObject.getString("saat_khoroj");
+                        //String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String elat = jsonObject.getString("elat");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null,null));
+                        String num = jsonObject.getString("num");
+
+                        String mokhatabin = jsonObject.getString("mokhatabin");
+                        String makan = jsonObject.getString("makan");
+                        String tozihat = jsonObject.getString("tozihat");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,mokhatabin,elat,vaziyat_taeid,family,num,0,makan,tozihat));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

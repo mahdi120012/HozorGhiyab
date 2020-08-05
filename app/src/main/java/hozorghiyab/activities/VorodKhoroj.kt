@@ -1,17 +1,14 @@
 package hozorghiyab.activities
 
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.appcompat.app.AppCompatActivity
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
@@ -112,7 +109,15 @@ class VorodKhoroj : AppCompatActivity() {
                 val minute: Int = mcurrentTime.get(Calendar.MINUTE)
                 val mTimePicker: TimePickerDialog
                 mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+
+
                     etSaatKhoroj.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
+                    val intSaatVorod: Int =  selectedHour.toInt()
+                    //val intSaatKhoroj: Int =  etSaatKhoroj.text.toString().toInt()
+
+                    //val sum: Int = intSaatKhoroj - intSaatVorod
+                    Toast.makeText(this,intSaatVorod.toString() ,Toast.LENGTH_SHORT).show()
+
                 }, hour, minute, true) //Yes 24 hour time
                 mTimePicker.setTitle("انتخاب زمان")
                 mTimePicker.show()

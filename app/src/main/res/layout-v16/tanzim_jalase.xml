@@ -49,8 +49,9 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginRight="12dp"
                 android:text="درخواست جلسه"
-                android:textSize="20sp"
-                app:fontFamily="@font/broya"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                app:fontFamily="@font/rmedium"
                 app:layout_constraintBottom_toBottomOf="@+id/imgBackInSendMessageTeacher"
                 app:layout_constraintEnd_toStartOf="@+id/imgBackInSendMessageTeacher"
                 app:layout_constraintTop_toTopOf="@+id/imgBackInSendMessageTeacher" />
@@ -66,12 +67,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/imgtolbariconmessage" />
+                app:srcCompat="@drawable/jalasat" />
 
             <ImageView
                 android:id="@+id/imgBackInSendMessageTeacher"
                 android:layout_width="50dp"
-                android:layout_height="20dp"
+                android:layout_height="26dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginRight="6dp"
@@ -81,7 +82,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/ic_back_24dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

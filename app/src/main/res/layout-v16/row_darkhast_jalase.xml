@@ -166,40 +166,109 @@
                 android:id="@+id/imgIconDate4"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage3"
-                card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage3"
+                android:layout_marginTop="2dp"
+                card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage10"
+                card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage10"
                 card_view:srcCompat="@drawable/date_icon" />
 
             <TextView
-                android:id="@+id/txOnvanRecevedMessage3"
+                android:id="@+id/txMatnMozo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/rmedium"
                 android:padding="3dp"
                 android:text="موضوع:"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                card_view:layout_constraintEnd_toEndOf="@+id/imgIconDate"
-                card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage4" />
+                card_view:layout_constraintEnd_toEndOf="@+id/txAzYaBe"
+                card_view:layout_constraintTop_toBottomOf="@+id/txNameFrestande" />
 
             <TextView
                 android:id="@+id/txOnvanRecevedMessage4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
                 android:fontFamily="@font/rmedium"
                 android:padding="3dp"
                 android:text="در تاریخ:"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                card_view:layout_constraintBottom_toBottomOf="@+id/imgIconDate"
-                card_view:layout_constraintEnd_toStartOf="@+id/imgIconDate"
-                card_view:layout_constraintTop_toTopOf="@+id/imgIconDate" />
+                card_view:layout_constraintEnd_toEndOf="@+id/txMatnMozo"
+                card_view:layout_constraintTop_toBottomOf="@+id/txMatnMozo" />
+
+            <TextView
+                android:id="@+id/txOnvanRecevedMessage8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="مخاطبین:"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage4"
+                card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage4" />
+
+            <TextView
+                android:id="@+id/txMokhatabin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="مخاطب یک"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                card_view:layout_constraintBottom_toBottomOf="@+id/txOnvanRecevedMessage8"
+                card_view:layout_constraintEnd_toStartOf="@+id/txOnvanRecevedMessage8"
+                card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage4" />
+
+            <TextView
+                android:id="@+id/txOnvanRecevedMessage9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="مکان:"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage8"
+                card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage8" />
+
+            <TextView
+                android:id="@+id/txMakan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="مکان یک"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                card_view:layout_constraintBottom_toBottomOf="@+id/txOnvanRecevedMessage9"
+                card_view:layout_constraintEnd_toStartOf="@+id/txOnvanRecevedMessage9"
+                card_view:layout_constraintTop_toTopOf="@+id/txOnvanRecevedMessage9" />
+
+            <TextView
+                android:id="@+id/txOnvanRecevedMessage10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="توضیحات:"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage9"
+                card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage9" />
+
+            <TextView
+                android:id="@+id/txTozihat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:padding="3dp"
+                android:text="توضیحات یک"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                card_view:layout_constraintBottom_toBottomOf="@+id/txOnvanRecevedMessage10"
+                card_view:layout_constraintEnd_toStartOf="@+id/txOnvanRecevedMessage10"
+                card_view:layout_constraintTop_toTopOf="@+id/txOnvanRecevedMessage10" />
 
             <TextView
                 android:id="@+id/txOnvanRecevedMessage6"
@@ -217,22 +286,20 @@
                 card_view:layout_constraintTop_toTopOf="@+id/imgIconDate4" />
 
             <TextView
-                android:id="@+id/txElat"
+                android:id="@+id/txMozo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
-                android:layout_marginRight="2dp"
                 android:fontFamily="@font/rmedium"
                 android:padding="3dp"
-                android:text="علت"
+                android:text="موضوع یک"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                card_view:layout_constraintBottom_toBottomOf="@+id/txOnvanRecevedMessage3"
-                card_view:layout_constraintEnd_toStartOf="@+id/txOnvanRecevedMessage3"
-                card_view:layout_constraintTop_toTopOf="@+id/txOnvanRecevedMessage3" />
+                card_view:layout_constraintBottom_toBottomOf="@+id/txMatnMozo"
+                card_view:layout_constraintEnd_toStartOf="@+id/txMatnMozo"
+                card_view:layout_constraintTop_toTopOf="@+id/txMatnMozo" />
 
             <TextView
-                android:id="@+id/txDateAz"
+                android:id="@+id/txDarTarikh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView2"
@@ -261,17 +328,6 @@
                 card_view:layout_constraintBottom_toBottomOf="@+id/txOnvanRecevedMessage6"
                 card_view:layout_constraintEnd_toStartOf="@+id/txOnvanRecevedMessage6"
                 card_view:layout_constraintTop_toTopOf="@+id/txOnvanRecevedMessage6" />
-
-            <ImageView
-                android:id="@+id/imgIconDate"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintTop_toBottomOf="@+id/txAzYaBe"
-                card_view:srcCompat="@drawable/date_icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

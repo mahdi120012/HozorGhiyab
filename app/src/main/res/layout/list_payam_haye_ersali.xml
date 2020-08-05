@@ -106,7 +106,7 @@
             <ImageView
                 android:id="@+id/imgBackInPayamHayeErsaliTeacher"
                 android:layout_width="50dp"
-                android:layout_height="20dp"
+                android:layout_height="26dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginRight="6dp"
@@ -116,7 +116,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/ic_back_24dp" />
 
             <TextView
                 android:id="@+id/txTitle"
@@ -124,9 +124,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:fontFamily="@font/broya"
+                android:fontFamily="@font/rmedium"
                 android:text=""
-                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imgTooTitlelbarMainAct"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -337,10 +337,24 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               if (clShowErsal != null) {
                   clShowErsal.setVisibility(View.GONE);
               }
+
+              final SpannableStringBuilder sb = new SpannableStringBuilder("جلسه" + new EnglishNumberToPersian().convert(recyclerModels.get(position).getCountRateAndComment()) + " موضوع:");
+
+              final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+              sb.setSpan(bss, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+
+
+              holder.txMatnMozo.setText(sb);
               holder.txTarikhDarkhast.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getOnvan()));
-              holder.txAzTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn()));
+              holder.txDarTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn()));
               //holder.txTaTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPicture()));
-              holder.txElat.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getCity()));
+              holder.txMozo.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getCity()));
+              holder.txMokhatabin.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPicture()));
+
+              holder.txMokhatabin.setText(recyclerModels.get(position).getPicture());
+              holder.txMakan.setText(recyclerModels.get(position).getVaziyat());
+              holder.txTozihat.setText(recyclerModels.get(position).getWorkNumber());
 
               if (recyclerModels.get(position).getPosition() != null){
                   if (recyclerModels.get(position).getPosition().equals("تایید شده")){
@@ -1385,8 +1399,10 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txUserNameInSearchInTeacher,txVaziyatDarsiVaAkhlaghi,txTaklif,txDate,
                  txDate2,txSaatVorod,txSaatKhoroj,txDate1,txTarikhDarkhast,txAzTarikh,txTaTarikh,txElat,
                  txAzYaBe,txAzYaBeVorodKhoroj,txNameFrestandeVorodKhoroj,txAzYaBeMorkhasi,
-                 txNameFerestandeMorkhasi,txNameFerestande,txMatnPayam,txDateInChat,txMokhaffafName
-                ,txNameFerestandeInSearch,txDateAsli,txDateAsli2,txDateAsli3,txDateAsli4;
+                 txNameFerestandeMorkhasi,txNameFerestande,txMatnPayam,txDateInChat,txMokhaffafName,
+                 txNameFerestandeInSearch,txDateAsli,txDateAsli2,txDateAsli3,txDateAsli4,
+                 txMozo,txDarTarikh,txMokhatabin,txMakan,txTozihat,txMatnMozo;
+
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
         imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgAddStudent,imgVaziyatTaeid,
         imgHozorGhiyab,imgUserPictureForSendMessageInTeacher,imgReadOrNo,imgVaziyatTaeidVorodKhoroj,
@@ -1400,6 +1416,14 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         LinearLayout linerLayoutInRowChat;
         MyViewHolder(View view) {
             super(view);
+
+            txMatnMozo = itemView.findViewById(R.id.txMatnMozo);
+            txMozo = itemView.findViewById(R.id.txMozo);
+            txDarTarikh = itemView.findViewById(R.id.txDarTarikh);
+            txMokhatabin = itemView.findViewById(R.id.txMokhatabin);
+            txMakan = itemView.findViewById(R.id.txMakan);
+            txTozihat = itemView.findViewById(R.id.txTozihat);
+
             cardMain4 = itemView.findViewById(R.id.cardMain);
             cardMain3 = itemView.findViewById(R.id.cardMain);
             cardMain2 = itemView.findViewById(R.id.cardMain);
