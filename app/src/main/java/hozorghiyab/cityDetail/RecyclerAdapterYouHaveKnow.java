@@ -268,10 +268,25 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               if (clShowErsal != null) {
                   clShowErsal.setVisibility(View.GONE);
               }
+
+
               holder.txDate2.setText(recyclerModels.get(position).getOnvan());
               holder.txSaatVorod.setText(recyclerModels.get(position).getMatn());
               holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
               holder.txNameFrestandeVorodKhoroj.setText(recyclerModels.get(position).getRate());
+
+              String saatVorodString = recyclerModels.get(position).getMatn();
+              //String saatKhorojString = recyclerModels.get(position).getPicture();
+
+              //saatVorodString = saatVorodString.replace(":",".") ;
+              //saatKhorojString = saatKhorojString.replace(":",".");
+              new EnglishNumberToPersian().convertToEnglish("۱۱۱.۱۱۱۱");
+              double saatVorod = Double.parseDouble(new EnglishNumberToPersian().convertToEnglish(recyclerModels.get(position).getMatn()));
+              //double saatKhoroj = Double.parseDouble("۱.۱");
+
+              Toast.makeText(c,String.valueOf(saatVorod).toString() ,Toast.LENGTH_LONG).show();
+
+
 
               if (recyclerModels.get(position).getCity() != null){
                   if (recyclerModels.get(position).getCity().equals("تایید شده")){

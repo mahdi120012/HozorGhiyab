@@ -109,14 +109,11 @@ class VorodKhoroj : AppCompatActivity() {
                 val minute: Int = mcurrentTime.get(Calendar.MINUTE)
                 val mTimePicker: TimePickerDialog
                 mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-
+                    //--select * from tavasi message WHERE id = ();
 
                     etSaatKhoroj.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
-                    val intSaatVorod: Int =  selectedHour.toInt()
-                    //val intSaatKhoroj: Int =  etSaatKhoroj.text.toString().toInt()
-
-                    //val sum: Int = intSaatKhoroj - intSaatVorod
-                    Toast.makeText(this,intSaatVorod.toString() ,Toast.LENGTH_SHORT).show()
+                    //val s = etSaatKhoroj.text.toString().substring(0, 2)
+                    //Toast.makeText(this,s.toString() ,Toast.LENGTH_SHORT).show()
 
                 }, hour, minute, true) //Yes 24 hour time
                 mTimePicker.setTitle("انتخاب زمان")

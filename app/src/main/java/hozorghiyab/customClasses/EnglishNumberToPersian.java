@@ -15,7 +15,7 @@ public class EnglishNumberToPersian {
                 .replace("7","۷")
                 .replace("8","۸")
                 .replace("9","۹")
-                .replace("10","۱۰");
+                .replace("10","۱۰").replace(":",":");
         return matn;
     }
 

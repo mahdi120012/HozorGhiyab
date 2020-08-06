@@ -177,6 +177,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
 
         }else{
 
+
             if (vorod_khoroj.toString()!!.equals("vorod_khoroj")){
                 rModelsYouHaveKnow = ArrayList()
                 rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "vorod_khoroj", this, rAdapterYouHaveKnow, "",null,null,null,"")
