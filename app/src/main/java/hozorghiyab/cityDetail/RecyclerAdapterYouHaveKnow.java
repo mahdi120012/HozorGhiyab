@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -274,19 +275,21 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.txSaatVorod.setText(recyclerModels.get(position).getMatn());
               holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
               holder.txNameFrestandeVorodKhoroj.setText(recyclerModels.get(position).getRate());
+              double saatVorod = 0.0;
+              double saatKhoroj = 0.0;
 
-              String saatVorodString = recyclerModels.get(position).getMatn();
-              //String saatKhorojString = recyclerModels.get(position).getPicture();
+              saatVorod = Double.parseDouble(recyclerModels.get(position).getCountRateAndComment().replace(":","."));
 
-              //saatVorodString = saatVorodString.replace(":",".") ;
-              //saatKhorojString = saatKhorojString.replace(":",".");
-              new EnglishNumberToPersian().convertToEnglish("۱۱۱.۱۱۱۱");
-              double saatVorod = Double.parseDouble(new EnglishNumberToPersian().convertToEnglish(recyclerModels.get(position).getMatn()));
-              //double saatKhoroj = Double.parseDouble("۱.۱");
+              if (recyclerModels.get(position).getVaziyat() == ""){
 
-              Toast.makeText(c,String.valueOf(saatVorod).toString() ,Toast.LENGTH_LONG).show();
+              }else {
+                  saatKhoroj = Double.parseDouble((recyclerModels.get(position).getVaziyat().replace(":",".")));
+              }
 
+              DecimalFormat formater = new DecimalFormat("00.00");
 
+              holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(formater.format(saatKhoroj-saatVorod)));
+              //Toast.makeText(c, formater.format(saatKhoroj-saatVorod) ,Toast.LENGTH_LONG).show();
 
               if (recyclerModels.get(position).getCity() != null){
                   if (recyclerModels.get(position).getCity().equals("تایید شده")){
@@ -1416,7 +1419,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txAzYaBe,txAzYaBeVorodKhoroj,txNameFrestandeVorodKhoroj,txAzYaBeMorkhasi,
                  txNameFerestandeMorkhasi,txNameFerestande,txMatnPayam,txDateInChat,txMokhaffafName,
                  txNameFerestandeInSearch,txDateAsli,txDateAsli2,txDateAsli3,txDateAsli4,
-                 txMozo,txDarTarikh,txMokhatabin,txMakan,txTozihat,txMatnMozo;
+                 txMozo,txDarTarikh,txMokhatabin,txMakan,txTozihat,txMatnMozo,txMajmoKarkard;
 
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
         imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgAddStudent,imgVaziyatTaeid,
@@ -1431,6 +1434,8 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         LinearLayout linerLayoutInRowChat;
         MyViewHolder(View view) {
             super(view);
+
+            txMajmoKarkard = itemView.findViewById(R.id.txMajmoKarkard);
 
             txMatnMozo = itemView.findViewById(R.id.txMatnMozo);
             txMozo = itemView.findViewById(R.id.txMozo);

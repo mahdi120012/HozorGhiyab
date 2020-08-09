@@ -23,7 +23,7 @@ public class EnglishNumberToPersian {
 
         String matn;
         matn = text.replace("۰","0")
-                .replace("۱","1")
+                .replace("١","1")
                 .replace("۲","2")
                 .replace("۳","3")
                 .replace("۴","4")
@@ -32,7 +32,7 @@ public class EnglishNumberToPersian {
                 .replace("۷","7")
                 .replace("۸","8")
                 .replace("۹","9")
-                .replace("۱۰","10");
+                .replace("۱۰","10").replace(":",":");
         return matn;
     }
 }

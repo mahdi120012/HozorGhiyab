@@ -179,6 +179,18 @@
                     card_view:layout_constraintTop_toBottomOf="@+id/txAzYaBe" />
 
                 <TextView
+                    android:id="@+id/txOnvanRecevedMessage7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rmedium"
+                    android:padding="3dp"
+                    android:text="مجموع کارکرد:"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage3"
+                    card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage3" />
+
+                <TextView
                     android:id="@+id/txSaatVorod"
 
                     android:layout_width="wrap_content"
@@ -192,6 +204,21 @@
                     card_view:layout_constraintBottom_toBottomOf="@+id/txOnvanRecevedMessage3"
                     card_view:layout_constraintEnd_toStartOf="@+id/txOnvanRecevedMessage3"
                     card_view:layout_constraintTop_toTopOf="@+id/txOnvanRecevedMessage3" />
+
+                <TextView
+                    android:id="@+id/txMajmoKarkard"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rmedium"
+                    android:padding="3dp"
+                    android:text="00:00"
+                    android:textColor="#000000"
+                    android:textDirection="ltr"
+                    android:textSize="15sp"
+                    card_view:layout_constraintBottom_toBottomOf="@+id/txOnvanRecevedMessage7"
+                    card_view:layout_constraintEnd_toStartOf="@+id/txOnvanRecevedMessage7"
+                    card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage3" />
 
                 <TextView
                     android:id="@+id/txOnvanRecevedMessage5"
@@ -228,7 +255,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView2"
-                    android:layout_marginTop="12dp"
                     android:layout_marginBottom="6dp"
                     android:padding="3dp"
                     android:text="##/##/##"
@@ -237,8 +263,8 @@
                     android:textSize="14sp"
                     card_view:fontFamily="@font/broya"
                     card_view:layout_constraintBottom_toBottomOf="parent"
-                    card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage3"
-                    card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage3" />
+                    card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage7"
+                    card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage7" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
