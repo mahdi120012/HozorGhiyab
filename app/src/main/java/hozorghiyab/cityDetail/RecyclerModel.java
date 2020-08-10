@@ -12,8 +12,11 @@ public class RecyclerModel {
     private int idTimeTakhir;
     private String vaziyat;
     private String workNumber;
+    private String saatVorodEnglish;
+    private String saatKhorojEnglish;
     public RecyclerModel(String id,String onvan,String matn ,String picture, String city,
-                         String position,String rate,String countRateAndComment,int idTimeTakhir,String vaziyat,String workNumber) {
+                         String position,String rate,String countRateAndComment,int idTimeTakhir,String vaziyat,String workNumber
+            ,String saatVorodEnglish, String saatKhorojEnglish) {
         this.id = id;
         this.onvan = onvan;
         this.matn = matn;
@@ -25,7 +28,10 @@ public class RecyclerModel {
         this.idTimeTakhir = idTimeTakhir;
         this.vaziyat = vaziyat;
         this.workNumber = workNumber;
+        this.saatVorodEnglish = saatVorodEnglish;
+        this.saatKhorojEnglish = saatKhorojEnglish;
     }
+
 
 
 
@@ -76,5 +82,13 @@ public class RecyclerModel {
 
     public String getWorkNumber() {
         return workNumber;
+    }
+
+    public String getSaatVorodEnglish() {
+        return saatVorodEnglish;
+    }
+
+    public String getSaatKhorojEnglish() {
+        return saatKhorojEnglish;
     }
 }

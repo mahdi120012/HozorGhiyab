@@ -38,6 +38,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import com.hozorghiyab.R;
 
@@ -275,22 +276,41 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.txSaatVorod.setText(recyclerModels.get(position).getMatn());
               holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
               holder.txNameFrestandeVorodKhoroj.setText(recyclerModels.get(position).getRate());
+
+
               double saatVorod = 0.0;
               double saatKhoroj = 0.0;
 
-              saatVorod = Double.parseDouble(recyclerModels.get(position).getCountRateAndComment().replace(":","."));
+              String faghatsaatVorodHoure = recyclerModels.get(position).getSaatVorodEnglish().substring(0,2);
+              String faghatsaatVorodMinute = recyclerModels.get(position).getSaatVorodEnglish().substring(3,5);
 
-              if (recyclerModels.get(position).getVaziyat() == ""){
+              String faghatsaatKhorojHoure = recyclerModels.get(position).getSaatKhorojEnglish().substring(0,2);
+              String faghatsaatKhorojMinute = recyclerModels.get(position).getSaatKhorojEnglish ().substring(3,5);
+
+
+              //Toast.makeText(c, faghatsaatVorodHoure + "::"+ faghatsaatVorodMinute ,Toast.LENGTH_LONG).show();
+
+
+              long houseMilisecond = TimeUnit.HOURS.toMillis(Integer.parseInt(faghatsaatVorodHoure));
+              //Toast.makeText(c, String.valueOf(houseMilisecond) ,Toast.LENGTH_LONG).show();
+
+              long minuteMilisecond = TimeUnit.HOURS.toMillis(12);
+
+
+
+              saatVorod = Double.parseDouble(recyclerModels.get(position).getSaatVorodEnglish().replace(":","."));
+
+              if (recyclerModels.get(position).getSaatKhorojEnglish().isEmpty() || recyclerModels.get(position).getSaatKhorojEnglish() == ""){
 
               }else {
-                  saatKhoroj = Double.parseDouble((recyclerModels.get(position).getVaziyat().replace(":",".")));
+                  saatKhoroj = Double.parseDouble((recyclerModels.get(position).getSaatKhorojEnglish().replace(":",".")));
               }
 
               DecimalFormat formater = new DecimalFormat("00.00");
 
               holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(formater.format(saatKhoroj-saatVorod)));
-              //Toast.makeText(c, formater.format(saatKhoroj-saatVorod) ,Toast.LENGTH_LONG).show();
 
+              //Toast.makeText(c, formater.format(saatKhoroj-saatVorod) ,Toast.LENGTH_LONG).show();
               if (recyclerModels.get(position).getCity() != null){
                   if (recyclerModels.get(position).getCity().equals("تایید شده")){
                       holder.imgVaziyatTaeidVorodKhoroj.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_shode));

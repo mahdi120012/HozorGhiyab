@@ -114,7 +114,7 @@ public class LoadData {
                         String position = jsonObject.getString("position");
                         float rate = Float.valueOf(jsonObject.getString("rate"));
                         String countRateAndComment = jsonObject.getString("count_rate_comment");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","",countRateAndComment,0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","",countRateAndComment,0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -238,7 +238,7 @@ public class LoadData {
                         String city = jsonObject.getString("city");
                         String position = jsonObject.getString("position");
                         //float rate = Float.valueOf(jsonObject.getString("rate"));
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1328,7 +1328,7 @@ public class LoadData {
                         String classId = jsonObject.getString("class_id");
                         String tedadHazerin = jsonObject.getString("tedad_hazerin");
                         String tedadGhayebin = jsonObject.getString("tedad_ghayebin");
-                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1390,7 +1390,7 @@ public class LoadData {
                         String studentName = jsonObject.getString("std_name");
                         String className = jsonObject.getString("class_name");
                         String studentPicture = jsonObject.getString("std_picture");
-                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -2815,7 +2815,7 @@ public class LoadData {
                         lastId = jsonObject.getString("id");
                         String className = jsonObject.getString("time_takhir");
 
-                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null,null));
+                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null,null,null,null));
                         rAdapterYouHaveKnow.notifyDataSetChanged();
 
                         list.add(className);
@@ -2931,7 +2931,7 @@ public class LoadData {
                         lastId = jsonObject.getString("id");
                         String family = jsonObject.getString("family");
 
-                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,family, "","","","","","",0,null,null));
+                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,family, "","","","","","",0,null,null,null,null));
                         rAdapterYouHaveKnow.notifyDataSetChanged();
 
                         list.add(family);
@@ -3002,7 +3002,7 @@ public class LoadData {
                         lastId = jsonObject.getString("class_id");
                         String className = jsonObject.getString("class_name");
 
-                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null,null));
+                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,className, "","","","","","",0,null,null,null,null));
                         rAdapterYouHaveKnow.notifyDataSetChanged();
 
                         list.add(className);
@@ -3759,7 +3759,7 @@ public class LoadData {
                         vaziyatAkhlaghi = jsonObject.getString("vaziyat_akhlaghi");
                         int idTimeTakhirConvert = Integer.parseInt(idTimeTakhir);
 
-                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,studentPicture,tozihatJalase,timeTakhir,vaziyatDarsi,vaziyatAkhlaghi,idTimeTakhirConvert,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,studentPicture,tozihatJalase,timeTakhir,vaziyatDarsi,vaziyatAkhlaghi,idTimeTakhirConvert,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -3889,7 +3889,7 @@ public class LoadData {
                         String className = jsonObject.getString("class_name");
                         String studentPicture = jsonObject.getString("std_picture");
 
-                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentName, className,studentPicture,"","","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4017,7 +4017,7 @@ public class LoadData {
                         String vaziyat_akhlaghi = jsonObject.getString("vaziyat_akhlaghi");
                         String taklif = jsonObject.getString("taklif");
 
-                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, classId,hazer_ya_na,vaziyat_darsi,vaziyat_akhlaghi,taklif,"",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, classId,hazer_ya_na,vaziyat_darsi,vaziyat_akhlaghi,taklif,"",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4143,7 +4143,7 @@ public class LoadData {
                         String classId = jsonObject.getString("class_id");
                         String tedadHazerin = jsonObject.getString("tedad_hazerin");
                         String tedadGhayebin = jsonObject.getString("tedad_ghayebin");
-                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,jalaseName, className,"",classId,tedadHazerin,"",tedadGhayebin,0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4270,7 +4270,7 @@ public class LoadData {
                         String tedadHazeri = jsonObject.getString("tedad_hazeri");
                         String tedadGheybat = jsonObject.getString("tedad_gheybat");
                         String classId = jsonObject.getString("class_id");
-                        recyclerModels.add(new RecyclerModel(lastId, className,tedadHazeri,"",tedadGheybat,classId,teacherName,teacherId,0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId, className,tedadHazeri,"",tedadGheybat,classId,teacherName,teacherId,0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4398,7 +4398,7 @@ public class LoadData {
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
                         String workNumber = jsonObject.getString("num");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber));
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber,null,null));
                         recyclerAdapter.notifyDataSetChanged();
                         recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -4478,7 +4478,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
 
-                        recyclerModels.add(new RecyclerModel(lastId3,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
+                        recyclerModels.add(new RecyclerModel(lastId3,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
                         recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -4554,7 +4554,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
 
-                        recyclerModels.add(new RecyclerModel(lastId3,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
+                        recyclerModels.add(new RecyclerModel(lastId3,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
                         //recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -4630,7 +4630,7 @@ public class LoadData {
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
                         String idMokhatab = jsonObject.getString("id_mokhatab");
 
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idMokhatab,"",0,vaziyatTaeid,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idMokhatab,"",0,vaziyatTaeid,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4710,7 +4710,7 @@ public class LoadData {
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
                         String workNumber = jsonObject.getString("num");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber));
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber,null,null));
                         recyclerAdapter.notifyDataSetChanged();
                         recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -4790,7 +4790,7 @@ public class LoadData {
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
                         String workNumber = jsonObject.getString("num");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber));
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber,null,null));
                         recyclerAdapter.notifyDataSetChanged();
                         //recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -4870,7 +4870,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -4944,7 +4944,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
 
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5015,7 +5015,7 @@ public class LoadData {
                         String nameStudent = jsonObject.getString("family");
                         String std_picture = jsonObject.getString("picture");
 
-                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5092,7 +5092,7 @@ public class LoadData {
                         String nameStudent = jsonObject.getString("family");
                         String std_picture = jsonObject.getString("picture");
 
-                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,studentId, nameStudent,std_picture,"","","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5171,7 +5171,7 @@ public class LoadData {
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
                         String user_id = jsonObject.getString("user_id");
-                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,user_id,0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,user_id,0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5247,7 +5247,7 @@ public class LoadData {
                         String makan = jsonObject.getString("makan");
                         String tozihat = jsonObject.getString("tozihat");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,mokhatabin,elat,vaziyat_taeid,family,num,0,makan,tozihat));
+                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,mokhatabin,elat,vaziyat_taeid,family,num,0,makan,tozihat,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5317,7 +5317,7 @@ public class LoadData {
                         String elat = jsonObject.getString("elat");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,"",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5390,7 +5390,7 @@ public class LoadData {
                         String family = jsonObject.getString("family");
                         String user_id = jsonObject.getString("user_id");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,user_id,0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,user_id,0,null,null,saat_vorod,saat_khoroj));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5459,7 +5459,7 @@ public class LoadData {
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,saat_vorod,0,saat_khoroj,null));
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,"noe",family,saat_vorod,0,null,null,saat_vorod,saat_khoroj));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5531,7 +5531,7 @@ public class LoadData {
                         String noe = jsonObject.getString("noe");
                         String readOrNo = jsonObject.getString("read_or_no");
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,"",readOrNo,0,vaziyatTaeid,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,tarikh,nameFerestande,noe,"",readOrNo,0,vaziyatTaeid,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5605,7 +5605,7 @@ public class LoadData {
                         String nameDaryaftKonandeh = jsonObject.getString("name_daryaft_konande");
                         String nameErsalKonandeh = jsonObject.getString("name_ersal_konande");
                         String tarikh = jsonObject.getString("tarikh");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameErsalKonandeh,nameDaryaftKonandeh,tarikh,"",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameErsalKonandeh,nameDaryaftKonandeh,tarikh,"",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5677,7 +5677,7 @@ public class LoadData {
                         String onvan = jsonObject.getString("onvan");
                         String matn = jsonObject.getString("message");
                         String nameFerestande = jsonObject.getString("name_daryaft_konande");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5748,7 +5748,7 @@ public class LoadData {
                         String onvan = jsonObject.getString("onvan");
                         String matn = jsonObject.getString("message");
                         String nameFerestande = jsonObject.getString("name_ferestande");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,"",nameFerestande,"","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5830,7 +5830,7 @@ public class LoadData {
                         String schoolName = jsonObject.getString("school_name");
                         String teacherId = jsonObject.getString("teacher_id");
                         String tedad_student = jsonObject.getString("tedad_student");
-                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacherId,tedad_student,"","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacherId,tedad_student,"","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5941,7 +5941,7 @@ public class LoadData {
                         String className = jsonObject.getString("class_name");
                         String teacher_id = jsonObject.getString("teacher_id");
                         String tedad_student = jsonObject.getString("tedad_student");
-                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacher_id,tedad_student,"","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,schoolName, className,"",teacher_id,tedad_student,"","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5999,7 +5999,7 @@ public class LoadData {
                         String city = jsonObject.getString("city");
                         String position = jsonObject.getString("position");
                         float rate = jsonObject.getInt("rate");
-                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null,null));
+                        recyclerModels.add(new RecyclerModel(lastId,onvan, matn,picture,city,"","","",0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
