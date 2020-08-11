@@ -8,10 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.icu.util.DateInterval;
+import android.os.Build;
+import android.provider.CalendarContract;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -35,7 +41,12 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -58,6 +69,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
     private String dateAsli2 = "";
     private String dateAsli3 = "";
     private String dateAsli4 = "";
+    LocalTime updatedTimeStatic;
 
     private ArrayList<RecyclerModel> recyclerModels; // this data structure carries our title and description
     Context c;
@@ -171,6 +183,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(final RecyclerAdapterYouHaveKnow.MyViewHolder holder,final int position) {
@@ -281,20 +294,8 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               double saatVorod = 0.0;
               double saatKhoroj = 0.0;
 
-              String faghatsaatVorodHoure = recyclerModels.get(position).getSaatVorodEnglish().substring(0,2);
-              String faghatsaatVorodMinute = recyclerModels.get(position).getSaatVorodEnglish().substring(3,5);
-
-              String faghatsaatKhorojHoure = recyclerModels.get(position).getSaatKhorojEnglish().substring(0,2);
-              String faghatsaatKhorojMinute = recyclerModels.get(position).getSaatKhorojEnglish ().substring(3,5);
 
 
-              //Toast.makeText(c, faghatsaatVorodHoure + "::"+ faghatsaatVorodMinute ,Toast.LENGTH_LONG).show();
-
-
-              long houseMilisecond = TimeUnit.HOURS.toMillis(Integer.parseInt(faghatsaatVorodHoure));
-              //Toast.makeText(c, String.valueOf(houseMilisecond) ,Toast.LENGTH_LONG).show();
-
-              long minuteMilisecond = TimeUnit.HOURS.toMillis(12);
 
 
 
@@ -304,11 +305,51 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
               }else {
                   saatKhoroj = Double.parseDouble((recyclerModels.get(position).getSaatKhorojEnglish().replace(":",".")));
+
+
+                  String faghatsaatVorodHoure = recyclerModels.get(position).getSaatVorodEnglish().substring(0,2);
+                  String faghatsaatVorodMinute = recyclerModels.get(position).getSaatVorodEnglish().substring(3,5);
+
+                  String faghatsaatKhorojHoure = recyclerModels.get(position).getSaatKhorojEnglish().substring(0,2);
+                  String faghatsaatKhorojMinute = recyclerModels.get(position).getSaatKhorojEnglish ().substring(3,5);
+
+
+                  //Toast.makeText(c, faghatsaatVorodHoure + "::"+ faghatsaatVorodMinute ,Toast.LENGTH_LONG).show();
+                  long houseMilisecondSaatVorod = TimeUnit.HOURS.toMillis(Integer.parseInt(faghatsaatVorodHoure));
+                  long minuteMilisecondSaatVorod = TimeUnit.MINUTES.toMillis(Integer.parseInt(faghatsaatVorodMinute));
+                  long jamSaatVorod = (int) (houseMilisecondSaatVorod + minuteMilisecondSaatVorod);
+
+
+
+                  long houseMilisecondSaatKhoroj = TimeUnit.HOURS.toMillis(Integer.parseInt(faghatsaatKhorojHoure));
+                  long minuteMilisecondSaatKhoroj = TimeUnit.MINUTES.toMillis(Integer.parseInt(faghatsaatKhorojMinute));
+                  long jamSaatKhoroj = (int) (houseMilisecondSaatKhoroj + minuteMilisecondSaatKhoroj);
+
+                 // Toast.makeText(c, String.valueOf(jamSaatKhoroj-jamSaatVorod) ,Toast.LENGTH_LONG).show();
+                  //Toast.makeText(c, String.valueOf(jamSaatKhoroj-jamSaatVorod) ,Toast.LENGTH_LONG).show();
+
+
+                  LocalTime time = null;
+                  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                      time = LocalTime.of(Integer.parseInt(faghatsaatKhorojHoure), Integer.parseInt(faghatsaatKhorojMinute), 00);
+
+                      // Subtract hours, minutes, or seconds
+                      //LocalTime updatedTime = time.minusHours(Integer.parseInt(faghatsaatVorodHoure)).minusMinutes(Integer.parseInt(faghatsaatVorodMinute)).minusSeconds(00);
+                      LocalTime updatedTime = time.plusHours(Integer.parseInt(faghatsaatVorodHoure)).plusHours(Integer.parseInt(faghatsaatVorodMinute)).minusSeconds(00);
+                      updatedTimeStatic = updatedTime;
+
+                      //holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTime.toString()));
+                      holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTimeStatic.toString()));
+
+
+                  }
+
+
+
               }
 
-              DecimalFormat formater = new DecimalFormat("00.00");
 
-              holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(formater.format(saatKhoroj-saatVorod)));
+
 
               //Toast.makeText(c, formater.format(saatKhoroj-saatVorod) ,Toast.LENGTH_LONG).show();
               if (recyclerModels.get(position).getCity() != null){
