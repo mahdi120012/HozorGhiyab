@@ -22,10 +22,10 @@ import hozorghiyab.customClasses.AppVersionName
 import hozorghiyab.customClasses.CustomDialog
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.user_info.Main_user_login_activity
-import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_activity.clAhkam
 import kotlinx.android.synthetic.main.main_activity.clJalasat
+import kotlinx.android.synthetic.main.main_activity.clSabtmakharej
 import kotlinx.android.synthetic.main.main_activity.clVorodKhoroj
 import kotlinx.android.synthetic.main.main_activity.imgNavigationViewInToolbarTop
 import kotlinx.android.synthetic.main.main_activity.imgTeacherPicture
@@ -86,6 +86,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
             clHozorGhiyabClickInMainActivity.setOnClickListener(){
                 startActivity(Intent(this, HozorGhiyabMain::class.java))
 
@@ -116,6 +118,12 @@ class MainActivity : AppCompatActivity() {
             clGozareshKar.setOnClickListener(){
                 startActivity(Intent(this, GozareshKar::class.java))
             }
+        }
+
+
+
+        clSabtmakharej.setOnClickListener(){
+            startActivity(Intent(this, Makharej::class.java))
         }
 
 

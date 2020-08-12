@@ -1539,6 +1539,71 @@ public class LoadData {
 
 
     }
+
+    public static void sendMablagh(final Context c, final String username, String mablagh,
+                                          String tarikh,
+                                          String tozihat, final ConstraintLayout clWifi, final EditText etMablagh,
+                                          final EditText etTarikh, final EditText etTozihat) {
+
+        String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String mablaghEncode= UrlEncoderClass.urlEncoder(mablagh);
+        String tarikhEncode= UrlEncoderClass.urlEncoder(tarikh);
+        String tozihatEncode= UrlEncoderClass.urlEncoder(tozihat);
+
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_sabt_makharej&username1=" + userNameEncode + "&mablagh=" + mablaghEncode + "&tarikh=" + tarikhEncode + "&tozihat=" + tozihatEncode;
+        itShouldLoadMore = false;
+        ProgressDialogClass.showProgress(c);
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        clWifi.setVisibility(View.GONE);
+                        ProgressDialogClass.dismissProgress();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        if (response.equals("send_shod")){
+                            Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+                            etMablagh.setText("");
+                            etTarikh.setText("");
+                            etTozihat.setText("");
+
+                            Intent intent = new Intent(c, ListPayamHayeErsali.class);
+                            intent.putExtra("sabt_makharej", "sabt_makharej");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            c.startActivity(intent);
+
+                            //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
+                            //LoadData.loadMoreClass(c,rAdapterYouHaveKnow,recyclerModels,progressBar,username);
+
+                        }else {
+                            Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                ProgressDialogClass.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
     public static void sendDarkhastJalase(final Context c, final String username, String onvan,
                                           String tarikhDarkhast,
                                           String tarikhShoro, final ConstraintLayout clWifi, final EditText etOnvan,
@@ -5198,6 +5263,87 @@ public class LoadData {
 
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
+
+
+    public static void ListMakharej(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
+                                    final ArrayList<RecyclerModel> recyclerModels,
+                                    final RecyclerView recyclerView,
+                                    final String username, final ConstraintLayout clWifi,String noe) {
+
+        String usernameEncode= UrlEncoderClass.urlEncoder(username);
+        String noeEncode= UrlEncoderClass.urlEncoder(noe);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_makharej&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismiss();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId2 = jsonObject.getString("id");
+                        String saat_vorod = jsonObject.getString("saat_vorod");
+                        //String saat_khoroj = jsonObject.getString("saat_khoroj");
+                        String elat = jsonObject.getString("elat");
+                        String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
+                        String family = jsonObject.getString("family");
+                        String num = jsonObject.getString("num");
+
+                        String mokhatabin = jsonObject.getString("mokhatabin");
+
+                        String tarikh = jsonObject.getString("tarikh");
+                        String makan = jsonObject.getString("makan");
+                        String tozihat = jsonObject.getString("tozihat");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,makan, saat_vorod,mokhatabin,elat,vaziyat_taeid,family,num,0,tarikh,tozihat,null,null));
+                        recyclerAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                clWifi.setVisibility(View.VISIBLE);
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoadData.firstLoadDataListPayamHayeErsaliTeacher(c, recyclerAdapter, recyclerModels,
+                                recyclerView, username,"",clWifi);
+                    }
+                });
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+
 
     public static void ListDarkhastJalase(final Context c, final RecyclerAdapterYouHaveKnow recyclerAdapter,
                                             final ArrayList<RecyclerModel> recyclerModels,

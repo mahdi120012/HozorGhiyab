@@ -146,6 +146,9 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         }else if (rowLayoutType.contains("vorod_khoroj")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_vorod_khoroj, parent, false));
 
+        }else if (rowLayoutType.contains("sabt_makharej")) {
+            return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_sabt_makharej, parent, false));
+
         }else if (rowLayoutType.contains("darkhast_morkhasi")) {
             return new RecyclerAdapterYouHaveKnow.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_darkhast_morkhasi, parent, false));
 
@@ -279,6 +282,85 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                     }
                 });
 
+
+
+          }else if (rowLayoutType.contains("sabt_makharej")){
+              if (clShowErsal != null) {
+                  clShowErsal.setVisibility(View.GONE);
+              }
+
+
+              holder.txDate2.setText(recyclerModels.get(position).getVaziyat());
+              holder.txSaatVorod.setText(recyclerModels.get(position).getOnvan());
+              holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
+              holder.txNameFrestandeVorodKhoroj.setText(recyclerModels.get(position).getRate());
+              holder.txOnvanRecevedMessage3.setText("مبلغ:");
+              holder.txOnvanRecevedMessage5.setVisibility(View.GONE);
+              holder.txSaatKhoroj.setVisibility(View.GONE);
+
+              holder.txOnvanRecevedMessage7.setText("توضیحات:");
+              holder.txMajmoKarkard.setText(recyclerModels.get(position).getWorkNumber());
+
+              //Toast.makeText(c, formater.format(saatKhoroj-saatVorod) ,Toast.LENGTH_LONG).show();
+              if (recyclerModels.get(position).getCity() != null){
+                  if (recyclerModels.get(position).getCity().equals("تایید شده")){
+                      holder.imgVaziyatTaeidVorodKhoroj.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_shode));
+                  }else if(recyclerModels.get(position).getCity().equals("رد شده")){
+                      holder.imgVaziyatTaeidVorodKhoroj.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.taeid_nashode));
+                  }
+              }
+
+
+              String noe = SharedPrefClass.getUserId(c,"noe");
+
+              if (!noe.equals("admin")){
+
+                  holder.txAzYaBeVorodKhoroj.setVisibility(View.GONE);
+                  holder.txNameFrestandeVorodKhoroj.setVisibility(View.GONE);
+              }
+
+
+              if (dateAsli3.equals(recyclerModels.get(position).getOnvan())) {
+                  holder.cardViewTxDate3.setVisibility(View.GONE);
+              }else {
+                  holder.txDateAsli.setText(recyclerModels.get(position).getVaziyat());
+                  dateAsli3 = recyclerModels.get(position).getOnvan();
+              }
+              String username = SharedPrefClass.getUserId(c,"user");
+
+
+              if (recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain3.setCardBackgroundColor(Color.parseColor("#efffde"));
+                  holder.txDate2.setTextColor(Color.parseColor("#70b15c"));
+
+              }else if (!recyclerModels.get(position).getCountRateAndComment().equals(username)){
+                  holder.cardMain3.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                  holder.txDate2.setTextColor(Color.parseColor("#a1aab3"));
+              }
+
+
+              if (noe.equals("admin")){
+                  holder.clVorodKhoroj.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+
+                          allDialogButton(c,position,"taeid_gozaresh",
+                                  holder.imgVaziyatTaeid,holder.txOnvanMessageInRecivedMessage,"saat_vorod_khoroj",
+                                  list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow,recyclerModels.get(position).getId());
+
+                      }
+                  });
+              }else {
+                  /*holder.clVorodKhoroj.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+                          CustomDialog.allDialogButton(c,position,"",holder.imgVaziyatTaeid,
+                                  holder.txOnvanMessageInRecivedMessage,"saat_vorod_khoroj",
+                                  list_family,list_id,recyclerModels,recyclerAdapterYouHaveKnow);
+                      }
+                  });*/
+
+              }
           }else if (rowLayoutType.contains("vorod_khoroj")){
               if (clShowErsal != null) {
                   clShowErsal.setVisibility(View.GONE);
@@ -334,12 +416,12 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                       time = LocalTime.of(Integer.parseInt(faghatsaatKhorojHoure), Integer.parseInt(faghatsaatKhorojMinute), 00);
 
                       // Subtract hours, minutes, or seconds
-                      //LocalTime updatedTime = time.minusHours(Integer.parseInt(faghatsaatVorodHoure)).minusMinutes(Integer.parseInt(faghatsaatVorodMinute)).minusSeconds(00);
-                      LocalTime updatedTime = time.plusHours(Integer.parseInt(faghatsaatVorodHoure)).plusHours(Integer.parseInt(faghatsaatVorodMinute)).minusSeconds(00);
-                      updatedTimeStatic = updatedTime;
+                      LocalTime updatedTime = time.minusHours(Integer.parseInt(faghatsaatVorodHoure)).minusMinutes(Integer.parseInt(faghatsaatVorodMinute)).minusSeconds(00);
+                      //LocalTime updatedTime = time.plusHours(Integer.parseInt(faghatsaatVorodHoure)).plusHours(Integer.parseInt(faghatsaatVorodMinute)).minusSeconds(00);
+                      //updatedTimeStatic = updatedTime;
 
                       //holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTime.toString()));
-                      holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTimeStatic.toString()));
+                      holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTime.toString()));
 
 
                   }
@@ -1480,7 +1562,8 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txAzYaBe,txAzYaBeVorodKhoroj,txNameFrestandeVorodKhoroj,txAzYaBeMorkhasi,
                  txNameFerestandeMorkhasi,txNameFerestande,txMatnPayam,txDateInChat,txMokhaffafName,
                  txNameFerestandeInSearch,txDateAsli,txDateAsli2,txDateAsli3,txDateAsli4,
-                 txMozo,txDarTarikh,txMokhatabin,txMakan,txTozihat,txMatnMozo,txMajmoKarkard;
+                 txMozo,txDarTarikh,txMokhatabin,txMakan,txTozihat,txMatnMozo,txMajmoKarkard,txOnvanRecevedMessage3
+                ,txOnvanRecevedMessage5,txOnvanRecevedMessage7;
 
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
         imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgAddStudent,imgVaziyatTaeid,
@@ -1496,6 +1579,10 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         MyViewHolder(View view) {
             super(view);
 
+            txOnvanRecevedMessage7 = itemView.findViewById(R.id.txOnvanRecevedMessage7);
+            txOnvanRecevedMessage5 = itemView.findViewById(R.id.txOnvanRecevedMessage5);
+
+            txOnvanRecevedMessage3 =itemView.findViewById(R.id.txOnvanRecevedMessage3);
             txMajmoKarkard = itemView.findViewById(R.id.txMajmoKarkard);
 
             txMatnMozo = itemView.findViewById(R.id.txMatnMozo);

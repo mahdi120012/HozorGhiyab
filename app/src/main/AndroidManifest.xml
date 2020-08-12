@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="hozorghiyab.activities.Makharej" />
         <activity android:name="hozorghiyab.activities.TanzimJalase" />
         <activity android:name="hozorghiyab.activities.WriteSepordanKar" />
         <activity android:name="hozorghiyab.activities.RecentSearch" />
