@@ -58,6 +58,7 @@ class Makharej : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.moh
             s += list_family[i].toString() + ", "
         }*/
 
+
         imgListJalasat.setOnClickListener {
             val intent = Intent(this, ListPayamHayeErsali::class.java)
             intent.putExtra("sabt_makharej", "sabt_makharej")

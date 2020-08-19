@@ -175,12 +175,14 @@
                 android:id="@+id/txMatnMozo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
                 android:fontFamily="@font/rmedium"
                 android:padding="3dp"
                 android:text="موضوع:"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                card_view:layout_constraintEnd_toEndOf="@+id/txAzYaBe"
+                card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toBottomOf="@+id/txNameFrestande" />
 
             <TextView

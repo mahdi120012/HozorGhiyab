@@ -69,7 +69,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
     private String dateAsli2 = "";
     private String dateAsli3 = "";
     private String dateAsli4 = "";
-    LocalTime updatedTimeStatic;
+    String staticTime = "00:00";
 
     private ArrayList<RecyclerModel> recyclerModels; // this data structure carries our title and description
     Context c;
@@ -381,12 +381,12 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
 
 
-              saatVorod = Double.parseDouble(recyclerModels.get(position).getSaatVorodEnglish().replace(":","."));
+              //saatVorod = Double.parseDouble(recyclerModels.get(position).getSaatVorodEnglish().replace(":","."));
 
               if (recyclerModels.get(position).getSaatKhorojEnglish().isEmpty() || recyclerModels.get(position).getSaatKhorojEnglish() == ""){
 
               }else {
-                  saatKhoroj = Double.parseDouble((recyclerModels.get(position).getSaatKhorojEnglish().replace(":",".")));
+                  //saatKhoroj = Double.parseDouble((recyclerModels.get(position).getSaatKhorojEnglish().replace(":",".")));
 
 
                   String faghatsaatVorodHoure = recyclerModels.get(position).getSaatVorodEnglish().substring(0,2);
@@ -412,6 +412,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
 
                   LocalTime time = null;
+                  LocalTime time2 = null;
                   if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                       time = LocalTime.of(Integer.parseInt(faghatsaatKhorojHoure), Integer.parseInt(faghatsaatKhorojMinute), 00);
 
@@ -423,6 +424,25 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                       //holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTime.toString()));
                       holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTime.toString()));
 
+                      //staticTime = holder.txMajmoKarkard.getText().toString();
+
+                      String faghat_saatKol = holder.txMajmoKarkard.getText().toString().substring(0,2);
+                      String faghat_daghigheKol = holder.txMajmoKarkard.getText().toString().substring(3,5);
+
+
+
+                      /*String a =
+                      String faghatSaatStatic = staticTime.substring(0,2);
+                      String faghatDaghigheStatic = staticTime.substring(3,5);
+
+
+
+                      time2 = LocalTime.of(Integer.parseInt(faghatSaatStatic), Integer.parseInt(faghatDaghigheStatic), 00);
+                      LocalTime updatedTime2 = time2.plusHours(Integer.parseInt(faghat_saatKol)).plusMinutes(Integer.parseInt(faghat_daghigheKol)).plusSeconds(00);
+                      holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTime2.toString()));
+
+                      staticTime = holder.txMajmoKarkard.getText().toString();
+*/
 
                   }
 
