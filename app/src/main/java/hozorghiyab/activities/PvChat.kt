@@ -120,6 +120,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                     when (tab.position) {
                         0 -> {
                             //همه
+                            clMajmoeKarkard.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "payam_haye_daryafti",null,clMain,null,"")
@@ -132,6 +133,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         }
                         1 -> {
                             //خصوصی
+                            clMajmoeKarkard.visibility = View.GONE
                             clMain.setVisibility(View.VISIBLE)
                             LoadData.lastId3 = "0"
 
@@ -157,6 +159,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         }
                         2 -> {
                             //گزارشات
+                            clMajmoeKarkard.visibility = View.VISIBLE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "pv",null,clMain,null,"")
@@ -165,9 +168,15 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
 
                             LoadData.firstLoadDataRecivedMessageChat(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
                                     rvInInboxMessageTeacher, username,mokhatabId.toString(),"gozaresh_kar",noe,clWifiState)
+
+                            /*LoadData.LoadMajmoeKolGozareshat(this@PvChat, username,mokhatabId.toString(),txMajmoeKolSaatKarkard,txTedadKol,
+                                    "gozaresh_kar",noe,clWifiState)*/
+
+
                         }
                         3 -> {
                             //کارها
+                            clMajmoeKarkard.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message_sepordan_kar", this@PvChat, rAdapterYouHaveKnow, mokhatabId.toString(),null,clMain,null,"")
@@ -179,6 +188,8 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         }
                         4 -> {
                             //احکام
+                            clMajmoeKarkard.visibility = View.GONE
+
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")
@@ -190,6 +201,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         }
                         5 -> {
                             //ورود خروج
+                            clMajmoeKarkard.visibility = View.VISIBLE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "vorod_khoroj", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")
@@ -197,16 +209,15 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                                     rModelsYouHaveKnow, null)
 
 
-                                LoadData.ListVorodKhorojErsaliDarPv(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
-                                        rvInInboxMessageTeacher, username,mokhatabId.toString(),clWifiState)
+                            LoadData.ListVorodKhorojErsaliDarPv(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
+                                     rvInInboxMessageTeacher, username,mokhatabId.toString(),clWifiState)
 
-
+                            LoadData.LoadMajmoeKolSaat(this@PvChat, username,mokhatabId.toString(),txMajmoeKolSaatKarkard,txTedadKol,clWifiState)
 
                         }
                         6 -> {
                             //مرخصی
-
-
+                            clMajmoeKarkard.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "darkhast_morkhasi", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")

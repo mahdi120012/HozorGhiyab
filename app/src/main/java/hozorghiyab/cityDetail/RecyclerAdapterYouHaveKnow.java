@@ -383,7 +383,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
               //saatVorod = Double.parseDouble(recyclerModels.get(position).getSaatVorodEnglish().replace(":","."));
 
-              if (recyclerModels.get(position).getSaatKhorojEnglish().isEmpty() || recyclerModels.get(position).getSaatKhorojEnglish() == ""){
+              /*if (recyclerModels.get(position).getSaatKhorojEnglish().isEmpty() || recyclerModels.get(position).getSaatKhorojEnglish() == ""){
 
               }else {
                   //saatKhoroj = Double.parseDouble((recyclerModels.get(position).getSaatKhorojEnglish().replace(":",".")));
@@ -412,8 +412,10 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
 
                   LocalTime time = null;
-                  LocalTime time2 = null;
-                  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                  LocalTime time2 = null;*/
+                  holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPosition()));
+
+                  /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                       time = LocalTime.of(Integer.parseInt(faghatsaatKhorojHoure), Integer.parseInt(faghatsaatKhorojMinute), 00);
 
                       // Subtract hours, minutes, or seconds
@@ -431,7 +433,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
 
 
 
-                      /*String a =
+                      *//*String a =
                       String faghatSaatStatic = staticTime.substring(0,2);
                       String faghatDaghigheStatic = staticTime.substring(3,5);
 
@@ -442,13 +444,13 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                       holder.txMajmoKarkard.setText(new EnglishNumberToPersian().convert(updatedTime2.toString()));
 
                       staticTime = holder.txMajmoKarkard.getText().toString();
-*/
+*//*
 
-                  }
+                  }*/
 
 
 
-              }
+
 
 
 
