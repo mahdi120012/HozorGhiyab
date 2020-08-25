@@ -1,9 +1,6 @@
 package hozorghiyab.activities
 
-import android.app.ActivityManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.ProgressDialog
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -21,6 +18,7 @@ import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.customClasses.AppVersionName
 import hozorghiyab.customClasses.CustomDialog
 import hozorghiyab.customClasses.SharedPrefClass
+import hozorghiyab.customClasses.TimeKononi
 import hozorghiyab.user_info.Main_user_login_activity
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_activity.clAhkam
@@ -34,6 +32,8 @@ import kotlinx.android.synthetic.main.main_activity_karkonan.*
 import kotlinx.android.synthetic.main.navigation_main.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.toolbar_button.*
+import kotlinx.android.synthetic.main.vorod_khoroj.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +42,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var noe = SharedPrefClass.getUserId(this,"noe")
+        var username = SharedPrefClass.getUserId(this,"user")
+        var name = SharedPrefClass.getUserId(this,"name")
+
+        val timeKononi = TimeKononi()
+        var nowTime = timeKononi.persianTimeWithoutDayName
+
+        val mcurrentTime: Calendar = Calendar.getInstance()
+        val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+        val minute: Int = mcurrentTime.get(Calendar.MINUTE)
+
+        LoadData.sendLastSeen(this,username,nowTime + " " + String.format("%02d:%02d", hour, minute))
 
         if(noe == "admin"){
             setContentView(com.hozorghiyab.R.layout.navigation_main)
@@ -55,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("ahkam", "ahkam")
                 startActivity(intent)
             }
+
 
             clSepordanKar.setOnClickListener(){
 
@@ -150,8 +162,7 @@ class MainActivity : AppCompatActivity() {
             startService(mServiceIntent)
         }*/
 
-        var username = SharedPrefClass.getUserId(this,"user")
-        var name = SharedPrefClass.getUserId(this,"name")
+
 
 
         if(name.isEmpty()){

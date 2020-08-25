@@ -1,13 +1,15 @@
 package hozorghiyab.activities
 
+import android.app.Activity
+import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.view.*
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
@@ -90,11 +92,18 @@ class VorodKhoroj : AppCompatActivity() {
                 val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
                 val minute: Int = mcurrentTime.get(Calendar.MINUTE)
                 val mTimePicker: TimePickerDialog
-                mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+                if (etSaatVorod.text.equals("")){
+                    etSaatVorod.setText(String.format("%02d:%02d", hour, minute))
+                }else{
+                    Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                }
+
+
+           /* mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
                     etSaatVorod.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
                 }, hour, minute, true) //Yes 24 hour time
                 mTimePicker.setTitle("انتخاب زمان")
-                mTimePicker.show()
+                mTimePicker.show()*/
 
 
         }
@@ -108,7 +117,15 @@ class VorodKhoroj : AppCompatActivity() {
                 val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
                 val minute: Int = mcurrentTime.get(Calendar.MINUTE)
                 val mTimePicker: TimePickerDialog
-                mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+
+                if (etSaatKhoroj.text.equals("")){
+                    etSaatKhoroj.setText(String.format("%02d:%02d", hour, minute))
+                }else{
+                    Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                }
+
+
+                /*mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
                     //--select * from tavasi message WHERE id = ();
 
                     etSaatKhoroj.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
@@ -117,7 +134,7 @@ class VorodKhoroj : AppCompatActivity() {
 
                 }, hour, minute, true) //Yes 24 hour time
                 mTimePicker.setTitle("انتخاب زمان")
-                mTimePicker.show()
+                mTimePicker.show()*/
             }
         }
 
@@ -155,7 +172,6 @@ class VorodKhoroj : AppCompatActivity() {
             }
         }
 
-
         val ha = Handler()
         ha.postDelayed(object : Runnable {
             override fun run() {
@@ -181,7 +197,6 @@ class VorodKhoroj : AppCompatActivity() {
         }
 
         imgMassenger.setOnClickListener{
-
             startActivity(Intent(this, InboxMessageChat::class.java))
             finish()
         }

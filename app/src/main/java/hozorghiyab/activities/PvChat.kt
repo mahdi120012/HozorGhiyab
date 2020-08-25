@@ -25,7 +25,9 @@ import kotlinx.android.synthetic.main.inbox_message_chat.rvInInboxMessageTeacher
 import kotlinx.android.synthetic.main.inbox_message_pv_chat.*
 import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
 import kotlinx.android.synthetic.main.list_payam_haye_ersali.tabLayout
+import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.toolbar_button.*
 import java.util.*
 
 
@@ -43,6 +45,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.statusbarColor));
         }
+
 
 
 
@@ -90,6 +93,8 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
         var nameMokhatab = if (intent.getExtras() == null) {}else{intent.extras!!.getString("name_mokhatab")}
         txNameMokhatab.setText(nameMokhatab.toString())
 
+        LoadData.loadLastSeen(this,mokhatabId.toString(),txLastSeen)
+
         //txMokhaffafName.setText(nameMokhatab.toString().substring(0,1))
 
         cardViewUnderProfilePicture.setVisibility(View.VISIBLE)
@@ -121,6 +126,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         0 -> {
                             //همه
                             clMajmoeKarkard.visibility = View.GONE
+                            clMore.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "payam_haye_daryafti",null,clMain,null,"")
@@ -134,7 +140,9 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         1 -> {
                             //خصوصی
                             clMajmoeKarkard.visibility = View.GONE
+                            clMore.visibility = View.GONE
                             clMain.setVisibility(View.VISIBLE)
+
                             LoadData.lastId3 = "0"
 
 
@@ -160,6 +168,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         2 -> {
                             //گزارشات
                             clMajmoeKarkard.visibility = View.VISIBLE
+                            clMore.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@PvChat, rAdapterYouHaveKnow, "pv",null,clMain,null,"")
@@ -177,6 +186,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         3 -> {
                             //کارها
                             clMajmoeKarkard.visibility = View.GONE
+                            clMore.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message_sepordan_kar", this@PvChat, rAdapterYouHaveKnow, mokhatabId.toString(),null,clMain,null,"")
@@ -189,6 +199,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         4 -> {
                             //احکام
                             clMajmoeKarkard.visibility = View.GONE
+                            clMore.visibility = View.GONE
 
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
@@ -202,6 +213,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         5 -> {
                             //ورود خروج
                             clMajmoeKarkard.visibility = View.VISIBLE
+                            clMore.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "vorod_khoroj", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")
@@ -212,12 +224,13 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                             LoadData.ListVorodKhorojErsaliDarPv(this@PvChat, rAdapterYouHaveKnow, rModelsYouHaveKnow,
                                      rvInInboxMessageTeacher, username,mokhatabId.toString(),clWifiState)
 
-                            LoadData.LoadMajmoeKolSaat(this@PvChat, username,mokhatabId.toString(),txMajmoeKolSaatKarkard,txTedadKol,clWifiState)
+                            LoadData.LoadMajmoeKolSaat(this@PvChat, username,mokhatabId.toString(),txMajmoeKolSaatKarkard,txTedadKol,miyanginKarkardRozane,clWifiState)
 
                         }
                         6 -> {
                             //مرخصی
                             clMajmoeKarkard.visibility = View.GONE
+                            clMore.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()
                             rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "darkhast_morkhasi", this@PvChat, rAdapterYouHaveKnow, "",null,clMain,null,"")
@@ -239,6 +252,14 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
 
+        imgMore.setOnClickListener {
+            if (clMore.visibility == View.VISIBLE){
+                clMore.visibility = View.GONE
+
+            }else if (clMore.visibility == View.GONE){
+                clMore.visibility = View.VISIBLE
+            }
+        }
 
      /*   Handler().postDelayed(
                 {
