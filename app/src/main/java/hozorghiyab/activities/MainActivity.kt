@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-
             clSepordanKar.setOnClickListener(){
 
                 val intent = Intent(this, SearchForSendMessage::class.java)

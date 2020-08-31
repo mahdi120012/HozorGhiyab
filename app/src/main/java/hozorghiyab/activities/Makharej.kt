@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.tanzim_jalase.imgListJalasat
 import kotlinx.android.synthetic.main.tanzim_jalase.imgSend
 import kotlinx.android.synthetic.main.tanzim_jalase.spinner
 import kotlinx.android.synthetic.main.toolbar_button.*
-import kotlinx.android.synthetic.main.write_new_message_teacher.imgBackInSendMessageTeacher
 import java.util.*
 
 class Makharej : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog.OnTimeSetListener {
