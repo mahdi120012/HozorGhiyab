@@ -1,11 +1,7 @@
 package hozorghiyab.activities
 
-import android.app.Activity
-import android.app.Dialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
@@ -25,7 +21,6 @@ import kotlinx.android.synthetic.main.toolbar_button.*
 import kotlinx.android.synthetic.main.vorod_khoroj.*
 import java.util.*
 
-
 class VorodKhoroj : AppCompatActivity() {
 
     public var saatVorodGhabli = ""
@@ -42,14 +37,230 @@ class VorodKhoroj : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.vorod_khoroj)
 
+        var username = SharedPrefClass.getUserId(this,"user")
+        val timeKononi = TimeKononi()
+
+        var ezafe_kari = if (intent.getExtras() == null) {}else{intent.extras!!.getString("ezafe_kari")}
+        if (ezafe_kari.toString()!!.equals("ezafe_kari")){
+            etElat.visibility = View.VISIBLE
+            imgSabtEzafeKari.visibility = View.VISIBLE
+            txSabtEzafeKari.visibility = View.VISIBLE
+            txElat.visibility = View.VISIBLE
+            imgSabtEzafeKari.setImageResource(R.drawable.gozaresh_selected);
+            imgErsalGozaresh.setImageResource(R.drawable.gozaresh);
+            txReciverFamilyInTeacher6.setText("ثبت اضافه کاری")
+
+            imgErsalGozaresh.setOnClickListener{
+                val intent = Intent(this, VorodKhoroj::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+
+            LoadData.loadVorodKhorojGhabliEzafeKari(this,etSaatVorod,etSaatKhoroj,etElat,timeKononi.persianTime,username,clWifiState)
+
+            etSaatVorod.setOnClickListener {
+
+                //Toast.makeText(this,myclass.schoolName.toString(),Toast.LENGTH_SHORT).show()
+
+                val mcurrentTime: Calendar = Calendar.getInstance()
+                val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+                val minute: Int = mcurrentTime.get(Calendar.MINUTE)
+                val mTimePicker: TimePickerDialog
+                if (etSaatVorod.text.equals("")){
+                    etSaatVorod.setText(String.format("%02d:%02d", hour, minute))
+                }/*else{
+                    Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                }*/
+
+
+                 mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+                         etSaatVorod.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
+                     }, hour, minute, true) //Yes 24 hour time
+                     mTimePicker.setTitle("انتخاب زمان")
+                     mTimePicker.show()
+
+
+            }
+
+            etSaatKhoroj.setOnClickListener{
+                val saatVorod: String = etSaatVorod.getText().toString()
+                if (saatVorod.length <= 0 || saatVorod == null){
+                    Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+                }else{
+                    val mcurrentTime: Calendar = Calendar.getInstance()
+                    val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+                    val minute: Int = mcurrentTime.get(Calendar.MINUTE)
+                    val mTimePicker: TimePickerDialog
+
+                    if (etSaatKhoroj.text.equals("")){
+                        etSaatKhoroj.setText(String.format("%02d:%02d", hour, minute))
+                    }/*else{
+                        Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                    }*/
+
+
+                    mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+                        //--select * from tavasi message WHERE id = ();
+
+                        etSaatKhoroj.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
+                        //val s = etSaatKhoroj.text.toString().substring(0, 2)
+                        //Toast.makeText(this,s.toString() ,Toast.LENGTH_SHORT).show()
+
+                    }, hour, minute, true) //Yes 24 hour time
+                    mTimePicker.setTitle("انتخاب زمان")
+                    mTimePicker.show()
+                }
+            }
+
+
+            txDate.setText(timeKononi.persianTime)
+
+            imgSendSaatVorod.setOnClickListener{
+                val saatVorod: String = etSaatVorod.getText().toString()
+                val date: String = txDate.getText().toString()
+                val elat: String = etElat.getText().toString()
+
+                if (saatVorod.length <= 0 || saatVorod == null) {
+                    Toast.makeText(this, "لطفا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+                } else if(saatVorod.equals(saatVorodGhabli)){
+                    Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
+                }else {
+                    LoadData.sendVorodKhorojEzafekari(this, username, saatVorod, "",date,elat,"saatVorod",clWifiState)
+                }
+            }
+
+            imgSendSaatKhoroj.setOnClickListener{
+                val saatVorod: String = etSaatVorod.getText().toString()
+                val saatKhoroj: String = etSaatKhoroj.getText().toString()
+                val date: String = txDate.getText().toString()
+                val elat: String = etElat.getText().toString()
+
+                if (saatVorod.length <= 0 || saatVorod == null){
+                    Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+
+                }else if(saatKhoroj.length <= 0 || saatKhoroj == null) {
+                    Toast.makeText(this, "لطفا ساعت خروج را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+
+                } else if(saatVorod.equals(saatVorodGhabli) && saatKhoroj.equals(saatKhorojGhabli)){
+                    Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
+                } else {
+                    LoadData.sendVorodKhorojEzafekari(this, username, saatVorod, saatKhoroj,date,elat,"saatKhoroj",clWifiState)
+                }
+            }
+
+
+        }else{
+
+            LoadData.loadVorodKhorojGhabli(this,etSaatVorod,etSaatKhoroj,timeKononi.persianTime,username,clWifiState)
+
+            etSaatVorod.setOnClickListener {
+
+                //Toast.makeText(this,myclass.schoolName.toString(),Toast.LENGTH_SHORT).show()
+
+                val mcurrentTime: Calendar = Calendar.getInstance()
+                val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+                val minute: Int = mcurrentTime.get(Calendar.MINUTE)
+                val mTimePicker: TimePickerDialog
+                if (etSaatVorod.text.equals("")){
+                    etSaatVorod.setText(String.format("%02d:%02d", hour, minute))
+                }else{
+                    Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                }
+
+
+                /* mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+                         etSaatVorod.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
+                     }, hour, minute, true) //Yes 24 hour time
+                     mTimePicker.setTitle("انتخاب زمان")
+                     mTimePicker.show()*/
+
+
+            }
+
+            etSaatKhoroj.setOnClickListener{
+                val saatVorod: String = etSaatVorod.getText().toString()
+                if (saatVorod.length <= 0 || saatVorod == null){
+                    Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+                }else{
+                    val mcurrentTime: Calendar = Calendar.getInstance()
+                    val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+                    val minute: Int = mcurrentTime.get(Calendar.MINUTE)
+                    val mTimePicker: TimePickerDialog
+
+                    if (etSaatKhoroj.text.equals("")){
+                        etSaatKhoroj.setText(String.format("%02d:%02d", hour, minute))
+                    }else{
+                        Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                    }
+
+
+                    /*mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+                        //--select * from tavasi message WHERE id = ();
+
+                        etSaatKhoroj.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
+                        //val s = etSaatKhoroj.text.toString().substring(0, 2)
+                        //Toast.makeText(this,s.toString() ,Toast.LENGTH_SHORT).show()
+
+                    }, hour, minute, true) //Yes 24 hour time
+                    mTimePicker.setTitle("انتخاب زمان")
+                    mTimePicker.show()*/
+                }
+            }
+
+
+            txDate.setText(timeKononi.persianTime)
+
+            imgSendSaatVorod.setOnClickListener{
+                val saatVorod: String = etSaatVorod.getText().toString()
+                val date: String = txDate.getText().toString()
+
+                if (saatVorod.length <= 0 || saatVorod == null) {
+                    Toast.makeText(this, "لطفا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+                } else if(saatVorod.equals(saatVorodGhabli)){
+                    Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
+                }else {
+                    LoadData.sendVorodKhoroj(this, username, saatVorod, "",date,"saatVorod",clWifiState)
+                }
+            }
+
+            imgSendSaatKhoroj.setOnClickListener{
+                val saatVorod: String = etSaatVorod.getText().toString()
+                val saatKhoroj: String = etSaatKhoroj.getText().toString()
+                val date: String = txDate.getText().toString()
+
+                if (saatVorod.length <= 0 || saatVorod == null){
+                    Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+
+                }else if(saatKhoroj.length <= 0 || saatKhoroj == null) {
+                    Toast.makeText(this, "لطفا ساعت خروج را انتخاب نمایید", Toast.LENGTH_SHORT).show()
+
+                } else if(saatVorod.equals(saatVorodGhabli) && saatKhoroj.equals(saatKhorojGhabli)){
+                    Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
+                } else {
+                    LoadData.sendVorodKhoroj(this, username, saatVorod, saatKhoroj,date,"saatKhoroj",clWifiState)
+                }
+            }
+
+
+        }
+
+
+        imgSabtEzafeKari.setOnClickListener{
+            val intent = Intent(this, VorodKhoroj::class.java)
+            intent.putExtra("ezafe_kari", "ezafe_kari")
+            startActivity(intent)
+            finish()
+        }
+
+
         imgListGozareshat.setOnClickListener {
             val intent = Intent(this, ListPayamHayeErsali::class.java)
             intent.putExtra("vorod_khoroj", "vorod_khoroj")
             startActivity(intent)
             finish()
         }
-        var username = SharedPrefClass.getUserId(this,"user")
-        val timeKononi = TimeKononi()
+
 
 
         //Adapter zir faghat baraye zakhireh ye class ide baraye spinner be kar mire:
@@ -82,95 +293,7 @@ class VorodKhoroj : AppCompatActivity() {
 
 
 
-        LoadData.loadVorodKhorojGhabli(this,etSaatVorod,etSaatKhoroj,timeKononi.persianTime,username,clWifiState)
 
-        etSaatVorod.setOnClickListener {
-
-            //Toast.makeText(this,myclass.schoolName.toString(),Toast.LENGTH_SHORT).show()
-
-                val mcurrentTime: Calendar = Calendar.getInstance()
-                val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-                val minute: Int = mcurrentTime.get(Calendar.MINUTE)
-                val mTimePicker: TimePickerDialog
-                if (etSaatVorod.text.equals("")){
-                    etSaatVorod.setText(String.format("%02d:%02d", hour, minute))
-                }else{
-                    Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
-                }
-
-
-           /* mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                    etSaatVorod.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
-                }, hour, minute, true) //Yes 24 hour time
-                mTimePicker.setTitle("انتخاب زمان")
-                mTimePicker.show()*/
-
-
-        }
-
-        etSaatKhoroj.setOnClickListener{
-            val saatVorod: String = etSaatVorod.getText().toString()
-            if (saatVorod.length <= 0 || saatVorod == null){
-                Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
-            }else{
-                val mcurrentTime: Calendar = Calendar.getInstance()
-                val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-                val minute: Int = mcurrentTime.get(Calendar.MINUTE)
-                val mTimePicker: TimePickerDialog
-
-                if (etSaatKhoroj.text.equals("")){
-                    etSaatKhoroj.setText(String.format("%02d:%02d", hour, minute))
-                }else{
-                    Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
-                }
-
-
-                /*mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                    //--select * from tavasi message WHERE id = ();
-
-                    etSaatKhoroj.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
-                    //val s = etSaatKhoroj.text.toString().substring(0, 2)
-                    //Toast.makeText(this,s.toString() ,Toast.LENGTH_SHORT).show()
-
-                }, hour, minute, true) //Yes 24 hour time
-                mTimePicker.setTitle("انتخاب زمان")
-                mTimePicker.show()*/
-            }
-        }
-
-
-        txDate.setText(timeKononi.persianTime)
-
-        imgSendSaatVorod.setOnClickListener{
-            val saatVorod: String = etSaatVorod.getText().toString()
-            val date: String = txDate.getText().toString()
-
-            if (saatVorod.length <= 0 || saatVorod == null) {
-                Toast.makeText(this, "لطفا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
-            } else if(saatVorod.equals(saatVorodGhabli)){
-                Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
-            }else {
-                LoadData.sendVorodKhoroj(this, username, saatVorod, "",date,"saatVorod",clWifiState)
-            }
-        }
-
-        imgSendSaatKhoroj.setOnClickListener{
-            val saatVorod: String = etSaatVorod.getText().toString()
-            val saatKhoroj: String = etSaatKhoroj.getText().toString()
-            val date: String = txDate.getText().toString()
-
-            if (saatVorod.length <= 0 || saatVorod == null){
-                Toast.makeText(this, "ابتدا ساعت ورود را انتخاب نمایید", Toast.LENGTH_SHORT).show()
-
-            }else if(saatKhoroj.length <= 0 || saatKhoroj == null) {
-                Toast.makeText(this, "لطفا ساعت خروج را انتخاب نمایید", Toast.LENGTH_SHORT).show()
-
-            } else if(saatVorod.equals(saatVorodGhabli) && saatKhoroj.equals(saatKhorojGhabli)){
-                Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
-            } else {
-                LoadData.sendVorodKhoroj(this, username, saatVorod, saatKhoroj,date,"saatKhoroj",clWifiState)
-            }
-        }
 
         val ha = Handler()
         ha.postDelayed(object : Runnable {

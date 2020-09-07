@@ -234,6 +234,19 @@
                     card_view:layout_constraintTop_toTopOf="@+id/txSaatKhoroj" />
 
                 <TextView
+                    android:id="@+id/txEzafeKari"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rmedium"
+                    android:padding="3dp"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    card_view:layout_constraintEnd_toEndOf="@+id/txOnvanRecevedMessage5"
+                    card_view:layout_constraintTop_toBottomOf="@+id/txOnvanRecevedMessage5" />
+
+                <TextView
                     android:id="@+id/txSaatKhoroj"
 
                     android:layout_width="wrap_content"

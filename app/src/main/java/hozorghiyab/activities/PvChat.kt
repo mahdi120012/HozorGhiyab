@@ -47,8 +47,6 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
         }
 
 
-
-
         val emojIcon = EmojIconActions(this, clMain, etMatnChat, imgSelectEmoji, "#495C66", "#DCE1E2", "#E6EBEF")
         emojIcon.setIconsIds(R.drawable.keyboad_icon,R.drawable.emoji_select)
         emojIcon.setUseSystemEmoji(true)
@@ -167,7 +165,7 @@ class PvChat : AppCompatActivity(), View.OnTouchListener {
                         }
                         2 -> {
                             //گزارشات
-                            clMajmoeKarkard.visibility = View.VISIBLE
+                            clMajmoeKarkard.visibility = View.GONE
                             clMore.visibility = View.GONE
                             LoadData.lastId2 = "0"
                             rModelsYouHaveKnow = ArrayList()

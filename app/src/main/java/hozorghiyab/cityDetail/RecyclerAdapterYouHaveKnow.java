@@ -187,7 +187,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    @SuppressLint("RecyclerView")
+    @SuppressLint({"RecyclerView", "ResourceAsColor"})
     @Override
     public void onBindViewHolder(final RecyclerAdapterYouHaveKnow.MyViewHolder holder,final int position) {
 
@@ -371,6 +371,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
               holder.txSaatVorod.setText(recyclerModels.get(position).getMatn());
               holder.txSaatKhoroj.setText(recyclerModels.get(position).getPicture());
               holder.txNameFrestandeVorodKhoroj.setText(recyclerModels.get(position).getRate());
+              holder.txEzafeKari.setText(recyclerModels.get(position).getWorkNumber());
 
 
               double saatVorod = 0.0;
@@ -521,16 +522,18 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   clShowErsal.setVisibility(View.GONE);
               }
 
-              final SpannableStringBuilder sb = new SpannableStringBuilder("جلسه" + new EnglishNumberToPersian().convert(recyclerModels.get(position).getCountRateAndComment()) + " موضوع:");
+              final SpannableStringBuilder sb = new SpannableStringBuilder("جلسه " + new EnglishNumberToPersian().convert(recyclerModels.get(position).getCountRateAndComment()) + " موضوع:");
 
               final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
-              sb.setSpan(bss, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+              sb.setSpan(bss, 0, 5 + recyclerModels.get(position).getCountRateAndComment().length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
 
 
 
               holder.txMatnMozo.setText(sb);
               holder.txTarikhDarkhast.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getOnvan()));
-              holder.txDarTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn()));
+              holder.txDarTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn().substring(0,11)));
+              holder.txSaat.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getMatn().substring(11,16)));
+
               //holder.txTaTarikh.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPicture()));
               holder.txMozo.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getCity()));
               holder.txMokhatabin.setText(new EnglishNumberToPersian().convert(recyclerModels.get(position).getPicture()));
@@ -946,6 +949,13 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                   holder.txAzYaBe.setVisibility(View.GONE);
                   holder.txNameFerestandeInRecivedMessage.setVisibility(View.GONE);
               }
+
+              //کد زیر برای تغییر بک گراند پیامهای خوانده نشده استفاده میشه ولی هنوز مشکل داره
+              /*if (recyclerModels.get(position).getSaatKhorojEnglish().equals("0")){
+                  holder.clMain.setBackgroundColor(Color.parseColor("#efefef"));
+              }else if (recyclerModels.get(position).getSaatKhorojEnglish().equals("1")){
+                  holder.clMain.setBackgroundColor(Color.parseColor("#ffffff"));
+              }*/
 
               holder.txOnvanMessageInRecivedMessage.setText(recyclerModels.get(position).getOnvan());
               holder.txMatnMessageInRecivedMessage.setText(recyclerModels.get(position).getMatn());
@@ -1585,7 +1595,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
                  txNameFerestandeMorkhasi,txNameFerestande,txMatnPayam,txDateInChat,txMokhaffafName,
                  txNameFerestandeInSearch,txDateAsli,txDateAsli2,txDateAsli3,txDateAsli4,
                  txMozo,txDarTarikh,txMokhatabin,txMakan,txTozihat,txMatnMozo,txMajmoKarkard,txOnvanRecevedMessage3
-                ,txOnvanRecevedMessage5,txOnvanRecevedMessage7;
+                ,txOnvanRecevedMessage5,txOnvanRecevedMessage7,txSaat,txEzafeKari;
 
         ImageView imageView,imgRemoveStudent,imgRemoveJalase,imgRemoveClass,imgErsalNazarIcon,
         imgHazerGhayebTik,imgChoiseUserInSearchInTeacher,imgChoiseReciverSendNewMessageInTeacher,imgAddStudent,imgVaziyatTaeid,
@@ -1600,6 +1610,8 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         LinearLayout linerLayoutInRowChat;
         MyViewHolder(View view) {
             super(view);
+            txEzafeKari = itemView.findViewById(R.id.txEzafeKari);
+            txSaat = itemView.findViewById(R.id.txSaat);
 
             txOnvanRecevedMessage7 = itemView.findViewById(R.id.txOnvanRecevedMessage7);
             txOnvanRecevedMessage5 = itemView.findViewById(R.id.txOnvanRecevedMessage5);

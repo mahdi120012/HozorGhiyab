@@ -180,7 +180,6 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="6dp"
             android:layout_marginRight="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imgListGozareshat"
@@ -212,6 +211,7 @@
             app:layout_constraintEnd_toEndOf="@+id/imgListGozareshat"
             app:layout_constraintStart_toStartOf="@+id/imgListGozareshat"
             app:layout_constraintTop_toTopOf="@+id/imgListGozareshat" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

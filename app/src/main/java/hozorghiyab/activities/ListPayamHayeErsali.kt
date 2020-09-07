@@ -6,6 +6,7 @@ import android.os.Handler
 import com.google.android.material.tabs.TabLayout
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import com.hozorghiyab.R
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.cityDetail.RecyclerAdapterYouHaveKnow
 import hozorghiyab.cityDetail.RecyclerModel
@@ -16,9 +17,10 @@ import kotlinx.android.synthetic.main.inbox_message.imgTooTitlelbarMainAct
 import kotlinx.android.synthetic.main.inbox_message.tabLayout
 import kotlinx.android.synthetic.main.inbox_message.txTitle
 import kotlinx.android.synthetic.main.list_payam_haye_ersali.*
+import kotlinx.android.synthetic.main.list_payam_haye_ersali.imgListGozareshat
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.toolbar_button.*
-import java.util.*
+import kotlinx.android.synthetic.main.vorod_khoroj.*
 
 class ListPayamHayeErsali : AppCompatActivity() {
     private var rAdapterYouHaveKnow: RecyclerAdapterYouHaveKnow? = null
@@ -109,6 +111,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
+
 
         if (sabt_makharej.toString()!!.equals("sabt_makharej")){
             clGozareshat.visibility = View.VISIBLE

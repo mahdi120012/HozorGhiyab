@@ -1736,6 +1736,66 @@ public class LoadData {
     }
 
 
+    public static void sendVorodKhorojEzafekari(final Context c, final String username,
+                                       String saatVorod, String saatKhoroj, String date,String elat, final String method, final ConstraintLayout clWifi) {
+
+        String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String saatVorodEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatVorod));
+        String saatKhorojEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatKhoroj));
+        String dateEncode= UrlEncoderClass.urlEncoder(date);
+        String elatEncode= UrlEncoderClass.urlEncoder(elat);
+
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj_ezafe_kari&username1=" + userNameEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode + "&elat=" + elatEncode;
+        itShouldLoadMore = false;
+        ProgressDialogClass.showProgress(c);
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        clWifi.setVisibility(View.GONE);
+                        ProgressDialogClass.dismissProgress();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        }
+
+                        if (response.equals("send_shod")){
+
+                            Toast.makeText(c, "ثبت شد", Toast.LENGTH_SHORT).show();
+                            if (method.equals("saatKhoroj")){
+                                Intent intent = new Intent(c, ListPayamHayeErsali.class);
+                                intent.putExtra("vorod_khoroj", "vorod_khoroj");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                c.startActivity(intent);
+                            }
+
+                            //Line Zir Baraye neshon dadan comment pas az ersal comment be server va namayesh to recyclerviewee.
+                            //LoadData.loadMoreClass(c,rAdapterYouHaveKnow,recyclerModels,progressBar,username);
+
+                        }else {
+                            Toast.makeText(c, "ثبت نشد", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                ProgressDialogClass.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
 
     public static void sendVorodKhoroj(final Context c, final String username,
                                        String saatVorod, String saatKhoroj, String date, final String method, final ConstraintLayout clWifi) {
@@ -2512,6 +2572,67 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+    public static void loadVorodKhorojGhabliEzafeKari(final Context c, final TextView etSaatVorod,
+                                                      final TextView etSaatKhoroj, final EditText etElat,
+                                                      String tarikh,
+                                                      String username, final ConstraintLayout clWifi) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String tarikhEncode = UrlEncoderClass.urlEncoder(tarikh);
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_saat_vorod_khoroj_ghabli_ezafe_kari&user1=" + usernameEncode + "&tarikhEncode=" + tarikhEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+
+                if (response.length() <= 0) {
+                    //Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String tarikh = null;
+                String saatVorod = null;
+                String saatKhoroj = null;
+                String elat = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        tarikh = jsonObject.getString("tarikh");
+                        saatVorod = jsonObject.getString("saat_vorod");
+                        saatKhoroj = jsonObject.getString("saat_khoroj");
+                        elat = jsonObject.getString("elat");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                etSaatVorod.setText(saatVorod);
+                etSaatKhoroj.setText(saatKhoroj);
+                etElat.setText(elat);
+                //VorodKhoroj.Myclass myclass = new VorodKhoroj.Myclass();
+                //myclass.Myclass("hi","by");
+
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                clWifi.setVisibility(View.VISIBLE);
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
     public static void loadVorodKhorojGhabli(final Context c,final TextView etSaatVorod,
                                                              final TextView etSaatKhoroj,
                                                              String tarikh,
@@ -2740,7 +2861,7 @@ public class LoadData {
                         e.printStackTrace();
                     }
                 }
-                txLastSeen.setText(new EnglishNumberToPersian().convert(lastSeen)  +" آخرین بازدید در");
+                txLastSeen.setText(new EnglishNumberToPersian().convert(lastSeen));
 
 
             }
@@ -4950,7 +5071,9 @@ public class LoadData {
                         String vaziyatTaeid = jsonObject.getString("vaziyat_taeid");
                         String workNumber = jsonObject.getString("num");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber,null,null));
+                        String readOrNo = jsonObject.getString("read_or_no");
+
+                        recyclerModels.add(new RecyclerModel(lastId2,onvan, matn,tarikh,nameFerestande,noe,idFerestande,"",0,vaziyatTaeid,workNumber,null,readOrNo));
                         recyclerAdapter.notifyDataSetChanged();
                         //recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
@@ -5769,8 +5892,9 @@ public class LoadData {
                         String family = jsonObject.getString("family");
                         String user_id = jsonObject.getString("user_id");
                         String majmoeKarkard = jsonObject.getString("majmoe_karkard");
+                        String ezafeKari = jsonObject.getString("noe");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,majmoeKarkard,family,user_id,0,null,null,saat_vorod,saat_khoroj));
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,majmoeKarkard,family,user_id,0,null,ezafeKari,saat_vorod,saat_khoroj));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5840,9 +5964,9 @@ public class LoadData {
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
                         String majmoeKarkard = jsonObject.getString("majmoe_karkard");
+                        String noe = jsonObject.getString("noe");
 
-
-                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,majmoeKarkard,family,saat_vorod,0,null,null,saat_vorod,saat_khoroj));
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,majmoeKarkard,family,saat_vorod,0,null,noe,saat_vorod,saat_khoroj));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
