@@ -38,7 +38,6 @@ class ListPayamHayeErsali : AppCompatActivity() {
         var darkhast_jalase = if (intent.getExtras() == null) {}else{intent.extras!!.getString("darkhast_jalase")}
         var sabt_makharej = if (intent.getExtras() == null) {}else{intent.extras!!.getString("sabt_makharej")}
 
-
         rModelsYouHaveKnow = ArrayList()
         rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
@@ -53,7 +52,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
                     0 -> {
                         //همه
 
-                        rModelsYouHaveKnow = ArrayList()
+                         rModelsYouHaveKnow = ArrayList()
                         rAdapterYouHaveKnow = RecyclerAdapterYouHaveKnow(rModelsYouHaveKnow, "recived_message", this@ListPayamHayeErsali, rAdapterYouHaveKnow, "payam_haye_ersali",null,null,null,"")
                         Recyclerview.define_recyclerviewAddStudent(this@ListPayamHayeErsali, rvInPayamHayeErsaliTeacher, rAdapterYouHaveKnow,
                                 rModelsYouHaveKnow, null)

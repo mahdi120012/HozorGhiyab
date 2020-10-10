@@ -1794,7 +1794,7 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         ConstraintLayout clTaeid = view.findViewById(R.id.clTaeid);
         ConstraintLayout clRad = view.findViewById(R.id.clRad);
 
-        clRemove.setVisibility(View.VISIBLE);
+        //clRemove.setVisibility(View.VISIBLE);
         clCopy.setVisibility(View.VISIBLE);
         clErsalNazar.setVisibility(View.GONE);
 
@@ -2034,14 +2034,14 @@ public class RecyclerAdapterYouHaveKnow extends RecyclerView.Adapter<RecyclerAda
         TextView txErsalGozaresh = view.findViewById(R.id.txErsalGozaresh);
 
         if (method.equals("taeid_gozaresh")){
-            clRemove.setVisibility(View.VISIBLE);
+            //clRemove.setVisibility(View.VISIBLE);
             clTaeid.setVisibility(View.VISIBLE);
             clRad.setVisibility(View.VISIBLE);
         }
         String noe = SharedPrefClass.getUserId(c,"noe");
         if (method.equals("gozaresh_kar")){
             if (noe.equals("admin")){
-                clRemove.setVisibility(View.VISIBLE);
+                //clRemove.setVisibility(View.VISIBLE);
                 clTaeid.setVisibility(View.VISIBLE);
                 clRad.setVisibility(View.VISIBLE);
                 clErsalGozaresh.setVisibility(View.VISIBLE);
