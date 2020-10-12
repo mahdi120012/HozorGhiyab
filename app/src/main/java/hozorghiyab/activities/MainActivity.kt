@@ -123,7 +123,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             clMorkhasi.setOnClickListener(){
-                startActivity(Intent(this, DarkhastMorkhasi::class.java))
+                val intent = Intent(this, MohasebeTashvighi::class.java)
+                startActivity(intent)
+                //startActivity(Intent(this, DarkhastMorkhasi::class.java))
             }
 
             clGozareshKar.setOnClickListener(){
