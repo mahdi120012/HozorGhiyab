@@ -12,9 +12,9 @@ class MohasebeTashvighi : AppCompatActivity() {
         btnMohasebe.setOnClickListener {
             var mizanHoghogh = Integer.parseInt(etMizanHoghogh.text.toString())
             var tedadMah = Integer.parseInt(etTedadMah.text.toString())
-            var mizanHoghoghGhanonKar = Integer.parseInt(etMizanHoghoghKarBeSaat.text.toString())
-            var saatKarkardRozaneh = Integer.parseInt(etSaatKarkardRozaneh.text.toString())
-            var tedadRozHayeMah = Integer.parseInt(etTedadRozHayeMah.text.toString())
+            //var mizanHoghoghGhanonKar = Integer.parseInt(etMizanHoghoghKarBeSaat.text.toString())
+            //var saatKarkardRozaneh = Integer.parseInt(etSaatKarkardRozaneh.text.toString())
+            //var tedadRozHayeMah = Integer.parseInt(etTedadRozHayeMah.text.toString())
 
             //var hoghoghSaatiGhanonKar = mizanHoghoghGhanonKar
             var a = (mizanHoghogh*tedadMah)/10000/7/30
