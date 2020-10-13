@@ -116,6 +116,98 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clEjadName"
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="6dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintEnd_toEndOf="@+id/clJalasat"
+                app:layout_constraintStart_toStartOf="@+id/clJalasat"
+                app:layout_constraintTop_toBottomOf="@+id/clJalasat">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="113dp">
+
+                    <ImageView
+                        android:id="@+id/imgEjadName"
+                        android:layout_width="70dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/letter" />
+
+                    <TextView
+                        android:id="@+id/textViewfa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/sahel"
+                        android:text="ایجاد نامه"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/imgEjadName"
+                        app:layout_constraintStart_toStartOf="@+id/imgEjadName"
+                        app:layout_constraintTop_toBottomOf="@+id/imgEjadName" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clMohasebeTashvighi"
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="6dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintBottom_toBottomOf="@+id/clSabtmakharej"
+                app:layout_constraintEnd_toEndOf="@+id/clVorodKhoroj"
+                app:layout_constraintStart_toStartOf="@+id/clVorodKhoroj"
+                app:layout_constraintTop_toTopOf="@+id/clSabtmakharej">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="113dp">
+
+                    <ImageView
+                        android:id="@+id/imgTashvighi"
+                        android:layout_width="70dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/calculate" />
+
+                    <TextView
+                        android:id="@+id/textView912assswwaaa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/sahel"
+                        android:text="محاسبه تشویقی"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/imgTashvighi"
+                        app:layout_constraintStart_toStartOf="@+id/imgTashvighi"
+                        app:layout_constraintTop_toBottomOf="@+id/imgTashvighi" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/clSabtmakharej"
@@ -209,7 +301,6 @@
                             app:srcCompat="@drawable/usericon222" />
 
 
-
                         <TextView
                             android:id="@+id/txTecherNameInMainActivity"
                             android:layout_width="wrap_content"
@@ -247,7 +338,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/parent"
                 app:layout_constraintStart_toStartOf="@+id/parent"
-                app:layout_constraintTop_toBottomOf="@+id/clHameyePayamHaClickInMainActivity" />
+                app:layout_constraintTop_toBottomOf="@+id/clEjadName" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/clClassClickInMainActivity"

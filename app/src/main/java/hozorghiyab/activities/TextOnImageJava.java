@@ -46,7 +46,9 @@ public class TextOnImageJava extends AppCompatActivity {
         addTextEditText = (EditText) findViewById(R.id.addTextEditText);
         Button saveImage = findViewById(R.id.saveImage);
         ImageView imgHome = findViewById(R.id.imgHome);
-        ImageView imgBack = findViewById(R.id.imgHome);
+        ImageView imgBack = findViewById(R.id.imgBack);
+        ImageView imgMassenger = findViewById(R.id.imgMassenger);
+
 
         imgHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +65,15 @@ public class TextOnImageJava extends AppCompatActivity {
                 finish();
             }
         });
+
+        imgMassenger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TextOnImageJava.this, InboxMessageChat.class));
+                finish();
+            }
+        });
+
 
 
         saveImage.setOnClickListener(new View.OnClickListener() {

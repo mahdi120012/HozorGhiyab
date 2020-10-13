@@ -38,7 +38,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/imgtolbariconmessage" />
+                app:srcCompat="@drawable/calculate" />
 
             <ImageView
                 android:id="@+id/imgBack"
@@ -53,7 +53,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/back_white2" />
 
             <TextView
                 android:id="@+id/txReciverFamilyInTeacher6"
@@ -74,6 +74,15 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <include
+        android:id="@+id/toolbarButton"
+        layout="@layout/toolbar_button"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/etMizanHoghogh"
         android:layout_width="wrap_content"
@@ -81,6 +90,8 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:fontFamily="@font/rmedium"
+        android:textSize="18sp"
+        android:gravity="right"
         android:hint="میزان حقوق"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +103,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:textSize="18sp"
+        android:gravity="right"
         android:hint="تعداد ماه"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/etMizanHoghogh"
@@ -103,7 +116,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="میزان حقوق قانون کار به ساعت"
+        android:gravity="right"
+        android:textSize="18sp"
+        android:hint="میزان حقوق قانون کار"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/etTedadMah"
         app:layout_constraintStart_toStartOf="@+id/etTedadMah"
@@ -114,6 +129,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="right"
+        android:textSize="18sp"
         android:hint="تعداد ساعات کارکرد روزانه"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/etMizanHoghoghKarBeSaat"
@@ -125,6 +142,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="right"
+        android:textSize="18sp"
         android:hint="تعداد روز های ماه"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/etSaatKarkardRozaneh"
@@ -150,6 +169,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="۰"
+        android:fontFamily="@font/rmedium"
+        android:textSize="18sp"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/btnMohasebe"
         app:layout_constraintStart_toStartOf="@+id/btnMohasebe"
         app:layout_constraintTop_toBottomOf="@+id/btnMohasebe" />

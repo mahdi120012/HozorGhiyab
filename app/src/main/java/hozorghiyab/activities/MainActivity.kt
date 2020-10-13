@@ -23,6 +23,7 @@ import hozorghiyab.user_info.Main_user_login_activity
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_activity.clAhkam
 import kotlinx.android.synthetic.main.main_activity.clJalasat
+import kotlinx.android.synthetic.main.main_activity.clMohasebeTashvighi
 import kotlinx.android.synthetic.main.main_activity.clSabtmakharej
 import kotlinx.android.synthetic.main.main_activity.clVorodKhoroj
 import kotlinx.android.synthetic.main.main_activity.imgNavigationViewInToolbarTop
@@ -32,7 +33,6 @@ import kotlinx.android.synthetic.main.main_activity_karkonan.*
 import kotlinx.android.synthetic.main.navigation_main.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.toolbar_button.*
-import kotlinx.android.synthetic.main.vorod_khoroj.*
 import java.util.*
 
 
@@ -59,6 +59,15 @@ class MainActivity : AppCompatActivity() {
             imgInboxMessage.visibility = View.VISIBLE
             imgWriteMessage.visibility = View.VISIBLE
             txCountNotReadMessage.visibility = View.VISIBLE
+
+
+            clEjadName.setOnClickListener {
+                startActivity(Intent(this, TextOnImageJava::class.java))
+            }
+
+            clMohasebeTashvighi.setOnClickListener(){
+                startActivity(Intent(this, MohasebeTashvighi::class.java))
+            }
 
             clAhkam.setOnClickListener(){
 
@@ -123,9 +132,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             clMorkhasi.setOnClickListener(){
-                val intent = Intent(this, MohasebeTashvighi::class.java)
-                startActivity(intent)
-                //startActivity(Intent(this, DarkhastMorkhasi::class.java))
+                startActivity(Intent(this, DarkhastMorkhasi::class.java))
+            }
+
+            clMohasebeTashvighi.setOnClickListener(){
+                startActivity(Intent(this, MohasebeTashvighi::class.java))
             }
 
             clGozareshKar.setOnClickListener(){
