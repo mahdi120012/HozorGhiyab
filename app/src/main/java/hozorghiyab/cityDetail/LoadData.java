@@ -2861,7 +2861,7 @@ public class LoadData {
                         e.printStackTrace();
                     }
                 }
-                txLastSeen.setText(new EnglishNumberToPersian().convert(lastSeen));
+                txLastSeen.setText(lastSeen);
 
 
             }

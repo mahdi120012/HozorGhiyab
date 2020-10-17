@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.view.MotionEvent
@@ -20,6 +22,8 @@ import hozorghiyab.customClasses.EnglishNumberToPersian
 import hozorghiyab.customClasses.SharedPrefClass
 import hozorghiyab.customClasses.TimeKononi
 import kotlinx.android.synthetic.main.makharej.*
+import kotlinx.android.synthetic.main.makharej.imgBack
+import kotlinx.android.synthetic.main.mohasebe_tashvighi.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.tanzim_jalase.*
 import kotlinx.android.synthetic.main.tanzim_jalase.etTarikh
@@ -28,6 +32,7 @@ import kotlinx.android.synthetic.main.tanzim_jalase.imgListJalasat
 import kotlinx.android.synthetic.main.tanzim_jalase.imgSend
 import kotlinx.android.synthetic.main.tanzim_jalase.spinner
 import kotlinx.android.synthetic.main.toolbar_button.*
+import java.text.DecimalFormat
 import java.util.*
 
 class Makharej : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog.OnTimeSetListener {
@@ -182,6 +187,41 @@ class Makharej : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.moh
             startActivity(Intent(this, InboxMessageChat::class.java))
             finish()
         }
+
+
+        etMablagh.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int,
+                                       count: Int) {
+                // TODO Auto-generated method stub
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int) {
+                // TODO Auto-generated method stub
+            }
+            override fun afterTextChanged(s: Editable) {
+                etMablagh.removeTextChangedListener(this)
+                try {
+                    var givenstring = s.toString()
+                    val longval: Long
+                    if (givenstring.contains(",")) {
+                        givenstring = givenstring.replace(",".toRegex(), "")
+                    }
+                    longval = givenstring.toLong()
+                    val formatter = DecimalFormat("#,###,###")
+                    val formattedString: String = formatter.format(longval)
+                    etMablagh.setText(EnglishNumberToPersian().convert(formattedString))
+                    etMablagh.setSelection(etMablagh.getText().length)
+                    // to place the cursor at the end of text
+                } catch (nfe: NumberFormatException) {
+                    nfe.printStackTrace()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                etMablagh.addTextChangedListener(this)
+            }
+        })
+
 
     }
 

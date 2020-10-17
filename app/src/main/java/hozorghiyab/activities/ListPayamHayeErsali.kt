@@ -157,6 +157,7 @@ class ListPayamHayeErsali : AppCompatActivity() {
             clGozareshat.visibility = View.VISIBLE
             imgSendNewMessageInTeacher.visibility = View.GONE
             imgTooTitlelbarMainAct.visibility = View.GONE
+            tabLayout.visibility = View.GONE
             txTitle.setText("لیست گزارشات")
         }
 

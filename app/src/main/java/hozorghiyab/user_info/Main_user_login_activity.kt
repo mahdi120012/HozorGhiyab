@@ -60,7 +60,7 @@ class Main_user_login_activity : AppCompatActivity() {
             val window = window
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor = Color.parseColor("#3fafa3")
+            window.statusBarColor = Color.parseColor("#44bba0")
             // KITKAT+
         } else {
             //below KITKAT

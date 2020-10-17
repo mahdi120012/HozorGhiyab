@@ -43,21 +43,20 @@
 
             <ImageView
                 android:id="@+id/imgTooTitlelbarMainActf"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/imgtolbariconmessage" />
+                app:srcCompat="@drawable/enter_exit" />
 
             <ImageView
                 android:id="@+id/imgBack"
                 android:layout_width="50dp"
-                android:layout_height="20dp"
+                android:layout_height="26dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginRight="6dp"
@@ -67,17 +66,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/back_white2" />
 
             <TextView
                 android:id="@+id/txReciverFamilyInTeacher6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:text="ثبت ورود خروج"
-                android:textSize="20sp"
-                app:fontFamily="@font/broya"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:fontFamily="@font/rmedium"
                 app:layout_constraintBottom_toBottomOf="@+id/imgBack"
                 app:layout_constraintEnd_toStartOf="@+id/imgBack"
                 app:layout_constraintTop_toTopOf="@+id/imgBack" />

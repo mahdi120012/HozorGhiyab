@@ -118,7 +118,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/clEjadName"
-                android:layout_width="116dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="6dp"
@@ -154,7 +154,7 @@
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/sahel"
                         android:text="ایجاد نامه"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/imgEjadName"
                         app:layout_constraintStart_toStartOf="@+id/imgEjadName"
@@ -164,7 +164,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/clMohasebeTashvighi"
-                android:layout_width="116dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="6dp"
@@ -247,7 +247,7 @@
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/sahel"
                         android:text="ثبت مخارج"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/imgMakharej"
                         app:layout_constraintStart_toStartOf="@+id/imgMakharej"

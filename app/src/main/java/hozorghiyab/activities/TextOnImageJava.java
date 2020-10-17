@@ -80,8 +80,11 @@ public class TextOnImageJava extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(TextOnImageJava.this, "ذخیره شد", Toast.LENGTH_SHORT).show();
-
+                if(passImageUri == null)
+                {
+                    Toast.makeText(TextOnImageJava.this, "عکسی انتخاب نشده", Toast.LENGTH_SHORT).show();
+                }else
+                {
                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
 
                 ContentValues values = new ContentValues();
@@ -95,10 +98,12 @@ public class TextOnImageJava extends AppCompatActivity {
                     outstream = getContentResolver().openOutputStream(uri);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outstream);
                     outstream.close();
-                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"ذخیره شد",Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                }
+
                 }
             }
         });
@@ -118,12 +123,12 @@ public class TextOnImageJava extends AppCompatActivity {
             public void onClick(View view) {
                 if(passImageUri == null)
                 {
-                    Toast.makeText(TextOnImageJava.this, "No Image Selected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TextOnImageJava.this, "عکسی انتخاب نشده", Toast.LENGTH_SHORT).show();
                 }else
                 {
                     if(TextUtils.isEmpty(addTextEditText.getText().toString()))
                     {
-                        addTextEditText.setError("Enter the text");
+                        addTextEditText.setError("متن را وارد نمایید");
                     }else
                     {
                         String text = addTextEditText.getText().toString();

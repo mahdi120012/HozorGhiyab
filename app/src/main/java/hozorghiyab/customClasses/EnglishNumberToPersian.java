@@ -45,6 +45,7 @@ public class EnglishNumberToPersian {
             else if (ch >= 0x06f0 && ch <= 0x06F9)
                 ch -= 0x06f0 - '0';
             chars[i] = ch;
+
         }
         return new String(chars);
     }

@@ -12,12 +12,15 @@ import hozorghiyab.customClasses.EnglishNumberToPersian
 import kotlinx.android.synthetic.main.mohasebe_tashvighi.*
 import kotlinx.android.synthetic.main.toolbar_button.*
 import java.text.DecimalFormat
+import java.util.*
 
 
 class MohasebeTashvighi : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mohasebe_tashvighi)
+        Locale.setDefault(Locale("en", "US"))
+
         btnMohasebe.setOnClickListener {
 
             if (etMizanHoghogh.text.toString() == ""
@@ -37,18 +40,16 @@ class MohasebeTashvighi : AppCompatActivity() {
             var saatKarkardRozaneh = EnglishNumberToPersian().persianToEnglish(etSaatKarkardRozaneh.text.toString().replace(",","")).toInt()
             var tedadRozHayeMah = EnglishNumberToPersian().persianToEnglish(etTedadRozHayeMah.text.toString()).toInt()
 
-                Toast.makeText(this,tedadRozHayeMah.toString(),Toast.LENGTH_SHORT).show()
 
 
             var d = (saatKarkardRozaneh*tedadRozHayeMah)
             var hoghoghSaati = mizanHoghoghGhanonKar/d
 
 
-            var a = (mizanHoghogh*tedadMah)/hoghoghSaati/saatKarkardRozaneh/tedadRozHayeMah
-            var b= 10/(String.format("%.1f",a).takeLast(1).toDouble())
-            var c = 30/b
+            var a = (mizanHoghogh*tedadMah)/hoghoghSaati/saatKarkardRozaneh/30
+            var b= (30/10)*(String.format("%.1f",a).takeLast(1).toDouble())
 
-            tcCalculate.setText(EnglishNumberToPersian().convert(String.format("%.2f",a).dropLast(3) + "ماه و " + String.format("%.0f",c) + "روز"))
+            tcCalculate.setText(EnglishNumberToPersian().convert(String.format("%.2f",a).dropLast(3) + " ماه و " + String.format("%.0f",b) + " روز "))
             }
         }
 
@@ -88,8 +89,10 @@ class MohasebeTashvighi : AppCompatActivity() {
                         givenstring = givenstring.replace(",".toRegex(), "")
                     }
                     longval = givenstring.toLong()
+
                     val formatter = DecimalFormat("#,###,###")
                     val formattedString: String = formatter.format(longval)
+
                     etMizanHoghogh.setText(EnglishNumberToPersian().convert(formattedString))
                     etMizanHoghogh.setSelection(etMizanHoghogh.getText().length)
                     // to place the cursor at the end of text
@@ -237,5 +240,7 @@ class MohasebeTashvighi : AppCompatActivity() {
         })
 
 
+
     }
+
 }
