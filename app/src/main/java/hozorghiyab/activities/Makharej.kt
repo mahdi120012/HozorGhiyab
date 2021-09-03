@@ -157,7 +157,7 @@ class Makharej : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com.moh
                 val timeKononi = TimeKononi()
                 var nowTime = timeKononi.persianTime
 
-                LoadData.sendMablagh(this, username,mablagh, tarikh ,tozihat,clWifiState,etMablagh,etTarikh,etTozihat)
+                LoadData.sendMablagh(this, username,selectedItemAdminId, mablagh, tarikh ,tozihat,clWifiState,etMablagh,etTarikh,etTozihat)
 
 
             }

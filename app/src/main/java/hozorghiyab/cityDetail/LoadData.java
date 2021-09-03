@@ -1540,18 +1540,19 @@ public class LoadData {
 
     }
 
-    public static void sendMablagh(final Context c, final String username, String mablagh,
+    public static void sendMablagh(final Context c, final String username, final String id_daryaft_konande, String mablagh,
                                           String tarikh,
                                           String tozihat, final ConstraintLayout clWifi, final EditText etMablagh,
                                           final EditText etTarikh, final EditText etTozihat) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String id_daryaft_konandeEncode= UrlEncoderClass.urlEncoder(id_daryaft_konande);
         String mablaghEncode= UrlEncoderClass.urlEncoder(mablagh);
         String tarikhEncode= UrlEncoderClass.urlEncoder(tarikh);
         String tozihatEncode= UrlEncoderClass.urlEncoder(tozihat);
 
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_sabt_makharej&username1=" + userNameEncode + "&mablagh=" + mablaghEncode + "&tarikh=" + tarikhEncode + "&tozihat=" + tozihatEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_sabt_makharej&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&mablagh=" + mablaghEncode + "&tarikh=" + tarikhEncode + "&tozihat=" + tozihatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1604,13 +1605,14 @@ public class LoadData {
     }
 
 
-    public static void sendDarkhastJalase(final Context c, final String username, String onvan,
-                                          String tarikhDarkhast,
+    public static void sendDarkhastJalase(final Context c, final String username,final String id_daryaft_konande,
+                                          String onvan, String tarikhDarkhast,
                                           String tarikhShoro, final ConstraintLayout clWifi, final EditText etOnvan,
                                           final EditText etTarikh, final EditText etSaat, final EditText etMokhatabin,
                                           final EditText etMakan, final EditText etTozihat) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String id_daryaft_konandeEncode= UrlEncoderClass.urlEncoder(id_daryaft_konande);
         String onvanEncode= UrlEncoderClass.urlEncoder(onvan);
         String tarikhDarkhastEncode= UrlEncoderClass.urlEncoder(tarikhDarkhast);
         String tarikhShoroEncode= UrlEncoderClass.urlEncoder(tarikhShoro);
@@ -1619,7 +1621,7 @@ public class LoadData {
         String makanEncode= UrlEncoderClass.urlEncoder(etMakan.getText().toString());
         String tozihatEncode= UrlEncoderClass.urlEncoder(etTozihat.getText().toString());
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_darkhast_jalase&username1=" + userNameEncode + "&tarikh_darkhast=" + tarikhDarkhastEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&onvan=" + onvanEncode + "&mokhatabin=" + mokhatabinEncode + "&makan=" + makanEncode + "&tozihat=" + tozihatEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_darkhast_jalase&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&tarikh_darkhast=" + tarikhDarkhastEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&onvan=" + onvanEncode + "&mokhatabin=" + mokhatabinEncode + "&makan=" + makanEncode + "&tozihat=" + tozihatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1737,15 +1739,17 @@ public class LoadData {
 
 
     public static void sendVorodKhorojEzafekari(final Context c, final String username,
-                                       String saatVorod, String saatKhoroj, String date,String elat, final String method, final ConstraintLayout clWifi) {
+                                       final String id_daryaft_konande, String saatVorod, String saatKhoroj,
+                                       String date,String elat, final String method, final ConstraintLayout clWifi) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String id_daryaft_konandeEncode= UrlEncoderClass.urlEncoder(id_daryaft_konande);
         String saatVorodEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatVorod));
         String saatKhorojEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatKhoroj));
         String dateEncode= UrlEncoderClass.urlEncoder(date);
         String elatEncode= UrlEncoderClass.urlEncoder(elat);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj_ezafe_kari&username1=" + userNameEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode + "&elat=" + elatEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj_ezafe_kari&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode + "&elat=" + elatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1798,14 +1802,16 @@ public class LoadData {
 
 
     public static void sendVorodKhoroj(final Context c, final String username,
-                                       String saatVorod, String saatKhoroj, String date, final String method, final ConstraintLayout clWifi) {
+                                       final String id_daryaft_konande, String saatVorod, String saatKhoroj,
+                                       String date, final String method, final ConstraintLayout clWifi) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String id_daryaft_konandeEncode= UrlEncoderClass.urlEncoder(id_daryaft_konande);
         String saatVorodEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatVorod));
         String saatKhorojEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatKhoroj));
         String dateEncode= UrlEncoderClass.urlEncoder(date);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj&username1=" + userNameEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode;
+        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -5453,8 +5459,8 @@ public class LoadData {
                         String elat = jsonObject.getString("elat");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        String user_id = jsonObject.getString("user_id");
-                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,user_id,0,null,null,null,null));
+                        String id_ersal_konande = jsonObject.getString("id_ersal_konande");
+                        recyclerModels.add(new RecyclerModel(lastId2,tarikh, saat_vorod,saat_khoroj,elat,vaziyat_taeid,family,id_ersal_konande,0,null,null,null,null));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -5890,11 +5896,11 @@ public class LoadData {
                         String saat_khoroj = jsonObject.getString("saat_khoroj");
                         String vaziyat_taeid = jsonObject.getString("vaziyat_taeid");
                         String family = jsonObject.getString("family");
-                        String user_id = jsonObject.getString("user_id");
+                        String id_ersal_konande = jsonObject.getString("id_ersal_konande");
                         String majmoeKarkard = jsonObject.getString("majmoe_karkard");
                         String ezafeKari = jsonObject.getString("noe");
 
-                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,majmoeKarkard,family,user_id,0,null,ezafeKari,saat_vorod,saat_khoroj));
+                        recyclerModels.add(new RecyclerModel(lastId2,new EnglishNumberToPersian().convert(tarikh), new EnglishNumberToPersian().convert(saat_vorod),new EnglishNumberToPersian().convert(saat_khoroj),vaziyat_taeid,majmoeKarkard,family,id_ersal_konande,0,null,ezafeKari,saat_vorod,saat_khoroj));
                         recyclerAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

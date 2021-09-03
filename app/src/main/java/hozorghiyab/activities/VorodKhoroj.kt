@@ -37,7 +37,8 @@ class VorodKhoroj : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.vorod_khoroj)
 
-        var username = SharedPrefClass.getUserId(this,"user")
+        var username = SharedPrefClass.getUserId(this, "user")
+
         val timeKononi = TimeKononi()
 
         var ezafe_kari = if (intent.getExtras() == null) {}else{intent.extras!!.getString("ezafe_kari")}
@@ -57,7 +58,7 @@ class VorodKhoroj : AppCompatActivity() {
             }
 
 
-            LoadData.loadVorodKhorojGhabliEzafeKari(this,etSaatVorod,etSaatKhoroj,etElat,timeKononi.persianTime,username,clWifiState)
+            LoadData.loadVorodKhorojGhabliEzafeKari(this, etSaatVorod, etSaatKhoroj, etElat, timeKononi.persianTime, username, clWifiState)
 
             etSaatVorod.setOnClickListener {
 
@@ -75,8 +76,8 @@ class VorodKhoroj : AppCompatActivity() {
 
 
                  mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                         etSaatVorod.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
-                     }, hour, minute, true) //Yes 24 hour time
+                     etSaatVorod.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
+                 }, hour, minute, true) //Yes 24 hour time
                      mTimePicker.setTitle("انتخاب زمان")
                      mTimePicker.show()
 
@@ -126,7 +127,7 @@ class VorodKhoroj : AppCompatActivity() {
                 } else if(saatVorod.equals(saatVorodGhabli)){
                     Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
                 }else {
-                    LoadData.sendVorodKhorojEzafekari(this, username, saatVorod, "",date,elat,"saatVorod",clWifiState)
+                    LoadData.sendVorodKhorojEzafekari(this, username, selectedItemAdminId, saatVorod, "", date, elat, "saatVorod", clWifiState)
                 }
             }
 
@@ -145,14 +146,14 @@ class VorodKhoroj : AppCompatActivity() {
                 } else if(saatVorod.equals(saatVorodGhabli) && saatKhoroj.equals(saatKhorojGhabli)){
                     Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
                 } else {
-                    LoadData.sendVorodKhorojEzafekari(this, username, saatVorod, saatKhoroj,date,elat,"saatKhoroj",clWifiState)
+                    LoadData.sendVorodKhorojEzafekari(this, username, selectedItemAdminId, saatVorod, saatKhoroj, date, elat, "saatKhoroj", clWifiState)
                 }
             }
 
 
         }else{
 
-            LoadData.loadVorodKhorojGhabli(this,etSaatVorod,etSaatKhoroj,timeKononi.persianTime,username,clWifiState)
+            LoadData.loadVorodKhorojGhabli(this, etSaatVorod, etSaatKhoroj, timeKononi.persianTime, username, clWifiState)
 
             etSaatVorod.setOnClickListener {
 
@@ -165,7 +166,7 @@ class VorodKhoroj : AppCompatActivity() {
                 if (etSaatVorod.text.equals("")){
                     etSaatVorod.setText(String.format("%02d:%02d", hour, minute))
                 }else{
-                    Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "ویرایش امکان پذیر نیست", Toast.LENGTH_SHORT).show()
                 }
 
 
@@ -191,7 +192,7 @@ class VorodKhoroj : AppCompatActivity() {
                     if (etSaatKhoroj.text.equals("")){
                         etSaatKhoroj.setText(String.format("%02d:%02d", hour, minute))
                     }else{
-                        Toast.makeText(this,"ویرایش امکان پذیر نیست",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "ویرایش امکان پذیر نیست", Toast.LENGTH_SHORT).show()
                     }
 
 
@@ -220,7 +221,7 @@ class VorodKhoroj : AppCompatActivity() {
                 } else if(saatVorod.equals(saatVorodGhabli)){
                     Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
                 }else {
-                    LoadData.sendVorodKhoroj(this, username, saatVorod, "",date,"saatVorod",clWifiState)
+                    LoadData.sendVorodKhoroj(this, username, selectedItemAdminId, saatVorod, "", date, "saatVorod", clWifiState)
                 }
             }
 
@@ -238,7 +239,7 @@ class VorodKhoroj : AppCompatActivity() {
                 } else if(saatVorod.equals(saatVorodGhabli) && saatKhoroj.equals(saatKhorojGhabli)){
                     Toast.makeText(this, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
                 } else {
-                    LoadData.sendVorodKhoroj(this, username, saatVorod, saatKhoroj,date,"saatKhoroj",clWifiState)
+                    LoadData.sendVorodKhoroj(this, username, selectedItemAdminId, saatVorod, saatKhoroj, date, "saatKhoroj", clWifiState)
                 }
             }
 

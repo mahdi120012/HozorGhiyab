@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.toolbar_button.*
 import java.text.DecimalFormat
 import java.util.*
 
-
 class MohasebeTashvighi : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

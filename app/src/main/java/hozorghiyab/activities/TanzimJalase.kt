@@ -168,7 +168,7 @@ class TanzimJalase : AppCompatActivity(), DatePickerDialog.OnDateSetListener,com
                 val timeKononi = TimeKononi()
                 var nowTime = timeKononi.persianTime
 
-                LoadData.sendDarkhastJalase(this, username,onvan, timeKononi.persianTime  ,tarikh + " " + saat,clWifiState,etOnvan,etTarikh,etSaat,etMokhatabin,etMakan,etTozihat)
+                LoadData.sendDarkhastJalase(this, username, selectedItemAdminId, onvan, timeKononi.persianTime  ,tarikh + " " + saat,clWifiState,etOnvan,etTarikh,etSaat,etMokhatabin,etMakan,etTozihat)
 
 
             }
