@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity() {
         nav_footer_txVesionCodeInMainPageTeacher.setText("نسخه " + AppVersionName.getVersionName(this))
 
         val appUpdater = AppUpdater(this).setUpdateFrom(UpdateFrom.JSON).
-                setUpdateJSON("http://robika.ir/ultitled/practice/tavasi_update_checker.json").
+                setUpdateJSON("http://hozori.ir/android/update_checker.json").
                 setTitleOnUpdateAvailable("بروزرسانی جدید موجوده!").setButtonUpdate("بروزرسانی").
                 setButtonDismiss("فعلا نه").setButtonDoNotShowAgain("")
         appUpdater.start()

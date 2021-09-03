@@ -64,6 +64,8 @@ public class LoadData {
     public static String lastId2 = "0";
     public static String lastId3 = "0";
     public static String lastId5 = "0";
+    public static String baseUrl = "http://hozori.ir/android/load_data.php";
+
 
     public static boolean itShouldLoadMore = true;
     public static String tedadPayamKhangeNashodeServise = "";
@@ -567,7 +569,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=remove_message&message_id=" + messageIdEncode;
+        String url= baseUrl + "?action=remove_message&message_id=" + messageIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال انجام...");
@@ -673,7 +675,7 @@ public class LoadData {
     public static void removDarkhastJalase(final Context c, String id) {
 
         String darkhastJalaseIdEncode = UrlEncoderClass.urlEncoder(id);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=remove_darkhast_jalase&darkhast_jalase_id=" + darkhastJalaseIdEncode;
+        String url= baseUrl+"?action=remove_darkhast_jalase&darkhast_jalase_id=" + darkhastJalaseIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -735,7 +737,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=remove_jalase&jalase_id=" + jalaseIdEncode + "&class_id=" + classIdEncode;
+        String url= baseUrl+"?action=remove_jalase&jalase_id=" + jalaseIdEncode + "&class_id=" + classIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -841,7 +843,7 @@ public class LoadData {
 
     public static void removeClass(final Context c, String classId) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=remove_class&class_id=" + classId;
+        String url= baseUrl + "?action=remove_class&class_id=" + classId;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -946,7 +948,7 @@ public class LoadData {
 
     public static void removeStudent(final Context c, String student_id) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=remove_student&student_id=" + student_id;
+        String url= baseUrl + "?action=remove_student&student_id=" + student_id;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -1063,7 +1065,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_student&limit=" + LOAD_LIMIT + "&student_name=" + studentNameEncode + "&class=" + classNameEncode + "&user1=" + username;
+        String url= baseUrl + "?action=send_student&limit=" + LOAD_LIMIT + "&student_name=" + studentNameEncode + "&class=" + classNameEncode + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -1184,7 +1186,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        final String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_jalase&limit=" + LOAD_LIMIT + "&name=" + jalaseNameEncode + "&class=" + classNameEncode + "&user1=" + username;
+        final String url= baseUrl + "?action=send_jalase&limit=" + LOAD_LIMIT + "&name=" + jalaseNameEncode + "&class=" + classNameEncode + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -1301,7 +1303,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=loadmore_jalase&lastId=" + lastId + "&limit=" + LOAD_LIMIT + "&user1=" + username + "&class=" + classNameEncode ;
+        String url = baseUrl + "?action=loadmore_jalase&lastId=" + lastId + "&limit=" + LOAD_LIMIT + "&user1=" + username + "&class=" + classNameEncode ;
 
         itShouldLoadMore = false;
         progressBar.setVisibility(View.VISIBLE);
@@ -1361,7 +1363,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=loadmore_student&lastId=" + lastId + "&limit=" + LOAD_LIMIT + "&user1=" + username + "&class=" + classNameEncode;
+        String url = baseUrl + "?action=loadmore_student&lastId=" + lastId + "&limit=" + LOAD_LIMIT + "&user1=" + username + "&class=" + classNameEncode;
 
         itShouldLoadMore = false;
         progressBar.setVisibility(View.VISIBLE);
@@ -1431,7 +1433,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_student&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode;
+        String url= baseUrl + "?action=send_message_student&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -1552,7 +1554,7 @@ public class LoadData {
         String tozihatEncode= UrlEncoderClass.urlEncoder(tozihat);
 
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_sabt_makharej&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&mablagh=" + mablaghEncode + "&tarikh=" + tarikhEncode + "&tozihat=" + tozihatEncode;
+        String url= baseUrl + "?action=send_sabt_makharej&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&mablagh=" + mablaghEncode + "&tarikh=" + tarikhEncode + "&tozihat=" + tozihatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1621,7 +1623,7 @@ public class LoadData {
         String makanEncode= UrlEncoderClass.urlEncoder(etMakan.getText().toString());
         String tozihatEncode= UrlEncoderClass.urlEncoder(etTozihat.getText().toString());
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_darkhast_jalase&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&tarikh_darkhast=" + tarikhDarkhastEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&onvan=" + onvanEncode + "&mokhatabin=" + mokhatabinEncode + "&makan=" + makanEncode + "&tozihat=" + tozihatEncode;
+        String url= baseUrl + "?action=send_darkhast_jalase&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&tarikh_darkhast=" + tarikhDarkhastEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&onvan=" + onvanEncode + "&mokhatabin=" + mokhatabinEncode + "&makan=" + makanEncode + "&tozihat=" + tozihatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1688,7 +1690,7 @@ public class LoadData {
         String elatEncode= UrlEncoderClass.urlEncoder(elat);
 
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_darkhast_morkhasi&username1=" + userNameEncode + "&tarikh=" + tarikhEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&tarikh_payan=" + tarikhPayanEncode + "&elat=" + elatEncode;
+        String url= baseUrl + "?action=send_darkhast_morkhasi&username1=" + userNameEncode + "&tarikh=" + tarikhEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&tarikh_payan=" + tarikhPayanEncode + "&elat=" + elatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1749,7 +1751,7 @@ public class LoadData {
         String dateEncode= UrlEncoderClass.urlEncoder(date);
         String elatEncode= UrlEncoderClass.urlEncoder(elat);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj_ezafe_kari&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode + "&elat=" + elatEncode;
+        String url= baseUrl + "?action=send_vorod_khoroj_ezafe_kari&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode + "&elat=" + elatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1811,7 +1813,7 @@ public class LoadData {
         String saatKhorojEncode= UrlEncoderClass.urlEncoder(new EnglishNumberToPersian().convertToEnglish(saatKhoroj));
         String dateEncode= UrlEncoderClass.urlEncoder(date);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_vorod_khoroj&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode;
+        String url= baseUrl + "?action=send_vorod_khoroj&username1=" + userNameEncode + "&id_daryaft_konande=" + id_daryaft_konandeEncode + "&saat_vorod=" + saatVorodEncode + "&saat_khoroj=" + saatKhorojEncode + "&date=" + dateEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1873,7 +1875,7 @@ public class LoadData {
         String natigeEncode= UrlEncoderClass.urlEncoder(etNatige.getText().toString());
         String dateEncode= UrlEncoderClass.urlEncoder(date);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_gozaresh_kar&username1=" + userNameEncode + "&id_daryaft_konande=" + idDaryaftKonandeEncode + "&gozaresh=" + gozareshEncode + "&natige=" + natigeEncode + "&date=" + dateEncode;
+        String url= baseUrl + "?action=send_gozaresh_kar&username1=" + userNameEncode + "&id_daryaft_konande=" + idDaryaftKonandeEncode + "&gozaresh=" + gozareshEncode + "&natige=" + natigeEncode + "&date=" + dateEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1937,7 +1939,7 @@ public class LoadData {
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
         String conversationIdEncode= UrlEncoderClass.urlEncoder(conversationId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_first_null_message&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&conversation_id=" + conversationIdEncode;
+        String url= baseUrl + "?action=send_first_null_message&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&conversation_id=" + conversationIdEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -1987,7 +1989,7 @@ public class LoadData {
         String userNameEncode = UrlEncoderClass.urlEncoder(username);
         String lastSeenEncode = UrlEncoderClass.urlEncoder(lastSeen);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_last_seen&username1=" + userNameEncode + "&last_seen=" + lastSeenEncode;
+        String url= baseUrl + "?action=send_last_seen&username1=" + userNameEncode + "&last_seen=" + lastSeenEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -2048,7 +2050,7 @@ public class LoadData {
         String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_sepordan_kar&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&kar1=" + kar1Encode + "&kar2=" + kar2Encode + "&kar3=" + kar3Encode + "&kar4=" + kar4Encode + "&kar5=" + kar5Encode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=send_sepordan_kar&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&kar1=" + kar1Encode + "&kar2=" + kar2Encode + "&kar3=" + kar3Encode + "&kar4=" + kar4Encode + "&kar5=" + kar5Encode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -2112,7 +2114,7 @@ public class LoadData {
         String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -2175,7 +2177,7 @@ public class LoadData {
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
         String id_karEncode= UrlEncoderClass.urlEncoder(id_kar);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_roye_sepordan_kar&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&id_kar=" + id_karEncode;
+        String url= baseUrl + "?action=send_message_roye_sepordan_kar&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode + "&id_kar=" + id_karEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -2255,7 +2257,7 @@ public class LoadData {
         String nowTimeEncode= UrlEncoderClass.urlEncoder(nowTime);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=send_message_teacher&username1=" + userNameEncode + "&std_id=" + stdIdEncode + "&onvan=" + onvanEncode + "&matn=" + matnEncode + "&now_time=" + nowTimeEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -2313,7 +2315,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=sendclass&limit=" + LOAD_LIMIT + "&school=" + schoolNameEncode + "&class=" + classNameEncode + "&user1=" + username;
+        String url= baseUrl + "?action=sendclass&limit=" + LOAD_LIMIT + "&school=" + schoolNameEncode + "&class=" + classNameEncode + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -2540,7 +2542,7 @@ public class LoadData {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_count_not_read_message&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_count_not_read_message&user1=" + usernameEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -2585,7 +2587,7 @@ public class LoadData {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
         String tarikhEncode = UrlEncoderClass.urlEncoder(tarikh);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_saat_vorod_khoroj_ghabli_ezafe_kari&user1=" + usernameEncode + "&tarikhEncode=" + tarikhEncode;
+        String url= baseUrl + "?action=load_saat_vorod_khoroj_ghabli_ezafe_kari&user1=" + usernameEncode + "&tarikhEncode=" + tarikhEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -2646,7 +2648,7 @@ public class LoadData {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
         String tarikhEncode = UrlEncoderClass.urlEncoder(tarikh);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_saat_vorod_khoroj_ghabli&user1=" + usernameEncode + "&tarikhEncode=" + tarikhEncode;
+        String url= baseUrl + "?action=load_saat_vorod_khoroj_ghabli&user1=" + usernameEncode + "&tarikhEncode=" + tarikhEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -2701,7 +2703,7 @@ public class LoadData {
 
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_teacher_name&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_teacher_name&user1=" + usernameEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -2751,7 +2753,7 @@ public class LoadData {
                                                              final ConstraintLayout clWifi) {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_teacher_name&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_teacher_name&user1=" + usernameEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -2839,7 +2841,7 @@ public class LoadData {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(userName);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_last_seen&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_last_seen&user1=" + usernameEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -2890,7 +2892,7 @@ public class LoadData {
                                                              final ConstraintLayout clWifi) {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_teacher_name&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_teacher_name&user1=" + usernameEncode;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -2978,7 +2980,7 @@ public class LoadData {
                                                              final TextView net_state,
                                                              final TextView txStudentName, final TextView txCountNotReadMessage,
                                                              final ImageView imgStudentPicture, final ConstraintLayout clWifi) {
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php"+urlAppend;
+        String url= baseUrl + urlAppend;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -3070,7 +3072,7 @@ public class LoadData {
                                      final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
                                      final ArrayList<RecyclerModel> rModelsYouHaveKnow) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_time_takhir&limit=" + LOAD_LIMIT;
+        String url= baseUrl + "?action=load_time_takhir&limit=" + LOAD_LIMIT;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -3189,7 +3191,7 @@ public class LoadData {
                                      final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
                                      final ArrayList<RecyclerModel> rModelsYouHaveKnow) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_admin_list&limit=" + LOAD_LIMIT + "&user1=" + username;
+        String url= baseUrl + "?action=load_admin_list&limit=" + LOAD_LIMIT + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -3257,7 +3259,7 @@ public class LoadData {
                                      final RecyclerAdapterYouHaveKnow rAdapterYouHaveKnow,
                                      final ArrayList<RecyclerModel> rModelsYouHaveKnow) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=loadclass&limit=" + LOAD_LIMIT + "&user1=" + username;
+        String url= baseUrl + "?action=loadclass&limit=" + LOAD_LIMIT + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -3373,7 +3375,7 @@ public class LoadData {
     public static void updatePassword(final Context c, final String username, final String newPassword,
                                       final EditText etNewPassword, final EditText etTekrarNewPassword,final Dialog dialog) {
 
-        String url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_password&username=" + UrlEncoderClass.urlEncoder(username) + "&new_password=" +  UrlEncoderClass.urlEncoder(newPassword);
+        String url = baseUrl + "?action=update_password&username=" + UrlEncoderClass.urlEncoder(username) + "&new_password=" +  UrlEncoderClass.urlEncoder(newPassword);
 
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
@@ -3427,19 +3429,19 @@ public class LoadData {
         if (noeGozaresh != null){
 
             if (noeGozaresh.equals("saat_vorod_khoroj")){
-                url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_vorod_khoroj&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+                url = baseUrl + "?action=update_vaziyat_vorod_khoroj&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
 
             }else if(noeGozaresh.equals("darkhasti_morkhasi")){
-                url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_morkhasi&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+                url = baseUrl + "?action=update_vaziyat_morkhasi&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
 
             }else if (noeGozaresh.equals("darkhast_jalase")){
                 Toast.makeText(c, idGozaresh, Toast.LENGTH_SHORT).show();
-                url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_darkhast_jalase&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+                url = baseUrl + "?action=update_vaziyat_darkhast_jalase&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
 
             }
 
         }else {
-            url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_vaziyat_gozaresh&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
+            url = baseUrl + "?action=update_vaziyat_gozaresh&gozaresh_id=" + UrlEncoderClass.urlEncoder(idGozaresh) + "&vaziyat=" +  UrlEncoderClass.urlEncoder(vaziyat);
         }
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
@@ -3494,7 +3496,7 @@ public class LoadData {
     public static void updateStudentInHozorGhiyabGhayebToHazer(final Context c, String student_id,final ImageView imgTik,
                                                                final ArrayList<RecyclerModel> recyclerModels, final int position) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_student_ghtoh&student_id=" + student_id;
+        String url= baseUrl + "?action=update_student_ghtoh&student_id=" + student_id;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -3610,7 +3612,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_jalase_tozihat&jalase_id=" + jalaseId + "&tozihat=" + tozihatEncode + "&taklif=" + taklifEncode;
+        String url= baseUrl + "?action=update_jalase_tozihat&jalase_id=" + jalaseId + "&tozihat=" + tozihatEncode + "&taklif=" + taklifEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -3727,7 +3729,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_student_time_takhir&student_id=" + student_id + "&time_takhir=" + timeTakhirEncode;
+        String url= baseUrl + "?action=update_student_time_takhir&student_id=" + student_id + "&time_takhir=" + timeTakhirEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -3780,7 +3782,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_student_vaziyat_darsi&student_id=" + student_id + "&time_takhir=" + timeTakhirEncode;
+        String url= baseUrl + "?action=update_student_vaziyat_darsi&student_id=" + student_id + "&time_takhir=" + timeTakhirEncode;
         itShouldLoadMore = false;
         /*final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -3833,7 +3835,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_student_vaziyat_akhlaghi&student_id=" + student_id + "&time_takhir=" + timeTakhirEncode;
+        String url= baseUrl + "?action=update_student_vaziyat_akhlaghi&student_id=" + student_id + "&time_takhir=" + timeTakhirEncode;
         itShouldLoadMore = false;
         /*final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -3880,7 +3882,7 @@ public class LoadData {
     public static void updateStudentInHozorGhiyab(final Context c, String student_id, final ImageView imgTik,
                                                   final ArrayList<RecyclerModel> recyclerModels, final int position) {
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=update_student&student_id=" + student_id;
+        String url= baseUrl + "?action=update_student&student_id=" + student_id;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -4002,7 +4004,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_student_hozorghiyab&limit=" + LOAD_LIMIT + "&class=" + classNameEncode + "&jalase=" + jalaseNameEncode + "&user1=" + username;
+        String url= baseUrl + "?action=load_student_hozorghiyab&limit=" + LOAD_LIMIT + "&class=" + classNameEncode + "&jalase=" + jalaseNameEncode + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -4139,7 +4141,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_student&limit=" + LOAD_LIMIT + "&class=" + selectedClassEncode + "&user1=" + username;
+        String url= baseUrl + "?action=load_student&limit=" + LOAD_LIMIT + "&class=" + selectedClassEncode + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -4266,7 +4268,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_dars_result_student&limit=" + LOAD_LIMIT + "&dars_id=" + selectedClassEncode + "&user1=" + username;
+        String url= baseUrl + "?action=load_dars_result_student&limit=" + LOAD_LIMIT + "&dars_id=" + selectedClassEncode + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -4395,7 +4397,7 @@ public class LoadData {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_jalasat&limit=" + LOAD_LIMIT + "&class=" + selectedClassEncode + "&user1=" + username;
+        String url= baseUrl + "?action=load_jalasat&limit=" + LOAD_LIMIT + "&class=" + selectedClassEncode + "&user1=" + username;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -4521,7 +4523,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_dars_list&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_dars_list&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -4648,7 +4650,7 @@ public class LoadData {
         String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
         String idKarEncode = UrlEncoderClass.urlEncoder(idKar);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_gozareshat_under_sepordan_kar_with_limit&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode + "&id_kar=" + idKarEncode + "&last_id=" + lastId2;
+        String url= baseUrl + "?action=load_gozareshat_under_sepordan_kar_with_limit&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode + "&id_kar=" + idKarEncode + "&last_id=" + lastId2;
         itShouldLoadMore = false;
        /* final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -4729,7 +4731,7 @@ public class LoadData {
         final String usernameIdEncode = UrlEncoderClass.urlEncoder(username);
         final String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat_witdh_last_load&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&mokhatab_id=" + mokhatabIdEncode + "&lastId=" + lastId3;
+        String url= baseUrl + "?action=load_pv_chat_witdh_last_load&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&mokhatab_id=" + mokhatabIdEncode + "&lastId=" + lastId3;
         itShouldLoadMore = false;
         //final ProgressDialog progressDialog = new ProgressDialog(c);
         //progressDialog.setMessage("درحال بارگزاری...");
@@ -4805,7 +4807,7 @@ public class LoadData {
 
         final String usernameIdEncode = UrlEncoderClass.urlEncoder(username);
         final String mokhatabIdEncode = UrlEncoderClass.urlEncoder(mokhatabId);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_pv_chat&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&mokhatab_id=" + mokhatabIdEncode + "&lastId=" + lastId3;
+        String url= baseUrl + "?action=load_pv_chat&limit=" + LOAD_LIMIT + "&username=" + usernameIdEncode + "&mokhatab_id=" + mokhatabIdEncode + "&lastId=" + lastId3;
         itShouldLoadMore = false;
         //final ProgressDialog progressDialog = new ProgressDialog(c);
         //progressDialog.setMessage("درحال بارگزاری...");
@@ -4880,7 +4882,7 @@ public class LoadData {
                                                           final String username, final ConstraintLayout clWifi) {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_message&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode ;
+        String url= baseUrl + "?action=load_message&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode ;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -4960,7 +4962,7 @@ public class LoadData {
         String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
         String idKarEncode = UrlEncoderClass.urlEncoder(idKar);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_gozareshat_under_sepordan_kar&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode + "&id_kar=" + idKarEncode;
+        String url= baseUrl + "?action=load_gozareshat_under_sepordan_kar&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode + "&id_kar=" + idKarEncode;
         itShouldLoadMore = false;
        /* final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -5040,7 +5042,7 @@ public class LoadData {
         String noeEncode = UrlEncoderClass.urlEncoder(noe);
         String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_recived_message_chat_tab&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        String url= baseUrl + "?action=load_recived_message_chat_tab&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
        /* final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -5123,7 +5125,7 @@ public class LoadData {
         String noeEncode = UrlEncoderClass.urlEncoder(noe);
         String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_recived_message_chat_tab&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        String url= baseUrl + "?action=load_recived_message_chat_tab&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
        /* final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -5197,7 +5199,7 @@ public class LoadData {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
         String noeEncode = UrlEncoderClass.urlEncoder(noe);
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_recived_message_teacher&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=load_recived_message_teacher&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
        /* final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -5275,7 +5277,7 @@ public class LoadData {
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
         String noeMessageEncode= UrlEncoderClass.urlEncoder(noeMessage);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result_chat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
+        String url= baseUrl + "?action=load_search_result_chat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -5352,7 +5354,7 @@ public class LoadData {
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
         String noeMessageEncode= UrlEncoderClass.urlEncoder(noeMessage);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_search_result_chat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
+        String url= baseUrl + "?action=load_search_result_chat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&query=" + queryEncode + "&noe=" + noeEncode + "&noe_message=" + noeMessageEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -5425,7 +5427,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String mokhatabIdEncode= UrlEncoderClass.urlEncoder(mokhatabId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi_dar_bakhsh_pv&limit=" + LOAD_LIMIT + "&username=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        String url= baseUrl + "?action=list_darkhast_morkhasi_dar_bakhsh_pv&limit=" + LOAD_LIMIT + "&username=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -5497,7 +5499,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_makharej&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=list_makharej&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -5577,7 +5579,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_jalase&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=list_darkhast_jalase&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -5653,7 +5655,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_darkhast_morkhasi&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=list_darkhast_morkhasi&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -5725,7 +5727,7 @@ public class LoadData {
         String noeEncode = UrlEncoderClass.urlEncoder(noe);
         String noeUserEncode = UrlEncoderClass.urlEncoder(noeUser);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=majmoe_kol_gozareshat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        String url= baseUrl + "?action=majmoe_kol_gozareshat&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode + "&noe_user=" + noeUserEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -5790,7 +5792,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String mokhatabIdEncode= UrlEncoderClass.urlEncoder(mokhatabId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_majmoe_karkard&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        String url= baseUrl + "?action=list_majmoe_karkard&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -5863,7 +5865,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String mokhatabIdEncode= UrlEncoderClass.urlEncoder(mokhatabId);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_vorod_khoroj_ersali_dar_pv&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
+        String url= baseUrl + "?action=list_vorod_khoroj_ersali_dar_pv&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&mokhatab_id=" + mokhatabIdEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -5936,7 +5938,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=list_vorod_khoroj_ersali&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode  +"&noe=" + noeEncode;
+        String url= baseUrl + "?action=list_vorod_khoroj_ersali&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode  +"&noe=" + noeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("درحال بارگزاری...");
@@ -6009,7 +6011,7 @@ public class LoadData {
         String usernameEncode= UrlEncoderClass.urlEncoder(username);
         String noeEncode= UrlEncoderClass.urlEncoder(noe);
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_list_payamhaye_ersali_teacher&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
+        String url= baseUrl + "?action=load_list_payamhaye_ersali_teacher&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode + "&noe=" + noeEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -6090,7 +6092,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_list_hameye_payam_ha&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_list_hameye_payam_ha&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
         itShouldLoadMore = false;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -6164,7 +6166,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_list_payamhaye_ersali_student&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_list_payamhaye_ersali_student&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
         itShouldLoadMore = false;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -6235,7 +6237,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=load_recived_message_student&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        String url= baseUrl + "?action=load_recived_message_student&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
         itShouldLoadMore = false;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -6309,7 +6311,7 @@ public class LoadData {
             e.printStackTrace();
         }
 
-        String url= "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=loadclass&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
+        String url= baseUrl + "?action=loadclass&limit=" + LOAD_LIMIT + "&user1=" + usernameEncode;
         itShouldLoadMore = false;
         final ProgressDialog progressDialog = new ProgressDialog(c);
         progressDialog.setMessage("Loading...");
@@ -6427,7 +6429,7 @@ public class LoadData {
                                             final ProgressBar progressBar,String username) {
 
 
-        String url = "http://robika.ir/ultitled/practice/tavasi_load_data.php?action=loadmore_class&lastId=" + lastId + "&limit=" + LOAD_LIMIT + "&user1=" + username;
+        String url = baseUrl + "?action=loadmore_class&lastId=" + lastId + "&limit=" + LOAD_LIMIT + "&user1=" + username;
 
         itShouldLoadMore = false;
         progressBar.setVisibility(View.VISIBLE);
