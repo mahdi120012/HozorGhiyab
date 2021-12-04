@@ -20,6 +20,7 @@ public class SharedPrefClass {
         sharedPreferences.edit().putString("name", "").commit();
         sharedPreferences.edit().putString("noe", "").commit();
         sharedPreferences.edit().putString("tedad_payam_khande_nashode", "").commit();
+        sharedPreferences.edit().putString("picture", "").commit();
     }
 
 }

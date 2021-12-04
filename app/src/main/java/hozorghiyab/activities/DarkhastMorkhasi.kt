@@ -162,7 +162,7 @@ class DarkhastMorkhasi : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             } else {
                 val timeKononi = TimeKononi()
 
-                LoadData.sendDarkhastMorkhasi(this, username, timeKononi.persianTime  ,tarikhPayan + " " + saatKhoroj,tarikhShoro + " " + saatVorod, elat,clWifiState)
+                LoadData.sendDarkhastMorkhasi(this, username, selectedItemAdminId, timeKononi.persianTime  ,tarikhPayan + " " + saatKhoroj,tarikhShoro + " " + saatVorod, elat,clWifiState)
             }
         }
 

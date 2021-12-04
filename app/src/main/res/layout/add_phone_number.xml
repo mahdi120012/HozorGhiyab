@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/back_login" />
+
+            <ImageView
+                android:id="@+id/imgNavigationInLoginPage"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/menu_icon" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/rmedium"
+                android:text="حضور غیاب"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgNavigationInLoginPage" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/rmedium"
+                android:text="خوش آمدید"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/textView43"
+                app:layout_constraintStart_toStartOf="@+id/textView43"
+                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/rmedium"
+                android:text="رمز ورود"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/rmedium"
+                android:text="شماره همراه"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@+id/etCounryName" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rmedium"
+                android:text="کشور"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/etCounryName"
+                app:layout_constraintEnd_toEndOf="@+id/etCounryName" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/imgEdame"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/green_background_button"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
+                app:layout_constraintStart_toStartOf="@+id/etCountryCode"
+                app:layout_constraintTop_toBottomOf="@+id/etPassword">
+
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/rmedium"
+                    android:text="ادامه"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintGuide_begin="55dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="353dp"
+                android:layout_marginEnd="80dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_end="55dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:hint="--- --- ----"
+                android:inputType="number"
+                android:maxLength="11"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/etCounryName"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/etCountryCode"
+                app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:ems="10"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:hint="*******"
+                android:inputType="textPassword"
+                android:maxLength="11"
+                android:padding="10dp"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/etCounryName"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+            <EditText
+                android:id="@+id/etCountryCode"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:editable="false"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:gravity="center"
+                android:hint="+98"
+                android:inputType="number"
+                android:maxLength="11"
+                android:padding="10dp"
+                android:text="+98"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/etPhoneNumber"
+                app:layout_constraintStart_toStartOf="@+id/etCounryName"
+                app:layout_constraintTop_toTopOf="@+id/etPhoneNumber" />
+
+
+            <EditText
+                android:id="@+id/etCounryName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                android:background="@xml/edittext_style"
+                android:backgroundTint="#edecec"
+                android:editable="true"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:gravity="left"
+                android:hint="Country"
+                android:inputType="number"
+                android:maxLength="11"
+                android:padding="10dp"
+                android:text="Iran"
+                android:textColorHighlight="#90b1e8"
+                android:textCursorDrawable="@xml/color_cursor"
+                android:textSize="15sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/textView44"
+                app:layout_constraintStart_toStartOf="@+id/textView44"
+                app:layout_constraintTop_toBottomOf="@+id/textView44"
+                app:srcCompat="@drawable/hozorghiyabicon" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="200dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/imgEdame" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

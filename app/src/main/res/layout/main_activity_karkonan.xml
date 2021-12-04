@@ -107,13 +107,12 @@
                 android:id="@+id/clMohasebeTashvighi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="6dp"
                 app:cardPreventCornerOverlap="false"
-                app:layout_constraintEnd_toEndOf="@+id/clAhkam"
-                app:layout_constraintStart_toStartOf="@+id/clAhkam"
-                app:layout_constraintTop_toBottomOf="@+id/clAhkam">
+                app:layout_constraintEnd_toEndOf="@+id/clMorkhasi"
+                app:layout_constraintStart_toStartOf="@+id/clMorkhasi"
+                app:layout_constraintTop_toTopOf="@+id/clSabtmakharej">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -157,8 +156,8 @@
                 app:cardElevation="6dp"
                 app:cardPreventCornerOverlap="false"
                 app:layout_constraintBottom_toBottomOf="@+id/clJalasat"
-                app:layout_constraintEnd_toEndOf="@+id/clMorkhasi"
-                app:layout_constraintStart_toStartOf="@+id/clMorkhasi"
+                app:layout_constraintEnd_toEndOf="@+id/clVorodKhoroj"
+                app:layout_constraintStart_toStartOf="@+id/clVorodKhoroj"
                 app:layout_constraintTop_toTopOf="@+id/clJalasat">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -294,16 +293,16 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/clAhkam"
-                android:layout_width="0dp"
+                android:layout_width="116dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="6dp"
                 app:cardPreventCornerOverlap="false"
-                app:layout_constraintEnd_toEndOf="@+id/clGozareshKar"
-                app:layout_constraintStart_toStartOf="@+id/clGozareshKar"
-                app:layout_constraintTop_toBottomOf="@+id/clGozareshKar">
+                app:layout_constraintEnd_toEndOf="@+id/clJalasat"
+                app:layout_constraintStart_toStartOf="@+id/clJalasat"
+                app:layout_constraintTop_toBottomOf="@+id/clJalasat">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -447,13 +446,13 @@
                 android:id="@+id/clJalasat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="6dp"
                 app:cardPreventCornerOverlap="false"
-                app:layout_constraintBottom_toBottomOf="@+id/clAhkam"
-                app:layout_constraintEnd_toEndOf="@+id/clVorodKhoroj"
-                app:layout_constraintStart_toStartOf="@+id/clVorodKhoroj"
-                app:layout_constraintTop_toTopOf="@+id/clAhkam">
+                app:layout_constraintEnd_toEndOf="@+id/clGozareshKar"
+                app:layout_constraintStart_toStartOf="@+id/clGozareshKar"
+                app:layout_constraintTop_toBottomOf="@+id/clGozareshKar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
 

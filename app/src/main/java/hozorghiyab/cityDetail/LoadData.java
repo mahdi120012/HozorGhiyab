@@ -55,6 +55,7 @@ import hozorghiyab.cityDetail.placeComment.RecyclerModelPlaceComment;
 import hozorghiyab.customClasses.EnglishNumberToPersian;
 import hozorghiyab.customClasses.Keyboard;
 import hozorghiyab.customClasses.SharedPrefClass;
+import hozorghiyab.customClasses.TimeKononi;
 import hozorghiyab.listCityACT.CityAdapter;
 
 public class LoadData {
@@ -64,7 +65,7 @@ public class LoadData {
     public static String lastId2 = "0";
     public static String lastId3 = "0";
     public static String lastId5 = "0";
-    public static String baseUrl = "http://hozori.ir/android/load_data.php";
+    public static String baseUrl = "https://hozori.ir/android/load_data.php";
 
 
     public static boolean itShouldLoadMore = true;
@@ -1567,6 +1568,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -1636,6 +1638,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -1680,17 +1683,18 @@ public class LoadData {
     }
 
 
-    public static void sendDarkhastMorkhasi(final Context c, final String username,String tarikh, String tarikhShoro,
+    public static void sendDarkhastMorkhasi(final Context c, final String username, String idDaryaftKonande, String tarikh, String tarikhShoro,
                                        String tarikhPayan, String elat ,final ConstraintLayout clWifi) {
 
         String userNameEncode= UrlEncoderClass.urlEncoder(username);
+        String idDaryaftKonandeEncode = UrlEncoderClass.urlEncoder(idDaryaftKonande);
         String tarikhEncode= UrlEncoderClass.urlEncoder(tarikh);
         String tarikhPayanEncode= UrlEncoderClass.urlEncoder(tarikhShoro);
         String tarikhShoroEncode= UrlEncoderClass.urlEncoder(tarikhPayan);
         String elatEncode= UrlEncoderClass.urlEncoder(elat);
 
 
-        String url= baseUrl + "?action=send_darkhast_morkhasi&username1=" + userNameEncode + "&tarikh=" + tarikhEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&tarikh_payan=" + tarikhPayanEncode + "&elat=" + elatEncode;
+        String url= baseUrl + "?action=send_darkhast_morkhasi&username1=" + userNameEncode + "&id_daryaft_konande=" + idDaryaftKonandeEncode + "&tarikh=" + tarikhEncode + "&tarikh_shoro=" + tarikhShoroEncode + "&tarikh_payan=" + tarikhPayanEncode + "&elat=" + elatEncode;
         itShouldLoadMore = false;
         ProgressDialogClass.showProgress(c);
 
@@ -1703,6 +1707,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -1764,6 +1769,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -1826,6 +1832,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -1888,6 +1895,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -1984,12 +1992,11 @@ public class LoadData {
     }*/
 
 
-    public static void sendLastSeen(final Context c, final String username,final String lastSeen) {
+    public static void sendLastSeen(final Context c, final String username) {
 
         String userNameEncode = UrlEncoderClass.urlEncoder(username);
-        String lastSeenEncode = UrlEncoderClass.urlEncoder(lastSeen);
 
-        String url= baseUrl + "?action=send_last_seen&username1=" + userNameEncode + "&last_seen=" + lastSeenEncode;
+        String url= baseUrl + "?action=send_last_seen&username1=" + userNameEncode;
         itShouldLoadMore = false;
         //ProgressDialogClass.showProgress(c);
 
@@ -2190,6 +2197,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         //ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -2270,6 +2278,7 @@ public class LoadData {
                         clWifi.setVisibility(View.GONE);
                         //ProgressDialogClass.dismissProgress();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -2869,8 +2878,7 @@ public class LoadData {
                         e.printStackTrace();
                     }
                 }
-                txLastSeen.setText(lastSeen);
-
+                txLastSeen.setText(new TimeKononi().changeGregorianToPersian(lastSeen));
 
             }
         }, new Response.ErrorListener() {
@@ -3218,12 +3226,14 @@ public class LoadData {
                         JSONObject jsonObject = response.getJSONObject(i);
 
                         lastId = jsonObject.getString("id");
-                        String family = jsonObject.getString("family");
+                        String firstName = jsonObject.getString("first_name");
+                        String lastName = jsonObject.getString("last_name");
+                        String fullName = firstName + " " + lastName;
 
-                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,family, "","","","","","",0,null,null,null,null));
+                        rModelsYouHaveKnow.add(new RecyclerModel(lastId,fullName, "","","","","","",0,null,null,null,null));
                         rAdapterYouHaveKnow.notifyDataSetChanged();
 
-                        list.add(family);
+                        list.add(fullName);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -3391,6 +3401,7 @@ public class LoadData {
 
                         progressDialog.dismiss();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -3406,6 +3417,54 @@ public class LoadData {
                         }else {
                             Toast.makeText(c, "مشکلی در تغییر رمز عبور بوجود آمده", Toast.LENGTH_SHORT).show();
                         }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                itShouldLoadMore = true;
+                progressDialog.dismiss();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void sendVerificationCode(final Context c, final String phoneNumber, final String code) {
+
+        String url = baseUrl + "?action=send_activation_code&phone_number=" + UrlEncoderClass.urlEncoder(phoneNumber) + "&activation_code=" +  UrlEncoderClass.urlEncoder(code);
+
+        itShouldLoadMore = false;
+        final ProgressDialog progressDialog = new ProgressDialog(c);
+        progressDialog.setMessage("درحال بارگزاری...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        StringRequest jsonArrayRequest = new StringRequest (Request.Method.GET, url,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        progressDialog.dismiss();
+                        itShouldLoadMore = true;
+
+                        if (response.length() <= 0) {
+                            Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                       /* if (response.equals("send_shod")){
+                            etNewPassword.setText("");
+                            etTekrarNewPassword.setText("");
+                            dialog.dismiss();
+                            Toast.makeText(c, "رمز عبور با موفقیت تغییر یافت", Toast.LENGTH_SHORT).show();
+                            Keyboard.hideKeyboard(c,(Activity) c);
+                        }else {
+                            Toast.makeText(c, "مشکلی در تغییر رمز عبور بوجود آمده", Toast.LENGTH_SHORT).show();
+                        }*/
 
                     }
                 }, new Response.ErrorListener() {
@@ -3458,6 +3517,7 @@ public class LoadData {
 
                         progressDialog.dismiss();
                         itShouldLoadMore = true;
+                        response = response.trim();
 
                         if (response.length() <= 0) {
                             Toast.makeText(c, "اطلاعاتی موجود نیست", Toast.LENGTH_SHORT).show();

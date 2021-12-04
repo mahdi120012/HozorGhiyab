@@ -1,5 +1,7 @@
 package hozorghiyab.customClasses;
 
+import android.widget.Toast;
+
 import java.text.ParseException;
 
 import saman.zamani.persiandate.PersianDate;
@@ -48,9 +50,9 @@ public class TimeKononi {
         int year = Integer.parseInt(dateString.substring(0,4));
         int month = Integer.parseInt(dateString.substring(5,7));
         int day = Integer.parseInt(dateString.substring(8,10));
-        /*int hour = Integer.parseInt(dateString.substring(11,13));
+        int hour = Integer.parseInt(dateString.substring(11,13));
         int minute = Integer.parseInt(dateString.substring(14,16));
-        int second = Integer.parseInt(dateString.substring(17,19));*/
+        int second = Integer.parseInt(dateString.substring(17,19));
 
         if (month > 00){
 
@@ -58,7 +60,11 @@ public class TimeKononi {
 
             persianTime = persianDate.toJalali(year,month,day);
             //String englishNumberToPersian = new EnglishNumberToPersian().convert(persianTime);
-            return String.valueOf(new EnglishNumberToPersian().convert(String.valueOf(persianTime[0]))) + "/" + String.valueOf(new EnglishNumberToPersian().convert(String.valueOf(persianTime[1]))) + "/" + String.valueOf(new EnglishNumberToPersian().convert(String.valueOf(persianTime[2])));
+            return new EnglishNumberToPersian().convert(String.valueOf(persianTime[0])) + "/" +
+                   new EnglishNumberToPersian().convert(String.valueOf(persianTime[1])) + "/" +
+                   new EnglishNumberToPersian().convert(String.valueOf(persianTime[2])) + " " +
+                   new EnglishNumberToPersian().convert(String.valueOf(hour)) + ":" +
+                   new EnglishNumberToPersian().convert(String.valueOf(minute));
         }else {
             return "تاریخ ثبت نشده";
 

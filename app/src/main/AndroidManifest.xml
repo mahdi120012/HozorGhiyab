@@ -16,22 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-
-
-        <activity android:name="hozorghiyab.activities.MohasebeTashvighi"></activity>
+        <activity android:name="hozorghiyab.activities.VerificationCode"></activity>
+<!--        <activity android:name="hozorghiyab.activities.AddPhoneNumber" />-->
+        <activity android:name="hozorghiyab.activities.MohasebeTashvighi" />
         <activity android:name="hozorghiyab.activities.TextOnImageJava" />
         <activity
             android:name="com.sarthakdoshi.textonimage.TextOnImage"
             android:theme="@style/Base.Theme.AppCompat" /> <!-- optional (needed if default theme has no action bar) -->
-        <activity android:name="hozorghiyab.user_info.Main_user_login_activity">
+        <activity android:name="hozorghiyab.activities.AddPhoneNumber">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="hozorghiyab.activities.Makharej" />
         <activity android:name="hozorghiyab.activities.TanzimJalase" />
         <activity android:name="hozorghiyab.activities.WriteSepordanKar" />

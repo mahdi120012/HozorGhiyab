@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.github.javiersantos.appupdater.AppUpdater
 import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.hozorghiyab.R
+import com.squareup.picasso.Picasso
 import hozorghiyab.cityDetail.LoadData
 import hozorghiyab.customClasses.AppVersionName
 import hozorghiyab.customClasses.CustomDialog
@@ -44,15 +45,8 @@ class MainActivity : AppCompatActivity() {
         var noe = SharedPrefClass.getUserId(this,"noe")
         var username = SharedPrefClass.getUserId(this,"user")
         var name = SharedPrefClass.getUserId(this,"name")
-
-        val timeKononi = TimeKononi()
-        var nowTime = timeKononi.persianTimeWithoutDayName
-
-        val mcurrentTime: Calendar = Calendar.getInstance()
-        val hour: Int = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-        val minute: Int = mcurrentTime.get(Calendar.MINUTE)
-
-        LoadData.sendLastSeen(this,username,nowTime + " " + String.format("%02d:%02d", hour, minute))
+        var picture = SharedPrefClass.getUserId(this,"picture")
+        LoadData.sendLastSeen(this, username)
 
         if(noe == "admin"){
             setContentView(com.hozorghiyab.R.layout.navigation_main)
@@ -163,7 +157,7 @@ class MainActivity : AppCompatActivity() {
         nav_footer_txVesionCodeInMainPageTeacher.setText("نسخه " + AppVersionName.getVersionName(this))
 
         val appUpdater = AppUpdater(this).setUpdateFrom(UpdateFrom.JSON).
-                setUpdateJSON("http://hozori.ir/android/update_checker.json").
+                setUpdateJSON("https://hozori.ir/android/update_checker.json").
                 setTitleOnUpdateAvailable("بروزرسانی جدید موجوده!").setButtonUpdate("بروزرسانی").
                 setButtonDismiss("فعلا نه").setButtonDoNotShowAgain("")
         appUpdater.start()
@@ -190,6 +184,18 @@ class MainActivity : AppCompatActivity() {
             }, 2000)
         }else{
             txTecherNameInMainActivity.setText(name)
+
+            /*if (picture == ""){
+
+            }else{
+                Picasso.get().
+                load(picture).
+                error(R.drawable.usericon222).
+                centerCrop().
+                into(imgTeacherPicture);
+            }*/
+
+
         }
 
 
@@ -234,7 +240,7 @@ class MainActivity : AppCompatActivity() {
         txExit.setOnClickListener(){
             SharedPrefClass.clearData(this)
             Toast.makeText(this,"شما خارج شدید",Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, Main_user_login_activity::class.java))
+            startActivity(Intent(this, AddPhoneNumber::class.java))
             finish()
         }
 
